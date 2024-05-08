@@ -1,0 +1,234 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Team;
+use App\Models\AdminSidebar;
+use App\Models\AdminSidebar2;
+use App\Models\Order1Modal;
+use App\Models\UserModal;
+use App\Models\CategoryModal;
+use App\Models\ProductModal;
+
+class TeamController extends Controller
+{
+	public function admin_index(Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$services = json_decode($req->session()->get('services'));
+			if (in_array(1, $services) || in_array(999, $services)) {
+				$totalOrders = Order1Modal::where(['payment_status' => 1])->count();
+				$totalUsers = UserModal::count();
+				$totalCategory = CategoryModal::count();
+				$totalProducts = ProductModal::count();
+				$TotalNewOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 1])->count();
+				$TotalAcceptedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 2])->count();
+				$TotalDispatchedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 3])->count();
+				$TotalDeliveredOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 4])->count();
+				$TotalRejectedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 5])->count();
+				$TotalTodaysOrders = Order1Modal::whereDate('created_at', now()->toDateString())
+					->where('payment_status', 1)
+					->where('order_status', 1)
+					->count();
+				$TotalTodaysUsers = UserModal::whereDate('created_at', now()->toDateString())
+					->count();
+				$TotalTodaysOrders = Order1Modal::whereDate('created_at', now()->toDateString())
+					->where('payment_status', 1)
+					->where('order_status', 1)
+					->count();
+				$sumFinalAmount = Order1Modal::where('payment_status', 1)
+					->whereNotIn('order_status', [5])
+					->sum('final_amount');
+				$TodaysSumFinalAmount = Order1Modal::whereDate('created_at', now()->toDateString())
+					->where('payment_status', 1)
+					->whereNotIn('order_status', [5])
+					->sum('final_amount');
+				return view('admin/index', compact(['totalOrders', 'totalUsers', 'totalCategory', 'totalProducts', 'TotalNewOrders', 'TotalAcceptedOrders', 'TotalDispatchedOrders', 'TotalDeliveredOrders', 'TotalRejectedOrders', 'TotalTodaysOrders', 'TotalTodaysUsers', 'sumFinalAmount', 'TodaysSumFinalAmount']));
+			} else {
+				$service = AdminSidebar::where('id', $services[0])->first();
+				if ($service->url == "#") {
+					$serviceDetials = AdminSidebar2::where('main_id', $services[0])->first();
+					return redirect()->route($serviceDetials->url);
+				} else {
+					return redirect()->route($service->url);
+				}
+			}
+		} else {
+			return view('admin/login/index');
+		}
+	}
+	public function add_team_view(Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$service_data = AdminSidebar::get();
+			return view('admin/team/add_team', compact('service_data'));
+		} else {
+			return view('admin/login/index');
+		}
+	}
+	public function view_team(Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$Team_data = Team::wherenull('deleted_at')->orderBy('id', 'desc')->get();
+			return view('admin/team/view_team', ['teamdetails' => $Team_data]);
+		} else {
+			return view('admin/login/index');
+		}
+	}
+	public function UpdateTeamStatus($status, $idd, Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$id = base64_decode($idd);
+			$admin_id = $req->session()->get('admin_id');
+			$admin_position = $req->session()->get('position');
+			if ($id == $admin_id) {
+				return Redirect('/view_team')->with('error', "Sorry You can't change status of yourself.");
+			}
+			if ($admin_position == "Super Admin") {
+				if ($status == "active") {
+					$teamStatusInfo = [
+						'is_active' => 1,
+					];
+					$TeamData = Team::wherenull('deleted_at')->where('id', $id)->first();
+					$TeamData->update($teamStatusInfo);
+				} else {
+					$teamStatusInfo = [
+						'is_active' => 0,
+					];
+					$TeamData = Team::wherenull('deleted_at')->where('id', $id)->first();
+					$TeamData->update($teamStatusInfo);
+				}
+				return Redirect('/view_team')->with('success', 'Status Updated Successfully.');
+			} else {
+				return Redirect('/view_team')->with('error', "Sorry you dont have Permission to change admin, Only Super admin can change status.");
+			}
+		} else {
+			return view('admin/login/index');
+		}
+	}
+	public function deleteTeam($idd, Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$id = base64_decode($idd);
+			$admin_id = $req->session()->get('admin_id');
+			$admin_position = $req->session()->get('position');
+			if ($id == $admin_id) {
+				return Redirect('/view_team')->with('error', "Sorry You can't delete yourself.");
+			}
+			if ($admin_position == "Super Admin") {
+				$TeamData = Team::wherenull('deleted_at')->where('id', $id)->first();
+				if (!empty($TeamData)) {
+					$img = $TeamData->image;
+					$TeamData->delete();
+					// if (!empty($img)) {
+					// 	unlink($img);
+					// }
+					return Redirect('/view_team')->with('success', 'Data Deleted Successfully.');
+				} else {
+					return Redirect('/view_team')->with('error', 'Some Error Occurred.');
+				}
+			} else {
+				return Redirect('/view_team')->with('error', "Sorry You Don't Have Permission To Delete Anything.");
+			}
+		} else {
+			return view('admin/login/index');
+		}
+	}
+	public function add_team_process(Request $req)
+	{
+		if (!empty($req->session()->has('admin_data'))) {
+			$admin_id = $req->session()->get('admin_id');
+			$req->validate([
+				'name' => 'required',
+				'email' => 'required|unique:admin_teams|email',
+				'password' => 'required',
+				'power' => 'required '
+			]);
+			$service = $req->input('service');
+			$services = $req->input('services');
+			if ($service == 999) {
+				$ser = '["999"]';
+			} else {
+				$ser = json_encode($services);
+			}
+			$fullimagepath = '';
+			if (!empty($req->img)) {
+				$allowedFormats = ['jpeg', 'jpg', 'webp'];
+				$extension = strtolower($req->img->getClientOriginalExtension());
+				if (in_array($extension, $allowedFormats)) {
+					$file = time() . '.' . $req->img->extension();
+					$req->img->move(public_path('uploads/image/Teams/'), $file);
+					$fullimagepath = 'uploads/image/Teams/' . $file;
+				} else {
+					// Handle invalid file format (not allowed)
+					return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+				}
+			}
+			$teamInfo = [
+				'name' => ucwords($req->input('name')),
+				'email' => $req->input('email'),
+				'phone' => $req->input('phone'),
+				'password' => md5($req->input('password')),
+				'address' => $req->input('address'),
+				'services' => $ser,
+				'power' => $req->input('power'),
+				'image' => $fullimagepath,
+				'ip' => $req->ip(),
+				'added_by' => $admin_id,
+				'is_active' => 1,
+			];
+			$last_id = Team::create($teamInfo);
+			return Redirect('/view_team')->with('success', 'Data Added Successfully.');
+		} else {
+			return view('admin/login/index');
+		}
+		//return response()->json(['response' => 'OK']);
+	}
+	//
+	// public function undoDelete(Request $req,$id){
+	//
+	// 		log::debug('$undoDelete');
+	// 		//log::debug($admin_id);
+	// 		//$admin = Admin::wherenull('deleted_at')-> where('admin_id', $admin_id)->first();
+	// 		$admin = Admin::onlyTrashed()->find($id);
+	// log::debug('$admin');
+	// 		log::debug($admin);
+	//         if (!is_null($admin)) {
+	// log::debug('$notNull');
+	//             $admin->restore();
+	// 			 log::debug('$restorsucces');
+	//             return Redirect('/adminList')->with('status', ' Deleted Admin Restored Successfully.');
+	//         } else {
+	//        log::debug('$restorfail');
+	//
+	// 			return Redirect('/adminList')->with('status', ' Deleted Admin Restored fail.');
+	//         }
+	//
+	//
+	//     }
+	//
+	// 	public function adminFilter(Request $req){
+	//
+	// 		$admin_name= $req->input('admin_name');
+	// 		$country= $req->input('country_name');
+	//
+	// 		log::debug('$adminFilter');
+	// 		//log::debug($admin_id);
+	// 		if(($admin_name && $admin_name!="") || ($country== null && $country==""))
+	// 		{
+	// 			$admin = Admin::wherenull('deleted_at')-> where('name', $admin_name)->get();
+	// 		}
+	// 		elseif(($country && $country!="") || ($admin_name== null && $admin_name=="")){
+	// 			$admin = Admin::wherenull('deleted_at')-> where('country', $country)->get();
+	// 		}
+	// 		else{
+	// 			$admin="";
+	// 		}
+	// 		//$admins =  Admin::wherenull('deleted_at')->get();
+	//
+	//        //return Redirect('/adminList')->with('status', 'Admin Deleted Successfully.');
+	//
+	//     }
+}
