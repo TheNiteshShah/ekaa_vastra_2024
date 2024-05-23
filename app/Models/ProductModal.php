@@ -22,6 +22,6 @@ class ProductModal extends Model
     }
     public function subcategory()
     {
-        return $this->belongsTo(subcategoryModal::class, 'subcategory_id')->withTrashed();
+        return $this->belongsTo(SubCategoryModal::class, 'subcategory_id')->withTrashed();
     }
 }
