@@ -57,13 +57,8 @@
                                                 @foreach($MasterTypeData as $master)
                                                 <th data-priority="1">{{$master->name}}</th>
                                                 @endforeach
-                                                <th data-priority="1">MRP</th>
-                                                <th data-priority="1">Price</th>
-                                                <th data-priority="1">GST %</th>
-                                                <th data-priority="1">GST</th>
-                                                <th data-priority="1">Selling Price </th>
+                                               
                                                 <th data-priority="1">Inventory</th>
-                                                <th data-priority="1">Images</th>
                                                 <th data-priority="6">Status</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <th data-priority="6">Action</th>
@@ -85,27 +80,9 @@
                                                 @endif
                                                 @endforeach
                                                 @endforeach
-                                                <th>₹{{$data->mrp}}</th>
-                                                <th>₹{{$data->price}}</th>
-                                                <th>{{$data->gst_percentage}}%</th>
-                                                <th>₹{{$data->gst}}</th>
-                                                <th>₹{{$data->selling_price}}</th>
+                                                
                                                 <th>{{$data->inventory}}</th>
-                                                <th>
-                                                    @if (!empty($data->image))
-                                                    <img src="{{asset($data->image)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image2))
-                                                    <img src="{{asset($data->image2)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image3))
-                                                    <img src="{{asset($data->image3)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image4))
-                                                    <img src="{{asset($data->image4)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-
-                                                </th>
+                                              
                                                 @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>
@@ -124,7 +101,7 @@
                                                         <a href="{{route('types.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
                                                         @endif
                                                         <a href="{{route('types.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                                                        <a href="{{route('types.copy',base64_encode($data->id))}}"><i class="fa fa-clone info2-icon" data-toggle="tooltip" data-placement="top" title="Copy"></i></a>
+                                                        <!-- <a href="{{route('types.copy',base64_encode($data->id))}}"><i class="fa fa-clone info2-icon" data-toggle="tooltip" data-placement="top" title="Copy"></i></a> -->
                                                         @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
                                                         @endif

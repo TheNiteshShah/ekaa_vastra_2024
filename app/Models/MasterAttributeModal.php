@@ -16,4 +16,5 @@ class MasterAttributeModal extends Model
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];
+    
 }

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('frontend/css/plugins/plugins.css')}}" />
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
     <style>
         @media screen and (max-width: 768px) {
@@ -32,14 +33,32 @@
                 overflow-x: hidden !important;
             }
         }
+
+        .out {
+            pointer-events: none;
+            opacity: 0.3;
+            position: relative;
+        }
+
+        .out:after {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: 1px;
+            background: rgb(80, 80, 80);
+            content: "";
+            width: 100%;
+            display: block;
+            transform: rotate(140deg);
+        }
     </style>
 
 </head>
 
 <body>
-@php 
-$categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
-@endphp
+    @php
+    $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
+    @endphp
 
     <!-- offcanvas-overlay start -->
     <div class="offcanvas-overlay"></div>
@@ -63,95 +82,18 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             </div>
             <nav class="offcanvas-menu">
                 <ul>
-                    <li><a href="#"><span class="menu-text">Home</span></a>
+                    <li><a href="{{route('/')}}">Home</a></li>
+                    @foreach($categoryData as $category)
+                    <li><a href="#"><span class="menu-text">{{$category->name}}</span></a>
                         <ul class="offcanvas-submenu">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
+                            @foreach($category->SubCategory as $subcategory)
+                            <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    @endforeach
+                    <li><a href="#">Contact Us</a></li>
 
-                        </ul>
-
-                    </li>
-                    <li><a href="#"><span class="menu-text">Shop</span></a>
-                        <ul class="offcanvas-submenu">
-                            <li>
-                                <a href="#"><span class="menu-text">Shop Grid</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="shop-grid-3-column.html">Shop Grid 3 Column</a></li>
-                                    <li><a href="shop-grid-4-column.html">Shop Grid 4 Column</a></li>
-                                    <li><a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a></li>
-                                    <li><a href="shop-grid-right-sidebar.html">Shop Grid Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">Shop List</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="shop-grid-list.html">Shop List</a></li>
-                                    <li><a href="shop-grid-list-left-sidebar.html">Shop List Left Sidebar</a></li>
-                                    <li><a href="shop-grid-list-right-sidebar.html">Shop List Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">Shop Single</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a class="d-block" href="single-product.html">Shop Single</a></li>
-                                    <li><a href="single-product-configurable.html">Shop Variable</a></li>
-                                    <li><a href="single-product-affiliate.html">Shop Affiliate</a></li>
-                                    <li><a href="single-product-group.html">Shop Group</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span class="menu-text">other pages</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="about-us.html">About Page</a></li>
-                                    <li><a href="cart.html">Cart Page</a></li>
-                                    <li><a href="checkout.html">Checkout Page</a></li>
-                                    <li><a href="compare.html">Compare Page</a></li>
-                                    <li><a href="login.html">Login &amp; Register Page</a></li>
-                                    <li><a href="myaccount.html">Account Page</a></li>
-                                    <li><a href="wishlist.html">Wishlist Page</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Pages</span></a>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="about-us.html">About Page</a></li>
-                            <li><a href="cart.html">Cart Page</a></li>
-                            <li><a href="checkout.html">Checkout Page</a></li>
-                            <li><a href="compare.html">Compare Page</a></li>
-                            <li><a href="login.html">Login &amp; Register Page</a></li>
-                            <li><a href="myaccount.html">Account Page</a></li>
-                            <li><a href="wishlist.html">Wishlist Page</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="menu-text">Blog</span></a>
-                        <ul class="offcanvas-submenu">
-                            <li><a href="#"><span class="menu-text">Blog Grid</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="blog-grid-3-column.html">Blog Grid 3 column</a></li>
-                                    <li><a href="blog-grid-4-column.html">Blog Grid 4 column</a></li>
-                                    <li><a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a>
-                                    </li>
-                                    <li><a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">Blog List</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a></li>
-                                    <li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><span class="menu-text">Blog Single</span></a>
-                                <ul class="offcanvas-submenu">
-                                    <li><a href="single-blog.html">Single Blog</a></li>
-                                    <li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a></li>
-                                    <li><a href="blog-single-right-sidebar.html">Blog Single Right Sidbar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="offcanvas-social py-30">
@@ -343,7 +285,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="row align-items-center position-relative">
                     <div class="col-6 col-lg-2 col-xl-3 order-first">
                         <div class="logo">
-                            <a href="index.html"><img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:45%" class="img-fluid"></a>
+                            <a href="{{route('/')}}"><img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:45%" class="img-fluid"></a>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
@@ -354,7 +296,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                     <a href="#">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($category->SubCategory as $subcategory)
-                                        <li><a href="all_products.html">{{$subcategory->name}}</a></li>
+                                        <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>

@@ -11,7 +11,7 @@ class ProductModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'category_id','subcategory_id','name','sku','description','is_top', 'ip', 'added_by', 'is_active','is_trending','seq'
+        'category_id','subcategory_id','name','sku','description','is_top', 'ip', 'added_by', 'is_active','is_trending','seq','mrp','price','gst_percentage','selling_price','gst','image','image2','image3','image4','label'
     ];
     
     use SoftDeletes;
@@ -19,5 +19,9 @@ class ProductModal extends Model
     public function types()
     {
         return $this->hasMany(TypeModal::class, 'product_id')->where('is_active', 1);
+    }
+    public function subcategory()
+    {
+        return $this->belongsTo(subcategoryModal::class, 'subcategory_id')->withTrashed();
     }
 }

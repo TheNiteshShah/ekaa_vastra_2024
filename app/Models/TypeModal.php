@@ -11,9 +11,13 @@ class TypeModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'product_id','mrp','price','gst_percentage','selling_price','gst','inventory', 'ip', 'added_by', 'is_active','image','image2','image3','image4','attribute1','attribute2','attribute3','attribute4'
+        'product_id','inventory', 'ip', 'added_by', 'is_active','attribute1','attribute2','attribute3','attribute4'
     ];
     
     use SoftDeletes;
     protected $del = ['deleted_at'];
+    public function size()
+    {
+        return $this->belongsTo(MasterAttributeModal::class, 'attribute1')->withTrashed();
+    }
 }

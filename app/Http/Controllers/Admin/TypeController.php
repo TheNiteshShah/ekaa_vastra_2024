@@ -40,16 +40,7 @@ class TypeController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             $this->validate($req, [
                 'product_id' => $req->id === null ? 'required' : 'required',
-                'mrp' => $req->id === null ? 'required' : 'required',
-                'selling_price' => $req->id === null ? 'required' : 'required',
-                'gst_percentage' => $req->id === null ? 'required' : 'required',
-                'gst' => $req->id === null ? 'required' : 'required',
-                'price' => $req->id === null ? 'required' : 'required',
                 'inventory' => $req->id === null ? 'required' : 'required',
-                'attribute1' => $req->id === null ? '' : '',
-                'attribute2' => $req->id === null ? '' : '',
-                'attribute3' => $req->id === null ? '' : '',
-                'attribute4' => $req->id === null ? '' : '',
                 'copy' => $req->id === null ? '' : '',
             ]);
             if ($req->id === null) {
@@ -64,30 +55,16 @@ class TypeController extends Controller
                     $copyData = TypeModal::where('id', $req->id)->first();
                 }
             }
-            try {
-                $image = $req->hasFile('image') ? $this->uploadImage($req->file('image'), 'types') : (isset($copyData->image) ? $copyData->image : null);
-                $image2 = $req->hasFile('image2') ? $this->uploadImage($req->file('image2'), 'types') : (isset($copyData->image2) ? $copyData->image2 : null);
-                $image3 = $req->hasFile('image3') ? $this->uploadImage($req->file('image3'), 'types') : (isset($copyData->image3) ? $copyData->image3 : null);
-                $image4 = $req->hasFile('image4') ? $this->uploadImage($req->file('image4'), 'types') : (isset($copyData->image4) ? $copyData->image4 : null);
-            } catch (InvalidFileFormatException $e) {
-                return redirect()->back()->with('error', $e->getMessage());
-            }
+           
             $userId = $req->session()->get('admin_id');
             $uploadData->product_id = $req->product_id;
-            $uploadData->mrp = $req->mrp;
-            $uploadData->selling_price = $req->selling_price;
-            $uploadData->gst_percentage = $req->gst_percentage;
-            $uploadData->price = $req->price;
-            $uploadData->gst = $req->gst;
+          
             $uploadData->inventory = $req->inventory;
             $uploadData->attribute1 = $req->attribute1;
             $uploadData->attribute2 = $req->attribute2;
             $uploadData->attribute3 = $req->attribute3;
             $uploadData->attribute4 = $req->attribute4;
-            $uploadData->image = $image;
-            $uploadData->image2 = $image2;
-            $uploadData->image3 = $image3;
-            $uploadData->image4 = $image4;
+     
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();

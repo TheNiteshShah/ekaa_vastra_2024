@@ -44,7 +44,7 @@
                                     <h4 class="mt-0 header-title">View {{$title}} List</h4>
                                 </div>
                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('master_type.create')}}" role="button"> Add {{$title}}</a></div>
+                                <!-- <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('master_type.create')}}" role="button"> Add {{$title}}</a></div> -->
                                 @endif
                             </div>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
@@ -68,7 +68,7 @@
                                                 <td>
                                                     <div class="btn-group" id="btns{{$loop->iteration}}">
                                                         @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                                        <a href="{{route('master_type.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                        <!-- <a href="{{route('master_type.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> -->
                                                         @endif
                                                         <a href="{{route('master_attributes.index',base64_encode($data->id))}}"><i class="fa fa-arrow-right info2-icon" data-toggle="tooltip" data-placement="top" title="Attributes"></i></a>
                                                     </div>

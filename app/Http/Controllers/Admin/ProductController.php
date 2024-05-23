@@ -55,12 +55,29 @@ class ProductController extends Controller
                 'is_top' => $req->id === null ? 'required' : 'required',
                 'is_trending' => $req->id === null ? 'required' : 'required',
                 'seq' => $req->id === null ? 'required' : 'required',
+                'mrp' => $req->id === null ? 'required' : 'required',
+                'selling_price' => $req->id === null ? 'required' : 'required',
+                'gst_percentage' => $req->id === null ? 'required' : 'required',
+                'gst' => $req->id === null ? 'required' : 'required',
+                'price' => $req->id === null ? 'required' : 'required',
+                'attribute1' => $req->id === null ? '' : '',
+                'attribute2' => $req->id === null ? '' : '',
+                'attribute3' => $req->id === null ? '' : '',
+                'label' => $req->id === null ? '' : '',
             ]);
             if ($req->id === null) {
                 $uploadData = new ProductModal();
                 // $uploadData->is_active = 0;
             } else {
                 $uploadData = ProductModal::where('id', $req->id)->first();
+            }
+            try {
+                $image = $req->hasFile('image') ? $this->uploadImage($req->file('image'), 'products') : (isset($uploadData->image) ? $uploadData->image : null);
+                $image2 = $req->hasFile('image2') ? $this->uploadImage($req->file('image2'), 'products') : (isset($uploadData->image2) ? $uploadData->image2 : null);
+                $image3 = $req->hasFile('image3') ? $this->uploadImage($req->file('image3'), 'products') : (isset($uploadData->image3) ? $uploadData->image3 : null);
+                $image4 = $req->hasFile('image4') ? $this->uploadImage($req->file('image4'), 'products') : (isset($uploadData->image4) ? $uploadData->image4 : null);
+            } catch (InvalidFileFormatException $e) {
+                return redirect()->back()->with('error', $e->getMessage());
             }
             $parentData = SubcategoryModal::where('id', $req->subcategory_id)->first();
             $userId = $req->session()->get('admin_id');
@@ -72,6 +89,16 @@ class ProductController extends Controller
             $uploadData->is_top = $req->is_top;
             $uploadData->is_trending = $req->is_trending;
             $uploadData->seq = $req->seq;
+            $uploadData->mrp = $req->mrp;
+            $uploadData->selling_price = $req->selling_price;
+            $uploadData->gst_percentage = $req->gst_percentage;
+            $uploadData->price = $req->price;
+            $uploadData->gst = $req->gst;
+            $uploadData->image = $image;
+            $uploadData->image2 = $image2;
+            $uploadData->image3 = $image3;
+            $uploadData->image4 = $image4;
+            $uploadData->label = $req->label;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();
@@ -107,8 +134,8 @@ class ProductController extends Controller
                 $id = base64_decode($idd);
                 $products = ProductModal::findOrFail($id);
                 $products->delete();
-                  //-------- delete products ---
-                  TypeModal::where('product_id', $id)->delete();
+                //-------- delete products ---
+                TypeModal::where('product_id', $id)->delete();
                 return redirect()->route('products.index', base64_encode($products->subcategory_id))->with('success', 'Product deleted Successfully!');
             } else {
                 return redirect()->back()->with('error', 'Sorry you dont have Permission to delete admin, Only Super admin can change status');
@@ -127,11 +154,48 @@ class ProductController extends Controller
                 $products->save();
                 return redirect()->back()->with('success', 'Status updated Successfully!');
             } else {
-                return redirect()->back()->with('error', 'Sorry you dont have Permission to delete admin, Only Super admin can change status');
+                return redirect()->back()->with('error', 'Sorry you don\'t have Permission to delete admin, Only Super admin can change status');
             }
         } else {
             return view('admin/login/index');
         }
     }
-    
+    function uploadImage($image, $folderName)
+    {
+        $allowedFormats = ['jpeg', 'jpg', 'webp'];
+        $extension = strtolower($image->getClientOriginalExtension());
+        // Check if the file format is allowed
+        if (in_array($extension, $allowedFormats)) {
+            $file = time() . '_' . uniqid() . '.' . $image->extension();
+            $image->move(public_path("uploads/image/$folderName/"), $file);
+            return "uploads/image/$folderName/" . $file;
+        } else {
+            // Handle invalid file format (not allowed)
+            throw new InvalidFileFormatException('Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+        }
+    }
+    public function img_remove(Request $req, $idd, $column)
+    {
+        if (!empty($req->session()->has('admin_data'))) {
+            if ($req->session()->get('position') == "Super Admin") {
+                $id = base64_decode($idd);
+                $product = ProductModal::where('id', $id)->first();
+                if ($column == 'image') {
+                    $product->image = null;
+                } elseif ($column == 'image2') {
+                    $product->image2 = null;
+                } elseif ($column == 'image3') {
+                    $product->image3 = null;
+                } else if ($column == 'image4') {
+                    $product->image4 = null;
+                }
+                $product->save();
+                return redirect()->back()->with('success', 'Removed Successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Sorry you don\'t have Permission to delete admin, Only Super admin can change status');
+            }
+        } else {
+            return view('admin/login/index');
+        }
+    }
 }

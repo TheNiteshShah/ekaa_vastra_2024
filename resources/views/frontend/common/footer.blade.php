@@ -1,102 +1,98 @@
-
-@php 
+@php
 $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
 @endphp
-    <!-- footer strat -->
-    <footer class="bg-lighten2 theme1 position-relative">
-        <!-- footer bottom start -->
-        <div class="footer-bottom pt-70 pb-30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-4 mb-10">
-                        <div class="footer-widget">
-                            <div class="footer-logo mb-10">
-                                <a href="index.html">
-                                    <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
-                                </a>
-                            </div>
-                            <p class="text mb-35">Established in 2024, 'EKAA VASTRA' was founded by SAKSHI KHANNA with a
-                                vision to transform the world of Ethnic and Fusion Fashion</p>
-                            <div class="social-network">
-                                <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
-                                <ul class="d-flex">
-                                    <li><a href="https://www.facebook.com/" target="_blank"><span
-                                                class="ion-social-facebook"></span></a></li>
-                                    <li class="me-0"><a href="https://www.instagram.com/" target="_blank"><span
-                                                class="ion-social-instagram-outline"></span></a></li>
-                                </ul>
-                            </div>
+<!-- footer strat -->
+<footer class="bg-lighten2 theme1 position-relative">
+    <!-- footer bottom start -->
+    <div class="footer-bottom pt-70 pb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-4 mb-10">
+                    <div class="footer-widget">
+                        <div class="footer-logo mb-10">
+                            <a href="index.html">
+                                <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
+                            </a>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-2 mb-10">
-                        <div class="footer-widget">
-                            <div class="section-title mb-20">
-                                <h2 class="title text-dark text-capitalize">Categories</h2>
-                            </div>
-                            <ul class="footer-menu">
-                                @foreach($categoryData as $category)
-                                <li>
-                                    <a href="#">{{$category->name}}</a>
-                                </li>
-                                @endforeach
+                        <p class="text mb-35">Established in 2024, 'EKAA VASTRA' was founded by SAKSHI KHANNA with a
+                            vision to transform the world of Ethnic and Fusion Fashion</p>
+                        <div class="social-network">
+                            <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
+                            <ul class="d-flex">
+                                <li><a href="https://www.facebook.com/" target="_blank"><span class="ion-social-facebook"></span></a></li>
+                                <li class="me-0"><a href="https://www.instagram.com/" target="_blank"><span class="ion-social-instagram-outline"></span></a></li>
                             </ul>
-                           
-
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-2 mb-10">
-                        <div class="footer-widget">
-                            <div class="section-title mb-20">
-                                <h2 class="title text-dark text-capitalize">Information</h2>
-                            </div>
-                            <!-- footer-menu start -->
-                            <ul class="footer-menu">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Return Policy</a></li>
-                            </ul>
-                            <!-- footer-menu end -->
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 mb-10">
-                        <div class="footer-widget">
-                            <div class="section-title mb-20">
-                                <h2 class="title text-dark text-capitalize">Customer Service</h2>
-                            </div>
-                            <!-- footer-menu start -->
-                            <ul class="footer-menu">
-                                <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
-                                <li><a href="tel:+919636373743"><i
-                                            class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
-                                <li><a href="mailto:orders@ekaavastra.com"><i class="ion-email mr-10"></i>
-                                        <span>orders@ekaavastra.com</span></a></li>
-                                <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap
-                                        Road,Sirsi 302021</span></li>
-                            </ul>
-                            <!-- footer-menu end -->
-                        </div>
-                    </div>
-
                 </div>
+                <div class="col-12 col-sm-6 col-lg-2 mb-10">
+                    <div class="footer-widget">
+                        <div class="section-title mb-20">
+                            <h2 class="title text-dark text-capitalize">Categories</h2>
+                        </div>
+                        <ul class="footer-menu">
+                            @foreach($categoryData as $category)
+                            <li>
+                                <a href="#">{{$category->name}}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+
+
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2 mb-10">
+                    <div class="footer-widget">
+                        <div class="section-title mb-20">
+                            <h2 class="title text-dark text-capitalize">Information</h2>
+                        </div>
+                        <!-- footer-menu start -->
+                        <ul class="footer-menu">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Return Policy</a></li>
+                        </ul>
+                        <!-- footer-menu end -->
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 mb-10">
+                    <div class="footer-widget">
+                        <div class="section-title mb-20">
+                            <h2 class="title text-dark text-capitalize">Customer Service</h2>
+                        </div>
+                        <!-- footer-menu start -->
+                        <ul class="footer-menu">
+                            <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
+                            <li><a href="tel:+919636373743"><i class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
+                            <li><a href="mailto:orders@ekaavastra.com"><i class="ion-email mr-10"></i>
+                                    <span>orders@ekaavastra.com</span></a></li>
+                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap
+                                    Road,Sirsi 302021</span></li>
+                        </ul>
+                        <!-- footer-menu end -->
+                    </div>
+                </div>
+
             </div>
         </div>
-        <!-- footer bottom end -->
-        <!-- coppy-right start -->
-        <div class="coppy-right">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="border-top py-20">
-                            <div class="row">
-                                <!-- <div class="col-12 col-md-5 col-lg-4 col-xl-3 order-last order-md-first"> -->
-                                <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-last order-md-first text">
-                                    <div class="text-center">
-                                        <p class="mb-3 mb-md-0">&copy; 2024 <a href="#">Ekaa Vastra</a>. All
-                                            Rights Reserved</p>
-                                    </div>
+    </div>
+    <!-- footer bottom end -->
+    <!-- coppy-right start -->
+    <div class="coppy-right">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="border-top py-20">
+                        <div class="row">
+                            <!-- <div class="col-12 col-md-5 col-lg-4 col-xl-3 order-last order-md-first"> -->
+                            <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-last order-md-first text">
+                                <div class="text-center">
+                                    <p class="mb-3 mb-md-0">&copy; 2024 <a href="#">Ekaa Vastra</a>. All
+                                        Rights Reserved</p>
                                 </div>
-                                <!-- <div class="col-12 col-md-7 col-lg-8 col-xl-9">
+                            </div>
+                            <!-- <div class="col-12 col-md-7 col-lg-8 col-xl-9">
                                     <ul
                                         class="footer-menu copyright-menu d-flex flex-wrap justify-content-center justify-content-md-end">
                                         <li><a href="#">Legal Notice</a></li>
@@ -111,173 +107,165 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                         <li><a href="myaccount.html">My account</a></li>
                                     </ul>
                                 </div> -->
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- copy-right end -->
-    </footer>
-    <!-- footer end -->
-
-    <!-- search-box and overlay start -->
-    <div class="overlay">
-        <div class="scale"></div>
-        <form class="search-box" action="#">
-            <input type="text" name="search" placeholder="Search products..." />
-            <button id="close" type="submit"><i class="ion-ios-search-strong"></i></button>
-        </form>
-        <button class="btn-close"><i class="ion-android-close"></i></button>
     </div>
-    <!-- search-box and overlay end -->
+    <!-- copy-right end -->
+</footer>
+<!-- footer end -->
 
-    <!-- modals start -->
+<!-- search-box and overlay start -->
+<div class="overlay">
+    <div class="scale"></div>
+    <form class="search-box" action="#">
+        <input type="text" name="search" placeholder="Search products..." />
+        <button id="close" type="submit"><i class="ion-ios-search-strong"></i></button>
+    </form>
+    <button class="btn-close"><i class="ion-android-close"></i></button>
+</div>
+<!-- search-box and overlay end -->
 
-    <!-- first modal -->
-    <div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+<!-- modals start -->
 
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-5 mb-lg-0">
-                            <div class="product-sync-init mb-20">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="{{asset('frontend/img/slider/thumb/1.jpg')}}" alt="product-thumb">
-                                    </div>
+<!-- first modal -->
+<div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-5 mb-lg-0">
+                        <div class="product-sync-init mb-20">
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <img src="{{asset('frontend/img/slider/thumb/1.jpg')}}" alt="product-thumb">
                                 </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="{{asset('frontend/img/slider/thumb/2.jpg')}}" alt="product-thumb">
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="{{asset('frontend/img/slider/thumb/3.jpg')}}" alt="product-thumb">
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <img src="{{asset('frontend/img/slider/thumb/4.jpg')}}" alt="product-thumb">
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
                             </div>
-
-                            <div class="product-sync-nav slick-nav-sync">
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/1.1.jpg')}}"
-                                                alt="product-thumb"></a>
-                                    </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <img src="{{asset('frontend/img/slider/thumb/2.jpg')}}" alt="product-thumb">
                                 </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}"
-                                                alt="product-thumb"></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/3.1.jpg')}}"
-                                                alt="product-thumb"></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/4.1.jpg')}}"
-                                                alt="product-thumb"></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
-                                <div class="single-product">
-                                    <div class="product-thumb">
-                                        <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}"
-                                                alt="product-thumb"></a>
-                                    </div>
-                                </div>
-                                <!-- single-product end -->
                             </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <img src="{{asset('frontend/img/slider/thumb/3.jpg')}}" alt="product-thumb">
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <img src="{{asset('frontend/img/slider/thumb/4.jpg')}}" alt="product-thumb">
+                                </div>
+                            </div>
+                            <!-- single-product end -->
                         </div>
-                        <div class="col-md-6 mt-5 mt-md-0">
-                            <div class="modal-product-info">
-                                <div class="product-head">
-                                    <h2 class="title">Brixton Patrol All Terrain Anorak Jacket</h2>
-                                    <h4 class="sub-title">Reference: demo_5</h4>
-                                    <div class="star-content mb-20">
-                                        <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                        <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                        <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                        <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                        <span class="star-on de-selected"><i class="ion-ios-star"></i> </span>
+
+                        <div class="product-sync-nav slick-nav-sync">
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/1.1.jpg')}}" alt="product-thumb"></a>
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}" alt="product-thumb"></a>
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/3.1.jpg')}}" alt="product-thumb"></a>
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/4.1.jpg')}}" alt="product-thumb"></a>
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                            <div class="single-product">
+                                <div class="product-thumb">
+                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}" alt="product-thumb"></a>
+                                </div>
+                            </div>
+                            <!-- single-product end -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-5 mt-md-0">
+                        <div class="modal-product-info">
+                            <div class="product-head">
+                                <h2 class="title">Brixton Patrol All Terrain Anorak Jacket</h2>
+                                <h4 class="sub-title">Reference: demo_5</h4>
+                                <div class="star-content mb-20">
+                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
+                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
+                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
+                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
+                                    <span class="star-on de-selected"><i class="ion-ios-star"></i> </span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <span class="product-price text-center"> <span class="new-price">₹29.00</span>
+                                </span>
+                                <p class="border-top pt-30">Whether you're exploring the woods or the city, the
+                                    Brixton™
+                                    Patrol All </p>
+                                <ul>
+                                    <li>Terrain Anorak Jacket has got you covered.</li>
+                                    <li>Camo jacket crafted from 4.5 oz nylon ripstop with two-way stretch, and a
+                                        water-repellent coating.</li>
+                                    <li>Drawstring hood.</li>
+                                </ul>
+                            </div>
+                            <div class="product-size d-flex align-items-center mt-30">
+                                <h3 class="title">Dimension</h3>
+                                <select>
+                                    <option value="0">40x60cm</option>
+                                    <option value="1">60x90cm</option>
+                                    <option value="2">80x120cm</option>
+
+                                </select>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-count style d-flex flex-column flex-sm-row my-4">
+                                    <div class="count d-flex">
+                                        <input type="number" min="1" max="10" step="1" value="1">
+                                        <div class="button-group">
+                                            <button class="count-btn increment"><i class="fas fa-chevron-up"></i></button>
+                                            <button class="count-btn decrement"><i class="fas fa-chevron-down"></i></button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
+                                            <span class="me-2"><i class="ion-bag"></i></span>
+                                            Add to cart
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="product-body">
-                                    <span class="product-price text-center"> <span class="new-price">₹29.00</span>
-                                    </span>
-                                    <p class="border-top pt-30">Whether you're exploring the woods or the city, the
-                                        Brixton™
-                                        Patrol All </p>
-                                    <ul>
-                                        <li>Terrain Anorak Jacket has got you covered.</li>
-                                        <li>Camo jacket crafted from 4.5 oz nylon ripstop with two-way stretch, and a
-                                            water-repellent coating.</li>
-                                        <li>Drawstring hood.</li>
+                                <div class="addto-whish-list">
+                                    <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
+                                    <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
+                                </div>
+                                <div class="pro-social-links mt-10">
+                                    <ul class="d-flex align-items-center">
+                                        <li class="share">Share</li>
+                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                        <li><a href="#"><i class="ion-social-google"></i></a></li>
+                                        <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
                                     </ul>
                                 </div>
-                                <div class="product-size d-flex align-items-center mt-30">
-                                    <h3 class="title">Dimension</h3>
-                                    <select>
-                                        <option value="0">40x60cm</option>
-                                        <option value="1">60x90cm</option>
-                                        <option value="2">80x120cm</option>
-
-                                    </select>
-                                </div>
-                                <div class="product-footer">
-                                    <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                        <div class="count d-flex">
-                                            <input type="number" min="1" max="10" step="1" value="1">
-                                            <div class="button-group">
-                                                <button class="count-btn increment"><i
-                                                        class="fas fa-chevron-up"></i></button>
-                                                <button class="count-btn decrement"><i
-                                                        class="fas fa-chevron-down"></i></button>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
-                                                <span class="me-2"><i class="ion-bag"></i></span>
-                                                Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="addto-whish-list">
-                                        <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
-                                        <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
-                                    </div>
-                                    <div class="pro-social-links mt-10">
-                                        <ul class="d-flex align-items-center">
-                                            <li class="share">Share</li>
-                                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-google"></i></a></li>
-                                            <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -285,63 +273,61 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             </div>
         </div>
     </div>
-    <!-- second modal -->
-    <div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+</div>
+<!-- second modal -->
+<div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5 class="title"><i class="fa fa-check"></i> Product added to compare.</h5>
-                </div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="title"><i class="fa fa-check"></i> Product added to compare.</h5>
             </div>
         </div>
     </div>
-    <!-- second modal -->
-    <div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center bg-dark">
-                    <h5 class="modal-title" id="add-to-cartCenterTitle"> <span class="ion-checkmark-round"></span>
-                        Product successfully added to your shopping cart</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+</div>
+<!-- second modal -->
+<div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center bg-dark">
+                <h5 class="modal-title" id="add-to-cartCenterTitle"> <span class="ion-checkmark-round"></span>
+                    Product successfully added to your shopping cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-5 divide-right">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{{asset('frontend/img/modal/1.jpg')}}" alt="img">
-                                </div>
-                                <div class="col-md-6 mb-2 mb-md-0">
-                                    <h4 class="product-name">New Balance Running Arishi trainers in triple</h4>
-                                    <h5 class="price">₹₹29.00</h5>
-                                    <h6 class="color"><strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
-                                    </h6>
-                                    <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
-                                </div>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5 divide-right">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{{asset('frontend/img/modal/1.jpg')}}" alt="img">
+                            </div>
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <h4 class="product-name">New Balance Running Arishi trainers in triple</h4>
+                                <h5 class="price">₹₹29.00</h5>
+                                <h6 class="color"><strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
+                                </h6>
+                                <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
                             </div>
                         </div>
-                        <div class="col-lg-7">
-                            <div class="modal-cart-content">
-                                <p class="cart-products-count">There is 1 item in your cart.</p>
-                                <p><strong>Total products:</strong>&nbsp;₹123.72</p>
-                                <p><strong>Total shipping:</strong>&nbsp;₹7.00 </p>
-                                <p><strong>Taxes</strong>&nbsp;₹0.00</p>
-                                <p><strong>Total:</strong>&nbsp;₹130.72 (tax excl.)</p>
-                                <div class="cart-content-btn">
-                                    <button type="button" class="btn theme-btn--dark1 btn--md mt-4"
-                                        data-bs-dismiss="modal">Continue
-                                        shopping</button>
-                                    <button class="btn theme-btn--dark1 btn--md mt-4"><i
-                                            class="ion-checkmark-round"></i>Proceed to
-                                        checkout</button>
-                                </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="modal-cart-content">
+                            <p class="cart-products-count">There is 1 item in your cart.</p>
+                            <p><strong>Total products:</strong>&nbsp;₹123.72</p>
+                            <p><strong>Total shipping:</strong>&nbsp;₹7.00 </p>
+                            <p><strong>Taxes</strong>&nbsp;₹0.00</p>
+                            <p><strong>Total:</strong>&nbsp;₹130.72 (tax excl.)</p>
+                            <div class="cart-content-btn">
+                                <button type="button" class="btn theme-btn--dark1 btn--md mt-4" data-bs-dismiss="modal">Continue
+                                    shopping</button>
+                                <button class="btn theme-btn--dark1 btn--md mt-4"><i class="ion-checkmark-round"></i>Proceed to
+                                    checkout</button>
                             </div>
                         </div>
                     </div>
@@ -349,37 +335,44 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             </div>
         </div>
     </div>
-    <!-- modals end -->
+</div>
+<!-- modals end -->
 
 
 
-    <!--*********************** 
+<!--*********************** 
         all js files
      ***********************-->
 
-    <!--****************************************************** 
+<!--****************************************************** 
         jquery,modernizr ,poppe,bootstrap,plugins and main js
      ******************************************************-->
 
-    <script src="{{asset('frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
-    <script src="{{asset('frontend/js/vendor/modernizr-3.7.1.min.js')}}"></script>
-    <script src="{{asset('frontend/js/plugins/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
-    <script src="{{asset('frontend/js/main.js')}}"></script>
+<script src="{{asset('frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
+<script src="{{asset('frontend/js/vendor/modernizr-3.7.1.min.js')}}"></script>
+<script src="{{asset('frontend/js/plugins/jquery-ui.min.js')}}"></script>
+<script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
+<script src="{{asset('frontend/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<script>
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // Your custom options
+    });
+</script>
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <!--*************************** 
+<!--*************************** 
           Minified  js 
      ***************************-->
 
-    <!--*********************************** 
+<!--*********************************** 
          vendor,plugins and main js
       ***********************************-->
 
-    <!-- <script src="{{asset('frontend/js/vendor/vendor.min.js"></script>
+<!-- <script src="{{asset('frontend/js/vendor/vendor.min.js"></script>
     <script src="{{asset('frontend/js/plugins/plugins.min.js"></script>
     <script src="{{asset('frontend/js/main.js"></script> -->
 

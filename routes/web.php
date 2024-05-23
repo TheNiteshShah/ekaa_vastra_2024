@@ -48,6 +48,8 @@ Route::get('/clear-cache', function () {
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('/');
+    Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');
+    Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
 });
 
 //=========================================== ADMIN =====================================================
@@ -87,6 +89,8 @@ Route::post('/products-store', [ProductController::class, 'store'])->name('produ
 Route::get('/products-show/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products-destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/products-img_remove/{id}/{id2}', [ProductController::class, 'img_remove'])->name('products.img_remove');
+
 //------ products ----------
 Route::get('/master_attributes/{id}', [MasterAttributeController::class, 'index'])->name('master_attributes.index');
 Route::get('/master_attributes-create/{id}', [MasterAttributeController::class, 'create'])->name('master_attributes.create');

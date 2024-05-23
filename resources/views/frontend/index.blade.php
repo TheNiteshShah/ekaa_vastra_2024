@@ -64,10 +64,12 @@
                             <div class="card-body p-0">
                                 <div class="media flex-column">
                                     <div class="product-thumbnail w-100 position-relative">
-                                        <span class="badge badge-danger top-left">new</span>
-                                        <a class="d-block" href="single-product.html">
-                                            <img class="first-img" src="{{asset($trend->types[0]->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($trend->types[0]->image2?$trend->types[0]->image2:$trend->types[0]->image1)}}" alt="thumbnail">
+                                    @if($trend->label)
+                                        <span class="badge badge-danger top-left">{{$trend->label}}</span>
+                                        @endif
+                                        <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
+                                            <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         <!-- product links -->
                                         <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
@@ -75,9 +77,9 @@
                                     <div class="media-body">
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
-                                            <h3 class="title mb-10"><a href="shop-grid-4-column.html">{{$trend->name}}</a></h3>
-                                            <h6 class="product-price"><del class="del">₹{{$trend->types[0]->mrp}}</del>
-                                                <span class="onsale">₹{{$trend->types[0]->selling_price}}</span>
+                                            <h3 class="title mb-10"><a href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">{{$trend->name}}</a></h3>
+                                            <h6 class="product-price"><del class="del">₹{{$trend->mrp}}</del>
+                                                <span class="onsale">₹{{$trend->selling_price}}</span>
                                             </h6>
                                         </div>
                                     </div>
@@ -121,16 +123,18 @@
             </div>
             <div class="col-12">
                 <div class="product-slider-init slick-nav">
-                @foreach($topData as $trend)
+                    @foreach($topData as $trend)
                     <div class="slider-item">
                         <div class="card product-card">
                             <div class="card-body p-0">
                                 <div class="media flex-column">
                                     <div class="product-thumbnail w-100 position-relative">
-                                        <span class="badge badge-danger top-left">new</span>
-                                        <a class="d-block" href="single-product.html">
-                                            <img class="first-img" src="{{asset($trend->types[0]->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($trend->types[0]->image2?$trend->types[0]->image2:$trend->types[0]->image1)}}" alt="thumbnail">
+                                        @if($trend->label)
+                                        <span class="badge badge-danger top-left">{{$trend->label}}</span>
+                                        @endif
+                                        <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
+                                            <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         <!-- product links -->
                                         <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
@@ -138,9 +142,9 @@
                                     <div class="media-body">
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
-                                            <h3 class="title mb-10"><a href="shop-grid-4-column.html">{{$trend->name}}</a></h3>
-                                            <h6 class="product-price"><del class="del">₹{{$trend->types[0]->mrp}}</del>
-                                                <span class="onsale">₹{{$trend->types[0]->selling_price}}</span>
+                                            <h3 class="title mb-10"><a href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">{{$trend->name}}</a></h3>
+                                            <h6 class="product-price"><del class="del">₹{{$trend->mrp}}</del>
+                                                <span class="onsale">₹{{$trend->selling_price}}</span>
                                             </h6>
                                         </div>
                                     </div>
