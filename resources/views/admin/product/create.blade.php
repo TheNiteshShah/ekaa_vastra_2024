@@ -187,7 +187,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 my-3">
-                                        <label>Is Top &nbsp;<span style="color:red;"></span></label>
+                                        <label>Is New &nbsp;<span style="color:red;"></span></label>
                                         <select name="is_top" id="is_top" class="form-control" required>
                                             <option value="">---- Select----</option>
                                             <option value="1" @if (($data->is_top == '1')) selected @endif>Yes</option>
@@ -201,7 +201,7 @@
 
                                     </div>
                                     <div class="col-sm-6 my-3">
-                                        <label>Is Trending &nbsp;<span style="color:red;"></span></label>
+                                        <label>Is Featured &nbsp;<span style="color:red;"></span></label>
                                         <select name="is_trending" id="is_trending" class="form-control" required>
                                             <option value="">---- Select----</option>
                                             <option value="1" @if ( ($data->is_trending == '1')) selected @endif>Yes</option>

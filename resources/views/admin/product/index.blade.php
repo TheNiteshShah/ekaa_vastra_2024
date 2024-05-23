@@ -62,8 +62,8 @@
                                                 <th data-priority="1">GST %</th>
                                                 <th data-priority="1">GST</th>
                                                 <th data-priority="1">Selling Price </th>
-                                                <th data-priority="1">Top</th>
-                                                <th data-priority="1">Trending</th>
+                                                <th data-priority="1">New</th>
+                                                <th data-priority="1">Featured</th>
                                                 <th data-priority="1">Images</th>
                                                 <th data-priority="1">Label</th>
                                                 <th data-priority="1">Sequence</th>
