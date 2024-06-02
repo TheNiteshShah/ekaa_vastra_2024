@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//============== FRONTEND CONTROLLERS =================
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CartController;
+//============== BACKEND CONTROLLERS =================
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\Slider2Controller;
-use App\Http\Controllers\Admin\Slider3Controller;
-use App\Http\Controllers\Admin\Slider4Controller;
-use App\Http\Controllers\Admin\Slider5Controller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
-use App\Http\Controllers\Admin\MinorCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\TypeController;
@@ -25,6 +23,7 @@ use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\MasterTypeController;
 use App\Http\Controllers\Admin\MasterAttributeController;
 use App\Http\Controllers\Admin\RkVendorController;
+use App\Http\Controllers\Admin\EvVendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +49,8 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('/');
     Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');
     Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
+    //------------ CART ----------------
+    Route::post('/add-to-cart', [CartController::class, 'addToCart']);
 });
 
 //=========================================== ADMIN =====================================================
@@ -62,7 +63,7 @@ Route::get('/admin_profile', [LoginController::class, 'admin_profile'])->name('a
 Route::get('/view_change_password', [LoginController::class, 'admin_change_pass_view'])->name('view_change_password');
 Route::post('/admin_change_password', [LoginController::class, 'admin_change_password'])->name('admin_change_password');
 
-// Admin Team
+//------ Admin Team ----------
 Route::get('/add_team_view', [TeamController::class, 'add_team_view'])->name('add_team_view');
 Route::get('/view_team', [TeamController::class, 'view_team'])->name('view_team');
 Route::post('/add_team_process', [TeamController::class, 'add_team_process'])->name('add_team_process');
@@ -79,10 +80,9 @@ Route::get('/user_cart/{id}', [UserController::class, 'userCart'])->name('user_c
 Route::resource('/category', CategoryController::class);
 Route::get('/contact_enquiry', [ContactUsController::class, 'index'])->name('contact_enquiry');
 Route::get('/popup_enquiry', [PopUpEnquiryController::class, 'index'])->name('popup_enquiry');
-//------ Subcategpry ----------
+//------ Subcategory ----------
 Route::resource('/subcategory', SubCategoryController::class);
 //------ products ----------
-Route::get('/products_minorcategory', [ProductController::class, 'products_minorcategory'])->name('products.minorcategory');
 Route::get('/products/{id}', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products-create/{id}', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products-store', [ProductController::class, 'store'])->name('products.store');
@@ -90,8 +90,7 @@ Route::get('/products-show/{id}', [ProductController::class, 'show'])->name('pro
 Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products-destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/products-img_remove/{id}/{id2}', [ProductController::class, 'img_remove'])->name('products.img_remove');
-
-//------ products ----------
+//------ master_attributes ----------
 Route::get('/master_attributes/{id}', [MasterAttributeController::class, 'index'])->name('master_attributes.index');
 Route::get('/master_attributes-create/{id}', [MasterAttributeController::class, 'create'])->name('master_attributes.create');
 Route::post('/master_attributes-store', [MasterAttributeController::class, 'store'])->name('master_attributes.store');
@@ -111,7 +110,6 @@ Route::get('/types-edit/{id}', [TypeController::class, 'edit'])->name('types.edi
 Route::get('/types-copy/{id}', [TypeController::class, 'copy'])->name('types.copy');
 Route::delete('/types-destroy/{id}', [TypeController::class, 'destroy'])->name('types.destroy');
 Route::get('/types-img_remove/{id}/{id2}', [TypeController::class, 'img_remove'])->name('types.img_remove');
-
 //---------- Orders ---------
 Route::get('/new_orders', [OrderController::class, 'new_orders'])->name('new_orders');
 Route::get('/accepted_orders', [OrderController::class, 'accepted_orders'])->name('accepted_orders');
@@ -124,6 +122,7 @@ Route::get('/orderDetails/{id}', [OrderController::class, 'orderDetails'])->name
 Route::get('/OrderInvoice/{id}', [OrderController::class, 'OrderInvoice'])->name('order-invoice');
 Route::get('/update-track/{id}', [OrderController::class, 'updateTrack'])->name('update-track');
 Route::post('/mark-dispatch', [OrderController::class, 'markDispatch'])->name('mark-dispatch');
+//---------- ev vendor ---------
+Route::resource('/ev_vendor', EvVendorController::class);
 //---------- rk vendor ---------
 Route::resource('/rk_vendor', RkVendorController::class);
-

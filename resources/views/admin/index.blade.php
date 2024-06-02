@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger mini-stat position-relative">
-                        <a href="{{route('products.minorcategory')}}">
+                        <a href="{{route('subcategory.index')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
                                     <h6 class="text-uppercase verti-label text-white-50">Total Products</h6>

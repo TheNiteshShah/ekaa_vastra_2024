@@ -188,20 +188,6 @@
                                     </div>
                                     <div class="col-sm-6 my-3">
                                         <label>Is New &nbsp;<span style="color:red;"></span></label>
-                                        <select name="is_top" id="is_top" class="form-control" required>
-                                            <option value="">---- Select----</option>
-                                            <option value="1" @if (($data->is_top == '1')) selected @endif>Yes</option>
-                                            <option value="0" @if ( ($data->is_top == '0')) selected @endif>No</option>
-                                        </select>
-                                        @error('is_top')
-                                        <span class='invalid-feedback' role='alert' style='color:#dc3545 !important'>
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-
-                                    </div>
-                                    <div class="col-sm-6 my-3">
-                                        <label>Is Featured &nbsp;<span style="color:red;"></span></label>
                                         <select name="is_trending" id="is_trending" class="form-control" required>
                                             <option value="">---- Select----</option>
                                             <option value="1" @if ( ($data->is_trending == '1')) selected @endif>Yes</option>
@@ -214,6 +200,21 @@
                                         @enderror
 
                                     </div>
+                                    <div class="col-sm-6 my-3">
+                                        <label> Is Featured &nbsp;<span style="color:red;"></span></label>
+                                        <select name="is_top" id="is_top" class="form-control" required>
+                                            <option value="">---- Select----</option>
+                                            <option value="1" @if (($data->is_top == '1')) selected @endif>Yes</option>
+                                            <option value="0" @if ( ($data->is_top == '0')) selected @endif>No</option>
+                                        </select>
+                                        @error('is_top')
+                                        <span class='invalid-feedback' role='alert' style='color:#dc3545 !important'>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+
+                                    </div>
+                                   
                                     <div class="col-sm-6 my-3" style="margin-top: 23px!important">
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('label') is-invalid @enderror" value="{{old('label') ? old('label') : $data->label}}" id="label" name="label" placeholder="Enter Label">

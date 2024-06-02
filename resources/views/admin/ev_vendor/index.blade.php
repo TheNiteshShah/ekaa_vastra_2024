@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">View <b>{{$parentData->name}}</b> > {{$title}}</h4>
+                    <h4 class="page-title">View {{$title}}</h4>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('subcategory.index')}}">Back</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">{{$title}}</a></li>
                         <li class="breadcrumb-item active">View {{$title}}</li>
                     </ol>
                     <div class="state-information d-none d-sm-block">
@@ -41,13 +41,13 @@
                             <!-- End show success and error messages -->
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h4 class="mt-0 header-title">View <b>{{$parentData->name}}</b> > {{$title}} List</h4>
+                                    <h4 class="mt-0 header-title">View {{$title}} List</h4>
                                 </div>
                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('products.create',$subcategory_id)}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
+                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('ev_vendor.create')}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
                                 @endif
                             </div>
-                            <hr style="margin-bottom: 50px;background-color: darkgrey;">
+                            <hr style="margin-bottom: 50px;background-color: daevgrey;">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
                                     <table id="userTable" class="table  table-striped">
@@ -55,20 +55,17 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th data-priority="1">Name</th>
-                                                <th data-priority="1">SKU</th>
-                                                <th data-priority="1">Description</th>
-                                                <th data-priority="1">MRP</th>
-                                                <th data-priority="1">Price</th>
-                                                <th data-priority="1">GST %</th>
+                                                <th data-priority="1">Business Name</th>
                                                 <th data-priority="1">GST</th>
-                                                <th data-priority="1">Selling Price </th>
-                                                <th data-priority="1">New</th>
-                                                <th data-priority="1">Featured</th>
-                                                <th data-priority="1">Images</th>
-                                                <th data-priority="1">Label</th>
-                                                <th data-priority="1">Sequence</th>
+                                                <th data-priority="1">Address</th>
+                                                <th data-priority="1">Phone</th>
+                                                <th data-priority="1">City</th>
+                                                <th data-priority="1">State</th>
+                                                <th data-priority="1">Pin Code</th>
                                                 <th data-priority="6">Status</th>
+                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <th data-priority="6">Action</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,32 +74,14 @@
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
                                                 <th>{{$data->name}}</th>
-                                                <th>{{$data->sku}}</th>
-                                                <th>{!!$data->description!!}</th>
-                                                <th>₹{{$data->mrp}}</th>
-                                                <th>₹{{$data->price}}</th>
-                                                <th>{{$data->gst_percentage}}%</th>
-                                                <th>₹{{$data->gst}}</th>
-                                                <th>₹{{$data->selling_price}}</th>
-                                                <th>{{$data->is_trending==1?'Yes':'No'}}</th>
-                                                <th>{{$data->is_top==1?'Yes':'No'}}</th>
-                                                <th>
-                                                    @if (!empty($data->image))
-                                                    <img src="{{asset($data->image)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image2))
-                                                    <img src="{{asset($data->image2)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image3))
-                                                    <img src="{{asset($data->image3)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image4))
-                                                    <img src="{{asset($data->image4)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-
-                                                </th>
-                                                <th>{{$data->label}}</th>
-                                                <th>{{$data->seq}}</th>
+                                                <th>{{$data->business_name}}</th>
+                                                <th>{{$data->gst}}</th>
+                                                <th>{{$data->address}}</th>
+                                                <th>{{$data->phone}}</th>
+                                                <th>{{$data->city->name}}</th>
+                                                <th>{{$data->city->state->name}}</th>
+                                                <th>{{$data->pin_code}}</th>
+                                               
                                                 @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>
@@ -112,24 +91,22 @@
                                                     <p class="label  status-inactive">Inactive</p>
                                                 </td>
                                                 @endif
+                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <td>
                                                     <div class="btn-group" id="btns{{$loop->iteration}}">
-                                                        @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                                        @if($data->is_active == 0)
-                                                        <a href="{{route('products.show',base64_encode($data->id))}}"><i class="fas fa-check success-icon" data-toggle="tooltip" data-placement="top" title="Active"></i></a>
+                                                        <!-- @if($data->is_active == 0)
+                                                        <a href="{{route('ev_vendor.show',base64_encode($data->id))}}"><i class="fas fa-check success-icon" data-toggle="tooltip" data-placement="top" title="Active"></i></a>
                                                         @else
-                                                        <a href="{{route('products.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
-                                                        @endif
-                                                        <a href="{{route('products.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                                                        @if(session()->get('position') == "Super Admin")
+                                                        <a href="{{route('ev_vendor.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
+                                                        @endif -->
+                                                        <a href="{{route('ev_vendor.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                        <!-- @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
-                                                        @endif
-                                                        @endif
-                                                        <a href="{{route('types.index',base64_encode($data->id))}}"><i class="fa fa-arrow-right info-icon" data-toggle="tooltip" data-placement="top" title="Types"></i></a>
+                                                        @endif -->
                                                     </div>
                                                     <div style="display:none" id="cnfbox{{$loop->iteration}}">
                                                         <p> Are you sure delete this </p>
-                                                        <form method="post" action="{{ route('products.destroy', base64_encode($data->id)) }}" style="display:inline">
+                                                        <form method="post" action="{{ route('ev_vendor.destroy', base64_encode($data->id)) }}" style="display:inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">Yes</button>
@@ -138,6 +115,7 @@
 
                                                     </div>
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                             @endif
@@ -155,23 +133,10 @@
 </div> <!-- content -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<!-- DataTables Buttons JavaScript -->
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#userTable').DataTable({
             responsive: true,
-            dom: 'Bfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
         });
         $(document.body).on('click', '.dCnf', function() {
             var i = $(this).attr("mydata");
