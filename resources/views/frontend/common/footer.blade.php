@@ -347,7 +347,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <!--****************************************************** 
         jquery,modernizr ,poppe,bootstrap,plugins and main js
      ******************************************************-->
-
+<script>
+       const base_path = '{{ url('/') }}\/';
+</script>
 <script src="{{asset('frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
 <script src="{{asset('frontend/js/vendor/modernizr-3.7.1.min.js')}}"></script>
@@ -355,28 +357,15 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
 <script src="{{asset('frontend/js/main.js')}}"></script>
+<script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-
+<script src="{{asset('frontend/js/snackbar.min.js')}}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
     });
 </script>
-<!-- Use the minified version files listed below for better performance and remove the files listed above -->
-
-<!--*************************** 
-          Minified  js 
-     ***************************-->
-
-<!--*********************************** 
-         vendor,plugins and main js
-      ***********************************-->
-
-<!-- <script src="{{asset('frontend/js/vendor/vendor.min.js"></script>
-    <script src="{{asset('frontend/js/plugins/plugins.min.js"></script>
-    <script src="{{asset('frontend/js/main.js"></script> -->
-
-
 </body>
 
 </html>

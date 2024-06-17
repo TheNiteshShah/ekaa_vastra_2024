@@ -100,6 +100,8 @@
                                                         <a href="{{route('rk_vendor.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
                                                         @endif -->
                                                         <a href="{{route('rk_vendor.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                        <a href="{{route('rk-vendor-product.index',base64_encode($data->id))}}"><i class="fas fa-arrow-right info-icon" data-toggle="tooltip" data-placement="top" title="Products"></i></a>
+                                                        <a href="{{route('rk-vendor-order.index',base64_encode($data->id))}}"><i class="fa fa-file info-icon" data-toggle="tooltip" data-placement="top" title="Bills"></i></a>
                                                         <!-- @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
                                                         @endif -->

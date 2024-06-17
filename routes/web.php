@@ -23,7 +23,10 @@ use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\MasterTypeController;
 use App\Http\Controllers\Admin\MasterAttributeController;
 use App\Http\Controllers\Admin\RkVendorController;
+use App\Http\Controllers\Admin\RkVendorProductController;
+use App\Http\Controllers\Admin\RkVendorOrderController;
 use App\Http\Controllers\Admin\EvVendorController;
+use App\Http\Controllers\Admin\FabricController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,5 +127,21 @@ Route::get('/update-track/{id}', [OrderController::class, 'updateTrack'])->name(
 Route::post('/mark-dispatch', [OrderController::class, 'markDispatch'])->name('mark-dispatch');
 //---------- ev vendor ---------
 Route::resource('/ev_vendor', EvVendorController::class);
+Route::resource('/fabric', FabricController::class);
+Route::get('/show-txn/{id}', [FabricController::class, 'showTxn'])->name('show-txn');
+
 //---------- rk vendor ---------
 Route::resource('/rk_vendor', RkVendorController::class);
+//---------- rk Products ---------
+Route::get('/rk-vendor-product/{id}', [RkVendorProductController::class, 'index'])->name('rk-vendor-product.index');
+Route::get('/rk-vendor-product-create/{id}', [RkVendorProductController::class, 'create'])->name('rk-vendor-product.create');
+Route::post('/rk-vendor-product', [RkVendorProductController::class, 'store'])->name('rk-vendor-product.store');
+Route::get('/rk-vendor-product-edit/{id}', [RkVendorProductController::class, 'edit'])->name('rk-vendor-product.edit');
+Route::get('/rk-vendor-product-show/{id}', [RkVendorProductController::class, 'show'])->name('rk-vendor-product.show');
+//---------- rk orders ---------
+Route::get('/rk-vendor-order/{id}', [RkVendorOrderController::class, 'index'])->name('rk-vendor-order.index');
+Route::get('/rk-vendor-order-create/{id}', [RkVendorOrderController::class, 'create'])->name('rk-vendor-order.create');
+Route::post('/rk-vendor-order', [RkVendorOrderController::class, 'store'])->name('rk-vendor-order.store');
+Route::get('/rk-vendor-order-edit/{id}', [RkVendorOrderController::class, 'edit'])->name('rk-vendor-order.edit');
+Route::get('/rk-vendor-order-show/{id}', [RkVendorOrderController::class, 'show'])->name('rk-vendor-order.show');
+Route::get('/rk-vendor-order-print/{id}', [RkVendorOrderController::class, 'print'])->name('rk-vendor-order.print');

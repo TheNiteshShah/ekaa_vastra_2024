@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Ekaa Vastra</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/img/favicon.png')}}" />
@@ -13,19 +14,15 @@
     <!--********************************** 
         all css files 
     *************************************-->
-
-    <!--*************************************************** 
-       fontawesome,bootstrap,plugins and main style css
-     ***************************************************-->
-
-    <link rel="stylesheet" href="{{asset('frontend/css/fontawesome.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/css/ionicons.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/css/simple-line-icons.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/css/plugins/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/css/plugins/plugins.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/fontawesome.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/ionicons.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/simple-line-icons.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/plugins/jquery-ui.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/plugins/plugins.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <style>
         @media screen and (max-width: 768px) {
@@ -315,16 +312,19 @@
                                             <i class="ion-ios-search-strong"></i>
                                         </a>
                                     </li>
+                                    @php $wishCount = 0;
+                                    $cartCount = 0;
+                                    @endphp
                                     <li class="position-relative d-none d-sm-block">
                                         <a class="offcanvas-toggle" href="#offcanvas-wishlist">
                                             <i class="ion-android-favorite-outline"></i>
-                                            <span class="badge cbdg1">4</span>
+                                            <span class="badge cbdg1">{{$wishCount}}</span>
                                         </a>
                                     </li>
                                     <li class="cart-block position-relative d-none d-sm-block">
                                         <a class="offcanvas-toggle" href="#offcanvas-cart">
                                             <i class="ion-bag"></i>
-                                            <span class="badge cbdg1">5</span>
+                                            <span class="badge cbdg1">{{$cartCount}}</span>
                                         </a>
                                     </li>
                                     <li class="me-0 cart-block">

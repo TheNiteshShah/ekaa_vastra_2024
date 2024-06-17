@@ -98,6 +98,15 @@
                                             <div style="color:red">{{$message}}</div>
                                             @enderror
                                         </div>
+                                        <div class="col-sm-6 my-3" style="margin-top: 23px!important">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{old('address') ? old('address') : ''}}" id="address" name="address" placeholder="Enter Address">
+                                                <label for="address">Enter Address &nbsp;<span style="color:red;">*</span></label>
+                                            </div>
+                                            @error('address')
+                                            <div style="color:red">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                         <div class="form-group">
                                             <div class="w-100 text-center">
                                                 <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-user"></i> Submit</button>

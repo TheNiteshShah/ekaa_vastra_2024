@@ -37,6 +37,7 @@ class UserController extends Controller
                 'phone' => $req->id === null ? 'required' : 'required',
                 'email' => $req->id === null ? 'required|unique:users|email' : 'required',
                 'password' => $req->id === null ? 'required' : '',
+                'address' => $req->id === null ? 'required' : '',
             ]);
             if ($req->id === null) {
                 $uploadData = new UserModal();
@@ -47,6 +48,7 @@ class UserController extends Controller
             $uploadData->name = ucwords($req->name);
             $uploadData->phone = $req->phone;
             $uploadData->email = $req->email;
+            $uploadData->address = $req->address;
             if (!empty($req->password)) {
                 $uploadData->password = md5($req->password);
             }

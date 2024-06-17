@@ -155,13 +155,15 @@
                         <nav class="shop-grid-nav mt-20">
                             <ul class="product-tag d-flex flex-wrap">
                                 @foreach($productData->types as $index=>$type)
-                                <li><a href="javascript:void(0)" class="{{$type->inventory==0?'out':''}}">{{$type->size->name}}</a></li>
+                                <li><a href="javascript:void(0)" value="{{$type->id}}" class="{{$type->inventory==0?'out':''}}" onclick="updateTypeId(this, {{$type->id}})">{{$type->size->name}}</a></li>
                                 @endforeach
                             </ul>
+                            <input type="hidden" id="product_id" name="product_id" value="{{$productData->id}}">
+                            <input type="hidden" id="type_id" name="type_id" value="">
                         </nav>
                         <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
                             <div class="count d-flex">
-                                <input type="number" min="1" max="10" step="1" value="1" />
+                                <input type="number" min="1" max="10" step="1" value="1" name="quantity" id="quantity" />
                                 <div class="button-group">
                                     <button class="count-btn increment">
                                         <i class="fas fa-chevron-up"></i>
@@ -172,7 +174,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0" proId="{{$productData}}" sizeId="">
+                                <button id="add-to-cart-btn" class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
                                     <span class="me-2"><i class="ion-bag"></i></span>
                                     Add to cart
                                 </button>
@@ -336,4 +338,20 @@
 </section>
 <!-- new arrival section end -->
 @endif
+<script>
+    function updateTypeId(element, typeId) {
+        // Update the hidden input value
+        document.getElementById('type_id').value = typeId;
+
+        // Remove the "active" class from all <a> elements
+        var links = document.querySelectorAll('.product-tag li a');
+        links.forEach(function(link) {
+            link.classList.remove('active');
+        });
+
+        // Add the "active" class to the clicked <a> element
+        element.classList.add('active');
+    }
+</script>
+
 @endsection
