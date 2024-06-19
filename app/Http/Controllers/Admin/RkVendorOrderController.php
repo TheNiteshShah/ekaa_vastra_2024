@@ -17,7 +17,7 @@ class RkVendorOrderController extends Controller
             $parent_id = base64_decode($parent_id);
             $parentData = RkVendorModal::where('id', $parent_id)->first();
             $foreachData = RkVendorOrderModal::where('vendor_id', $parent_id)->latest()->get();
-            $title =  "RK Vendor - " . $parentData->name . ' Bills';
+            $title =  "RK Vendor - " . $parentData->name . ' Invoice';
             return view('admin/rk_vendor_order.index', compact('foreachData', 'title', 'parent_id'));
         } else {
             return view('admin/login/index');

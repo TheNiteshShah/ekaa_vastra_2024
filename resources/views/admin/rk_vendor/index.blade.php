@@ -44,7 +44,7 @@
                                     <h4 class="mt-0 header-title">View {{$title}} List</h4>
                                 </div>
                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('rk_vendor.create')}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
+                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('rk_vendor.create')}}" role="button" style="margin-left: 20px;"> Add New Vendor</a></div>
                                 @endif
                             </div>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
@@ -54,6 +54,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
+                                                <th data-priority="6">Action</th>
+                                                @endif
                                                 <th data-priority="1">Name</th>
                                                 <th data-priority="1">Business Name</th>
                                                 <th data-priority="1">GST</th>
@@ -63,9 +66,6 @@
                                                 <th data-priority="1">State</th>
                                                 <th data-priority="1">Pin Code</th>
                                                 <!-- <th data-priority="6">Status</th> -->
-                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                                <th data-priority="6">Action</th>
-                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -73,6 +73,33 @@
                                             @foreach($foreachData as $data)
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
+                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
+                                                <td>
+                                                    <div class="btn-group" id="btns{{$loop->iteration}}">
+                                                        <!-- @if($data->is_active == 0)
+                                                        <a href="{{route('rk_vendor.show',base64_encode($data->id))}}"><i class="fas fa-check success-icon" data-toggle="tooltip" data-placement="top" title="Active"></i></a>
+                                                        @else
+                                                        <a href="{{route('rk_vendor.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
+                                                        @endif -->
+                                                        <a href="{{route('rk_vendor.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                        <a href="{{route('rk-vendor-product.index',base64_encode($data->id))}}"><i class="fa fa-list danger-icon" data-toggle="tooltip" data-placement="top" title="Products"></i></a>
+                                                        <a href="{{route('rk-vendor-order.index',base64_encode($data->id))}}"><i class="fa fa-file info-icon" data-toggle="tooltip" data-placement="top" title="Invoice"></i></a>
+                                                        <!-- @if(session()->get('position') == "Super Admin")
+                                                        <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
+                                                        @endif -->
+                                                    </div>
+                                                    <div style="display:none" id="cnfbox{{$loop->iteration}}">
+                                                        <p> Are you sure delete this </p>
+                                                        <form method="post" action="{{ route('rk_vendor.destroy', base64_encode($data->id)) }}" style="display:inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                                        </form>
+                                                        <a href="javascript:();" class="cans btn btn-default" mydatas="{{$loop->iteration}}">No</a>
+
+                                                    </div>
+                                                </td>
+                                                @endif
                                                 <th>{{$data->name}}</th>
                                                 <th>{{$data->business_name}}</th>
                                                 <th>{{$data->gst}}</th>
@@ -91,33 +118,7 @@
                                                     <p class="label  status-inactive">Inactive</p>
                                                 </td>
                                                 @endif -->
-                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                                <td>
-                                                    <div class="btn-group" id="btns{{$loop->iteration}}">
-                                                        <!-- @if($data->is_active == 0)
-                                                        <a href="{{route('rk_vendor.show',base64_encode($data->id))}}"><i class="fas fa-check success-icon" data-toggle="tooltip" data-placement="top" title="Active"></i></a>
-                                                        @else
-                                                        <a href="{{route('rk_vendor.show',base64_encode($data->id))}}"><i class="fas fa-times danger-icon" data-toggle="tooltip" data-placement="top" title="Inactive"></i></a>
-                                                        @endif -->
-                                                        <a href="{{route('rk_vendor.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                                                        <a href="{{route('rk-vendor-product.index',base64_encode($data->id))}}"><i class="fas fa-arrow-right danger-icon" data-toggle="tooltip" data-placement="top" title="Products"></i></a>
-                                                        <a href="{{route('rk-vendor-order.index',base64_encode($data->id))}}"><i class="fa fa-file info-icon" data-toggle="tooltip" data-placement="top" title="Bills"></i></a>
-                                                        <!-- @if(session()->get('position') == "Super Admin")
-                                                        <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
-                                                        @endif -->
-                                                    </div>
-                                                    <div style="display:none" id="cnfbox{{$loop->iteration}}">
-                                                        <p> Are you sure delete this </p>
-                                                        <form method="post" action="{{ route('rk_vendor.destroy', base64_encode($data->id)) }}" style="display:inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Yes</button>
-                                                        </form>
-                                                        <a href="javascript:();" class="cans btn btn-default" mydatas="{{$loop->iteration}}">No</a>
-
-                                                    </div>
-                                                </td>
-                                                @endif
+                                                
                                             </tr>
                                             @endforeach
                                             @endif

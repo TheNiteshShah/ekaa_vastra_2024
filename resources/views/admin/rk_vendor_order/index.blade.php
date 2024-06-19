@@ -40,11 +40,11 @@
                             @endif
                             <!-- End show success and error messages -->
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <h4 class="mt-0 header-title">View {{$title}} List</h4>
                                 </div>
                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                <div class="col-md-3"> <a class="btn btn-info cticket" href="{{route('rk-vendor-order.create',base64_encode($parent_id))}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
+                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('rk-vendor-order.create',base64_encode($parent_id))}}" role="button" style="margin-left: 20px;">Create New Invoice</a></div>
                                 @endif
                             </div>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
@@ -54,14 +54,14 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
+                                                <th data-priority="6">Action</th>
+                                                @endif
                                                 <th data-priority="1">Invoice No.</th>
                                                 <th data-priority="1">Invoice Date</th>
                                                 <th data-priority="1">SubTotal</th>
                                                 <th data-priority="6">GST</th>
                                                 <th data-priority="6">Total</th>
-                                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                                <th data-priority="6">Action</th>
-                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,16 +69,11 @@
                                             @foreach($foreachData as $data)
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
-                                                <th>{{$data->invoice_no}}</th>
-                                                <th>{{$data->invoice_date}}</th>
-                                                <th>₹{{$data->sub_total}}</th>
-                                                <th>₹{{$data->gst_amount}}</th>
-                                                <th>₹{{$data->total_amount}}</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <td>
                                                     <div class="btn-group" id="btns{{$loop->iteration}}">
                                                         <!-- <a href="{{route('rk-vendor-order.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> -->
-                                                        <a href="{{route('rk-vendor-order.print',base64_encode($data->id))}}"><i class="fas fa-eye info-icon" data-toggle="tooltip" data-placement="top" title="Print"></i></a>
+                                                        <a href="{{route('rk-vendor-order.print',base64_encode($data->id))}}"><i class="fas fa-print info-icon" data-toggle="tooltip" data-placement="top" title="Print"></i></a>
                                                         <!-- @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
                                                         @endif -->
@@ -95,6 +90,12 @@
                                                     </div>
                                                 </td>
                                                 @endif
+                                                <th>{{$data->invoice_no}}</th>
+                                                <th>{{$data->invoice_date}}</th>
+                                                <th>₹{{$data->sub_total}}</th>
+                                                <th>₹{{$data->gst_amount}}</th>
+                                                <th>₹{{$data->total_amount}}</th>
+
                                             </tr>
                                             @endforeach
                                             @endif

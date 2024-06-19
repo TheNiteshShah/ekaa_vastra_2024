@@ -74,7 +74,7 @@
                                     <div class="col-sm-6 my-3" style="margin-top: 23px!important">
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('unit') is-invalid @enderror" value="{{old('unit') ? old('unit') : $data->unit}}" id="unit" name="unit" placeholder="Enter Unit" required>
-                                            <label for="unit">Enter Unit &nbsp;<span style="color:red;">*</span></label>
+                                            <label for="unit">Enter Set / Pc &nbsp;<span style="color:red;">*</span></label>
                                         </div>
                                         @error('unit')
                                         <div style="color:red">{{$message}}</div>

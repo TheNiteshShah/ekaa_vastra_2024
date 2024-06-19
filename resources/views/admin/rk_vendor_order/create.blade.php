@@ -87,7 +87,7 @@
                                         <select name="name[]" id="name-1" data-id="1" onchange="change(this)" class="form-control select2" required>
                                             <option value="">----Select Product----</option>
                                             @foreach($productData as $product)
-                                            <option value="{{$product->id}}" {{ $data->product_id== $product->id ? 'selected' : '' }} data-price="{{$product->price}}">{{$product->name}}</option>
+                                            <option value="{{$product->id}}" {{ $data->product_id== $product->id ? 'selected' : '' }} data-price="{{$product->price}}">{{$product->name}} - ₹{{$product->price}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -104,7 +104,7 @@
                                         <div class="form-floating" style="display: flex;align-items: center;">
                                             <input type="text" readonly class="form-control" name="total[]" id="total-1" style="background-color: white">
                                             <label for="Total">Total &nbsp;<span style="color:red;">*</span></label>
-                                            <button style="margin-left:10px;" class="btn btn-success" type="button" onclick="addMore()"><i class="fa fa-plus"></i></button>
+                                            <button style="margin-left:10px;" class="btn btn-success" type="button" onclick="addMore()">Add <i class="fa fa-plus"></i></button>
                                         </div>
                                         @error('total')
                                         <div style="color:red">{{$message}}</div>
@@ -113,7 +113,7 @@
                                     <div id="more"></div>
                                     <div class="form-group">
                                         <div class="w-100 text-center">
-                                            <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-user"></i> Submit</button>
+                                            <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-file"></i> Generate Invoice</button>
 
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
     function addMore() {
         var count = parseInt($("#count").val());
         var index = count + 1;
-        var div = '<div id="tb-' + index + '" class="row"><div class="col-sm-3 my-3"><label>Product &nbsp;<span style="color:red;"></span></label><select name="name[]" id="name-' + index + '" data-id="' + index + '" onchange="change(this)" class="form-control select2" required><option value="">----Select Product----</option>@foreach($productData as $product)<option value="{{$product->id}}" data-price="{{$product->price}}">{{$product->name}}</option>@endforeach</select></div> <div class="col-sm-4 my-3" style="margin-top: 23px!important"><div class="form-floating"><input type="text" class="form-control" placeholder="Enter Quantity" required name="quantity[]" onkeypress="return isNumberKey(event)" onkeyup="calculate_selling(' + index + ')"  id="qty-' + index + '"><label for="quantity">Enter Quantity &nbsp;<span style="color:red;">*</span></label></div></div><div class="col-sm-4 my-3" style="margin-top: 23px!important;"><div class="form-floating" style="display: flex;align-items: center;"><input type="text" readonly class="form-control" name="total[]" id="total-' + index + '" style="background-color: white"><label for="Total">Total &nbsp;<span style="color:red;">*</span></label><button style="margin-left:5px;" class="btn btn-success" type="button" onclick="addMore()"><i class="fa fa-plus"></i></button><button style="margin-left:5px" type="button" onclick="remove(' + index + ')" class="btn btn-danger"><i class="fa fa-times" ></i></button></div></div></div>';
+        var div = '<div id="tb-' + index + '" class="row"><div class="col-sm-3 my-3"><label>Product &nbsp;<span style="color:red;"></span></label><select name="name[]" id="name-' + index + '" data-id="' + index + '" onchange="change(this)" class="form-control select2" required><option value="">----Select Product----</option>@foreach($productData as $product)<option value="{{$product->id}}" data-price="{{$product->price}}">{{$product->name}} - ₹{{$product->price}}</option>@endforeach</select></div> <div class="col-sm-4 my-3" style="margin-top: 23px!important"><div class="form-floating"><input type="text" class="form-control" placeholder="Enter Quantity" required name="quantity[]" onkeypress="return isNumberKey(event)" onkeyup="calculate_selling(' + index + ')"  id="qty-' + index + '"><label for="quantity">Enter Quantity &nbsp;<span style="color:red;">*</span></label></div></div><div class="col-sm-4 my-3" style="margin-top: 23px!important;"><div class="form-floating" style="display: flex;align-items: center;"><input type="text" readonly class="form-control" name="total[]" id="total-' + index + '" style="background-color: white"><label for="Total">Total &nbsp;<span style="color:red;">*</span></label><button style="margin-left:5px;" class="btn btn-success" type="button" onclick="addMore()">Add <i class="fa fa-plus"></i></button><button style="margin-left:5px" type="button" onclick="remove(' + index + ')" class="btn btn-danger">Remove <i class="fa fa-times" ></i></button></div></div></div>';
 
         $('#more').append(div);
         $("#count").val(index);
