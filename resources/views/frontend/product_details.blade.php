@@ -120,7 +120,9 @@
                     <div class="single-product-head">
                         <div class="row justify-content-between align-items-center">
                             <h2 class="title mb-20">{{$productData->name}}</h2>
+                            @if(auth()->check())
                             <a href="#"><span class="hear-icon2 top-right"><i class="ion-ios-heart-outline " style="font-weight: bold;"></i></span></a>
+                            @endif
                         </div>
                         <div class="star-content mb-20">
                             <span class="star-on"><i class="ion-ios-star"></i> </span>

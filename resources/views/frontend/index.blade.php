@@ -71,8 +71,9 @@
                                             <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- product links -->
+                                        @if(auth()->check())
                                         <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">
@@ -136,8 +137,9 @@
                                             <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- product links -->
+                                        @if(auth()->check())
                                         <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">

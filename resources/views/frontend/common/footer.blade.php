@@ -348,7 +348,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         jquery,modernizr ,poppe,bootstrap,plugins and main js
      ******************************************************-->
 <script>
-       const base_path = '{{ url('/') }}\/';
+    const baseUrl = "{{config('app.url')}}";
 </script>
 <script src="{{asset('frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
@@ -357,13 +357,74 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
 <script src="{{asset('frontend/js/main.js')}}"></script>
-<script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
+<script src="{{asset('frontend/custom/custom.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<script src="{{asset('frontend/js/snackbar.min.js')}}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
+
 <script>
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
+    });
+
+    //------------ Login ---------------- 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBCxbeIgKW2_sfszxWcStTpYisjfFl49YE",
+        authDomain: "ekaa-vastra.firebaseapp.com",
+        projectId: "ekaa-vastra",
+        storageBucket: "ekaa-vastra.appspot.com",
+        messagingSenderId: "493392459476",
+        appId: "1:493392459476:web:92320171f6620fde5d2d41",
+        measurementId: "G-PPX8ZRHYSZ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('sendOtpButton').addEventListener('click', function() {
+            var phone =  document.getElementById('loginPhone').value;
+            var phoneNumber = '+91' + document.getElementById('loginPhone').value;
+            var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                .then(function(confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+                    var otp = prompt('Enter the OTP you received');
+                    return confirmationResult.confirm(otp);
+                }).then(function(result) {
+                    var user = result.user;
+                    console.log('User signed in successfully:', user);
+                    // Send the ID token to your backend for verification
+                    user.getIdToken().then(function(idToken) {
+                        fetch(baseUrl + 'login', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                // token: idToken
+                                phone: phone,
+                                token: user.uid
+                            })
+                        }).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            console.log('Backend response:', data);
+                            var myModal = new bootstrap.Modal(document.getElementById('login'));
+                            myModal.hide();
+                            successToast('Successfully Login');
+                            setTimeout(() => {
+                                location.reload()
+                            }, 1000);
+                        }).catch(function(error) {
+                            console.error('Error during backend verification:', error);
+                        });
+                    });
+                }).catch(function(error) {
+                    console.error('Error during sign in:', error);
+                });
+        });
     });
 </script>
 </body>

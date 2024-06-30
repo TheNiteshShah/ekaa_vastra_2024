@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TypeModal;
+use App\Models\CartModal;
 
 class CartController extends Controller
 {
@@ -35,22 +37,24 @@ class CartController extends Controller
         $ip = request()->ip();
         $cur_date = now();
 
-        $cart_item = [
-            'product_id' => $product_id,
-            'type_id' => $type_id,
-            'quantity' => $quantity,
-            'ip' => $ip,
-            'date' => $cur_date
-        ];
-
-        $type_data = TypeModal::where(['id'=> $type_id,'is_active'=> 1])->first();
+        
+        $type_data = TypeModal::where(['id' => $type_id, 'is_active' => 1])->first();
         if (!$type_data || $type_data->inventory < $quantity) {
             return [
                 'status' => false,
                 'message' => 'Product is out of stock'
             ];
         }
-
+        
+        $cart_item = [
+            'product_id' => $product_id,
+            'type_id' => $type_id,
+            'product_name' => $type_data->product->name,
+            'type_name' => $type_data->size->name,
+            'quantity' => $quantity,
+            'ip' => $ip,
+            'date' => $cur_date
+        ];
         $cart_data = Session::get('cart_data', []);
 
         foreach ($cart_data as $item) {
@@ -82,18 +86,14 @@ class CartController extends Controller
 
         $user_id = Auth::id();
         $ip = request()->ip();
-        $type_data = TypeModal::where(['id'=> $type_id,'is_active'=> 1])->first();
+        $type_data = TypeModal::where(['id' => $type_id, 'is_active' => 1])->first();
         if (!$type_data || $type_data->inventory < $quantity) {
             return [
                 'status' => false,
                 'message' => 'Product is out of stock'
             ];
         }
-
-        $cartInfo = DB::table('tbl_cart')
-            ->where('user_id', $user_id)
-            ->where('type_id', $type_id)
-            ->first();
+        $cartInfo = CartModal::where(['user_id' => $user_id, 'type_id' => $type_id])->first();
 
         if ($cartInfo) {
             return [
@@ -101,18 +101,15 @@ class CartController extends Controller
                 'message' => 'Item is already in your cart'
             ];
         }
+        $cart_insert = new CartModal();
+        $cart_insert->user_id = $user_id;
+        $cart_insert->product_id = $product_id;
+        $cart_insert->type_id = $type_id;
+        $cart_insert->quantity = $quantity;
+        $cart_insert->ip = $ip;
+        $cart_insert->save();
 
-        $cart_insert = [
-            'user_id' => $user_id,
-            'product_id' => $product_id,
-            'type_id' => $type_id,
-            'quantity' => $quantity,
-            'ip' => $ip,
-        ];
-
-        $last_id = DB::table('tbl_cart')->insertGetId($cart_insert);
-
-        if ($last_id) {
+        if ($cart_insert) {
             return [
                 'status' => true,
                 'message' => 'Item successfully added to your cart'

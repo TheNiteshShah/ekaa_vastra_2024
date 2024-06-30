@@ -11,11 +11,11 @@ $('#add-to-cart-btn').click(function (e) {
   var type_id = $('#type_id').val();
   var quantity = $('#quantity').val();
   if (!type_id) {
-    toast("Please select size!");
+    errorToast("Please select size!");
     return;
   }
   $.ajax({
-    url: base_path + 'add-to-cart',
+    url: baseUrl + 'add-to-cart',
     method: 'post',
     data: {
       product_id: product_id,
@@ -26,14 +26,14 @@ $('#add-to-cart-btn').click(function (e) {
     success: function (response) {
       console.log(response)
       if (response.status == true) {
-        toast('Item successfully added to your cart');
+        successToast('Item successfully added to your cart');
       } else {
-        toast(response.message);
+        errorToast(response.message);
       }
     },
     error: function (xhr, status, error) {
       console.error(xhr.responseText);
-      toast("An error occurred while adding the item to the cart!");
+      errorToast("An error occurred while adding the item to the cart!");
     }
   });
 });
@@ -52,12 +52,12 @@ function deleteCart(obj) {
     dataType: 'json',
     success: function (response) {
       if (response.status == true) {
-        notifySuccess(response.message)
+        successToast(response.message)
         $("#headerCount").load(window.location.href + " #headerCount > *");   // cart count
         $("#footerCount").load(window.location.href + " #footerCount > *");   // cart count
         $(".refreshing").load(window.location.href + " .refreshing > *");
       } else if (response.status == false) {
-        notifyError(response.message)
+        errorToast(response.message)
         $(".refreshing").load(window.location.href + " .refreshing > *");
       }
     }
@@ -91,19 +91,4 @@ function updateCart(i) {
       }
     }
   });
-}
-function toast(msg) {
-  Toastify({
-    text: msg,
-    duration: 3000,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      // background: "linear-gradient(to right, #00b09b, #96c93d)",
-      background: "#292929",
-    },
-    onClick: function () { } // Callback after click
-  }).showToast();
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 //============== FRONTEND CONTROLLERS =================
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\AuthController;
 //============== BACKEND CONTROLLERS =================
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\TeamController;
@@ -50,6 +51,8 @@ Route::get('/clear-cache', function () {
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('/');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');
     Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
     //------------ CART ----------------

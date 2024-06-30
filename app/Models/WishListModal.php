@@ -4,24 +4,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TypeModal extends Model
+class WishListModal extends Model
 {
-    protected $table = 'types';
+    protected $table = 'cart';
     public $timestamps = true;
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'product_id','inventory', 'ip', 'added_by', 'is_active','attribute1','attribute2','attribute3','attribute4'
+        'user_id', 'product_id','type_id', 'quantity', 'ip'
     ];
-    
     use SoftDeletes;
     protected $del = ['deleted_at'];
     public function product()
     {
         return $this->belongsTo(ProductModal::class, 'product_id')->withTrashed();
     }
-    public function size()
+    public function type()
     {
-        return $this->belongsTo(MasterAttributeModal::class, 'attribute1')->withTrashed();
+        return $this->belongsTo(TypeModal::class, 'type_id')->withTrashed();
     }
 }

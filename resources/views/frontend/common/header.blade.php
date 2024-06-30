@@ -53,9 +53,11 @@
 </head>
 
 <body>
-    @php
-    $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
-    @endphp
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+   
 
     <!-- offcanvas-overlay start -->
     <div class="offcanvas-overlay"></div>
@@ -194,6 +196,7 @@
                 <button class="offcanvas-close">×</button>
             </div>
             <ul class="minicart-product-list">
+            @foreach($cartItems as $cart)
                 <li>
                     <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro1.jpeg')}}" alt="Cart product Image"></a>
                     <div class="content">
@@ -203,36 +206,7 @@
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro2.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Lucky Wooden Elephant</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹35.00</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro3.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Fish Cut Out Set</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹9.00</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro4.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Lucky Wooden Elephant</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹35.00</span></span>
-                        <a href="#" class="remove">×</a>
-                    </div>
-                </li>
+                @endforeach
             </ul>
             <div class="sub-total d-flex flex-wrap justify-content-between">
                 <strong>Subtotal :</strong>
@@ -273,7 +247,40 @@
         </div>
     </div>
     <!--offcanvas-setting End -->
-
+    <!-- Login Modal -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border:none">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-11 text-center">
+                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h4 class="title text-capitalize pb-30 text-center">Log in to your account</h4>
+                    <form class="log-in-form">
+                        <div class="form-group row">
+                            <label for="loginPhone" class="col-md-2 col-form-label" style="text-align:end">+91</label>
+                            <div class="col-md-10">
+                                <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="loginPhone" placeholder="Mobile Number">
+                            </div>
+                        </div>
+                        <p class="mt-2 mb-2">By Continuing, I agree to the Terms of use & Privacy Policy</p>
+                        <div id="recaptcha-container"></div>
+                        <div class="sign-btn text-center mt-3">
+                            <button type="button" id="sendOtpButton" class="btn theme-btn--dark1 btn--md w-100">Login with OTP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal -->
     <!-- header start -->
     <header id="sticky" class="header2 style1 theme1">
         <!-- header-middle start -->
@@ -298,7 +305,7 @@
                                     </ul>
                                 </li>
                                 @endforeach
-                                <li><a href="contact.html">contact Us</a></li>
+                                <li><a href="#">contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -312,15 +319,14 @@
                                             <i class="ion-ios-search-strong"></i>
                                         </a>
                                     </li>
-                                    @php $wishCount = 0;
-                                    $cartCount = 0;
-                                    @endphp
+                                    @if(auth()->check())
                                     <li class="position-relative d-none d-sm-block">
                                         <a class="offcanvas-toggle" href="#offcanvas-wishlist">
                                             <i class="ion-android-favorite-outline"></i>
-                                            <span class="badge cbdg1">{{$wishCount}}</span>
+                                            <span class="badge cbdg1">{{$wishlistCount}}</span>
                                         </a>
                                     </li>
+                                    @endif
                                     <li class="cart-block position-relative d-none d-sm-block">
                                         <a class="offcanvas-toggle" href="#offcanvas-cart">
                                             <i class="ion-bag"></i>
@@ -328,9 +334,16 @@
                                         </a>
                                     </li>
                                     <li class="me-0 cart-block">
-                                        <a class="offcanvas-toggle" href="#offcanvas-setting">
+                                        @if(auth()->check())
+                                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >Logout</a>
+                                        </form>
+                                        @else
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
                                             <i class="icon-user"></i>
                                         </a>
+                                        @endif
                                     </li>
                                     <!-- cart block end -->
                                 </ul>
