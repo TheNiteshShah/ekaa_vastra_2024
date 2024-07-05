@@ -11,6 +11,7 @@ function isNumberKey(evt){
         text: msg,
         duration: 3000,
         close: true,
+        stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
             background: "linear-gradient(to right, #000000, #434343)",
         },
@@ -22,10 +23,10 @@ function errorToast(msg) {
         text: msg,
         duration: 3000,
         close: true,
-        closMultiple: false,
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
-            background: "linear-gradient(to right, #ff0000, #ff7f7f)",
+             background: "linear-gradient(to right, #000000, #434343)"
+            // background: "linear-gradient(to right, #ff0000, #ff7f7f)",
         },
     }).showToast();
 }

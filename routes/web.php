@@ -56,7 +56,12 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');
     Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
     //------------ CART ----------------
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');;
     Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+    Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+    Route::get('/get-sizes/{id}', [TypeController::class, 'getSizes'])->name('getSizes');
+    Route::get('/get-qty/{id}', [TypeController::class, 'getQty'])->name('getQty');
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart');
 });
 
 //=========================================== ADMIN =====================================================

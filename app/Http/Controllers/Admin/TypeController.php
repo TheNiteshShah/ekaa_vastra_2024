@@ -18,7 +18,7 @@ class TypeController extends Controller
             $MasterTypeData = MasterTypeModal::with('masterAttributes')->get();
             $title =  "Types";
             $parentData = ProductModal::where('id', $id)->first();
-            return view('admin/type.index', compact('foreachData', 'title', 'product_id', 'parentData','MasterTypeData'));
+            return view('admin/type.index', compact('foreachData', 'title', 'product_id', 'parentData', 'MasterTypeData'));
         } else {
             return view('admin/login/index');
         }
@@ -55,16 +55,16 @@ class TypeController extends Controller
                     $copyData = TypeModal::where('id', $req->id)->first();
                 }
             }
-           
+
             $userId = $req->session()->get('admin_id');
             $uploadData->product_id = $req->product_id;
-          
+
             $uploadData->inventory = $req->inventory;
             $uploadData->attribute1 = $req->attribute1;
             $uploadData->attribute2 = $req->attribute2;
             $uploadData->attribute3 = $req->attribute3;
             $uploadData->attribute4 = $req->attribute4;
-     
+
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();
@@ -175,6 +175,31 @@ class TypeController extends Controller
         } else {
             return view('admin/login/index');
         }
+    }
+    public function getSizes(Request $req, $id)
+    {
+        $types = TypeModal::where('product_id', $id)->get();
+        $sizes = $types->map(function ($type) {
+            $size = $type->size;
+            return [
+                'type_id' => $type->id,
+                'size' => $size
+            ];
+        });
+        return response()->json($sizes);
+    }
+    public function getQty(Request $req, $id)
+    {
+        $type = TypeModal::Find($id);
+        $loop = ($type->inventory > 5) ? 5 : $type->inventory;
+        $inventory = [];
+        for ($i = 1; $i <= $loop; $i++) {
+            $inventory[] = [
+                'type_id' => $id,
+                'qty' => $i
+            ];
+        }
+        return response()->json($inventory);
     }
 }
 class InvalidFileFormatException extends \Exception

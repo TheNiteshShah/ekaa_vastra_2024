@@ -361,7 +361,16 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
-
+@if (session('status-success'))
+<script>
+    successToast("{{ session('status-success') }}")
+</script>
+@endif
+@if (session('status-error'))
+<script>
+    successToast("{{ session('status-error') }}")
+</script>
+@endif
 <script>
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
@@ -382,7 +391,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     firebase.initializeApp(firebaseConfig);
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('sendOtpButton').addEventListener('click', function() {
-            var phone =  document.getElementById('loginPhone').value;
+            var phone = document.getElementById('loginPhone').value;
             var phoneNumber = '+91' + document.getElementById('loginPhone').value;
             var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
@@ -424,6 +433,60 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 }).catch(function(error) {
                     console.error('Error during sign in:', error);
                 });
+        });
+    });
+    $(document).ready(function() {
+        $('.btn[data-bs-target="#sizeModal"]').on('click', function() {
+            var productId = $(this).data('product-id');
+            var activeTypeId = $(this).data('type-id');
+            var activeQty = $(this).data('qty');
+            var sizesList = $('#sizeList');
+            sizesList.html('loading...');
+            $.ajax({
+                url: baseUrl + 'get-sizes/' + productId,
+                method: 'GET',
+                success: function(response) {
+                    sizesList.empty();
+                    response.forEach(function(item) {
+                        var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                    });
+                    document.getElementById('activeTypeId').value = activeTypeId;
+                    document.getElementById('CartTypeId').value = activeTypeId;
+                    document.getElementById('activeQty').value = activeQty;
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching sizes:', error);
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        $('.btn[data-bs-target="#quantityModal"]').on('click', function() {
+            var productId = $(this).data('product-id');
+            var activeTypeId = $(this).data('type-id');
+            var activeQty = $(this).data('qty');
+            var QtyList = $('#QtyList');
+            QtyList.html('loading...');
+            $.ajax({
+                url: baseUrl + 'get-qty/' + activeTypeId,
+                method: 'GET',
+                success: function(response) {
+                    QtyList.empty();
+                    response.forEach(function(item) {
+                        var activeClass = (item.qty == activeQty) ? 'active' : '';
+                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
+                    });
+                    document.getElementById('activeTypeId').value = activeTypeId;
+                    document.getElementById('CartTypeId').value = activeTypeId;
+                    document.getElementById('activeQty').value = activeQty;
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching sizes:', error);
+                }
+            });
         });
     });
 </script>

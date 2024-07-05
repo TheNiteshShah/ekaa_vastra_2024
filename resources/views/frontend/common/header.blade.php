@@ -57,7 +57,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
-   
+
 
     <!-- offcanvas-overlay start -->
     <div class="offcanvas-overlay"></div>
@@ -195,27 +195,56 @@
                 <span class="title">Cart</span>
                 <button class="offcanvas-close">×</button>
             </div>
+            @if(!empty($cartItems) && $cartItems!='[]')
             <ul class="minicart-product-list">
-            @foreach($cartItems as $cart)
+                @php
+                $cart_total = 0;
+                @endphp
+                @foreach($cartItems as $cart)
+                @if(!auth()->check())
+                @php
+                $type = App\Models\TypeModal::find($cart['type_id']);
+                $cart_total += ($type->product->selling_price*$cart['quantity']);
+                @endphp
                 <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro1.jpeg')}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Midnight Palm Coord</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹100.00</span></span>
+                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="title">{{$type->product->name}}</a>
+                        <span class="quantity-price mt-0"><b>Size:</b> {{$type->size->name}}</span>
+                        <span class="quantity-price mt-0">{{$cart['quantity']}} x <span class="amount">₹{{$type->product->selling_price}}</span></span>
+                        <!-- <a href="#" class="remove">×</a> -->
+                    </div>
+                </li>
+                @else
+                @php
+                $cart_total += ($cart->product->selling_price*$cart->quantity);
+                @endphp
+                <li>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" alt="Cart product Image"></a>
+                    <div class="content">
+                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$cart->product->name}}</a>
+                        <span class="quantity-price mt-0"><b>Size:</b> {{$cart->type->size->name}}</span>
+                        <span class="quantity-price mt-0">{{$cart->quantity}} x <span class="amount">₹{{$cart->product->selling_price}}</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
+                @endif
                 @endforeach
             </ul>
             <div class="sub-total d-flex flex-wrap justify-content-between">
                 <strong>Subtotal :</strong>
-                <span class="amount">₹144.00</span>
+                <span class="amount">₹{{$cart_total}}</span>
             </div>
-            <a href="cart.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block me-sm-2">view
+            <a href="{{route('cart')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block me-sm-2">view
                 cart</a>
             <a href="checkout.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
             <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p>
+            @else
+            <div class="text-center ">
+                <img src="{{asset('frontend/img/empty_bag.png')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
+            </div>
+            <h6 class="text-center mt-2">Your cart is empty!</h6>
+            @endif
         </div>
     </div>
     <!-- OffCanvas Cart End -->
@@ -337,7 +366,7 @@
                                         @if(auth()->check())
                                         <form method="POST" id="logout-form" action="{{ route('logout') }}">
                                             @csrf
-                                            <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >Logout</a>
+                                            <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                         </form>
                                         @else
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">

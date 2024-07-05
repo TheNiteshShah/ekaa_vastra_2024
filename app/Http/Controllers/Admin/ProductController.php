@@ -198,4 +198,5 @@ class ProductController extends Controller
             return view('admin/login/index');
         }
     }
+    
 }
