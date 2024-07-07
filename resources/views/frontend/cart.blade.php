@@ -251,11 +251,15 @@
     .btn:first-child:active {
         background: #09080A;
     }
-
-    .theme-btn--dark1 a:hover {
-        color: #ffffff !important;
-        /* background: #2caf4e; */
+    btn-check:checked+.btn,
+    .btn.active,
+    .btn.show,
+    .btn:first-child:active,
+    :not(.btn-check)+.btn:active {
+        color: var(--bs-btn-active-color);
+        background-color: #09080A;
     }
+
 
     @media (max-width:445px) {
         .fix {
@@ -295,6 +299,8 @@
         height: 4px;
         width: 10%;
     }
+
+   
 </style>
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">
@@ -306,9 +312,9 @@
                         <ol class="checkout-steps">
                             <li class="step step1 active">BAG</li>
                             <li class="divider"></li>
-                            <li class="step step2">ADDRESS</li>
-                            <li class="divider"></li>
-                            <li class="step step3">PAYMENT</li>
+                            <!-- <li class="step step2">ADDRESS</li>
+                            <li class="divider"></li> -->
+                            <li class="step step3">Checkout</li>
                         </ol>
 
                     </div>
@@ -340,7 +346,7 @@
                             @endphp
                             <tr class="red-main_box">
                                 <th class="text-center imge__box" scope="row" style="width: 23%;">
-                                    <img src="{{asset($type->product->image)}}" class="view_checkout_image mt-0" alt="img">
+                                    a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" alt="Cart product Image"></a>
                                 </th>
                                 <td class="text-start" style="width: 60%;">
                                     <div>
@@ -384,7 +390,7 @@
                             @endphp
                             <tr class="red-main_box">
                                 <th class="text-center imge__box" scope="row" style="width: 23%;">
-                                    <img src="{{asset($cart->product->image)}}" class="view_checkout_image mt-0" alt="img">
+                                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" class="view_checkout_image mt-0" alt="img"></a>
                                 </th>
                                 <td class="text-start" style="width: 60%;">
                                     <div>
@@ -455,7 +461,12 @@
                     </div>
 
                     <div class="d-flex justify-content-end mt-3 fix">
-                        <button class="btn theme-btn--dark1 btn--md">Place Order </button>
+                        @if(auth()->check())
+                        <a href="{{route('checkout')}}"><button class="btn theme-btn--dark1 btn--xl">Checkout</button></a>
+                        @else
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login"><button class="btn theme-btn--dark1 btn--xl">Checkout</button></a>
+                        @endif
+
                     </div>
                 </ul>
             </div>

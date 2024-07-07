@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\UserModal;
+use App\Models\User;
 use App\Models\CartModal;
 
 class UserController extends Controller
@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $foreachData = UserModal::wherenull('deleted_at')->latest()->get();
+            $foreachData = User::wherenull('deleted_at')->latest()->get();
             $title =  "Users";
             return view('admin/user.index', compact('foreachData', 'title'));
         } else {
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function create(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $data = new UserModal();
+            $data = new User();
             $title =  "Add Users";
             return view('admin/user.create', compact('data', 'title'));
         } else {
@@ -40,9 +40,9 @@ class UserController extends Controller
                 'address' => $req->id === null ? 'required' : '',
             ]);
             if ($req->id === null) {
-                $uploadData = new UserModal();
+                $uploadData = new User();
             } else {
-                $uploadData = UserModal::where('id', $req->id)->first();
+                $uploadData = User::where('id', $req->id)->first();
             }
             $userId = $req->session()->get('admin_id');
             $uploadData->name = ucwords($req->name);
@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         if (!empty($req->session()->has('admin_data'))) {
             $id = base64_decode($idd);
-            $data = UserModal::where('id', $id)->first();
+            $data = User::where('id', $id)->first();
             $title =  "Users";
             return view('admin/user.create', compact('data', 'title'));
         } else {
@@ -85,7 +85,7 @@ class UserController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             if ($req->session()->get('position') == "Super Admin") {
                 $id = base64_decode($idd);
-                $users = UserModal::findOrFail($id);
+                $users = User::findOrFail($id);
                 $users->delete();
                 return redirect()->route('users.index')->with('success', 'User deleted Successfully!');
             } else {
@@ -100,7 +100,7 @@ class UserController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             if ($req->session()->get('position') == "Super Admin") {
                 $id = base64_decode($idd);
-                $users = UserModal::findOrFail($id);
+                $users = User::findOrFail($id);
                 $users->is_active = !$users->is_active;
                 $users->save();
                 return redirect()->route('users.index')->with('success', 'Status updated Successfully!');
@@ -115,7 +115,7 @@ class UserController extends Controller
     {
         if (!empty($req->session()->has('admin_data'))) {
             $id = base64_decode($idd);
-            $UserData = UserModal::where('id', $id)->first();
+            $UserData = User::where('id', $id)->first();
             $foreachData = CartModal::where('user_id', $id)->get();
             $title =  $UserData->name . " Cart";
             return view('admin/user.cart', compact('foreachData', 'title'));

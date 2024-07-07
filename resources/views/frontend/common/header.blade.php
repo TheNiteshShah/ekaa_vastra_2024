@@ -73,8 +73,18 @@
                 <nav class="offcanvas-top-nav">
                     <ul class="d-flex justify-content-center align-items-center">
                         <li class="mx-3">
-                            <a href="wishlist.html"> <i class="ion-android-favorite-outline"></i> Wishlist
-                                <span>(0)</span></a>
+                            <!-- <a href="wishlist.html"> <i class="ion-android-favorite-outline"></i> Wishlist
+                                <span>(0)</span></a> -->
+                            @if(auth()->check())
+                            <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            </form>
+                            @else
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
+                                <i class="icon-user"></i>
+                            </a>
+                            @endif
                         </li>
                     </ul>
                 </nav>
@@ -83,7 +93,7 @@
                 <ul>
                     <li><a href="{{route('/')}}">Home</a></li>
                     @foreach($categoryData as $category)
-                    <li><a href="#"><span class="menu-text">{{$category->name}}</span></a>
+                    <li><a href="javascript:void(0)"><span class="menu-text">{{$category->name}}</span></a>
                         <ul class="offcanvas-submenu">
                             @foreach($category->SubCategory as $subcategory)
                             <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
@@ -91,26 +101,17 @@
                         </ul>
                     </li>
                     @endforeach
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="javascript:void(0)">Contact Us</a></li>
 
                 </ul>
             </nav>
             <div class="offcanvas-social py-30">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-social-facebook"></i></a>
+                        <a target="_blank" rel="noopener" href="https://www.facebook.com/ekaavastra"><i class="icon-social-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-social-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-social-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-social-google"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-social-instagram"></i></a>
+                        <a target="_blank" rel="noopener" href="https://www.instagram.com/ekaavastra/"><i class="icon-social-instagram"></i></a>
                     </li>
                 </ul>
             </div>
@@ -125,65 +126,26 @@
                 <span class="title">Wishlist</span>
                 <button class="offcanvas-close">×</button>
             </div>
+            @if(!empty($wishlistItems) && $wishlistItems!='[]')
             <ul class="minicart-product-list">
+                @foreach($wishlistItems as $wish)
                 <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro1.jpeg')}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Midnight Palm Coord</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹100.00</span></span>
-                        <a href="#" class="remove">×</a>
+                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$wish->product->name}}</a>
                         <button class="btn theme-btn--dark3 btn--sm mt-10">
                             <span class="me-2"><i class="ion-bag"></i></span>
                             Move to bag
                         </button>
                     </div>
                 </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro2.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Lucky Wooden Elephant</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹35.00</span></span>
-                        <a href="#" class="remove">×</a>
-                        <button class="btn theme-btn--dark3 btn--sm mt-10">
-                            <span class="me-2"><i class="ion-bag"></i></span>
-                            Move to bag
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro3.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Fish Cut Out Set</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹9.00</span></span>
-                        <a href="#" class="remove">×</a>
-                        <button class="btn theme-btn--dark3 btn--sm mt-10">
-                            <span class="me-2"><i class="ion-bag"></i></span>
-                            Move to bag
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <a href="single-product.html" class="image"><img src="{{asset('frontend/img/product/pro4.jpeg')}}" alt="Cart product Image"></a>
-                    <div class="content">
-                        <a href="single-product.html" class="title">Lucky Wooden Elephant</a>
-                        <span class="quantity-price mt-0"><b>Size:</b> S</span>
-
-                        <span class="quantity-price mt-0">1 x <span class="amount">₹35.00</span></span>
-                        <a href="#" class="remove">×</a>
-                        <button class="btn theme-btn--dark3 btn--sm mt-10">
-                            <span class="me-2"><i class="ion-bag"></i></span>
-                            Move to bag
-                        </button>
-                    </div>
-                </li>
+                @endforeach
             </ul>
-            <a href="wishlist.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-30">view
-                wishlist</a>
+            @else
+            <h6 class="text-center mt-2">Your wishlist is empty!</h6>
+            @endif
+            <!-- <a href="wishlist.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-30">view
+                wishlist</a> -->
         </div>
     </div>
     <!-- OffCanvas Wishlist End -->
@@ -212,7 +174,7 @@
                         <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="title">{{$type->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$type->size->name}}</span>
                         <span class="quantity-price mt-0">{{$cart['quantity']}} x <span class="amount">₹{{$type->product->selling_price}}</span></span>
-                        <!-- <a href="#" class="remove">×</a> -->
+                        <!-- <a href="javascript:void(0)" class="remove">×</a> -->
                     </div>
                 </li>
                 @else
@@ -225,7 +187,7 @@
                         <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$cart->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$cart->type->size->name}}</span>
                         <span class="quantity-price mt-0">{{$cart->quantity}} x <span class="amount">₹{{$cart->product->selling_price}}</span></span>
-                        <a href="#" class="remove">×</a>
+                        <!-- <a href="javascript:void(0)" class="remove">×</a> -->
                     </div>
                 </li>
                 @endif
@@ -237,8 +199,8 @@
             </div>
             <a href="{{route('cart')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block me-sm-2">view
                 cart</a>
-            <a href="checkout.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
-            <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p>
+            <a href="{{route('checkout')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
+            <!-- <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p> -->
             @else
             <div class="text-center ">
                 <img src="{{asset('frontend/img/empty_bag.png')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
@@ -296,13 +258,17 @@
                         <div class="form-group row">
                             <label for="loginPhone" class="col-md-2 col-form-label" style="text-align:end">+91</label>
                             <div class="col-md-10">
-                                <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="loginPhone" placeholder="Mobile Number">
+                                <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="loginPhone" placeholder="Mobile Number" required>
                             </div>
                         </div>
                         <p class="mt-2 mb-2">By Continuing, I agree to the Terms of use & Privacy Policy</p>
                         <div id="recaptcha-container"></div>
                         <div class="sign-btn text-center mt-3">
                             <button type="button" id="sendOtpButton" class="btn theme-btn--dark1 btn--md w-100">Login with OTP</button>
+                            <button class="btn theme-btn--dark1 btn--md w-100" id="login-loader" style="border-color:#09080A;display:none;" type="button" disabled>
+                                <span style="color:#09080A;">Loading...</span>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -326,7 +292,7 @@
                             <ul class="main-menu d-flex align-items-center">
                                 @foreach($categoryData as $category)
                                 <li>
-                                    <a href="#">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
+                                    <a href="javascript:void(0)">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($category->SubCategory as $subcategory)
                                         <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
@@ -334,7 +300,7 @@
                                     </ul>
                                 </li>
                                 @endforeach
-                                <li><a href="#">contact Us</a></li>
+                                <li><a href="javascript:void(0)">contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -362,7 +328,7 @@
                                             <span class="badge cbdg1">{{$cartCount}}</span>
                                         </a>
                                     </li>
-                                    <li class="me-0 cart-block">
+                                    <li class="me-0 cart-block position-relative d-none d-sm-block">
                                         @if(auth()->check())
                                         <form method="POST" id="logout-form" action="{{ route('logout') }}">
                                             @csrf

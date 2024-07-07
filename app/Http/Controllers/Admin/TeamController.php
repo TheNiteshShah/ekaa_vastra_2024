@@ -8,7 +8,7 @@ use App\Models\Team;
 use App\Models\AdminSidebar;
 use App\Models\AdminSidebar2;
 use App\Models\Order1Modal;
-use App\Models\UserModal;
+use App\Models\User;
 use App\Models\CategoryModal;
 use App\Models\ProductModal;
 
@@ -20,7 +20,7 @@ class TeamController extends Controller
 			$services = json_decode($req->session()->get('services'));
 			if (in_array(1, $services) || in_array(999, $services)) {
 				$totalOrders = Order1Modal::where(['payment_status' => 1])->count();
-				$totalUsers = UserModal::count();
+				$totalUsers = User::count();
 				$totalCategory = CategoryModal::count();
 				$totalProducts = ProductModal::count();
 				$TotalNewOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 1])->count();
@@ -32,7 +32,7 @@ class TeamController extends Controller
 					->where('payment_status', 1)
 					->where('order_status', 1)
 					->count();
-				$TotalTodaysUsers = UserModal::whereDate('created_at', now()->toDateString())
+				$TotalTodaysUsers = User::whereDate('created_at', now()->toDateString())
 					->count();
 				$TotalTodaysOrders = Order1Modal::whereDate('created_at', now()->toDateString())
 					->where('payment_status', 1)

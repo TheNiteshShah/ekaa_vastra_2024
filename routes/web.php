@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\AuthController;
+use App\Http\Controllers\Frontend\UserOrderController;
+use App\Http\Controllers\Frontend\AddressController;
 //============== BACKEND CONTROLLERS =================
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\TeamController;
@@ -62,6 +64,17 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/get-sizes/{id}', [TypeController::class, 'getSizes'])->name('getSizes');
     Route::get('/get-qty/{id}', [TypeController::class, 'getQty'])->name('getQty');
     Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart');
+    //------------ Order ----------------
+    Route::get('/checkout', [UserOrderController::class, 'index'])->name('checkout')->middleware('auth');
+    Route::get('/get-shipping-charges/{id}', [UserOrderController::class, 'getShippingCharges'])->name('getShippingCharges')->middleware('auth');
+    Route::post('/checkout-process', [UserOrderController::class, 'checkout'])->name('checkout-process')->middleware('auth');
+    Route::get('/order-success/{order_id}', [UserOrderController::class, 'showOrderSuccess'])->name('order.success');
+    //------------ ADDRESS ----------------
+    Route::get('fetch-pin-data/{pincode}', [AddressController::class, 'fetchPincodeData']);
+    Route::post('add-address', [AddressController::class, 'addAddress'])->name('addAddress')->middleware('auth');
+    Route::post('edit-address', [AddressController::class, 'editAddress'])->name('editAddress')->middleware('auth');
+    Route::post('change-default-address', [AddressController::class, 'changeDefaultAddress'])->name('changeDefaultAddress')->middleware('auth');
+    Route::get('get-address/{id}', [AddressController::class, 'getAddressById']);
 });
 
 //=========================================== ADMIN =====================================================

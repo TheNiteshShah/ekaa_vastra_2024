@@ -78,7 +78,7 @@
                                                 <th>{{$data->user->name}} - {{$data->user->phone}}</th>
                                                 <th>{{$data->address}}</th>
                                                 <th>₹{{$data->final_amount}}</th>
-                                                <th>{{$data->payment_type==1?"COD":"Online"}}</th>
+                                                <th>{{$data->payment_mode==1?"COD":"Online"}}</th>
                                                 <th>{{$order_details}}</th>
                                                 <th>{{$data->created_at->format('Y-m-d H:i:s')}}</th>
                                                 <th><a href="{{$data->tracking_url}}" target="_blank" rel="noopener noreferrer">{{$data->tracking_url}}</a></th>

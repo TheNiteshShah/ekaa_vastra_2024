@@ -53,7 +53,7 @@
                                                 <th>#</th>
                                                 <th data-priority="1">Image</th>
                                                 <th data-priority="1">Product</th>
-                                                <th data-priority="1">Type</th>
+                                                <th data-priority="1">Size</th>
                                                 <th data-priority="1">Quantity</th>
                                                 <th data-priority="1">Price</th>
                                                 <th data-priority="1">Total Amount</th>
@@ -64,8 +64,8 @@
                                             @foreach($foreachData as $data)
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
-                                                <th> @if (!empty($data->product->image))
-                                                    <img src="{{asset($data->product->image)}}" alt="image" height=50 width=80>
+                                                <th> @if (!empty($data->image))
+                                                    <img src="{{asset($data->image)}}" alt="image" height=50 width=80>
                                                     @elseif(!empty($data->product->image2))
                                                     <img src="{{asset($data->product->image2)}}" alt="image" height=50 width=80>
                                                     @elseif (!empty($data->product->image3))
@@ -75,10 +75,10 @@
                                                     @endif
                                                 </th>
                                                 <th>{{$data->product->name}}</th>
-                                                <th>{{$data->type->name}}</th>
+                                                <th>{{$data->type->size->name}}</th>
                                                 <th>{{$data->quantity}}</th>
                                                 <th>₹{{$data->price}}</th>
-                                                <th>₹{{$data->total_price}}</th>
+                                                <th>₹{{$data->price * $data->quantity}}</th>
                                             </tr>
                                             @endforeach
                                             @endif

@@ -12,7 +12,7 @@ class Order2Modal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'main_id', 'product_id', 'type_id', 'quantity', 'price', 'total_price', 'gst_percentage'
+        'main_id', 'product_id', 'type_id', 'quantity', 'price', 'gst_percentage','name','image'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

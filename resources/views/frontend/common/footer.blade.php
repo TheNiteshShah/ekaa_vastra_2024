@@ -14,13 +14,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                 <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
                             </a>
                         </div>
-                        <p class="text mb-35">Established in 2024, 'EKAA VASTRA' was founded by SAKSHI KHANNA with a
-                            vision to transform the world of Ethnic and Fusion Fashion</p>
+                        <!-- <p class="text mb-35">Established in 2024, 'EKAA VASTRA' was founded by SAKSHI KHANNA with a
+                            vision to transform the world of Ethnic and Fusion Fashion</p> -->
                         <div class="social-network">
                             <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
                             <ul class="d-flex">
-                                <li><a href="https://www.facebook.com/" target="_blank"><span class="ion-social-facebook"></span></a></li>
-                                <li class="me-0"><a href="https://www.instagram.com/" target="_blank"><span class="ion-social-instagram-outline"></span></a></li>
+                                <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ekaavastra"><span class="ion-social-facebook"></span></a></li>
+                                <li class="me-0"><a target="_blank" rel="noopener" href="https://www.instagram.com/"><span class="ion-social-instagram-outline"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +33,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         <ul class="footer-menu">
                             @foreach($categoryData as $category)
                             <li>
-                                <a href="#">{{$category->name}}</a>
+                                <a href="javascript:void(0)">{{$category->name}}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -48,10 +48,10 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Return Policy</a></li>
+                            <li><a href="javascript:void(0)">About Us</a></li>
+                            <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                            <li><a href="javascript:void(0)">Terms & Conditions</a></li>
+                            <li><a href="javascript:void(0)">Return Policy</a></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>
@@ -65,8 +65,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         <ul class="footer-menu">
                             <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
                             <li><a href="tel:+919636373743"><i class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
-                            <li><a href="mailto:orders@ekaavastra.com"><i class="ion-email mr-10"></i>
-                                    <span>orders@ekaavastra.com</span></a></li>
+                            <li><a href="mailto:ekaavastra@gmail.com"><i class="ion-email mr-10"></i>
+                                    <span>ekaavastra@gmail.com</span></a></li>
                             <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap
                                     Road,Sirsi 302021</span></li>
                         </ul>
@@ -254,16 +254,14 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                     </div>
                                 </div>
                                 <div class="addto-whish-list">
-                                    <a href="#"><i class="icon-heart"></i> Add to wishlist</a>
-                                    <a href="#"><i class="icon-shuffle"></i> Add to compare</a>
+                                    <a href="javascript:void(0)"><i class="icon-heart"></i> Add to wishlist</a>
+                                    <a href="javascript:void(0)"><i class="icon-shuffle"></i> Add to compare</a>
                                 </div>
                                 <div class="pro-social-links mt-10">
                                     <ul class="d-flex align-items-center">
                                         <li class="share">Share</li>
-                                        <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-google"></i></a></li>
-                                        <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                                        <li><a target="_blank" rel="noopener" href="javascript:void(0)"><i class="ion-social-facebook"></i></a></li>
+                                        <li><a target="_blank" rel="noopener" href="https://www.instagram.com/ekaavastra/"><i class="ion-social-instagram"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -391,7 +389,15 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     firebase.initializeApp(firebaseConfig);
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('sendOtpButton').addEventListener('click', function() {
+            $('#sendOtpButton').hide();
+            $('#login-loader').show();
             var phone = document.getElementById('loginPhone').value;
+            if (!phone) {
+                errorToast('Phone number is required');
+                $('#sendOtpButton').show();
+                $('#login-loader').hide();
+                return;
+            }
             var phoneNumber = '+91' + document.getElementById('loginPhone').value;
             var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
@@ -421,17 +427,26 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         }).then(function(data) {
                             console.log('Backend response:', data);
                             var myModal = new bootstrap.Modal(document.getElementById('login'));
+                            $('#sendOtpButton').show();
+                            $('#login-loader').hide();
                             myModal.hide();
                             successToast('Successfully Login');
                             setTimeout(() => {
                                 location.reload()
                             }, 1000);
                         }).catch(function(error) {
+                            $('#sendOtpButton').show();
+                            $('#login-loader').hide();
                             console.error('Error during backend verification:', error);
                         });
                     });
                 }).catch(function(error) {
+                    $('#sendOtpButton').show();
+                    $('#login-loader').hide();
                     console.error('Error during sign in:', error);
+                    if (error == 'The SMS verification code used to create the phone auth credential is invalid. Please resend the verification code sms and be sure to use the verification code provided by the user.') {
+                        successToast('Wrong OTP Entered!');
+                    }
                 });
         });
     });
@@ -487,6 +502,119 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     console.error('Error fetching sizes:', error);
                 }
             });
+        });
+    });
+
+    function fetchAddressDetails() {
+        var pincode = document.getElementById('add-pincode').value;
+        if (!pincode) {
+            var pincode = document.getElementById('edit-pincode').value;
+        }
+        if (pincode.length === 6) {
+            $('#pin-error').html('');
+            $('#pin-error1').html('');
+            var apiUrl = baseUrl + 'fetch-pin-data/' + pincode;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.Status === 'Success') {
+                        var postOffice = data.PostOffice[0];
+                        document.getElementById('add-country').value = postOffice.Country;
+                        document.getElementById('add-state').value = postOffice.State;
+                        document.getElementById('add-city').value = postOffice.District;
+                    } else {
+                        alert('Invalid Pincode');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching address details:', error);
+                });
+        } else {
+            $('#pin-error').html('Please enter a valid pincode');
+            $('#pin-error1').html('Please enter a valid pincode');
+        }
+    }
+    document.querySelectorAll('.edit-address-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            var addressId = this.getAttribute('data-address-id');
+            fetch(baseUrl + 'get-address/' + addressId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('edit-address-id').value = data.id;
+                    document.getElementById('edit-first-name').value = data.first_name;
+                    document.getElementById('edit-last-name').value = data.last_name;
+                    document.getElementById('edit-email').value = data.email;
+                    document.getElementById('edit-phone').value = data.phone;
+                    document.getElementById('edit-address').value = data.address;
+                    document.getElementById('edit-country').value = data.country;
+                    document.getElementById('edit-pincode').value = data.pincode;
+                    document.getElementById('edit-state').value = data.state;
+                    document.getElementById('edit-city').value = data.city;
+                })
+                .catch(error => console.error('Error fetching address details:', error));
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        function fetchCharges(paymentMode) {
+            const url = baseUrl + 'get-shipping-charges';
+            const params = new URLSearchParams({
+                d_pin: '302020', // Replace with actual destination pin code
+                o_pin: '302021', // Replace with actual origin pin code
+                cgm: 200,
+                pt: paymentMode == 2 ? 'Pre-paid' : 'COD',
+                cod: paymentMode == 1 ? 1 : 0
+            });
+
+            fetch(`${url}/${paymentMode}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        errorToast('Failed to fetch charges');
+                    } else {
+                        document.getElementById('shipping').innerText = data.data.shipping;
+                        document.getElementById('subTotal').innerText = data.data.sub_total;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching charges:', error);
+                    errorToast('Error fetching charges');
+                });
+        }
+
+        document.querySelectorAll('input[name="payment_mode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                fetchCharges(this.value);
+            });
+        });
+
+        // Initial fetch based on default selected radio button
+        const defaultPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
+        fetchCharges(defaultPaymentMode);
+    });
+    document.getElementById("placeOrder").addEventListener("click", function() {
+        $('#placeOrder').hide();
+        $('#checkout-loader').show();
+        const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
+        $.ajax({
+            url: baseUrl + 'checkout-process',
+            type: 'POST',
+            data: {
+                payment_mode: selectedPaymentMode,
+                _token: '{{ csrf_token() }}' // Laravel CSRF token
+            },
+            success: function(response) {
+                $('#placeOrder').show();
+                $('#checkout-loader').hide();
+                // Handle success response
+                // alert(response.message + ' Order ID: ' + response.order_id);
+                window.location.href = baseUrl + 'order-success/' + response.order_id;
+            },
+            error: function(xhr) {
+                $('#placeOrder').show();
+                $('#checkout-loader').hide();
+                // Handle error response
+                alert('Error: ' + xhr.responseText);
+            }
         });
     });
 </script>

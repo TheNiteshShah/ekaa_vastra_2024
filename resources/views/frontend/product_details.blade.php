@@ -175,20 +175,23 @@
                                     </button>
                                 </div>
                             </div>
+
                             <div>
                                 <button id="add-to-cart-btn" class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
                                     <span class="me-2"><i class="ion-bag"></i></span>
                                     Add to cart
                                 </button>
+                                <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0" id="add-cart-loader" style="border-color:#09080A;padding: 17px 40px;display:none;" type="button" disabled>
+                                    <span style="color:#09080A;">Adding...</span>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
+                                </button>
                             </div>
                         </div>
-
+<!-- 
                         <div class="Offers">
                             <div class="slider-item slider-item__1">
-                                <div class="testimonial-content " style="border: 1px solid gainsboro;
-    padding: 10px 0px;">
-                                    <div style="display: flex;
-                      align-items: center;">
+                                <div class="testimonial-content " style="border: 1px solid gainsboro;padding: 10px 0px;">
+                                    <div style="display: flex;align-items: center;">
                                         <div style="width: 10%;">
                                             <img src="{{asset('frontend/img/icon/offerpic.png')}}" alt="">
                                         </div>
@@ -197,7 +200,6 @@
                                         </div>
                                     </div>
                                     <div style="margin-left:  40px;">
-
                                         <div>
                                             <p>COUPON: <b>EKAA200</b> </p>
                                         </div>
@@ -207,30 +209,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="slider-item slider-item__1">
-                                <div class="testimonial-content " style="border: 1px solid gainsboro;
-    padding: 10px 0px;">
-                                    <div style="display: flex;
-                      align-items: center;">
-                                        <div style="width: 10%;">
-                                            <img src="{{asset('frontend/assets/img/icon/offerpic.png')}}" alt="">
-                                        </div>
-                                        <div>
-                                            <p><b> Offers for you </b></p>
-                                        </div>
-                                    </div>
-                                    <div style="margin-left:  40px;">
-
-                                        <div>
-                                            <p>COUPON: <b>EKAA200</b> </p>
-                                        </div>
-                                        <div>
-                                            <p><b>Congratulation! You are eligible for ₹250 extra discount</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="pro-social-links mt-30">
                         <ul class="d-flex align-items-center">
@@ -263,14 +242,14 @@
                 <div class="block-reassurance">
                     <ul id="offcanvas-menu2" class="blog-ctry-menu">
                         <li><a href="javascript:void(0)">Description</a>
-                            <ul class="category-sub-menu">
+                            <!-- <ul class="category-sub-menu">
                                 <p>Kurta length - 46"</p>
                                 <p>Pants Length - 38"</p>
                                 <p><b>Color:</b> Beige</p>
                                 <p><b>Fabric:</b> Pure Cotton Cambric</p>
                                 <p>Wash Instruction: Dry clean only</p>
                                 <p>The model (height 5'5) is wearing a size S</p>
-                            </ul>
+                            </ul> -->
 
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>

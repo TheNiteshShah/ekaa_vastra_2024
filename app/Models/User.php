@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -17,12 +18,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    public $timestamps = true;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
         'password',
         'firebase_id',
-        'phone'
+        'phone',
+        'ip', 'added_by', 'is_active','wallet','default_address_id'
     ];
 
     /**
@@ -43,4 +48,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    use SoftDeletes;
+    protected $del = ['deleted_at'];
 }

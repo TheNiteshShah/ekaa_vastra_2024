@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WishListModal extends Model
 {
-    protected $table = 'cart';
+    protected $table = 'wishlist';
     public $timestamps = true;
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', 'product_id','type_id', 'quantity', 'ip'
+        'user_id', 'product_id', 'ip'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];
