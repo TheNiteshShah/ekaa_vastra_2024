@@ -1,4 +1,5 @@
 @extends('frontend.base_template')
+@section('title', $title)
 @section('main')
 <style>
     .slick-dotted {

@@ -1,4 +1,5 @@
 @extends('frontend.base_template')
+@section('title', 'Home - Ekaa Vastra')
 @section('main')
 <!-- main slider start -->
 <section class="bg-light position-relative">

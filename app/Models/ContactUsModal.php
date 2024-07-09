@@ -12,7 +12,7 @@ class ContactUsModal extends Model
 	protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','email','phone','message','ip','added_by',
+        'name','email','phone','message','ip',
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

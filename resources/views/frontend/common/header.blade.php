@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Ekaa Vastra</title>
+    <title>@yield('title')</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/img/favicon.png')}}" />
 
@@ -76,7 +76,7 @@
                             <!-- <a href="wishlist.html"> <i class="ion-android-favorite-outline"></i> Wishlist
                                 <span>(0)</span></a> -->
                             @if(auth()->check())
-                            <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                            <form method="POST" id="logout-form" action="">
                                 @csrf
                                 <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                             </form>
@@ -101,7 +101,7 @@
                         </ul>
                     </li>
                     @endforeach
-                    <li><a href="javascript:void(0)">Contact Us</a></li>
+                    <li><a href="{{route('contact-us')}}">Contact Us</a></li>
 
                 </ul>
             </nav>
@@ -300,7 +300,7 @@
                                     </ul>
                                 </li>
                                 @endforeach
-                                <li><a href="javascript:void(0)">contact Us</a></li>
+                                <li><a href="{{route('contact-us')}}">contact Us</a></li>
                             </ul>
                         </nav>
                     </div>

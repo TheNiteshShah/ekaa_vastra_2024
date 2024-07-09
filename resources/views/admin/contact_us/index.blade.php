@@ -1,5 +1,5 @@
 @extends('admin.base_template')
-@section('title',$title)
+@section('title','$title')
 @section('main')
 <!-- Start content -->
 <div class="content">
@@ -67,7 +67,7 @@
                                                 <th>{{$data->email}}</th>
                                                 <th>{{$data->phone}}</th>
                                                 <th>{{$data->message}}</th>
-                                                <th>{{$data->created_at->format('Y-m-d H:i:s')}}</th>
+                                                <th>{{$data->created_at->format('Y-m-d h:m a')}}</th>
                                             </tr>
                                             @endforeach
                                             @endif

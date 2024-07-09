@@ -10,7 +10,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-4 mb-10">
                     <div class="footer-widget">
                         <div class="footer-logo mb-10">
-                            <a href="index.html">
+                            <a href="{{ route('/') }}">
                                 <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
                             </a>
                         </div>
@@ -49,9 +49,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
                             <li><a href="javascript:void(0)">About Us</a></li>
-                            <li><a href="javascript:void(0)">Privacy Policy</a></li>
-                            <li><a href="javascript:void(0)">Terms & Conditions</a></li>
-                            <li><a href="javascript:void(0)">Return Policy</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{ route('terms-and-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{ route('refund-policy')}}">Refund Policy</a></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>

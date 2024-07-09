@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 //============== FRONTEND CONTROLLERS =================
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
@@ -57,6 +58,11 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');
     Route::get('/product/{id}', [HomeController::class, 'product'])->name('product');
+    Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
+    Route::post('/contact-us-store', [HomeController::class, 'contactUsStore'])->name('contact-us-store');
+    Route::get('/refund-policy', [HomeController::class, 'refundPolicy'])->name('refund-policy');
+    Route::get('/terms-and-conditions', [HomeController::class, 'termsAndConditions'])->name('terms-and-conditions');
+    Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
     //------------ CART ----------------
     Route::get('/cart', [CartController::class, 'index'])->name('cart');;
     Route::post('/add-to-cart', [CartController::class, 'addToCart']);

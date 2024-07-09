@@ -196,7 +196,7 @@ span.separator {
 }
 
 .theme-border2 {
-  border: 2px solid #09080A!important;
+  border: 2px solid #09080A !important;
 }
 
 @media screen and (min-width: 1200px) {
@@ -621,7 +621,7 @@ textarea:active::placeholder {
 }
 
 .theme-bg2 {
-  background-color: #09080A!important;
+  background-color: #09080A !important;
 }
 
 .theme-bg3 {
@@ -1892,6 +1892,7 @@ textarea:active::placeholder {
   line-height: 33px;
   top: 10px !important;
 }
+
 .hear-icon2 {
   position: absolute;
   text-align: center;
@@ -1960,7 +1961,7 @@ textarea:active::placeholder {
 
 .theme2 .badge-danger {
   color: #ffffff;
-  background-color: #09080A!important;
+  background-color: #09080A !important;
 }
 
 .theme3 .badge-danger {
@@ -3655,13 +3656,15 @@ input[type="number"]::-webkit-outer-spin-button {
 .theme1 .slick-dots li button {
   background: #b0b0b0;
 }
+
 .blog-ctry-menu li:hover>a {
   transform: none !important;
 }
+
 .product-tag li .active {
   color: #ffffff;
-    background: #292929;
-    border-color: #292929;
+  background: #292929;
+  border-color: #292929;
 }
 
 
@@ -7186,14 +7189,18 @@ ul.amount li {
 /* ***************
    map page End
  ******************/
- body::-webkit-scrollbar {
-	width: 0.5125rem;
+body::-webkit-scrollbar {
+  width: 0.5125rem;
 }
 
 body::-webkit-scrollbar-track {
-	background-color: white;
+  background-color: white;
 }
 
 body::-webkit-scrollbar-thumb {
-	background: #09080A;
+  background: #09080A;
+}
+
+.text-justify {
+  text-align: justify;
 }

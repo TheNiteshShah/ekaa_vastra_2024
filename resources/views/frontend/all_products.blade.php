@@ -1,4 +1,5 @@
 @extends('frontend.base_template')
+@section('title', $title)
 @section('main')
 <style>
     @media (min-width:991px) {
