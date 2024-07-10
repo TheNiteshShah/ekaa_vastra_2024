@@ -121,9 +121,9 @@
                     <div class="single-product-head">
                         <div class="row justify-content-between align-items-center">
                             <h2 class="title mb-20">{{$productData->name}}</h2>
-                            @if(auth()->check())
+                            <!-- @if(auth()->check())
                             <a href="#"><span class="hear-icon2 top-right"><i class="ion-ios-heart-outline " style="font-weight: bold;"></i></span></a>
-                            @endif
+                            @endif -->
                         </div>
                         <div class="star-content mb-20">
                             <span class="star-on"><i class="ion-ios-star"></i> </span>
@@ -132,7 +132,7 @@
                             <span class="star-on"><i class="ion-ios-star"></i> </span>
                             <span class="star-on"><i class="ion-ios-star"></i> </span>
                             <a href="#" id="write-comment"><span class="ms-2"><i class="far fa-comment-dots"></i></span>
-                                Read reviews <span>(1)</span></a>
+                                Read reviews <span>(0)</span></a>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="edite"><i class="far fa-edit"></i></span> Write a
                                 review</a>
                         </div>
@@ -234,23 +234,16 @@
                             <img src="{{asset('frontend/img/icon/11.png')}}" alt="img" />
                             Usually ships in 5-6 days
                         </li>
-                        <li>
+                        <!-- <li>
                             <img src="{{asset('frontend/img/icon/12.png')}}" alt="img" />
                             Easy Return & Exchange Know More
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="block-reassurance">
                     <ul id="offcanvas-menu2" class="blog-ctry-menu">
                         <li><a href="javascript:void(0)">Description</a>
-                            <!-- <ul class="category-sub-menu">
-                                <p>Kurta length - 46"</p>
-                                <p>Pants Length - 38"</p>
-                                <p><b>Color:</b> Beige</p>
-                                <p><b>Fabric:</b> Pure Cotton Cambric</p>
-                                <p>Wash Instruction: Dry clean only</p>
-                                <p>The model (height 5'5) is wearing a size S</p>
-                            </ul> -->
+                        {!!$productData->description!!}
 
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>
@@ -296,7 +289,7 @@
                                             <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         <!-- product links -->
-                                        <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
+                                        <!-- <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a> -->
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">

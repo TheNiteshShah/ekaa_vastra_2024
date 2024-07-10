@@ -47,7 +47,7 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
         $title = $productData->name . ' - Ekaa Vastra';
-        return view('frontend/product_details', compact('productData', 'relatedData','title'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 
@@ -97,5 +97,42 @@ class HomeController extends Controller
         }
     }
     // ============================= END CONTACT US STORE ============================ 
-
+    public function OrderInvoice(Request $req)
+    {
+        $OrderData = [
+            'id' => 17,
+            'invoice_no' => '17/EV/24-25',
+            'payment_mode' => 'Prepaid',
+            'shipping' => 36,
+            'discount' => 0,
+            'total_amount' => 999,
+            'final_amount' => 999,
+            'address' => [
+                'name' => 'Devangini Kumari',
+                'phone' => '9829347005  ',
+                'email' => 'devanginishaktawatjpr@gmail.com',
+                'address' => 'Doongri Haveli, Indira Bazar, Khejron Ka Rasta, Jaipur, Rajasthan, IN, 302001',
+            ],
+            'created_at' => '09-Jul-2024',
+        ];
+        $foreachData = [
+            [
+                'gst_percentage' => 5,
+                'quantity' => 1,
+                'price' => 999,
+                'product' => [
+                    'name' => 'Lime Blossom Co-ord Set',
+                    'sku' => 'EV124',
+                ],
+                'type' => [
+                    'name' => 'L',
+                ]
+            ]
+        ];
+        $enOr =  json_encode($OrderData);
+        $OrderData = json_decode($enOr);
+        $enFor =  json_encode($foreachData);
+        $foreachData = json_decode($enFor);
+        return view('admin/order/invoice', compact(['OrderData', 'foreachData']));
+    }
 }

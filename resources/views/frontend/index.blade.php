@@ -48,7 +48,7 @@
 <!-- common banner  end -->
 @if(!empty($trendingData))
 <!-- product tab start -->
-<section class="theme1 bg-white pb-70">
+<section class="theme1 bg-white pt-70 pb-70">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -72,9 +72,9 @@
                                             <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        @if(auth()->check())
+                                        <!-- @if(auth()->check())
                                         <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
-                                        @endif
+                                        @endif -->
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">
@@ -138,9 +138,9 @@
                                             <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        @if(auth()->check())
+                                        <!-- @if(auth()->check())
                                         <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
-                                        @endif
+                                        @endif -->
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">

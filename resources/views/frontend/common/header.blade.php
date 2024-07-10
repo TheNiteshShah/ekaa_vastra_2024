@@ -290,6 +290,7 @@
                     <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
                         <nav class="header-bottom theme1">
                             <ul class="main-menu d-flex align-items-center">
+                                <li><a href="{{route('/')}}">Home</a></li>
                                 @foreach($categoryData as $category)
                                 <li>
                                     <a href="javascript:void(0)">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
