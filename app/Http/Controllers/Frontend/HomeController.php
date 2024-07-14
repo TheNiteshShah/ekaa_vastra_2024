@@ -16,6 +16,7 @@ use App\Models\SliderModal;
 use App\Models\ProductModal;
 use App\Models\ContactUsModal;
 use App\Models\CartModal;
+use App\Models\TestimonialModal;
 
 
 class HomeController extends Controller
@@ -26,7 +27,9 @@ class HomeController extends Controller
         $sliderData = SliderModal::where('is_active', 1)->get();
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
-        return view('frontend/index', compact('sliderData', 'trendingData', 'topData'))->withTitle('Ekaa Vastra');
+        $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
+
+        return view('frontend/index', compact('sliderData', 'trendingData', 'topData','testimonialsData'))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
@@ -63,7 +66,7 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
         $title = $productData->name . ' - Ekaa Vastra';
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title','cartInfo'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 

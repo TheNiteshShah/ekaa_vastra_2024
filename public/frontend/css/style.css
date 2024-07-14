@@ -7204,3 +7204,33 @@ body::-webkit-scrollbar-thumb {
 .text-justify {
   text-align: justify;
 }
+.button-fixed-left{
+	position: fixed;
+	bottom: 50px;
+	left: 10px;
+	border-radius: 50% !important;
+	padding: 10px 15px !important;
+	z-index: 999;
+}
+.green {
+  background: rgba(25, 135, 84, 1);
+  box-shadow: 0 0 0 0 rgba(25, 135, 84, 1);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(25, 135, 84, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+  }
+}

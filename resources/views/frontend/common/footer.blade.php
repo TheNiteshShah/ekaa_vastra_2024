@@ -20,7 +20,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
                             <ul class="d-flex">
                                 <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ekaavastra"><span class="ion-social-facebook"></span></a></li>
-                                <li class="me-0"><a target="_blank" rel="noopener" href="https://www.instagram.com/"><span class="ion-social-instagram-outline"></span></a></li>
+                                <li class="me-0"><a target="_blank" rel="noopener" href="https://www.instagram.com/ekaavastra"><span class="ion-social-instagram-outline"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -114,8 +114,10 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         </div>
     </div>
     <!-- copy-right end -->
+    <a class="btn btn-success white btn-lg mt-3 button-fixed-left green" href="https://wa.me/+919636373743/?text=Hi" role="button"><i class="ion-social-whatsapp-outline" style="font-size:25px"></i></a>
 </footer>
 <!-- footer end -->
+
 
 <!-- search-box and overlay start -->
 <div class="overlay">
@@ -588,35 +590,39 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         });
 
         // Initial fetch based on default selected radio button
-        const defaultPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
-        fetchCharges(defaultPaymentMode);
+        if (document.querySelector('input[name="payment_mode"]:checked')) {
+            const defaultPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
+            fetchCharges(defaultPaymentMode);
+        }
     });
-    document.getElementById("placeOrder").addEventListener("click", function() {
-        $('#placeOrder').hide();
-        $('#checkout-loader').show();
-        const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
-        $.ajax({
-            url: baseUrl + 'checkout-process',
-            type: 'POST',
-            data: {
-                payment_mode: selectedPaymentMode,
-                _token: '{{ csrf_token() }}' // Laravel CSRF token
-            },
-            success: function(response) {
-                $('#placeOrder').show();
-                $('#checkout-loader').hide();
-                // Handle success response
-                // alert(response.message + ' Order ID: ' + response.order_id);
-                window.location.href = baseUrl + 'order-success/' + response.order_id;
-            },
-            error: function(xhr) {
-                $('#placeOrder').show();
-                $('#checkout-loader').hide();
-                // Handle error response
-                alert('Error: ' + xhr.responseText);
-            }
+    if (document.getElementById("placeOrder")) {
+        document.getElementById("placeOrder").addEventListener("click", function() {
+            $('#placeOrder').hide();
+            $('#checkout-loader').show();
+            const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
+            $.ajax({
+                url: baseUrl + 'checkout-process',
+                type: 'POST',
+                data: {
+                    payment_mode: selectedPaymentMode,
+                    _token: '{{ csrf_token() }}' // Laravel CSRF token
+                },
+                success: function(response) {
+                    $('#placeOrder').show();
+                    $('#checkout-loader').hide();
+                    // Handle success response
+                    // alert(response.message + ' Order ID: ' + response.order_id);
+                    window.location.href = baseUrl + 'order-success/' + response.order_id;
+                },
+                error: function(xhr) {
+                    $('#placeOrder').show();
+                    $('#checkout-loader').hide();
+                    // Handle error response
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
         });
-    });
+    }
 </script>
 </body>
 

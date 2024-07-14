@@ -11,7 +11,7 @@ class TestimonialModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','image','review','ip', 'added_by','seq'
+        'name','image','review','ip', 'added_by','seq','rating'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

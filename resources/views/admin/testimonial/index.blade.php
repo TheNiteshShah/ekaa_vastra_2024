@@ -57,6 +57,7 @@
                                                 <th data-priority="1">Name</th>
                                                 <th data-priority="1">Image</th>
                                                 <th data-priority="1">Review</th>
+                                                <th data-priority="1">Rating</th>
                                                 <th data-priority="1">Sequence</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <th data-priority="6">Action</th>
@@ -77,6 +78,7 @@
                                                     @endif
                                                 </td>
                                                 <th>{{$data->review}}</th>
+                                                <th>{{$data->rating}}</th>
                                                 <th>{{$data->seq}}</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <td>

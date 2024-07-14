@@ -82,6 +82,15 @@
                                     </div>
                                     <div class="col-sm-6 my-3" style="margin-top: 23px!important">
                                         <div class="form-floating">
+                                            <input type="text" class="form-control @error('rating') is-invalid @enderror" value="{{old('rating') ? old('rating') : $data->rating}}" id="rating" name="rating" placeholder="Enter Rating" onkeypress="return isNumberKey(event)" required>
+                                            <label for="rating">Enter Rating (1 to 5)&nbsp;<span style="color:red;">*</span></label>
+                                        </div>
+                                        @error('rating')
+                                        <div style="color:red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 my-3" style="margin-top: 23px!important">
+                                        <div class="form-floating">
                                             <input type="text" class="form-control @error('seq') is-invalid @enderror" value="{{old('seq') ? old('seq') : $data->seq}}" id="seq" name="seq" placeholder="Enter Sequence" onkeypress="return isNumberKey(event)" required>
                                             <label for="seq">Enter Sequence &nbsp;<span style="color:red;">*</span></label>
                                         </div>

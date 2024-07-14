@@ -179,33 +179,39 @@
 </div> -->
 <!-- common-banner end -->
 <!-- testimonial-section start -->
-<!-- <section class="testimonial-section pb-70">
+@if(!empty($testimonialsData))
+<section class="testimonial-section pb-70">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="testimonial-init dots-style">
+                    @foreach($testimonialsData as $test)
                     <div class="slider-item">
                         <div class="testimonial-content text-center">
-                            <img class="mb-30 mx-auto" src="{{asset('frontend/img/profile/test1.jpg')}}" alt="user">
+                            @if($test->image)
+                            <img class="mb-30 mx-auto" src="{{asset($test->image)}}" alt="user">
+                            @else
+                            <img class="mb-30 mx-auto" src="{{asset('frontend/img/profile/default.jpg')}}" alt="default">
+                            @endif
                             <div class="star-rating">
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-ios-star"></span>
-                                <span class="ion-android-star-half"></span>
+                                @for ($i = 0; $i < floor($test->rating); $i++) <span class="ion-ios-star"></span> @endfor
+
+                                    @if ($test->rating - floor($test->rating) > 0)
+                                    <span class="ion-android-star-half"></span> @endif
                             </div>
                             <span class="ion-quote d-block float-left"></span>
-                            <p>Hello !! Thank you for such a beautiful outfit i wore it on Dandia night at my
-                                university presently in Russia everyone here praised it so much 🌸</p>
+                            <p>{{$test->review}}</p>
                             <span class="ion-quote float-right"></span>
-                            <h4 class="text-uppercase mb-15">Aashna Bindra</h4>
+                            <h4 class="text-uppercase mb-15">{{$test->name}}</h4>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-</section> -->
+</section>
+@endif
 <!-- testimonial-section end -->
 
 

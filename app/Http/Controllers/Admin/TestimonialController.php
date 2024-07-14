@@ -34,6 +34,7 @@ class TestimonialController extends Controller
             $this->validate($req, [
                 'name' => $req->id === null ? 'required' : 'required',
                 'review' => $req->id === null ? 'required' : 'required',
+                'rating' => $req->id === null ? 'required' : 'required',
                 'seq' => $req->id === null ? 'required' : 'required',
             ]);
             if ($req->id === null) {
@@ -58,6 +59,7 @@ class TestimonialController extends Controller
             $userId = $req->session()->get('admin_id');
             $uploadData->name = ucwords($req->name);
             $uploadData->review = $req->review;
+            $uploadData->rating = $req->rating;
             $uploadData->seq = $req->seq;
             $uploadData->image = $image;
             $uploadData->ip = $req->ip();
