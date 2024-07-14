@@ -92,15 +92,18 @@
         })(window, document, 'script', 'dataLayer', 'GTM-KZ4GPFRC');
     </script>
     <!-- End Google Tag Manager -->
-     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDBXV3VHBN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDBXV3VHBN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-RDBXV3VHBN');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RDBXV3VHBN');
+    </script>
 </head>
 
 <body>
@@ -332,6 +335,20 @@
     <!-- Login Modal -->
     <!-- header start -->
     <header id="sticky" class="header2 style1 theme1">
+    <div class="custom-marquee" role="region">
+        <div class="track ">
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp</span>
+        </div>
+    </div>
         <!-- header-middle start -->
         <div class="header-middle">
             <div class="container">
@@ -416,3 +433,5 @@
         <!-- header-middle end -->
     </header>
     <!-- header end -->
+ 
+   

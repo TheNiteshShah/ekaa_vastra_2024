@@ -184,6 +184,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                <div class="section-title text-center mb-30">
+                    <h2 class="title text-dark text-capitalize mb-20">Testimonials </h2>
+                </div>
+            </div>
+            <div class="col-12">
                 <div class="testimonial-init dots-style">
                     @foreach($testimonialsData as $test)
                     <div class="slider-item">
