@@ -5,7 +5,7 @@
 <section class="bg-light position-relative">
     <div class="main-slider dots-style theme1">
         @foreach($sliderData as $slider)
-        <div class="slider-item bg-img" style="background-image: url('{{ asset($slider->image) }}');">
+        <div class="slider-item bg-img" style="background-image: url('{{ asset($slider->web_image) }}');">
             <div class="container">
                 <div class="row align-items-center slider-height">
                     <div class="col-12">

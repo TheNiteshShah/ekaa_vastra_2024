@@ -8,11 +8,14 @@ use Carbon\Carbon;
 use Redirect;
 use Laravel\Sanctum\PersonalAccessToken;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModal;
+use Illuminate\Support\Facades\Session;
 use App\Models\SubCategoryModal;
 use App\Models\SliderModal;
 use App\Models\ProductModal;
 use App\Models\ContactUsModal;
+use App\Models\CartModal;
 
 
 class HomeController extends Controller
@@ -41,13 +44,26 @@ class HomeController extends Controller
     {
         $originalName = urldecode(str_replace('-', '+', $encodeSub));
         $productData = ProductModal::where(['is_active' => 1, 'name' => $originalName])->first();
+        $cartInfo = 0;
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $cartInfo = CartModal::where(['user_id' => $user_id, 'product_id' => $productData->id])->count();
+        } else {
+            $cart_data = Session::get('cart_data', []);
+
+            foreach ($cart_data as $item) {
+                if ($item['product_id'] == $productData->id) {
+                    $cartInfo = 1;
+                }
+            }
+        }
         $relatedData = ProductModal::where('is_active', 1)
             ->where('subcategory_id', $productData->subcategory_id)
             ->where('id', '!=', $productData->id)
             ->limit(10)
             ->get();
         $title = $productData->name . ' - Ekaa Vastra';
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title','cartInfo'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 
@@ -72,6 +88,12 @@ class HomeController extends Controller
     public function privacyPolicy(Request $req)
     {
         return view('frontend.privacy_policy');
+    }
+    // ============================= END PRIVACY POLICY ============================ 
+    // ============================= START PRIVACY POLICY ============================ 
+    public function aboutUs(Request $req)
+    {
+        return view('frontend.about_us');
     }
     // ============================= END PRIVACY POLICY ============================ 
     // ============================= START CONTACT US STORE ============================ 

@@ -48,8 +48,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         </div>
                         <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="javascript:void(0)">About Us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{ route('about-us')}}">About Us</a></li>
+                            <li><a href="{{ route('privacy-policy')}}">Privacy Policy</a></li>
                             <li><a href="{{ route('terms-and-conditions')}}">Terms & Conditions</a></li>
                             <li><a href="{{ route('refund-policy')}}">Refund Policy</a></li>
                         </ul>
@@ -66,7 +66,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
                             <li><a href="tel:+919636373743"><i class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
                             <li><a href="mailto:ekaavastra@gmail.com"><i class="ion-email mr-10"></i>
-                                    <span>ekaavastra@gmail.com</span></a></li>
+                                    <span style="text-transform:none">ekaavastra@gmail.com</span></a></li>
                             <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap
                                     Road,Sirsi 302021</span></li>
                         </ul>

@@ -54,7 +54,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th data-priority="1">Image</th>
+                                                <th data-priority="1">Web Image</th>
+                                                <th data-priority="1">Mobile Image</th>
                                                 <th data-priority="1">Link</th>
                                                 <th data-priority="6">Status</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
@@ -68,8 +69,15 @@
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
                                                 <td>
-                                                    @if (!empty($data->image))
-                                                    <img src="{{asset($data->image)}}" alt="image" width="100" height="70">
+                                                    @if (!empty($data->web_image))
+                                                    <img src="{{asset($data->web_image)}}" alt="image" width="100" height="70">
+                                                    @else
+                                                    No Image Found!
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (!empty($data->mob_image))
+                                                    <img src="{{asset($data->mob_image)}}" alt="image" width="100" height="70">
                                                     @else
                                                     No Image Found!
                                                     @endif

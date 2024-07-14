@@ -150,7 +150,7 @@
                             @endif
                         </div>
                         <p class="font-size">
-                            {!!$productData->description!!}
+                            {!!$productData->short_description!!}
                         </p>
                     </div>
                     <div class="product-footer">
@@ -178,6 +178,12 @@
                             </div>
 
                             <div>
+                                @if($cartInfo)
+                                <a href="{{route('cart')}}"><button id="go-to-cart-btn" class="btn theme-btn--dark1 btn--xl mt-30 mt-sm-0">
+                                        <span class="me-2"><i class="ion-bag"></i></span>
+                                        Go to bag
+                                    </button></a>
+                                @else
                                 <button id="add-to-cart-btn" class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
                                     <span class="me-2"><i class="ion-bag"></i></span>
                                     Add to cart
@@ -186,9 +192,10 @@
                                     <span style="color:#09080A;">Adding...</span>
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
                                 </button>
+                                @endif
                             </div>
                         </div>
-<!-- 
+                        <!-- 
                         <div class="Offers">
                             <div class="slider-item slider-item__1">
                                 <div class="testimonial-content " style="border: 1px solid gainsboro;padding: 10px 0px;">
@@ -242,9 +249,10 @@
                 </div>
                 <div class="block-reassurance">
                     <ul id="offcanvas-menu2" class="blog-ctry-menu">
-                        <li><a href="javascript:void(0)">Description</a>
-                        {!!$productData->description!!}
-
+                        <li class="active"><a href="javascript:void(0)">Description</a>
+                            <ul class="category-sub-menu" style="display:block">
+                                {!!$productData->description!!}
+                            </ul>
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>
                             <ul class="category-sub-menu">

@@ -346,7 +346,7 @@
                             @endphp
                             <tr class="red-main_box">
                                 <th class="text-center imge__box" scope="row" style="width: 23%;">
-                                    a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" alt="Cart product Image"></a>
+                                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" alt="Cart product Image"></a>
                                 </th>
                                 <td class="text-start" style="width: 60%;">
                                     <div>

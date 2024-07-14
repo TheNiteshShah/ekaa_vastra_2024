@@ -37,23 +37,38 @@ class SliderController extends Controller
             } else {
                 $uploadData = SliderModal::where('id', $req->id)->first();
             }
-            if (!empty($req->image)) {
+            if (!empty($req->web_image)) {
                 $allowedFormats = ['jpeg', 'jpg', 'webp'];
-                $extension = strtolower($req->image->getClientOriginalExtension());
+                $extension = strtolower($req->web_image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
-                    $file = time() . '.' . $req->image->extension();
-                    $req->image->move(public_path('uploads/image/sliders/'), $file);
-                    $image = 'uploads/image/sliders/' . $file;
+                    $file = time() . '.' . $req->web_image->extension();
+                    $req->web_image->move(public_path('uploads/image/sliders/'), $file);
+                    $web_image = 'uploads/image/sliders/' . $file;
                 } else {
                     // Handle invalid file format (not allowed)
                     return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, and webp files are allowed.');
                 }
             } else {
-                $image = $uploadData->image;
+                $web_image = $uploadData->web_image;
+            }
+            if (!empty($req->mob_image)) {
+                $allowedFormats = ['jpeg', 'jpg', 'webp'];
+                $extension = strtolower($req->mob_image->getClientOriginalExtension());
+                if (in_array($extension, $allowedFormats)) {
+                    $file = time() . '.' . $req->mob_image->extension();
+                    $req->mob_image->move(public_path('uploads/image/sliders/'), $file);
+                    $mob_image = 'uploads/image/sliders/' . $file;
+                } else {
+                    // Handle invalid file format (not allowed)
+                    return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+                }
+            } else {
+                $mob_image = $uploadData->mob_image;
             }
             $userId = $req->session()->get('admin_id');
             $uploadData->link = $req->link;
-            $uploadData->image = $image;
+            $uploadData->web_image = $web_image;
+            $uploadData->mob_image = $mob_image;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();

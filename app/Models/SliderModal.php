@@ -11,7 +11,7 @@ class SliderModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'image', 'link','ip', 'added_by', 'is_active'
+        'web_image','mob_image', 'link','ip', 'added_by', 'is_active'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

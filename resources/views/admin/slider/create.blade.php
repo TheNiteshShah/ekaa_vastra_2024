@@ -71,12 +71,22 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 my-3">
-                                        <label for="image">Image &nbsp;<span style="color:red;"></span></label>
-                                        <input type="file" class="form-control" type="text" value="" id="image" name="image" placeholder="Enter Image">
-                                        @if($data->image)
-                                        <img id="slide_img_path2" height=100 width=100 src="{{asset($data->image)}} ">
+                                        <label for="web_image">Web Image &nbsp;<span style="color:red;">1920*842</span></label>
+                                        <input type="file" class="form-control" type="text" value="" id="web_image" name="web_image" placeholder="Enter Web Image">
+                                        @if($data->web_image)
+                                        <img id="web_image_img" height=100 width=150 src="{{asset($data->web_image)}} ">
                                         @endif
-                                        @error('image')
+                                        @error('web_image')
+                                        <div style="color:red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 my-3">
+                                        <label for="mob_image">Mobile Image &nbsp;<span style="color:red;"></span></label>
+                                        <input type="file" class="form-control" type="text" value="" id="mob_image" name="mob_image" placeholder="Enter Mobile Image">
+                                        @if($data->image)
+                                        <img id="mob_image_img" height=100 width=100 src="{{asset($data->mob_image)}} ">
+                                        @endif
+                                        @error('mob_image')
                                         <div style="color:red">{{$message}}</div>
                                         @enderror
                                     </div>

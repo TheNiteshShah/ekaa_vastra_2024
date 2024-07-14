@@ -85,6 +85,7 @@ class ProductController extends Controller
             $uploadData->subcategory_id = $req->subcategory_id;
             $uploadData->name =  ucwords($req->name);
             $uploadData->sku = $req->sku;
+            $uploadData->short_description = $req->short_description;
             $uploadData->description = $req->description;
             $uploadData->is_top = $req->is_top;
             $uploadData->is_trending = $req->is_trending;

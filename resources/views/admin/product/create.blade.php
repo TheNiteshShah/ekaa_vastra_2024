@@ -81,8 +81,16 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-12 my-3" style="margin-top: 23px!important">
+                                        <label for="short_description">Enter Short Description &nbsp;<span style="color:red;">*</span></label>
+                                        <textarea class="form-control" type="text" class="form-control @error('short_description') is-invalid @enderror" id="editor1" name="short_description" placeholder="Enter Short Description" required>{{old('short_description') ? old('short_description') : $data->short_description}}</textarea>
+
+                                        @error('short_description')
+                                        <div style="color:red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-12 my-3" style="margin-top: 23px!important">
                                         <label for="description">Enter Description &nbsp;<span style="color:red;">*</span></label>
-                                        <textarea class="form-control" type="text" class="form-control @error('description') is-invalid @enderror" id="editor1" name="description" placeholder="Enter Description" required>{{old('description') ? old('description') : $data->description}}</textarea>
+                                        <textarea class="form-control" type="text" class="form-control @error('description') is-invalid @enderror" id="editor2" name="description" placeholder="Enter Description" required>{{old('description') ? old('description') : $data->description}}</textarea>
 
                                         @error('description')
                                         <div style="color:red">{{$message}}</div>
@@ -244,10 +252,11 @@
     </div> <!-- container-fluid -->
 
 </div> <!-- content -->
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
 <script>
     $(document).ready(function() {
         CKEDITOR.replace('editor1');
+        CKEDITOR.replace('editor2');
     });
 </script>
 <script>

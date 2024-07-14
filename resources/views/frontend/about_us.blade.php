@@ -21,7 +21,9 @@
 <!-- breadcrumb-section end -->
 <!-- product tab start -->
 <section class="whish-list-section theme1 pb-70">
-    <p></p>
+    <div class="container grid-wraper">
+    <p class="mb-20 text-justify"></p>
+    </div>
 </section>
 <!-- product tab end -->
 @endsection

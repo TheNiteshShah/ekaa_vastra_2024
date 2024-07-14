@@ -21,7 +21,7 @@ class CartController extends Controller
             $user_id = Auth::id();
             $cartItems = CartModal::where(['user_id' => $user_id])->get();
         }
-      
+
         return view('frontend/cart', compact('cartItems'))->withTitle('My Cart');
     }
     // ============================= END VIEW CART ============================ 
@@ -69,7 +69,7 @@ class CartController extends Controller
         $cart_data = Session::get('cart_data', []);
 
         foreach ($cart_data as $item) {
-            if ($item['product_id'] == $product_id && $item['type_id'] == $type_id) {
+            if ($item['product_id'] == $product_id) {
                 return [
                     'status' => false,
                     'message' => 'Item is already in your cart'
@@ -105,7 +105,7 @@ class CartController extends Controller
                 'message' => 'Product is out of stock'
             ];
         }
-        $cartInfo = CartModal::where(['user_id' => $user_id, 'type_id' => $type_id])->first();
+        $cartInfo = CartModal::where(['user_id' => $user_id, 'product_id' => $product_id])->first();
 
         if ($cartInfo) {
             return [

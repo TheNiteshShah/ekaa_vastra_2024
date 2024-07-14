@@ -23,26 +23,39 @@
 <!-- product tab start -->
 <section class="whish-list-section theme1 pb-70">
     <div class="container grid-wraper">
-        <p class="mb-20 text-justify">This Privacy policy describes how nukkadstudios.com (the “Site” or “we”) collects, uses, and discloses your Personal Information when you visit or make a purchase from the Site.</p>
+        <p class="mb-20 text-justify">This Privacy policy describes how ekaavastra.com (the “Site” or “we”) collects, uses, and discloses your Personal Information when you visit or make a purchase from the Site.</p>
         <h5 class="title mb-20">Contact</h5>
-        <p class="mb-20 text-justify">We accept returns only for products received in a faulty, damaged, or incorrect condition. If you receive such a product, please contact us immediately. We will arrange for the faulty or damaged item to be picked up within 48 hours. Upon receiving the returned item, we will initiate a refund process, and you can expect the refunded amount to reflect in your bank account within 7-10 business days.</p>
-        <h5 class="title mb-20">Replacement & Exchange Policy:</h5>
-        <p class="mb-20 text-justify">We offer replacements and exchanges for products that are sent incorrectly, damaged, or faulty. If you wish to exchange the size, color, or the product itself, we will handle the return pick-up and redelivery process. A return pick-up will be scheduled within 48 hours, and you can expect the new delivery within 7 to 10 days. However, for correctly sent products, if you wish to exchange them, there will be an additional charge of ₹180 to cover the cost of pick-up and redelivery.</p>
-        <h5 class="title mb-20">Refund Policy:</h5>
-        <p class="mb-20 text-justify">If you receive a faulty or damaged product and wish to request a refund, the item must be in the same condition as you received it, unused, with tag, and in its original packaging. Contact us, and we will schedule a return pick-up within 48 hours. Once we receive the returned item, we will initiate the refund process, and you can expect the refunded amount to reflect in your bank account within 7 to 14 business days.</p>
-        <h5 class="title mb-20">Contact Us:</h5>
-        <p class="mb-20 text-justify">Call or WhatsApp us at +919636373743 between 10 am to 10 pm on business days.
-            Email us at ekaavastra@gmail.com between 10 am to 10 pm on business days.
-            Direct Message us on Instagram where we are available 24x7 for international shipping inquiries and support.
-            Order Processing Time:
-            We typically take 3 to 4 days to process an order. We aim to deliver within seven days, with a maximum of 10 days. In case of any delay, we offer express shipping options for your convenience.</p>
-        <h5 class="title mb-20">Damaged Items:</h5>
-        <p class="mb-20 text-justify">If you notice any damage upon receiving your order, please inspect it immediately and contact us. We will evaluate the issue and make it right by sending you a replacement product or issuing a complete refund.</p>
-        <h5 class="title mb-20">Exceptions/Non-Returnable Items:</h5>
-        <p class="mb-20 text-justify">Products received correctly and in the condition as mentioned on the website are not eligible for a refund. If you wish to replace a correctly sent product, there will be a fee of ₹180 to cover the cost of return pick-up and redelivery.</p>
-        <h5 class="title mb-20">International Shipping:</h5>
-        <p class="mb-20 text-justify">We provide international shipping, and the cost is calculated based on the parcel's weight and distance. The shipping cost will be charged to the customer. The return, replacement, and cancellation policies apply to international orders as well.</p>
-        <p class="mb-20 text-justify">If you have any further questions or concerns regarding our policies, please do not hesitate to contact us using the provided methods. Thank you for shopping with us!</p>
+        <p class="mb-20 text-justify">After reviewing this policy, if you have additional questions, want more information about our privacy practices, or would like to make a complaint, please contact us via Whatsapp on 9636373743 or by mail using the details provided below:
+            Sunshine Aditya, Maharana Pratap Road,Sirsi 302021</p>
+        <h5 class="title mb-20">Collecting Personal Information</h5>
+        <p class="mb-20 text-justify">When you visit the Site, we collect certain information about your device, your interaction with the Site, and information necessary to process your purchases. We may also collect additional information if you contact us for customer support. In this Privacy Policy, we refer to any information about an identifiable individual (including the information below) as “Personal Information”. See the list below for more information about what Personal Information we collect and why.</p>
+        <h6 class="title mb-20">Device Information</h6>
+        <ul>
+            <li><b>Purpose of collection:</b> to load the Site accurately for you, and to perform analytics on Site usage to optimize our Site.</li>
+            <li><b>Source of collection: </b> Collected automatically when you access our Site using cookies, log files, web beacons, tags or pixels.</li>
+            <li><b>Personal Information collected: </b> version of web browser, IP address, time zone, cookie information, what sites or products you view, search terms, and how you interact with the Site.</li>
+        </ul>
+        <h6 class="title mb-20 mt-20">Order Information</h6>
+        <ul>
+            <li><b>Purpose of collection:</b> to provide products or services to you to fulfill our contract, to process your payment information, arrange for shipping, and provide you with invoices and/or order confirmations, communicate with you, screen our orders for potential risk or fraud, and when in line with the preferences you have shared with us, provide you with information or advertising relating to our products or services.</li>
+            <li><b>Source of collection: </b> collected from you.</li>
+            <li><b>Personal Information collected: </b> name, billing address, shipping address, payment information (including credit card numbers, UPI,), email address, and phone number.</li>
+        </ul>
+        <h6 class="title mb-20 mt-20">Customer Support Information</h6>
+        <ul>
+            <li><b>Personal Information collected:</b> name, email address, and phone number.</li>
+            <li><b>Purpose of collection: </b>  to provide customer support.</li>
+            <li><b>Source of collection: </b> collected from you</li>
+        </ul>
+        <p>Minors</p>
+        <p class="mb-20 text-justify">Our Platform is available only to persons who can form a legally binding contract under the Indian Contract Act, 1872. We do not intentionally collect Personal Information from children. If you are the parent or guardian and believe your child has provided us with Personal Information, please contact us at the address above to request deletion.</p>
+        <h5 class="title mb-20">Behavioural Advertising</h5>
+        <p class="mb-20 text-justify">As described above, we use your Personal Information to provide you with targeted advertisements or marketing communications we believe may be of interest to you. For example:</p>
+        <ul>
+            <li>We use Google Analytics to help us understand how our customers use the Site. You can read more about how Google uses your Personal Information here: https://www.google.com/intl/en/policies/privacy/. You can also opt-out of Google Analytics here: https://tools.google.com/dlpage/gaoptout.</li>
+            <li>We share information about your use of the Site, your purchases, and your interaction with our ads on other websites with our advertising partners. We collect and share some of this information directly with our advertising partners, and in some cases through the use of cookies or other similar technologies (which you may consent to, depending on your location).</li>
+            <li><b>Source of collection: </b> collected from you</li>
+        </ul>
     </div>
 
 </section>

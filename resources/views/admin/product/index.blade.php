@@ -56,7 +56,6 @@
                                                 <th>#</th>
                                                 <th data-priority="1">Name</th>
                                                 <th data-priority="1">SKU</th>
-                                                <th data-priority="1">Description</th>
                                                 <th data-priority="1">MRP</th>
                                                 <th data-priority="1">Price</th>
                                                 <th data-priority="1">GST %</th>
@@ -64,7 +63,7 @@
                                                 <th data-priority="1">Selling Price </th>
                                                 <th data-priority="1">New</th>
                                                 <th data-priority="1">Featured</th>
-                                                <th data-priority="1">Images</th>
+                                                <th data-priority="1">Image</th>
                                                 <th data-priority="1">Label</th>
                                                 <th data-priority="1">Sequence</th>
                                                 <th data-priority="6">Status</th>
@@ -78,7 +77,6 @@
                                                 <th>{{$loop->iteration}}</th>
                                                 <th>{{$data->name}}</th>
                                                 <th>{{$data->sku}}</th>
-                                                <th>{!!$data->description!!}</th>
                                                 <th>₹{{$data->mrp}}</th>
                                                 <th>₹{{$data->price}}</th>
                                                 <th>{{$data->gst_percentage}}%</th>
@@ -90,16 +88,7 @@
                                                     @if (!empty($data->image))
                                                     <img src="{{asset($data->image)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
                                                     @endif
-                                                    @if (!empty($data->image2))
-                                                    <img src="{{asset($data->image2)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image3))
-                                                    <img src="{{asset($data->image3)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-                                                    @if (!empty($data->image4))
-                                                    <img src="{{asset($data->image4)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
-                                                    @endif
-
+                                                   
                                                 </th>
                                                 <th>{{$data->label}}</th>
                                                 <th>{{$data->seq}}</th>
