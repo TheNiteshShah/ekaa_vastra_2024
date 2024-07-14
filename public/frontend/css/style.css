@@ -2232,7 +2232,7 @@ textarea:active::placeholder {
 *------------------*/
 .sub-menu {
   position: absolute;
-  top: 100%;
+  top: 80%;
   padding: 0;
   min-width: 240px;
   z-index: 4;
@@ -7212,26 +7212,32 @@ body::-webkit-scrollbar-thumb {
 	padding: 10px 15px !important;
 	z-index: 999;
 }
+
 .green {
-  background: rgba(25, 135, 84, 1);
-  box-shadow: 0 0 0 0 rgba(25, 135, 84, 1);
+  background: rgba(0, 168, 132, 1);
+  box-shadow: 0 0 0 0 rgba(0, 168, 132, 1);
+  animation: pulse-green 2s infinite;
+}
+.green:hover {
+  background: rgba(0, 168, 132, 1);
+  box-shadow: 0 0 0 0 rgba(0, 168, 132, 1);
   animation: pulse-green 2s infinite;
 }
 
 @keyframes pulse-green {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+    box-shadow: 0 0 0 0 rgba(0, 168, 132, 0.7);
   }
   
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(25, 135, 84, 0);
+    box-shadow: 0 0 0 10px rgba(0, 168, 132, 0);
   }
   
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+    box-shadow: 0 0 0 0 rgba(0, 168, 132, 0);
   }
 }
 .custom-marquee {
