@@ -7255,7 +7255,7 @@ body::-webkit-scrollbar-thumb {
   bottom: 6px;
   white-space: nowrap;
   will-change: transform;
-  animation: marquee 70s linear infinite;
+  animation: marquee 15s linear infinite;
 }
 
 .custom-marquee .content {
