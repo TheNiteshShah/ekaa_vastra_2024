@@ -14,8 +14,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                 <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
                             </a>
                         </div>
-                        <!-- <p class="text mb-35">Established in 2024, 'EKAA VASTRA' was founded by SAKSHI KHANNA with a
-                            vision to transform the world of Ethnic and Fusion Fashion</p> -->
+                        <p class="text mb-35">Founded in 2024, our journey began with a passion that burned bright, a desire to empower people to embrace their unique spirit through the clothes they wear. </p>
                         <div class="social-network">
                             <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
                             <ul class="d-flex">

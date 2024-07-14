@@ -7207,7 +7207,7 @@ body::-webkit-scrollbar-thumb {
 .button-fixed-left{
 	position: fixed;
 	bottom: 50px;
-	left: 10px;
+	left: 20px;
 	border-radius: 50% !important;
 	padding: 10px 15px !important;
 	z-index: 999;

@@ -202,7 +202,7 @@
                             <span class="ion-quote d-block float-left"></span>
                             <p>{{$test->review}}</p>
                             <span class="ion-quote float-right"></span>
-                            <h4 class="text-uppercase mb-15">{{$test->name}}</h4>
+                            <h4 class="text-uppercase mb-15 mt-10">{{$test->name}}</h4>
                         </div>
                     </div>
                     @endforeach
