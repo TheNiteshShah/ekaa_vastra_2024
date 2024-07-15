@@ -33,7 +33,7 @@
 
                     <div class="single-contact-block">
                         <h4><i class="fa fa-fax"></i> Address</h4>
-                        <p>Sunshine Aditya, Jaipur, Rajasthan 302012</p>
+                        <p>Sunshine Aditya, Kundra Road, Sirsi, Jaipur, Rajasthan, 302012</p>
                     </div>
 
                     <!--  End of single contact block -->

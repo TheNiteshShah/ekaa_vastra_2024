@@ -66,8 +66,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <li><a href="tel:+919636373743"><i class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
                             <li><a href="mailto:ekaavastra@gmail.com"><i class="ion-email mr-10"></i>
                                     <span style="text-transform:none">ekaavastra@gmail.com</span></a></li>
-                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap
-                                    Road,Sirsi 302021</span></li>
+                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Kundra Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>

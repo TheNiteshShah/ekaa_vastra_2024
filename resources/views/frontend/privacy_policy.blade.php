@@ -23,7 +23,7 @@
 <!-- product tab start -->
 <section class="whish-list-section theme1 pb-70">
     <div class="container grid-wraper">
-        <p class="mb-20 text-justify">The domain name www.ekaavastra.com (“Website”) is a site operated by EKAA VASTRA, a company incorporated under laws of India with our registered office at Sunshine Aditya, Maharana Pratap Road,Sirsi 302021 (“Company/ EKAA VASTRA”).
+        <p class="mb-20 text-justify">The domain name www.ekaavastra.com (“Website”) is a site operated by EKAA VASTRA, a Proprietary firm incorporated under laws of India with our registered office at F. No 105, Sunshine Aditya, Kundra Road, Sirsi, Jaipur, Rajasthan, 302012 (Proprietary firm/ EKAA VASTRA”).
         </p>
         <p class="mb-20 text-justify">Through this document, we wish to make you feel safe and comfortable while using our website. We want to make you fully aware of certain data/information that we will be collecting from you so that you feel confident sharing that particular information with us.</p>
         <p class="mb-20 text-justify">This Privacy Policy covers the information EKAA VASTRA collects from the user(s) of www.ekaavastra.com ("Website"). By using the services on the www.ekaavastra.com website, you agree to the collection and use of information in relation to this policy, terms of service, conditions, etc.</p>
