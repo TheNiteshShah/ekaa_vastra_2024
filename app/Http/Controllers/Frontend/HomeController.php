@@ -93,6 +93,12 @@ class HomeController extends Controller
         return view('frontend.privacy_policy');
     }
     // ============================= END PRIVACY POLICY ============================ 
+    // ============================= START SHIPPING POLICY ============================ 
+    public function shippingPolicy(Request $req)
+    {
+        return view('frontend.shipping_policy');
+    }
+    // ============================= END SHIPPING POLICY ============================ 
     // ============================= START PRIVACY POLICY ============================ 
     public function aboutUs(Request $req)
     {
