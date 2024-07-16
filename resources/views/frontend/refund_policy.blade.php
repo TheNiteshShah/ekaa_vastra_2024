@@ -1,5 +1,5 @@
 @extends('frontend.base_template')
-@section('title', 'Refund Policy - Ekaa Vastra')
+@section('title', 'Return & Refund Policy - Ekaa Vastra')
 @section('main')
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">
@@ -7,13 +7,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb-title text-center my-20">
-                    <h2 class="title text-dark text-capitalize">Refund Policy</h2>
+                    <h2 class="title text-dark text-capitalize">Return & Refund Policy</h2>
                 </div>
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
                     <li class="breadcrumb-item"><a href="{{route('/')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Refund Policy</li>
+                    <li class="breadcrumb-item active" aria-current="page">Return & Refund Policy</li>
                 </ol>
             </div>
         </div>

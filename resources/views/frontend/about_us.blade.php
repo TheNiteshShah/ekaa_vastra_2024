@@ -1,4 +1,5 @@
 @extends('frontend.base_template')
+@section('title', 'About Us - Ekaa Vastra')
 @section('main')
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">

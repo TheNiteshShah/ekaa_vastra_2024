@@ -61,9 +61,10 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
     Route::post('/contact-us-store', [HomeController::class, 'contactUsStore'])->name('contact-us-store');
     Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
-    Route::get('/refund-policy', [HomeController::class, 'refundPolicy'])->name('refund-policy');
+    Route::get('/return-refund-policy', [HomeController::class, 'refundPolicy'])->name('return-refund-policy');
     Route::get('/terms-and-conditions', [HomeController::class, 'termsAndConditions'])->name('terms-and-conditions');
     Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
+    Route::get('/shipping-policy', [HomeController::class, 'shippingPolicy'])->name('shipping-policy');
     Route::get('/order-bill', [HomeController::class, 'OrderInvoice'])->name('order-bill');
     //------------ CART ----------------
     Route::get('/cart', [CartController::class, 'index'])->name('cart');;
