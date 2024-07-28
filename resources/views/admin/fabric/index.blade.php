@@ -71,8 +71,8 @@
                                             @foreach($foreachData as $data)
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
-                                                <th>{{$data->vendor->name}}</th>
-                                                <th>{{$data->code}}</th>
+                                                <th>{{$data->vendor->business_name}}</th>
+                                                <th>EVF-{{$data->id}}</th>
                                                 <td>
                                                     @if (!empty($data->image))
                                                     <img src="{{asset($data->image)}}" alt="image" width="100" height="70">

@@ -36,7 +36,6 @@ class FabricController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             $this->validate($req, [
                 'vendor_id' => $req->id === null ? 'required' : '',
-                'code' => $req->id === null ? 'required' : '',
                 'quantity' => $req->id === null ? 'required' : 'required',
                 'unit' => $req->id === null ? 'required' : '',
                 'sample_price' => $req->id === null ? 'required' : '',
@@ -65,7 +64,6 @@ class FabricController extends Controller
             $userId = $req->session()->get('admin_id');
             if ($req->id === null) {
                 $uploadData->vendor_id = $req->vendor_id;
-                $uploadData->code = $req->code;
                 $uploadData->quantity = $req->quantity;
                 $uploadData->unit = $req->unit;
                 $uploadData->sample_price = $req->sample_price;

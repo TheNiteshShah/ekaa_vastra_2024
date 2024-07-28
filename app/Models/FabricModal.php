@@ -11,7 +11,7 @@ class FabricModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'vendor_id','code','image','quantity','unit','sample_price','bulk_price','date','ip', 'added_by', 'is_active'
+        'vendor_id','image','quantity','unit','sample_price','bulk_price','date','ip', 'added_by', 'is_active'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];
