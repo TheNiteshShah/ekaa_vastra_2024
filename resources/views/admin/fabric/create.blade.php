@@ -67,7 +67,7 @@
                                         <select name="vendor_id" id="vendor_id" class="form-control">
                                             <option value="">---- Select----</option>
                                             @foreach($vendors as $vendor)
-                                            <option value="{{$vendor->id}}" @if ($data->vendor_id == $vendor->id) selected @endif>{{$vendor->name}}</option>
+                                            <option value="{{$vendor->id}}" @if ($data->vendor_id == $vendor->id) selected @endif>{{$vendor->business_name}}</option>
                                             @endforeach
                                         </select>
                                         @error('vendor_id')
