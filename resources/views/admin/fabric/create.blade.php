@@ -77,15 +77,6 @@
                                         @enderror
 
                                     </div>
-                                    <div class="col-sm-6 my-3" style="margin-top: 37px!important">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control @error('code') is-invalid @enderror" value="{{old('code') ? old('code') : $data->code}}" id="code" name="code" placeholder="Enter Code" required>
-                                            <label for="code">Product Code &nbsp;<span style="color:red;">*</span></label>
-                                        </div>
-                                        @error('code')
-                                        <div style="color:red">{{$message}}</div>
-                                        @enderror
-                                    </div>
                                     <div class="col-sm-6 my-3">
                                         <label for="image">Image &nbsp;<span style="color:red;"></span></label>
                                         <input type="file" class="form-control" type="text" value="" id="image" name="image" placeholder="Enter Image">
