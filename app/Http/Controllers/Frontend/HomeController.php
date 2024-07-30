@@ -125,7 +125,7 @@ class HomeController extends Controller
 
         $body = $response->json();
         if (!$body['success']) {
-            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Invalid reCAPTCHA'])->withInput();
+            return redirect()->back()->withErrors(['g-recaptcha-response' => $body['error-codes']])->withInput();
         }
         $uploadData = new ContactUsModal();
         $uploadData->name = ucwords($req->customerName);
