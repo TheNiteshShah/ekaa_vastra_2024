@@ -274,7 +274,7 @@ class UserOrderController extends Controller
     }
     public function checkPhonePeUrl()
     {
-        $url = 'https://api.phonepe.com/apis/pg-sandbox/pg/v1/pay'; // Sandbox endpoint
+        $url = 'https://api.phonepe.com/apis/hermes/pg/v1/pay'; // Sandbox endpoint
         $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
 
         $payload = [
