@@ -17,6 +17,7 @@ use App\Models\OrderAddressModal;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+
 class UserOrderController extends Controller
 {
     private $PHONE_PE_SALT; // Replace with your PhonePe API Key
@@ -225,7 +226,7 @@ class UserOrderController extends Controller
     // ============================= END CHECKOUT PROCESS ============================ 
     public function getPhonePeUrl($order1Update, $orderAddressUpload)
     {
-        $url = $this->PHONE_PE_URL+'pg/v1/pay'; // Sandbox endpoint
+        $url = $this->PHONE_PE_URL . 'pg/v1/pay'; // Sandbox endpoint
         $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
 
         $payload = [
@@ -293,7 +294,6 @@ class UserOrderController extends Controller
 
                 $responseBody = $response->getBody()->getContents();
                 return json_decode($responseBody);
-
             } catch (\GuzzleHttp\Exception\RequestException $e) {
                 Log::error('cURL Error: ' . $e->getMessage());
                 return response()->json(['error' => 'cURL Error: ' . $e->getMessage()], 500);
