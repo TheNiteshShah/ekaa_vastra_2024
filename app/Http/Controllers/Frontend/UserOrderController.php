@@ -25,9 +25,9 @@ class UserOrderController extends Controller
     private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
     public function __construct()
     {
-        $this->PHONE_PE_SALT = '4d0c93b5-b222-452f-97bf-8337e42f5591'; // Get API Key from config
-        $this->PHONE_PE_MERCHANT_ID = 'M22QX0TIVYNRE'; // Get Salt Key from config
-        $this->PHONE_PE_URL = 'https://api.phonepe.com/apis/hermes/'; // Get Salt Key from config
+        $this->PHONE_PE_SALT = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399'; // Get API Key from config
+        $this->PHONE_PE_MERCHANT_ID = 'PGTESTPAYUAT'; // Get Salt Key from config
+        $this->PHONE_PE_URL = 'https://api-preprod.phonepe.com/apis/hermes/'; // Get Salt Key from config
     }
     // ============================= START VIEW CHECKOUT ============================ 
     public function index(Request $req)
@@ -274,25 +274,25 @@ class UserOrderController extends Controller
     }
     public function checkPhonePeUrl()
     {
-        $url = $this->PHONE_PE_URL . 'pg/v1/pay'; // Sandbox endpoint
+        $url = 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay'; // Sandbox endpoint
         $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
 
         $payload = [
-            "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
-            "merchantTransactionId" => "MT4518752444",
+            "merchantId" => 'M22QX0TIVYNRE', // Get from config
+            "merchantTransactionId" => "MT7850590068188104",
             "merchantUserId" => "MUID123",
             // "amount" => ($order1Update->final_amount*100),
-            "amount" => 1000,
-            "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
-            "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
-            "mobileNumber" => "9876543210",
-            "redirectMode" => "POST",
+            "amount" => 10000,
+            "redirectUrl" => "https://webhook.site/redirect-url", // Route to handle PhonePe response
+            "callbackUrl" => "https://webhook.site/callback-url", // Route for PhonePe callbacks
+            "mobileNumber" => "9999999999",
+            "redirectMode" => "REDIRECT",
             "paymentInstrument" => [
                 "type" => "PAY_PAGE",
             ],
         ];
         $encodedPayload = json_encode($payload);
-        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . $this->PHONE_PE_SALT) . '###1'; // Salt index set to 1
+        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . '4d0c93b5-b222-452f-97bf-8337e42f5591') . '###1'; // Salt index set to 1
         $requestJson = [
             'request' => base64_encode($encodedPayload),
         ];
