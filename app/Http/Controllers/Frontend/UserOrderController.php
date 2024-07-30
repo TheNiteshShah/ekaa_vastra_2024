@@ -232,6 +232,7 @@ class UserOrderController extends Controller
         $payload = [
             "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
             "merchantTransactionId" => $order1Update->txn_id,
+            "merchantUserId" => $order1Update->user_id,
             // "amount" => ($order1Update->final_amount*100),
             "amount" => 100,
             "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
@@ -242,7 +243,54 @@ class UserOrderController extends Controller
                 "type" => "PAY_PAGE",
             ],
         ];
+        $encodedPayload = json_encode($payload);
+        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . $this->PHONE_PE_SALT) . '###1'; // Salt index set to 1
+        $requestJson = [
+            'request' => base64_encode($encodedPayload),
+        ];
 
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-VERIFY' => $signature,
+        ])
+            ->post($url, $requestJson);
+
+        if ($response->failed()) {
+            return response()->json(['status' => false, 'message' => 'Error creating PhonePe order', 'error' => $response->json()]);
+        }
+
+        $responseData = $response->json();
+
+        if ($responseData['code'] === 'PAYMENT_INITIATED') {
+            return response()->json([
+                'status' => true,
+                'message' => 'Success! Redirecting to PhonePe for payment.',
+                'data' => $responseData,
+                'redirectUrl' => $responseData['data']['instrumentResponse']['redirectInfo']['url'],
+            ]);
+        } else {
+            return response()->json(['status' => false, 'message' => 'PhonePe payment initiation failed', 'error' => $responseData]);
+        }
+    }
+    public function checkPhonePeUrl()
+    {
+        $url = $this->PHONE_PE_URL . 'pg/v1/pay'; // Sandbox endpoint
+        $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
+
+        $payload = [
+            "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
+            "merchantTransactionId" => "MT4518752444",
+            "merchantUserId" => "MUID123",
+            // "amount" => ($order1Update->final_amount*100),
+            "amount" => 1000,
+            "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
+            "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
+            "mobileNumber" => "9876543210",
+            "redirectMode" => "POST",
+            "paymentInstrument" => [
+                "type" => "PAY_PAGE",
+            ],
+        ];
         $encodedPayload = json_encode($payload);
         $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . $this->PHONE_PE_SALT) . '###1'; // Salt index set to 1
         $requestJson = [

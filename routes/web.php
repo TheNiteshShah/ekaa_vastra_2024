@@ -78,6 +78,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/get-shipping-charges/{id}', [UserOrderController::class, 'getShippingCharges'])->name('getShippingCharges')->middleware('auth');
     Route::post('/checkout-process', [UserOrderController::class, 'checkout'])->name('checkout-process')->middleware('auth');
     Route::post('/verify-phone-pe-payment', [UserOrderController::class, 'verifyPhonePePayment'])->name('verify-phone-pe-payment');
+    Route::get('/check-phone-pe-url', [UserOrderController::class, 'checkPhonePeUrl'])->name('check-phone-pe-url');
     Route::get('/order-success/{order_id}', [UserOrderController::class, 'showOrderSuccess'])->name('order.success');
     //------------ ADDRESS ----------------
     Route::get('fetch-pin-data/{pincode}', [AddressController::class, 'fetchPincodeData']);
