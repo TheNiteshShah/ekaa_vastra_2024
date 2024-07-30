@@ -1,4 +1,5 @@
 @extends('frontend.base_template')
+@section('title', 'checkout - Ekaa Vastra')
 @section('main')
 <style>
     .filter-check-box_3 {
@@ -530,13 +531,13 @@
                             </div>
                             <div>
                                 <div class=" flex-wrap">
-                                    <!-- <div class="custom-radio mt-3">
+                                    <div class="custom-radio mt-3">
                                         <input type="radio" id="prePaid" name="payment_mode" value="2" >
                                         <label for="prePaid">
                                             <b style=" font-size:  15px; margin-bottom:  10px;"> Online Payment </b>
                                             <p class="mt-2">Get upto 2% discount on prepaid order</p>
                                         </label>
-                                    </div> -->
+                                    </div>
                                     <div class="custom-radio mt-3">
                                         <input type="radio" id="COD" name="payment_mode" value="1" checked>
                                         <label for="COD">
@@ -596,7 +597,7 @@
                                         </div>
                                         <div class="mt-2 mb-2 row justify-content-between align-items-center col-12">
                                             <div class="col-10">
-                                                @if($address->id==$defaultAddress->id)
+                                                @if($defaultAddress && $address->id==$defaultAddress->id)
                                                 <span class="btn--sm text-uppercase  d-block d-sm-inline-block me-sm-2" style="background-color: #e9e9eb;color: #282c3f;">Delivering Here</span>
                                                 @else
                                                 <form method="POST" action="{{ route('changeDefaultAddress') }}" style="display:inline">

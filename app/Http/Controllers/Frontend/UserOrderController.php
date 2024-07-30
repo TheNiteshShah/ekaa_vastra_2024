@@ -15,9 +15,19 @@ use App\Models\Order1Modal;
 use App\Models\Order2Modal;
 use App\Models\OrderAddressModal;
 use Illuminate\Support\Facades\Http;
-
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 class UserOrderController extends Controller
 {
+    private $PHONE_PE_SALT; // Replace with your PhonePe API Key
+    private $PHONE_PE_MERCHANT_ID; // Replace with your PhonePe Salt Key
+    private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
+    public function __construct()
+    {
+        $this->PHONE_PE_SALT = '4d0c93b5-b222-452f-97bf-8337e42f5591'; // Get API Key from config
+        $this->PHONE_PE_MERCHANT_ID = 'M22QX0TIVYNRE'; // Get Salt Key from config
+        $this->PHONE_PE_URL = 'https://api.phonepe.com/apis/hermes/'; // Get Salt Key from config
+    }
     // ============================= START VIEW CHECKOUT ============================ 
     public function index(Request $req)
     {
@@ -179,11 +189,13 @@ class UserOrderController extends Controller
             $cod = 0;
         }
         $response = $this->calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total);
+        $txn_id = bin2hex(random_bytes(12));
         //---------- ORDER1 Entry -----------
         $order1Update = Order1Modal::where('id', $order1Upload->id)->first();
         $order1Update->total_amount = $cart_total;
         $order1Update->shipping = $response['data']['shipping'];
         $order1Update->final_amount = $response['data']['sub_total'];
+        $order1Update->txn_id = $txn_id;
         $order1Update->save();
         //---------- ORDER Address Entry -----------
         $orderAddressUpload = new OrderAddressModal();
@@ -200,10 +212,93 @@ class UserOrderController extends Controller
         $orderAddressUpload->city = $defaultAddress->city;
         $orderAddressUpload->ip = $request->ip();
         $orderAddressUpload->save();
-        //------------ EMPTY CART ---------
-        CartModal::where('user_id', $user_id)->delete();
-        // Return a response
-        return response()->json(['message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
+        if ($request->input('payment_mode') == 2) { // for prepaid orders
+            $res = $this->getPhonePeUrl($order1Update, $orderAddressUpload);
+            return $res;
+        } else {
+            //------------ EMPTY CART ---------
+            CartModal::where('user_id', $user_id)->delete();
+            // Return a response
+            return response()->json(['status' => true, 'message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
+        }
+    }
+    // ============================= END CHECKOUT PROCESS ============================ 
+    public function getPhonePeUrl($order1Update, $orderAddressUpload)
+    {
+        $url = $this->PHONE_PE_URL+'pg/v1/pay'; // Sandbox endpoint
+        $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
+
+        $payload = [
+            "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
+            "merchantTransactionId" => $order1Update->txn_id,
+            // "amount" => ($order1Update->final_amount*100),
+            "amount" => 100,
+            "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
+            "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
+            "mobileNumber" => $orderAddressUpload->phone,
+            "redirectMode" => "POST",
+            "paymentInstrument" => [
+                "type" => "PAY_PAGE",
+            ],
+        ];
+
+        $encodedPayload = json_encode($payload);
+        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . $this->PHONE_PE_SALT) . '###1'; // Salt index set to 1
+        $requestJson = [
+            'request' => base64_encode($encodedPayload),
+        ];
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-VERIFY' => $signature,
+        ])
+            ->post($url, $requestJson);
+
+        if ($response->failed()) {
+            return response()->json(['status' => false, 'message' => 'Error creating PhonePe order', 'error' => $response->json()]);
+        }
+
+        $responseData = $response->json();
+
+        if ($responseData['code'] === 'PAYMENT_INITIATED') {
+            return response()->json([
+                'status' => true,
+                'message' => 'Success! Redirecting to PhonePe for payment.',
+                'data' => $responseData,
+                'redirectUrl' => $responseData['data']['instrumentResponse']['redirectInfo']['url'],
+            ]);
+        } else {
+            return response()->json(['status' => false, 'message' => 'PhonePe payment initiation failed', 'error' => $responseData]);
+        }
+    }
+    public function verifyPhonePePayment(Request $request)
+    {
+        $body = $request->all();
+        $url = $this->PHONE_PE_URL; // Sandbox endpoint
+
+        if (isset($body['code']) && $body['code'] === 'PAYMENT_SUCCESS') {
+            $url = $url . 'pg/v1/status/' . $this->PHONE_PE_MERCHANT_ID . '/' . $body['transactionId'];
+
+            $verifyHeader = hash('sha256', '/pg/v1/status/' . $this->PHONE_PE_MERCHANT_ID . '/' . $body['transactionId'] . $this->PHONE_PE_SALT) . '###1';
+
+            $client = new Client();
+            try {
+                $response = $client->request('GET', $url, [
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'X-VERIFY' => $verifyHeader,
+                        'X-MERCHANT-ID' => config('services.phone_pe.merchant_id'),
+                    ],
+                ]);
+
+                $responseBody = $response->getBody()->getContents();
+                return json_decode($responseBody);
+
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                Log::error('cURL Error: ' . $e->getMessage());
+                return response()->json(['error' => 'cURL Error: ' . $e->getMessage()], 500);
+            }
+        }
     }
     // ============================= END CHECKOUT PROCESS ============================ 
     public function showOrderSuccess($order_id)

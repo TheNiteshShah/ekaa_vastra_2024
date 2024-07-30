@@ -12,7 +12,7 @@ class Order1Modal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id','promo_id','promo_discount','total_amount','final_amount', 'payment_status', 'order_status', 'payment_type', 'address_id', 'ip','shipping'
+        'user_id','promo_id','promo_discount','total_amount','final_amount', 'payment_status', 'order_status', 'payment_type', 'address_id', 'ip','shipping','txn_id'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];
