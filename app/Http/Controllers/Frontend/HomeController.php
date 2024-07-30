@@ -118,14 +118,14 @@ class HomeController extends Controller
         ]);
         // reCAPTCHA verification
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('6LffcxsqAAAAADSJJ0G_C_V8MU8i7lnLHfXJVW0f'),
+            'secret' => '6LffcxsqAAAAADSJJ0G_C_V8MU8i7lnLHfXJVW0f',
             'response' => $req->input('g-recaptcha-response'),
             'remoteip' => $req->ip(),
         ]);
 
         $body = $response->json();
         if (!$body['success']) {
-            return redirect()->back()->withErrors(['g-recaptcha-response' => $body['error-codes']])->withInput();
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Invalid reCAPTCHA'])->withInput();
         }
         $uploadData = new ContactUsModal();
         $uploadData->name = ucwords($req->customerName);
