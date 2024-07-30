@@ -99,7 +99,11 @@
                                 <div style="color:red">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="form-group mb-0">
+                            <div class="g-recaptcha" data-sitekey="6LffcxsqAAAAAFtr6nyQTZP1GyRHkxNmqp8TMQYN"></div>
+                            @error('g-recaptcha-response')
+                            <div style="color:red">{{ $message }}</div>
+                            @enderror
+                            <div class="form-group mb-0 mt-2">
                                 <button type="submit" value="submit" id="submit" class="btn theme-btn--dark1 btn--xl" name="submit">Submit</button>
                             </div>
                         </form>
@@ -118,4 +122,5 @@
     </div>
 </div>
 <!-- map end -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection

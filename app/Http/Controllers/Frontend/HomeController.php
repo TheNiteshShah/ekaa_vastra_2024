@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Redirect;
+use Illuminate\Support\Facades\Http;
 use Laravel\Sanctum\PersonalAccessToken;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class HomeController extends Controller
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
 
-        return view('frontend/index', compact('sliderData', 'trendingData', 'topData','testimonialsData'))->withTitle('Ekaa Vastra');
+        return view('frontend/index', compact('sliderData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
@@ -113,7 +114,19 @@ class HomeController extends Controller
             'customerEmail' =>  'required',
             'customerPhone' =>  'required',
             'customerMessage' => 'required',
+            'g-recaptcha-response' => 'required',
         ]);
+        // reCAPTCHA verification
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('6LffcxsqAAAAADSJJ0G_C_V8MU8i7lnLHfXJVW0f'),
+            'response' => $req->input('g-recaptcha-response'),
+            'remoteip' => $req->ip(),
+        ]);
+
+        $body = $response->json();
+        if (!$body['success']) {
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Invalid reCAPTCHA'])->withInput();
+        }
         $uploadData = new ContactUsModal();
         $uploadData->name = ucwords($req->customerName);
         $uploadData->email = $req->customerEmail;
@@ -130,35 +143,52 @@ class HomeController extends Controller
     // ============================= END CONTACT US STORE ============================ 
     public function OrderInvoice(Request $req)
     {
-        $OrderData = [
-            'id' => 17,
-            'invoice_no' => '17/EV/24-25',
-            'payment_mode' => 'Prepaid',
-            'shipping' => 36,
-            'discount' => 0,
-            'total_amount' => 999,
-            'final_amount' => 999,
-            'address' => [
-                'name' => 'Devangini Kumari',
-                'phone' => '9829347005  ',
-                'email' => 'devanginishaktawatjpr@gmail.com',
-                'address' => 'Doongri Haveli, Indira Bazar, Khejron Ka Rasta, Jaipur, Rajasthan, IN, 302001',
-            ],
-            'created_at' => '09-Jul-2024',
-        ];
+
         $foreachData = [
             [
                 'gst_percentage' => 5,
                 'quantity' => 1,
                 'price' => 999,
                 'product' => [
-                    'name' => 'Lime Blossom Co-ord Set',
-                    'sku' => 'EV124',
+                    'name' => 'Blue Abstract Print Suit Set',
+                    'sku' => 'EV130',
                 ],
                 'type' => [
                     'name' => 'L',
                 ]
+            ],
+            [
+                'gst_percentage' => 12,
+                'quantity' => 1,
+                'price' => 1149,
+                'product' => [
+                    'name' => 'Forest Green Abstract Print Co-ord Set',
+                    'sku' => 'EV130',
+                ],
+                'type' => [
+                    'name' => 'S',
+                ]
             ]
+        ];
+        $total = 999 + 1149;
+        $shipping = 0;
+        $discount = 0;
+        $final = ($total - $discount) + $shipping;
+        $OrderData = [
+            'id' => 19,
+            'invoice_no' => '19/EV/24-25',
+            'payment_mode' => 'Prepaid',
+            'shipping' => $shipping,
+            'discount' => $discount,
+            'total_amount' => $total,
+            'final_amount' => $final,
+            'address' => [
+                'name' => 'Riya Gupta',
+                'phone' => '9928413990',
+                'email' => '',
+                'address' => '139, Mangal Vihar, Near Riddhi Siddhe sweets, Gopalpura Bypass, Jaipur, Rajasthan, 302018',
+            ],
+            'created_at' => '07-Jul-2024',
         ];
         $enOr =  json_encode($OrderData);
         $OrderData = json_decode($enOr);
