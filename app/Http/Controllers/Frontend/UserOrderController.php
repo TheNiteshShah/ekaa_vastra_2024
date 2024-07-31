@@ -255,8 +255,8 @@ class UserOrderController extends Controller
             "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
             "merchantTransactionId" => $order1Update->txn_id,
             "merchantUserId" => $order1Update->user_id,
-            // "amount" => ($order1Update->final_amount*100),
-            "amount" => 100,
+            "amount" => ($order1Update->final_amount*100),
+            // "amount" => 100,
             "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
             "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
             "mobileNumber" => $orderAddressUpload->phone,
