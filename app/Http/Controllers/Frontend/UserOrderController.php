@@ -17,7 +17,8 @@ use App\Models\OrderAddressModal;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewOrderEmail;
 class UserOrderController extends Controller
 {
     private $PHONE_PE_SALT; // Replace with your PhonePe API Key
@@ -219,9 +220,13 @@ class UserOrderController extends Controller
         } else {
             //------------ EMPTY CART ---------
             CartModal::where('user_id', $user_id)->delete();
+            Mail::to('ekaavastra@gmail.com')->send(new NewOrderEmail($order1Upload));
             // Return a response
             return response()->json(['status' => true, 'message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
         }
+    }
+    public function checkMail(){
+        Mail::to('ekaavastra@gmail.com')->send(new NewOrderEmail('1'));
     }
     // ============================= END CHECKOUT PROCESS ============================ 
     public function getPhonePeUrl($order1Update, $orderAddressUpload)
@@ -277,22 +282,31 @@ class UserOrderController extends Controller
         $url = 'https://api.phonepe.com/apis/hermes/pg/v1/pay'; // Sandbox endpoint
         $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
 
-        $payload = [
-            "merchantId" => 'M22QX0TIVYNRE', // Get from config
-            "merchantTransactionId" => "MT7850590068188104",
-            "merchantUserId" => "MUID123",
-            // "amount" => ($order1Update->final_amount*100),
-            "amount" => 10000,
-            "redirectUrl" => "https://webhook.site/redirect-url", // Route to handle PhonePe response
-            "callbackUrl" => "https://webhook.site/callback-url", // Route for PhonePe callbacks
-            "mobileNumber" => "9999999999",
-            "redirectMode" => "REDIRECT",
-            "paymentInstrument" => [
+        $payload = (object)[
+            "merchantId" => "PGTESTPAYUAT", // Replace with your actual merchant ID
+            "merchantTransactionId" => "MT7850590068188104", // Replace with your order ID
+            "merchantUserId" => "MUID123", // Replace with your merchant user ID
+            "amount" => 10000, // Replace with actual amount
+            "redirectUrl" => "https://webhook.site/redirect-url", // Replace with your redirect URL
+            "callbackUrl" => "https://webhook.site/callback-url", // Replace with your callback URL
+            "mobileNumber" => "9999999999", // Replace with user's mobile number
+            "redirectMode" => "REDIRECT", // Update based on PhonePe documentation
+            "paymentInstrument" => (object)[ // Cast as stdClass object
                 "type" => "PAY_PAGE",
             ],
         ];
-        $encodedPayload = json_encode($payload);
-        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . '4d0c93b5-b222-452f-97bf-8337e42f5591') . '###1'; // Salt index set to 1
+        
+        $jsonPayload = json_encode($payload);
+        $encodedPayload = base64_encode($jsonPayload);
+        // if ($encodedPayload == "ewogICJtZXJjaGFudElkIjogIlBHVEVTVFBBWVVBVCIsCiAgIm1lcmNoYW50VHJhbnNhY3Rpb25JZCI6ICJNVDc4NTA1OTAwNjgxODgxMDQiLAogICJtZXJjaGFudFVzZXJJZCI6ICJNVUlEMTIzIiwKICAiYW1vdW50IjogMTAwMDAsCiAgInJlZGlyZWN0VXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL3JlZGlyZWN0LXVybCIsCiAgInJlZGlyZWN0TW9kZSI6ICJSRURJUkVDVCIsCiAgImNhbGxiYWNrVXJsIjogImh0dHBzOi8vd2ViaG9vay5zaXRlL2NhbGxiYWNrLXVybCIsCiAgIm1vYmlsZU51bWJlciI6ICI5OTk5OTk5OTk5IiwKICAicGF5bWVudEluc3RydW1lbnQiOiB7CiAgICAidHlwZSI6ICJQQVlfUEFHRSIKICB9Cn0=") {
+
+        //     echo "Yes";
+        // } else {
+        //     echo "NO";
+        // }
+        print_r($encodedPayload);
+        die();
+        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399') . '###1'; // Salt index set to 1
         $requestJson = [
             'request' => base64_encode($encodedPayload),
         ];

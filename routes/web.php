@@ -80,6 +80,7 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/verify-phone-pe-payment', [UserOrderController::class, 'verifyPhonePePayment'])->name('verify-phone-pe-payment');
     Route::get('/check-phone-pe-url', [UserOrderController::class, 'checkPhonePeUrl'])->name('check-phone-pe-url');
     Route::get('/order-success/{order_id}', [UserOrderController::class, 'showOrderSuccess'])->name('order.success');
+    Route::get('/checkMail', [UserOrderController::class, 'checkMail'])->name('checkMail');
     //------------ ADDRESS ----------------
     Route::get('fetch-pin-data/{pincode}', [AddressController::class, 'fetchPincodeData']);
     Route::post('add-address', [AddressController::class, 'addAddress'])->name('addAddress')->middleware('auth');
