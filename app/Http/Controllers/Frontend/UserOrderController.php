@@ -27,12 +27,9 @@ class UserOrderController extends Controller
     private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
     public function __construct()
     {
-        // $this->PHONE_PE_SALT = '4872b5fb-f34d-4fd5-ada2-5e4ed7d9bcbd'; // Get API Key from config
-        // $this->PHONE_PE_MERCHANT_ID = 'PGTESTPAYUAT149'; // Get Salt Key from config
-        // $this->PHONE_PE_URL = 'https://api-preprod.phonepe.com/apis/hermes/'; // Get Salt Key from config
-        $this->PHONE_PE_SALT = '4d0c93b5-b222-452f-97bf-8337e42f5591'; // Get API Key from config
-        $this->PHONE_PE_MERCHANT_ID = 'M22QX0TIVYNRE'; // Get Salt Key from config
-        $this->PHONE_PE_URL = 'https://api.phonepe.com/apis/hermes/'; // Get Salt Key from config
+        $this->PHONE_PE_SALT = env('PHONE_PE_SALT'); // Get API Key from config
+        $this->PHONE_PE_MERCHANT_ID = env('PHONE_PE_MERCHANT_ID'); // Get Salt Key from config
+        $this->PHONE_PE_URL = env('PHONE_PE_URL'); // Get Salt Key from config
     }
     // ============================= START VIEW CHECKOUT ============================ 
     public function index(Request $req)
@@ -164,8 +161,8 @@ class UserOrderController extends Controller
         $order1Upload = new Order1Modal();
         $order1Upload->payment_mode = $request->input('payment_mode');
         $order1Upload->user_id = $user_id;
-        $order1Upload->payment_status = 1;
-        $order1Upload->order_status = 1;
+        $order1Upload->payment_status = $request->input('payment_mode') == 1 ? 1 : 0;
+        $order1Upload->order_status = $request->input('payment_mode') == 1 ? 1 : 0;
         $order1Upload->address_id = $defaultAddress->id;
         $order1Upload->ip = $ip;
         $order1Upload->save();
@@ -250,11 +247,10 @@ class UserOrderController extends Controller
         }
     }
     // ============================= END CHECKOUT PROCESS ============================ 
+    // ============================= START GET PHONEPE URL ============================ 
     public function getPhonePeUrl($order1Update, $orderAddressUpload)
     {
         $url = $this->PHONE_PE_URL . 'pg/v1/pay'; // Sandbox endpoint
-        $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
-
         $payload = (object)[
             "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
             "merchantTransactionId" => $order1Update->txn_id,
@@ -300,60 +296,13 @@ class UserOrderController extends Controller
             return response()->json(['status' => false, 'message' => 'PhonePe payment initiation failed', 'error' => $responseData]);
         }
     }
-    public function checkPhonePeUrl()
-    {
-        $url = 'https://api-preprod.phonepe.com/apis/hermes/pg/v1/pay'; // Sandbox endpoint
-        $successUrl = route('verify-phone-pe-payment'); // Route for successful payments
-
-        $payload = (object)[
-            "merchantId" => "PGTESTPAYUAT149", // Replace with your actual merchant ID
-            "merchantTransactionId" => "MT7850590068188104", // Replace with your order ID
-            "merchantUserId" => "MUID123", // Replace with your merchant user ID
-            "amount" => 10000, // Replace with actual amount
-            "redirectUrl" => "https://webhook.site/redirect-url", // Replace with your redirect URL
-            "redirectMode" => "POST", // Update based on PhonePe documentation
-            "callbackUrl" => "https://webhook.site/callback-url", // Replace with your callback URL
-            "mobileNumber" => "9999999999", // Replace with user's mobile number
-            "paymentInstrument" => (object)[ // Cast as stdClass object
-                "type" => "PAY_PAGE",
-            ],
-        ];
-
-        $jsonPayload = json_encode($payload);
-        $encodedPayload = base64_encode($jsonPayload);
-
-        $signature = hash('sha256', $encodedPayload . '/pg/v1/pay' . '4872b5fb-f34d-4fd5-ada2-5e4ed7d9bcbd') . '###1'; // Salt index set to 1
-        $requestJson = [
-            'request' => $encodedPayload,
-        ];
-
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'X-VERIFY' => $signature,
-        ])
-            ->post($url, $requestJson);
-
-        if ($response->failed()) {
-            return response()->json(['status' => false, 'message' => 'Error creating PhonePe order', 'error' => $response->json()]);
-        }
-
-        $responseData = $response->json();
-        if ($responseData['code'] === 'PAYMENT_INITIATED') {
-            return response()->json([
-                'status' => true,
-                'message' => 'Success! Redirecting to PhonePe for payment.',
-                'data' => $responseData,
-                'redirectUrl' => $responseData['data']['instrumentResponse']['redirectInfo']['url'],
-            ]);
-        } else {
-            return response()->json(['status' => false, 'message' => 'PhonePe payment initiation failed', 'error' => $responseData]);
-        }
-    }
+    // ============================= END GET PHONEPE URL ============================ 
+    // ============================= START VERIFY PHONEPE PAYMENT ============================ 
     public function verifyPhonePePayment(Request $request)
     {
         $body = $request->all();
-        $url = $this->PHONE_PE_URL; // Sandbox endpoint
-        Log::error('PhonePeResponse: ' . $body);
+        $url = $this->PHONE_PE_URL;
+        // Log::error('PhonePeResponse: ' . $body);
 
         if (isset($body['code']) && $body['code'] === 'PAYMENT_SUCCESS') {
             $url = $url . 'pg/v1/status/' . $this->PHONE_PE_MERCHANT_ID . '/' . $body['transactionId'];
@@ -371,13 +320,26 @@ class UserOrderController extends Controller
                 ]);
 
                 $responseBody = $response->getBody()->getContents();
-                return json_decode($responseBody);
+                $decodeRes = json_decode($responseBody);
+                if (isset($decodeRes->code) && $decodeRes->code === 'PAYMENT_SUCCESS') {
+                    //---------- ORDER1 Entry -----------
+                    $order1Update = Order1Modal::where('txn_id', $decodeRes->data->merchantTransactionId)->first();
+                    $order1Update->payment_status = 1;
+                    $order1Update->order_status = 1;
+                    $order1Update->save();
+                    //------------ EMPTY CART ---------
+                    CartModal::where('user_id', $order1Update->user_id)->delete();
+                    return Redirect('/order-success/' . $order1Update->id);
+                } else {
+                }
             } catch (\GuzzleHttp\Exception\RequestException $e) {
                 Log::error('cURL Error: ' . $e->getMessage());
                 return response()->json(['error' => 'cURL Error: ' . $e->getMessage()], 500);
             }
         }
     }
+    // ============================= END VERIFY PHONEPE PAYMENT ============================ 
+
     // ============================= END CHECKOUT PROCESS ============================ 
     public function showOrderSuccess($order_id)
     {

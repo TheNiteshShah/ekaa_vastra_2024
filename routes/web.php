@@ -77,8 +77,6 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/checkout', [UserOrderController::class, 'index'])->name('checkout')->middleware('auth');
     Route::get('/get-shipping-charges/{id}', [UserOrderController::class, 'getShippingCharges'])->name('getShippingCharges')->middleware('auth');
     Route::post('/checkout-process', [UserOrderController::class, 'checkout'])->name('checkout-process')->middleware('auth');
-    Route::post('/verify-phone-pe-payment', [UserOrderController::class, 'verifyPhonePePayment'])->name('verify-phone-pe-payment');
-    Route::get('/check-phone-pe-url', [UserOrderController::class, 'checkPhonePeUrl'])->name('check-phone-pe-url');
     Route::get('/order-success/{order_id}', [UserOrderController::class, 'showOrderSuccess'])->name('order.success');
     Route::get('/checkMail', [UserOrderController::class, 'checkMail'])->name('checkMail');
     //------------ ADDRESS ----------------

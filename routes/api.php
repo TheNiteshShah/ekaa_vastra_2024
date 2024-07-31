@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+//============== API CONTROLLERS =================
+use App\Http\Controllers\Frontend\UserOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/verify-phone-pe-payment', [UserOrderController::class, 'verifyPhonePePayment'])->name('verify-phone-pe-payment');
+
