@@ -260,7 +260,7 @@ class UserOrderController extends Controller
             "merchantTransactionId" => $order1Update->txn_id,
             "merchantUserId" => $order1Update->user_id,
             // "amount" => ($order1Update->final_amount*100),
-            "amount" => 1000,
+            "amount" => 100,
             "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
             "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
             "mobileNumber" => $orderAddressUpload->phone,
@@ -353,6 +353,7 @@ class UserOrderController extends Controller
     {
         $body = $request->all();
         $url = $this->PHONE_PE_URL; // Sandbox endpoint
+        Log::error('PhonePeResponse: ' . $body);
 
         if (isset($body['code']) && $body['code'] === 'PAYMENT_SUCCESS') {
             $url = $url . 'pg/v1/status/' . $this->PHONE_PE_MERCHANT_ID . '/' . $body['transactionId'];
