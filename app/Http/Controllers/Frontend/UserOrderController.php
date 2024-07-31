@@ -27,9 +27,12 @@ class UserOrderController extends Controller
     private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
     public function __construct()
     {
-        $this->PHONE_PE_SALT = '4872b5fb-f34d-4fd5-ada2-5e4ed7d9bcbd'; // Get API Key from config
-        $this->PHONE_PE_MERCHANT_ID = 'PGTESTPAYUAT149'; // Get Salt Key from config
-        $this->PHONE_PE_URL = 'https://api-preprod.phonepe.com/apis/hermes/'; // Get Salt Key from config
+        // $this->PHONE_PE_SALT = '4872b5fb-f34d-4fd5-ada2-5e4ed7d9bcbd'; // Get API Key from config
+        // $this->PHONE_PE_MERCHANT_ID = 'PGTESTPAYUAT149'; // Get Salt Key from config
+        // $this->PHONE_PE_URL = 'https://api-preprod.phonepe.com/apis/hermes/'; // Get Salt Key from config
+        $this->PHONE_PE_SALT = '4d0c93b5-b222-452f-97bf-8337e42f5591'; // Get API Key from config
+        $this->PHONE_PE_MERCHANT_ID = 'M22QX0TIVYNRE'; // Get Salt Key from config
+        $this->PHONE_PE_URL = 'https://api.phonepe.com/apis/hermes/'; // Get Salt Key from config
     }
     // ============================= START VIEW CHECKOUT ============================ 
     public function index(Request $req)
