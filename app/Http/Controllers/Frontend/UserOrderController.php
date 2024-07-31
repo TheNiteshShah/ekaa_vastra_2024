@@ -127,7 +127,7 @@ class UserOrderController extends Controller
             if (!empty($decoded)) {
                 $shipping = $decoded[0]->total_amount;
                 $new_total = $cart_total + $shipping;
-                $res = array('sub_total' => number_format($new_total, 2), 'shipping' => number_format($shipping, 2));
+                $res = array('sub_total' => round($new_total, 2), 'shipping' => round($shipping, 2));
                 $respone['status'] = true;
                 $respone['message'] = 'Shipping Calculated Successfully!';
                 $respone['data'] = $res;
@@ -250,13 +250,12 @@ class UserOrderController extends Controller
     // ============================= START GET PHONEPE URL ============================ 
     public function getPhonePeUrl($order1Update, $orderAddressUpload)
     {
-        $url = $this->PHONE_PE_URL . 'pg/v1/pay'; // Sandbox endpoint
+        $url = $this->PHONE_PE_URL . 'pg/v1/pay';
         $payload = (object)[
             "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
             "merchantTransactionId" => $order1Update->txn_id,
             "merchantUserId" => $order1Update->user_id,
-            "amount" => ($order1Update->final_amount*100),
-            // "amount" => 100,
+            "amount" => $order1Update->final_amount*100,
             "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
             "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
             "mobileNumber" => $orderAddressUpload->phone,
