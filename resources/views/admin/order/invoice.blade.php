@@ -34,10 +34,6 @@
                         105, 1st floor, Sunshine Aditya, Maharana Pratap Marg, <br> Near Teoler High School, Jaipur, Rajasthan
                         <br> 302012<br>
                         <span class="font-weight-bold">GSTIN : </span> 08BVTPJ7597L1ZC
-
-                        <!-- <br>
-            www.ekaavastra.com -->
-                        <!-- <br> -->
                         <br>
                     </span>
                 </div>
@@ -47,11 +43,13 @@
                         <ul style="list-style-type:none;padding-left: 0px;">
                             <li style="padding-left: 0px;">Name<span style="margin-left:30px">:</span></li>
                             <li style="padding-left: 0px;">Phone<span style="margin-left:28px">:</span></li>
+                            @if($OrderData->address->email)<li style="padding-left: 0px;">Email<span style="margin-left:16px">:</span></li>@endif
                             <li style="padding-left: 0px;">Address<span style="margin-left:16px">:</span></li>
                         </ul>
                         <ul style="list-style-type:none">
                             <li>{{$OrderData->address->name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
+                            @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
                             <li>{{$OrderData->address->address}}</li>
                         </ul>
                     </div>
@@ -82,11 +80,13 @@
                         <ul style="list-style-type:none;padding-left: 0px;">
                             <li style="padding-left: 0px;">Name<span style="margin-left:30px">:</span></li>
                             <li style="padding-left: 0px;">Phone<span style="margin-left:28px">:</span></li>
+                            @if($OrderData->address->email)<li style="padding-left: 0px;">Email<span style="margin-left:16px">:</span></li>@endif
                             <li style="padding-left: 0px;">Address<span style="margin-left:16px">:</span></li>
                         </ul>
                         <ul style="list-style-type:none">
                             <li>{{$OrderData->address->name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
+                            @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
                             <li>{{$OrderData->address->address}}</li>
                         </ul>
                     </div>
@@ -133,6 +133,14 @@
                                 <td>SubTotal</td>
                                 <td class="product_table text-right">₹{{$OrderData->total_amount}}</td>
                             </tr>
+                            @if($OrderData->discount)
+                            <tr>
+                                <td colspan="6"></td>
+                                <td>Discount</td>
+                                <td class="product_table text-right">-₹{{$OrderData->discount}}</td>
+                            </tr>
+                            @endif
+                            @if($OrderData->shipping)
                             <tr>
                                 <td colspan="6"></td>
                                 <td>Shipping</td>
@@ -143,19 +151,9 @@
                                 <td>Free Shipping (First Order)</td>
                                 <td class="product_table text-right">-₹{{$OrderData->shipping}}</td>
                             </tr>
+                            @endif
 
-                            <!-- @if(!empty($OrderData->shipping))
-                            <tr>
-                                <td colspan="6"></td>
-                                <td>Discount</td>
-                                <td class="product_table text-right">-₹{{$OrderData->discount}}</td>
-                            </tr>
-                            @endif -->
-                            <!-- <tr>
-                <td colspan="4"></td>
-                <td>Discount</td>
-                <td class="product_table text-right">₹100</td>
-              </tr> -->
+
                             <tr>
                                 <th colspan="6"></th>
                                 <th>Total</th>

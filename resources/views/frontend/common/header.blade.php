@@ -104,6 +104,8 @@
 
         gtag('config', 'G-RDBXV3VHBN');
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -311,7 +313,7 @@
                 </div>
                 <div class="modal-body">
                     <h4 class="title text-capitalize pb-30 text-center">Log in to your account</h4>
-                    <form class="log-in-form">
+                    <form class="log-in-form" id="login-form">
                         <div class="form-group row">
                             <label for="loginPhone" class="col-md-2 col-form-label" style="text-align:end">+91</label>
                             <div class="col-md-10">
@@ -321,8 +323,8 @@
                         <p class="mt-2 mb-2">By Continuing, I agree to the Terms of use & Privacy Policy</p>
                         <div id="recaptcha-container"></div>
                         <div class="sign-btn text-center mt-3">
-                            <button type="button" id="sendOtpButton" class="btn theme-btn--dark1 btn--md w-100">Login with OTP</button>
-                            <button class="btn theme-btn--dark1 btn--md w-100" id="login-loader" style="border-color:#09080A;display:none;" type="button" disabled>
+                            <button type="submit" id="sendOtpButton" class="btn theme-btn--dark1 btn--md w-100">Login with OTP</button>
+                            <button class="btn theme-btn--dark1 btn--md w-100 d-none" id="login-loader" style="border-color:#09080A;;" type="button" disabled>
                                 <span style="color:#09080A;">Loading...</span>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
                             </button>
@@ -333,22 +335,101 @@
         </div>
     </div>
     <!-- Login Modal -->
-    <!-- header start -->
-    <header id="sticky" class="header2 style1 theme1">
-    <div class="custom-marquee" role="region">
-        <div class="track ">
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-            <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+    <style>
+        .otp-field {
+            flex-direction: row;
+            column-gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .otp-field input {
+            height: 45px;
+            width: 42px;
+            border-radius: 6px;
+            outline: none;
+            font-size: 1.125rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .otp-field input:focus {
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .otp-field input::-webkit-inner-spin-button,
+        .otp-field input::-webkit-outer-spin-button {
+            display: none;
+        }
+
+        .resend {
+            font-size: 12px;
+        }
+    </style>
+    <!-- OTP Modal -->
+    <div class="modal fade" id="otp" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border:none">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-11 text-center">
+                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h4 class="title text-capitalize pb-30 text-center">Mobile Phone Verification</h4>
+                    <p class="text-center pb-30">Enter the 6-digit verification code that was sent to your phone number.</p>
+                    <form class="otp-form" id="otp-form">
+                        <div class="otp-field mb-4">
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                        </div>
+
+                        <button type="submit" class="btn theme-btn--dark1 btn--md w-100" id="verifyOtpButton">
+                            Verify
+                        </button>
+                        <button class="btn theme-btn--dark1 btn--md w-100 d-none" id="otp-loader" style="border-color:#09080A;;" type="button" disabled>
+                            <span style="color:#09080A;">Loading...</span>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
+                        </button>
+                        <p class="resend pt-30 text-center pb-30">
+                            Didn't receive code? <a href="">Request again</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- OTP Modal -->
+    <!-- header start -->
+    <header id="sticky" class="header2 style1 theme1">
+        <!-- custom marquee start -->
+
+        <div class="custom-marquee" role="region">
+            <div class="track ">
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+            </div>
+        </div>
+        <!-- custom marquee end -->
+
         <!-- header-middle start -->
         <div class="header-middle">
             <div class="container">
@@ -380,21 +461,21 @@
                         <!-- search-form end -->
                         <div class="d-flex align-items-center justify-content-end">
                             <div class="cart-block-links theme1">
-                                <ul class="d-flex align-items-center">
+                                <ul class="side-menu d-flex align-items-center">
                                     <li>
                                         <a href="javascript:void(0)" class="search search-toggle">
                                             <i class="ion-ios-search-strong"></i>
                                         </a>
                                     </li>
                                     @if(auth()->check())
-                                    <li class="position-relative d-none d-sm-block">
+                                    <li class="position-relative ">
                                         <a class="offcanvas-toggle" href="#offcanvas-wishlist">
                                             <i class="ion-android-favorite-outline"></i>
                                             <span class="badge cbdg1">{{$wishlistCount}}</span>
                                         </a>
                                     </li>
                                     @endif
-                                    <li class="cart-block position-relative d-none d-sm-block">
+                                    <li class="cart-block position-relative ">
                                         <a class="offcanvas-toggle" href="#offcanvas-cart">
                                             <i class="ion-bag"></i>
                                             <span class="badge cbdg1">{{$cartCount}}</span>
@@ -402,10 +483,16 @@
                                     </li>
                                     <li class="me-0 cart-block position-relative d-none d-sm-block">
                                         @if(auth()->check())
-                                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                                            @csrf
-                                            <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                        </form>
+                                        <a href="javascript:void(0)"><i class="icon-user"></i> <i class="ion-ios-arrow-down"></i></a>
+                                        <ul class="sub-menu side-ul">
+                                            <li><a href="{{route('my-account')}}">My Account</a></li>
+                                            <li>
+                                                <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button type="submit" class="logout-btn">Logout</button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                         @else
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
                                             <i class="icon-user"></i>
@@ -433,5 +520,3 @@
         <!-- header-middle end -->
     </header>
     <!-- header end -->
- 
-   

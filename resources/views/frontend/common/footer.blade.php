@@ -50,7 +50,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <li><a href="{{ route('about-us')}}">About Us</a></li>
                             <li><a href="{{ route('privacy-policy')}}">Privacy Policy</a></li>
                             <li><a href="{{ route('terms-and-conditions')}}">Terms & Conditions</a></li>
-                            <li><a href="{{ route('refund-policy')}}">Refund Policy</a></li>
+                            <li><a href="{{ route('return-refund-policy')}}">Return & Refund Policy</a></li>
+                            <li><a href="{{ route('shipping-policy')}}">Shipping Policy</a></li>
                         </ul>
                         <!-- footer-menu end -->
                     </div>
@@ -128,213 +129,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 </div>
 <!-- search-box and overlay end -->
 
-<!-- modals start -->
-
-<!-- first modal -->
-<div class="modal fade theme1 style1" id="quick-view" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 mb-5 mb-lg-0">
-                        <div class="product-sync-init mb-20">
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <img src="{{asset('frontend/img/slider/thumb/1.jpg')}}" alt="product-thumb">
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <img src="{{asset('frontend/img/slider/thumb/2.jpg')}}" alt="product-thumb">
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <img src="{{asset('frontend/img/slider/thumb/3.jpg')}}" alt="product-thumb">
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <img src="{{asset('frontend/img/slider/thumb/4.jpg')}}" alt="product-thumb">
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                        </div>
-
-                        <div class="product-sync-nav slick-nav-sync">
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/1.1.jpg')}}" alt="product-thumb"></a>
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <a href="javascript:void(0)"> <img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}" alt="product-thumb"></a>
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/3.1.jpg')}}" alt="product-thumb"></a>
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/4.1.jpg')}}" alt="product-thumb"></a>
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                            <div class="single-product">
-                                <div class="product-thumb">
-                                    <a href="javascript:void(0)"><img src="{{asset('frontend/img/slider/thumb/2.1.jpg')}}" alt="product-thumb"></a>
-                                </div>
-                            </div>
-                            <!-- single-product end -->
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-5 mt-md-0">
-                        <div class="modal-product-info">
-                            <div class="product-head">
-                                <h2 class="title">Brixton Patrol All Terrain Anorak Jacket</h2>
-                                <h4 class="sub-title">Reference: demo_5</h4>
-                                <div class="star-content mb-20">
-                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                    <span class="star-on"><i class="ion-ios-star"></i> </span>
-                                    <span class="star-on de-selected"><i class="ion-ios-star"></i> </span>
-                                </div>
-                            </div>
-                            <div class="product-body">
-                                <span class="product-price text-center"> <span class="new-price">₹29.00</span>
-                                </span>
-                                <p class="border-top pt-30">Whether you're exploring the woods or the city, the
-                                    Brixton™
-                                    Patrol All </p>
-                                <ul>
-                                    <li>Terrain Anorak Jacket has got you covered.</li>
-                                    <li>Camo jacket crafted from 4.5 oz nylon ripstop with two-way stretch, and a
-                                        water-repellent coating.</li>
-                                    <li>Drawstring hood.</li>
-                                </ul>
-                            </div>
-                            <div class="product-size d-flex align-items-center mt-30">
-                                <h3 class="title">Dimension</h3>
-                                <select>
-                                    <option value="0">40x60cm</option>
-                                    <option value="1">60x90cm</option>
-                                    <option value="2">80x120cm</option>
-
-                                </select>
-                            </div>
-                            <div class="product-footer">
-                                <div class="product-count style d-flex flex-column flex-sm-row my-4">
-                                    <div class="count d-flex">
-                                        <input type="number" min="1" max="10" step="1" value="1">
-                                        <div class="button-group">
-                                            <button class="count-btn increment"><i class="fas fa-chevron-up"></i></button>
-                                            <button class="count-btn decrement"><i class="fas fa-chevron-down"></i></button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
-                                            <span class="me-2"><i class="ion-bag"></i></span>
-                                            Add to cart
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="addto-whish-list">
-                                    <a href="javascript:void(0)"><i class="icon-heart"></i> Add to wishlist</a>
-                                    <a href="javascript:void(0)"><i class="icon-shuffle"></i> Add to compare</a>
-                                </div>
-                                <div class="pro-social-links mt-10">
-                                    <ul class="d-flex align-items-center">
-                                        <li class="share">Share</li>
-                                        <li><a target="_blank" rel="noopener" href="javascript:void(0)"><i class="ion-social-facebook"></i></a></li>
-                                        <li><a target="_blank" rel="noopener" href="https://www.instagram.com/ekaavastra/"><i class="ion-social-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- second modal -->
-<div class="modal fade style2" id="compare" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5 class="title"><i class="fa fa-check"></i> Product added to compare.</h5>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- second modal -->
-<div class="modal fade style3" id="add-to-cart" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center bg-dark">
-                <h5 class="modal-title" id="add-to-cartCenterTitle"> <span class="ion-checkmark-round"></span>
-                    Product successfully added to your shopping cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-5 divide-right">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="{{asset('frontend/img/modal/1.jpg')}}" alt="img">
-                            </div>
-                            <div class="col-md-6 mb-2 mb-md-0">
-                                <h4 class="product-name">New Balance Running Arishi trainers in triple</h4>
-                                <h5 class="price">₹₹29.00</h5>
-                                <h6 class="color"><strong>Dimension: </strong>: <span class="dmc">40x60cm</span>
-                                </h6>
-                                <h6 class="quantity"><strong>Quantity:</strong>&nbsp;1</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="modal-cart-content">
-                            <p class="cart-products-count">There is 1 item in your cart.</p>
-                            <p><strong>Total products:</strong>&nbsp;₹123.72</p>
-                            <p><strong>Total shipping:</strong>&nbsp;₹7.00 </p>
-                            <p><strong>Taxes</strong>&nbsp;₹0.00</p>
-                            <p><strong>Total:</strong>&nbsp;₹130.72 (tax excl.)</p>
-                            <div class="cart-content-btn">
-                                <button type="button" class="btn theme-btn--dark1 btn--md mt-4" data-bs-dismiss="modal">Continue
-                                    shopping</button>
-                                <button class="btn theme-btn--dark1 btn--md mt-4"><i class="ion-checkmark-round"></i>Proceed to
-                                    checkout</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modals end -->
 
 
 
@@ -388,68 +182,183 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('sendOtpButton').addEventListener('click', function() {
-            $('#sendOtpButton').hide();
-            $('#login-loader').show();
-            var phone = document.getElementById('loginPhone').value;
-            if (!phone) {
-                errorToast('Phone number is required');
-                $('#sendOtpButton').show();
-                $('#login-loader').hide();
+
+        const loginModal = new bootstrap.Modal(document.getElementById('login'));
+        const otpModal = new bootstrap.Modal(document.getElementById('otp'));
+        const loginForm = document.getElementById('login-form');
+        const otpForm = document.getElementById('otp-form');
+        const loginPhone = document.getElementById('loginPhone');
+        const sendOtpButton = document.getElementById('sendOtpButton');
+        const loginLoader = document.getElementById('login-loader');
+        const otpInputs = document.querySelectorAll('.otp-field > input'); // Assuming class for OTP inputs
+
+        // Helper function to validate phone number (optional)
+        function validatePhoneNumber(phoneNumber) {
+            // Add your phone number validation logic here
+            // (e.g., check for minimum length, presence of digits)
+            return phoneNumber.length === 10 && /^\d+$/.test(phoneNumber);
+        }
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const Number = loginPhone.value;
+
+            if (!validatePhoneNumber(Number)) {
+                errorToast('Invalid phone number');
                 return;
             }
-            var phoneNumber = '+91' + document.getElementById('loginPhone').value;
-            var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+            try {
+                sendOtpButton.classList.add('d-none'); // Hide button
+                loginLoader.classList.remove('d-none'); // Show loader
 
-            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-                .then(function(confirmationResult) {
-                    window.confirmationResult = confirmationResult;
-                    var otp = prompt('Enter the OTP you received');
-                    return confirmationResult.confirm(otp);
-                }).then(function(result) {
-                    var user = result.user;
-                    console.log('User signed in successfully:', user);
-                    // Send the ID token to your backend for verification
-                    user.getIdToken().then(function(idToken) {
-                        fetch(baseUrl + 'login', {
+                // Initialize reCAPTCHA verifier (optional: set 'size': 'invisible' for smoother UX)
+                const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                    'size': 'invisible' // Optional: Use invisible reCAPTCHA
+                });
+                const phoneNumber = '+91' + Number;
+                // Trigger reCAPTCHA challenge and send OTP
+                const confirmationResult = await firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier);
+
+                // Open OTP modal
+                otpModal.show();
+
+                otpForm.addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent default form submission
+                    const otpArray = Object.values(otpInputs); // Convert object to array
+                    const otp = otpArray.reduce((acc, input) => acc + (input.value || ''), '');
+                    if (otp.length != 6) {
+                        errorToast('OTP must be 6 digit!');
+                        return;
+                    }
+                    try {
+                        document.getElementById('verifyOtpButton').classList.add('d-none'); // Hide button
+                        document.getElementById('otp-loader').classList.remove('d-none'); // Show loader
+                        // Confirm OTP
+                        const result = await confirmationResult.confirm(otp);
+                        const user = result.user;
+
+                        console.log('User signed in successfully:', user);
+
+                        // Handle successful login based on your backend logic
+                        // (Example: Send ID token for backend verification)
+                        const idToken = await user.getIdToken();
+                        const response = await fetch(baseUrl + 'login', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Assuming you have CSRF protection
                             },
                             body: JSON.stringify({
-                                // token: idToken
-                                phone: phone,
+                                phone: Number,
                                 token: user.uid
                             })
-                        }).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            console.log('Backend response:', data);
-                            var myModal = new bootstrap.Modal(document.getElementById('login'));
-                            $('#sendOtpButton').show();
-                            $('#login-loader').hide();
-                            myModal.hide();
-                            successToast('Successfully Login');
-                            setTimeout(() => {
-                                location.reload()
-                            }, 1000);
-                        }).catch(function(error) {
-                            $('#sendOtpButton').show();
-                            $('#login-loader').hide();
-                            console.error('Error during backend verification:', error);
                         });
-                    });
-                }).catch(function(error) {
-                    $('#sendOtpButton').show();
-                    $('#login-loader').hide();
-                    console.error('Error during sign in:', error);
-                    if (error == 'The SMS verification code used to create the phone auth credential is invalid. Please resend the verification code sms and be sure to use the verification code provided by the user.') {
-                        successToast('Wrong OTP Entered!');
+                        const data = await response.json();
+                        console.log('Backend response:', data);
+
+                        if (data.success) {
+                            successToast('Successfully Logged In!');
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            otpModal.hide(); // Close OTP modal on successful login
+                        } else {
+                            document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
+                            document.getElementById('otp-loader').classList.add('d-none'); // hide loader
+                            console.error('Backend verification failed:', data.message || 'Unknown error');
+                            errorToast(data.message || 'Login failed. Please try again.');
+                        }
+                    } catch (error) {
+                        document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
+                        document.getElementById('otp-loader').classList.add('d-none'); // hide loader
+                        console.error('Error during OTP confirmation:', error);
+                        errorToast('Wrong OTP entered. Please try again.'); // Consistent error message
+                    } finally {
+                        // Reset UI state
+                        document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
+                        document.getElementById('otp-loader').classList.add('d-none'); // hide loader
+                        otpForm.reset(); // Clear OTP form inputs
                     }
                 });
+            } catch (error) {
+                // console.error('Error during sign in:', error);
+                sendOtpButton.classList.remove('d-none'); // Show button again
+                loginLoader.classList.add('d-none'); // Hide loader
+                errorToast('An error occurred. Please try again.'); // Generic error message
+            }
         });
     });
+
+    const inputs = document.querySelectorAll(".otp-field > input");
+    // const button = document.getElementById('verifyOtpButton');
+
+    window.addEventListener("load", () => inputs[0].focus());
+    // button.setAttribute("disabled", "disabled");
+
+    inputs[0].addEventListener("paste", function(event) {
+        event.preventDefault();
+
+        const pastedValue = (event.clipboardData || window.clipboardData).getData(
+            "text"
+        );
+        const otpLength = inputs.length;
+
+        for (let i = 0; i < otpLength; i++) {
+            if (i < pastedValue.length) {
+                inputs[i].value = pastedValue[i];
+                inputs[i].removeAttribute("disabled");
+                inputs[i].focus;
+            } else {
+                inputs[i].value = ""; // Clear any remaining inputs
+                inputs[i].focus;
+            }
+        }
+    });
+
+    inputs.forEach((input, index1) => {
+        input.addEventListener("keyup", (e) => {
+            const currentInput = input;
+            const nextInput = input.nextElementSibling;
+            const prevInput = input.previousElementSibling;
+
+            if (currentInput.value.length > 1) {
+                currentInput.value = "";
+                return;
+            }
+
+            if (
+                nextInput &&
+                nextInput.hasAttribute("disabled") &&
+                currentInput.value !== ""
+            ) {
+                nextInput.removeAttribute("disabled");
+                nextInput.focus();
+            }
+
+            if (e.key === "Backspace") {
+                inputs.forEach((input, index2) => {
+                    if (index1 <= index2 && prevInput) {
+                        input.setAttribute("disabled", true);
+                        input.value = "";
+                        prevInput.focus();
+                    }
+                });
+            }
+
+            // button.classList.remove("active");
+            // button.setAttribute("disabled", "disabled");
+
+            // const inputsNo = inputs.length;
+            // if (!inputs[inputsNo - 1].disabled && inputs[inputsNo - 1].value !== "") {
+            //     button.classList.add("active");
+            //     button.removeAttribute("disabled");
+
+            //     return;
+            // }
+        });
+    });
+
     $(document).ready(function() {
         $('.btn[data-bs-target="#sizeModal"]').on('click', function() {
             var productId = $(this).data('product-id');
@@ -610,7 +519,21 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     $('#checkout-loader').hide();
                     // Handle success response
                     // alert(response.message + ' Order ID: ' + response.order_id);
-                    window.location.href = baseUrl + 'order-success/' + response.order_id;
+                    // Handle success response based on payment mode
+                    if (selectedPaymentMode === '1') {
+                        // Handle COD payment success
+                        window.location.href = baseUrl + 'order-success/' + response.order_id;
+                    } else if (selectedPaymentMode === '2') {
+                        // Handle prepaid payment success
+                        console.log('response', response)
+                        if (response.data.success) {
+                            // alert('Prepaid order placed successfully. Order ID: ' + response.order_id);
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            alert('Some error occurred! Please try after some time')
+                        }
+                        // Redirect to payment gateway or other actions
+                    }
                 },
                 error: function(xhr) {
                     $('#placeOrder').show();

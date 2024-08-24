@@ -18,6 +18,8 @@ use App\Models\ProductModal;
 use App\Models\ContactUsModal;
 use App\Models\CartModal;
 use App\Models\TestimonialModal;
+use App\Models\User;
+use App\Models\Order1Modal;
 
 
 class HomeController extends Controller
@@ -29,7 +31,8 @@ class HomeController extends Controller
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
-
+        // $user = User::where(['phone' => '8387039990'])->first();
+        // Auth::login($user);
         return view('frontend/index', compact('sliderData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
@@ -106,6 +109,15 @@ class HomeController extends Controller
         return view('frontend.about_us');
     }
     // ============================= END PRIVACY POLICY ============================ 
+    // ============================= START MY ACCOUNT ============================ 
+    public function myAccount(Request $req)
+    {
+        $user_id = Auth::id();
+        $orders = Order1Modal::where(['user_id' => $user_id, 'payment_status' => 1])->orderBy('id','desc')->get();
+
+        return view('frontend.my_account', compact('orders'));
+    }
+    // ============================= END MY ACCOUNT ============================ 
     // ============================= START CONTACT US STORE ============================ 
     public function contactUsStore(Request $req)
     {
@@ -150,45 +162,33 @@ class HomeController extends Controller
                 'quantity' => 1,
                 'price' => 999,
                 'product' => [
-                    'name' => 'Blue Abstract Print Suit Set',
-                    'sku' => 'EV130',
+                    'name' => 'Forest Green Abstract Print Co-ord Set',
+                    'sku' => 'EV132',
                 ],
                 'type' => [
-                    'name' => 'L',
+                    'name' => 'M',
                 ]
             ],
-            [
-                'gst_percentage' => 12,
-                'quantity' => 1,
-                'price' => 1149,
-                'product' => [
-                    'name' => 'Forest Green Abstract Print Co-ord Set',
-                    'sku' => 'EV130',
-                ],
-                'type' => [
-                    'name' => 'S',
-                ]
-            ]
         ];
-        $total = 999 + 1149;
+        $total = 999 + 999;
         $shipping = 0;
         $discount = 0;
         $final = ($total - $discount) + $shipping;
         $OrderData = [
-            'id' => 19,
-            'invoice_no' => '19/EV/24-25',
+            'id' => 22,
+            'invoice_no' => '22/EV/24-25',
             'payment_mode' => 'Prepaid',
             'shipping' => $shipping,
             'discount' => $discount,
             'total_amount' => $total,
             'final_amount' => $final,
             'address' => [
-                'name' => 'Riya Gupta',
-                'phone' => '9928413990',
-                'email' => '',
-                'address' => '139, Mangal Vihar, Near Riddhi Siddhe sweets, Gopalpura Bypass, Jaipur, Rajasthan, 302018',
+                'name' => 'Sumita Kanwar',
+                'phone' => '7357813114',
+                'email' => 'sumitashekhawat255@gmail.com',
+                'address' => 'Flat 307, Sunshine Aditya, Maharana Pratap Marg, Near Teoler High School, Jaipur, Rajasthan 302012',
             ],
-            'created_at' => '07-Jul-2024',
+            'created_at' => '7-Aug-2024',
         ];
         $enOr =  json_encode($OrderData);
         $OrderData = json_decode($enOr);
