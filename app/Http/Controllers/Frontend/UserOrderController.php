@@ -35,7 +35,7 @@ class UserOrderController extends Controller
     public function index(Request $req)
     {
         $user_id = Auth::id();
-        $user = User::firstOrCreate(['id' => $user_id]);
+        $user = User::where(['id' => $user_id]);
         $cartItems = CartModal::where(['user_id' => $user_id])->get();
         if (count($cartItems) == 0) {
             return Redirect('/');
@@ -84,7 +84,7 @@ class UserOrderController extends Controller
         foreach ($cartItems as $cart) {
             $cart_total += ($cart->product->selling_price * $cart->quantity);
         }
-        $user = User::firstOrCreate(['id' => $user_id]);
+        $user = User::where(['id' => $user_id]);
         $defaultAddress = UserAddressModal::where('id', $user->default_address_id)->first();
         $d_pin = $defaultAddress->pincode;
         $weight = 200;
@@ -155,7 +155,7 @@ class UserOrderController extends Controller
         $user_id = Auth::id();
         $ip = request()->ip();
         $cartItems = CartModal::where(['user_id' => $user_id])->get();
-        $user = User::firstOrCreate(['id' => $user_id]);
+        $user = User::where(['id' => $user_id]);
         $defaultAddress = UserAddressModal::where('id', $user->default_address_id)->first();
         //---------- ORDER1 Entry -----------
         $order1Upload = new Order1Modal();

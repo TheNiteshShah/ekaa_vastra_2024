@@ -545,6 +545,22 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         });
     }
 </script>
+@if(auth()->check() && !auth()->user()->name)
+<script>
+    $(document).ready(function() {
+        $('#signup').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        $('#signup').on('hide.bs.modal', function(e) {
+            e.preventDefault(); // Prevents the modal from closing
+        });
+    });
+    const signupModal = new bootstrap.Modal(document.getElementById('signup'));
+    signupModal.show();
+</script>
+@endif
 </body>
 
 </html>

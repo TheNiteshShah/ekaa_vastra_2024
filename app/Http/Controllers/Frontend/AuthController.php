@@ -47,6 +47,22 @@ class AuthController extends Controller
         return response()->json(['success' => true]);
     }
     // ============================= END LOGIN ============================ 
+    // ============================= START SIGNUP ============================ 
+    public function signup(Request $request)
+    {
+        $signupName = $request->input('signupName');
+        $signupEmail = $request->input('signupEmail');
+        $user_id = Auth::id();
+        $ip = request()->ip();
+        $userData = User::where('id', $user_id)->first();
+        $userData->name = $signupName;
+        $userData->email = $signupEmail;
+        $userData->ip = $ip;
+        $userData->save();
+        Auth::login($userData);
+        return redirect()->back()->with('status-success', 'Signup successfully');
+    }
+    // ============================= END LOGIN ============================ 
     // ============================= START LOGOUT ============================ 
     public function logout(Request $request)
     {
@@ -55,7 +71,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->back()->with('status-success', 'Logout successfully');
-        
     }
     // ============================= END LOGOUT ============================ 
 

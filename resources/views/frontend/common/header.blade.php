@@ -335,6 +335,44 @@
         </div>
     </div>
     <!-- Login Modal -->
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signup" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border:none">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h4 class="title text-capitalize pb-30 text-center">Sign up to your account</h4>
+                    <form class="sign-up-form" id="signup-form" action="{{route('user-signup')}}" method="post">
+                        @csrf
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="signupName" name="signupName" placeholder="Name" required>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <input type="email" class="form-control" id="signupEmail" name="signupEmail" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div id="recaptcha-container"></div>
+                        <div class="sign-btn text-center mt-3">
+                            <button type="submit" id="signUpButton" class="btn theme-btn--dark1 btn--md w-100">Sign Up</button>
+                            <button class="btn theme-btn--dark1 btn--md w-100 d-none" id="login-loader" style="border-color:#09080A;" type="button" disabled>
+                                <span style="color:#09080A;">Loading...</span>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
     <style>
         .otp-field {
             flex-direction: row;
