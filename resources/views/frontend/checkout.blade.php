@@ -438,6 +438,11 @@
                                         <span class="whish-title-k"> ₹{{$cart->product->mrp}}</span>
                                         <span class="whish-title"> ₹{{$cart->product->selling_price}}</span>
                                     </div>
+                                    <div class="">
+                                        <!-- Button trigger modal -->
+                                        <span style="padding: 0 8px;">Size: {{$cart->type->size->name}}</span>
+                                        <span style="padding: 0 8px;">Qty: {{$cart->quantity}}</span>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -532,7 +537,7 @@
                             <div>
                                 <div class=" flex-wrap">
                                     <div class="custom-radio mt-3">
-                                        <input type="radio" id="prePaid" name="payment_mode" value="2" >
+                                        <input type="radio" id="prePaid" name="payment_mode" value="2">
                                         <label for="prePaid">
                                             <b style=" font-size:  15px; margin-bottom:  10px;"> Online Payment </b>
                                             <p class="mt-2">Get upto 2% discount on prepaid order</p>

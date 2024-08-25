@@ -20,6 +20,8 @@ use App\Models\CartModal;
 use App\Models\TestimonialModal;
 use App\Models\User;
 use App\Models\Order1Modal;
+use App\Models\Order2Modal;
+use App\Models\UserAddressModal;
 
 
 class HomeController extends Controller
@@ -116,6 +118,18 @@ class HomeController extends Controller
         $orders = Order1Modal::where(['user_id' => $user_id, 'payment_status' => 1])->orderBy('id','desc')->get();
 
         return view('frontend.my_account', compact('orders'));
+    }
+    // ============================= END MY ACCOUNT ============================ 
+    // ============================= START ORDER DETAIL ============================ 
+    public function orderDetail(Request $req, $id)
+    {
+        $user_id = Auth::id();
+        $user = User::where(['id' => $user_id])->first();
+        $ordersDetail = Order1Modal::where(['id' => base64_decode($id)])->first();
+        // print_r($ordersDetail->details);die();
+        $orderAddress = UserAddressModal::where('id', $ordersDetail->address_id)->first();
+
+        return view('frontend.order_detail', compact('ordersDetail','orderAddress'));
     }
     // ============================= END MY ACCOUNT ============================ 
     // ============================= START CONTACT US STORE ============================ 

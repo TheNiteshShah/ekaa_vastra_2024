@@ -94,7 +94,7 @@
                                             </td>
                                             <td>{{$order->payment_mode==1?"COD":"Prepaid"}}</td>
                                             <td>₹{{$order->final_amount}}</td>
-                                            <td><a href="#" class="ht-btn black-btn">View</a>
+                                            <td><a class="link" href="{{route('order-detail',base64_encode($order->id))}}" class="ht-btn black-btn">View</a>
                                             </td>
                                         </tr>
                                         @endforeach

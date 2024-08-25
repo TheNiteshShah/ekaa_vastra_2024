@@ -20,6 +20,14 @@ class Order1Modal extends Model
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
     }
+    public function details()
+    {
+        return $this->hasMany(Order2Modal::class, 'id')->withTrashed();
+    }
+    // public function details()
+    // {
+    //     return $this->belongsTo(Order2Modal::class, 'id')->withTrashed();
+    // }
      public function promo()
     {
         return $this->belongsTo(PromoModal::class, 'promo_id')->withTrashed();
