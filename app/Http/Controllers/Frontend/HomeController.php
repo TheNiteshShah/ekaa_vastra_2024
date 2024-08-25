@@ -126,7 +126,9 @@ class HomeController extends Controller
         $user_id = Auth::id();
         $user = User::where(['id' => $user_id])->first();
         $ordersDetail = Order1Modal::where(['id' => base64_decode($id)])->first();
-        // print_r($ordersDetail->details);die();
+        if(empty($ordersDetail)){
+            return redirect('/')->with('status-error', 'Something Went Wrong');
+        }
         $orderAddress = UserAddressModal::where('id', $ordersDetail->address_id)->first();
 
         return view('frontend.order_detail', compact('ordersDetail','orderAddress'));
