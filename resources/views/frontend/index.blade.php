@@ -103,7 +103,7 @@
     <div class="">
         <div class="row">
             <div class="col-12">
-                <div class="position-relative zoom-in overflow-hidden">
+                <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
                         <img src="{{asset('frontend/img/banner/banner1.jpg')}}" alt="banner-thumb-naile">
                     </div>
@@ -168,7 +168,7 @@
     <div class="">
         <div class="row">
             <div class="col-12">
-                <div class="position-relative zoom-in overflow-hidden">
+                <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
                         <img src="{{asset('frontend/img/banner/banner2.jpg')}}" alt="banner-thumb-naile">
                     </div>
