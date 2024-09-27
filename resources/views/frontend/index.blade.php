@@ -99,7 +99,7 @@
 <!-- product tab end -->
 @endif
 <!-- common-banner start -->
-<!-- <div class="common-banner pb-70 bg-white">
+<div class="common-banner pb-70 bg-white">
     <div class="">
         <div class="row">
             <div class="col-12">
@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 <!-- common-banner end -->
 <!-- new arrival section start -->
 <section class="theme1 bg-white pb-70">
@@ -164,7 +164,7 @@
 </section>
 <!-- new arrival section end -->
 <!-- common-banner start -->
-<!-- <div class="common-banner pb-70 bg-white">
+<div class="common-banner pb-70 bg-white">
     <div class="">
         <div class="row">
             <div class="col-12">
@@ -176,7 +176,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 <!-- common-banner end -->
 <!-- testimonial-section start -->
 @if(!empty($testimonialsData))
