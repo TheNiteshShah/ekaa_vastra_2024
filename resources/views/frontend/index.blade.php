@@ -96,19 +96,26 @@
 <!-- product tab end -->
 @endif
 <!-- common-banner start -->
+@if(isset($bannerData[0]))
 <div class="common-banner pb-70 bg-white">
     <div class="">
         <div class="row">
             <div class="col-12">
                 <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
-                        <img src="{{asset('frontend/img/banner/banner1.jpg')}}" alt="banner-thumb-naile">
+                        <picture>
+                            <!-- Source for mobile -->
+                            <source srcset="{{ asset($bannerData[0]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
+                            <!-- Source for web -->
+                            <img src="{{ asset($bannerData[0]->web_image) }}" loading="lazy" alt="Slider Image">
+                        </picture>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 <!-- common-banner end -->
 <!-- new arrival section start -->
 <section class="theme1 bg-white pb-70">
@@ -161,19 +168,26 @@
 </section>
 <!-- new arrival section end -->
 <!-- common-banner start -->
+@if(isset($bannerData[1]))
 <div class="common-banner pb-70 bg-white">
     <div class="">
         <div class="row">
             <div class="col-12">
                 <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
-                        <img src="{{asset('frontend/img/banner/banner2.jpg')}}" loading="lazy" alt="banner-thumb-naile">
+                        <picture>
+                            <!-- Source for mobile -->
+                            <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
+                            <!-- Source for web -->
+                            <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="Slider Image">
+                        </picture>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 <!-- common-banner end -->
 <!-- testimonial-section start -->
 @if(!empty($testimonialsData))

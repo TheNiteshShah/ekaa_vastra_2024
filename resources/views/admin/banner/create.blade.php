@@ -10,7 +10,7 @@
                 <div class="page-title-box">
                     <h4 class="page-title">{{$title}}</h4>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('sliders.index')}}">Back</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('banners.index')}}">Back</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                     <div class="state-information d-none d-sm-block">
@@ -57,7 +57,7 @@
 
                             <h4 class="mt-0 header-title">{{$title}} Form</h4>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
-                            <form action="{{route('sliders.store')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('banners.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$data->id}}">
                                 <div class="form-group row">

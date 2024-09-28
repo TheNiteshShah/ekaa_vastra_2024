@@ -22,6 +22,7 @@ use App\Models\User;
 use App\Models\Order1Modal;
 use App\Models\Order2Modal;
 use App\Models\UserAddressModal;
+use App\Models\BannerModal;
 
 
 class HomeController extends Controller
@@ -30,12 +31,13 @@ class HomeController extends Controller
     public function index(Request $req)
     {
         $sliderData = SliderModal::where('is_active', 1)->get();
+        $bannerData = BannerModal::where('is_active', 1)->get();
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        return view('frontend/index', compact('sliderData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
+        return view('frontend/index', compact('sliderData','bannerData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 

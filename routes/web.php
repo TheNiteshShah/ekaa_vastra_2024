@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\AddressController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -109,6 +110,7 @@ Route::get('/UpdateTeamStatus/{status}/{id}', [TeamController::class, 'UpdateTea
 Route::get('/deleteTeam/{id}', [TeamController::class, 'deleteTeam'])->name('deleteTeam');
 //-------- NEW -----------
 Route::resource('/sliders', SliderController::class);
+Route::resource('/banners', BannerController::class);
 Route::resource('/popup', PopUpController::class);
 Route::resource('/users', UserController::class);
 Route::resource('/testimonial', TestimonialController::class);
