@@ -5,15 +5,12 @@
 <section class="bg-light position-relative">
     <div class="main-slider dots-style theme1">
         @foreach($sliderData as $slider)
-        <div class="slider-item bg-img" style="background-image: url('{{ asset($slider->web_image) }}');">
-            <div class="container">
-                <div class="row align-items-center slider-height">
-                    <div class="col-12">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- slider-item end -->
+        <picture>
+            <!-- Source for mobile -->
+            <source srcset="{{ asset($slider->mob_image) }}" loading="lazy" media="(max-width: 768px)">
+            <!-- Source for web -->
+            <img src="{{ asset($slider->web_image) }}" loading="lazy" alt="Slider Image">
+        </picture>
         @endforeach
     </div>
     <!-- slick-progress -->
@@ -69,8 +66,8 @@
                                         <span class="badge badge-danger top-left">{{$trend->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
-                                            <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
+                                            <img class="first-img" loading="lazy" src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img" loading="lazy" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         <!-- @if(auth()->check())
                                         <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
@@ -135,8 +132,8 @@
                                         <span class="badge badge-danger top-left">{{$trend->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
-                                            <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
+                                            <img class="first-img" loading="lazy" src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img" loading="lazy" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         <!-- @if(auth()->check())
                                         <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
@@ -170,7 +167,7 @@
             <div class="col-12">
                 <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
-                        <img src="{{asset('frontend/img/banner/banner2.jpg')}}" alt="banner-thumb-naile">
+                        <img src="{{asset('frontend/img/banner/banner2.jpg')}}" loading="lazy" alt="banner-thumb-naile">
                     </div>
                 </div>
             </div>
@@ -194,9 +191,9 @@
                     <div class="slider-item">
                         <div class="testimonial-content text-center">
                             @if($test->image)
-                            <img class="mb-30 mx-auto" src="{{asset($test->image)}}" alt="user">
+                            <img class="mb-30 mx-auto" loading="lazy" src="{{asset($test->image)}}" alt="user">
                             @else
-                            <img class="mb-30 mx-auto" src="{{asset('frontend/img/profile/default.jpg')}}" alt="default">
+                            <img class="mb-30 mx-auto" loading="lazy" src="{{asset('frontend/img/profile/default.jpg')}}" alt="default">
                             @endif
                             <div class="star-rating">
                                 @for ($i = 0; $i < floor($test->rating); $i++) <span class="ion-ios-star"></span> @endfor
