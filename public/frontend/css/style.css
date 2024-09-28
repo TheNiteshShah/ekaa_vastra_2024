@@ -2252,6 +2252,7 @@ textarea:active::placeholder {
   transition: transform 0.3s, opacity 0.3s;
   transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
 }
+
 .side-menu li:hover>.sub-menu {
   opacity: 1;
   visibility: visible;
@@ -2378,6 +2379,7 @@ textarea:active::placeholder {
   text-align: center;
   border-radius: 100%;
 }
+
 .side-ul li a {
   font-size: 15px;
   height: 40px;
@@ -7221,23 +7223,35 @@ body::-webkit-scrollbar-thumb {
 .text-justify {
   text-align: justify;
 }
-.button-fixed-left{
-	position: fixed;
-	bottom: 50px;
-	left: 20px;
-	border-radius: 50% !important;
-	padding: 10px 15px !important;
-	z-index: 999;
+
+.button-fixed-left {
+  position: fixed;
+  bottom: 50px;
+  left: 20px;
+  border-radius: 50% !important;
+  z-index: 999;
+  text-align: center !important;
+  height: 50px;
+  min-width: 50px;
+  visibility: visible;
+  transition: none !important;
+  background-color: #4dc247;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .green {
-  background: rgba(0, 168, 132, 1);
-  box-shadow: 0 0 0 0 rgba(0, 168, 132, 1);
+  background: rgb(37, 211, 102);
+  box-shadow: 0 0 0 0 rgb(37, 211, 102);
   animation: pulse-green 2s infinite;
 }
+
 .green:hover {
-  background: rgba(0, 168, 132, 1);
-  box-shadow: 0 0 0 0 rgba(0, 168, 132, 1);
+  background: rgb(37, 211, 102);
+  box-shadow: 0 0 0 0 rgb(37, 211, 102);
   animation: pulse-green 2s infinite;
 }
 
@@ -7246,17 +7260,18 @@ body::-webkit-scrollbar-thumb {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(0, 168, 132, 0.7);
   }
-  
+
   70% {
     transform: scale(1);
     box-shadow: 0 0 0 10px rgba(0, 168, 132, 0);
   }
-  
+
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(0, 168, 132, 0);
   }
 }
+
 .custom-marquee {
   position: relative;
   width: 100vw;
@@ -7282,20 +7297,21 @@ body::-webkit-scrollbar-thumb {
 /*! CSS Used keyframes */
 @keyframes marquee {
   from {
-      transform: translateX(0);
+    transform: translateX(0);
   }
 
   to {
-      transform: translateX(-20%);
+    transform: translateX(-20%);
   }
 }
-.logout-btn{
+
+.logout-btn {
   font-size: 15px;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-    display: inline-block;
-    text-align: center;
-    border-radius: 100%;
-    color: #292929;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100%;
+  color: #292929;
 }
