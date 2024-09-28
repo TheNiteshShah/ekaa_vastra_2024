@@ -76,6 +76,7 @@ class ProductController extends Controller
                 $image2 = $req->hasFile('image2') ? $this->uploadImage($req->file('image2'), 'products') : (isset($uploadData->image2) ? $uploadData->image2 : null);
                 $image3 = $req->hasFile('image3') ? $this->uploadImage($req->file('image3'), 'products') : (isset($uploadData->image3) ? $uploadData->image3 : null);
                 $image4 = $req->hasFile('image4') ? $this->uploadImage($req->file('image4'), 'products') : (isset($uploadData->image4) ? $uploadData->image4 : null);
+                $size_chart = $req->hasFile('size_chart') ? $this->uploadImage($req->file('size_chart'), 'products') : (isset($uploadData->size_chart) ? $uploadData->size_chart : null);
             } catch (InvalidFileFormatException $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
@@ -99,6 +100,7 @@ class ProductController extends Controller
             $uploadData->image2 = $image2;
             $uploadData->image3 = $image3;
             $uploadData->image4 = $image4;
+            $uploadData->size_chart = $size_chart;
             $uploadData->label = $req->label;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;

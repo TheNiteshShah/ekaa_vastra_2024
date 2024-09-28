@@ -6,7 +6,32 @@
         bottom: -15px !important;
     }
 </style>
+<!-- offcanvas-size chart Start -->
+<div id="offcanvas-size-chart" class="offcanvas offcanvas-cart theme1">
+    <div class="inner">
+        <div class="head d-flex justify-content-between">
+            <span class="title">Size Chart</span>
+            <button class="offcanvas-close">×</button>
+        </div>
+        <div class="content_setting">
+            <div class="info_setting">
+                <div class="mb-30 border-bottom pb-30 border-bottom">
+                    <h3 class="title_setting">Outfits (Garment Size)</h3>
+                    <img src="{{asset($productData->size_chart)}}" alt="Size Chart" class="img-fluid d-block mx-auto">
+                    <p class="mt-2"><b>Measured in 'Inches'</b></p>
+                    <p class="">These are Garment sizes, take your body measurements and match the garment accordingly</p>
+                </div>
+                <div>
+                    <h2 class="title_setting ">Garment Measuring Guide</h2>
+                    <img src="{{ asset('frontend/img/garment-guide.webp') }}" alt="Garment-Guide" class="img-fluid d-block mx-auto">
+                </div>
 
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--offcanvas-size chart End -->
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">
     <div class="container">
@@ -154,7 +179,8 @@
                         </p>
                     </div>
                     <div class="product-footer">
-                        <h6>Select Size</h6>
+                        
+                        <h6>Select Size   <a class="offcanvas-toggle pl-3" style="font-weight: 400;color:black" href="#offcanvas-size-chart"><span>Size chart →</span></a></h6>
                         <nav class="shop-grid-nav mt-20">
                             <ul class="product-tag d-flex flex-wrap">
                                 @foreach($productData->types as $index=>$type)

@@ -270,33 +270,7 @@
     </div>
     <!-- OffCanvas Cart End -->
 
-    <!-- offcanvas-setting Start -->
-    <div id="offcanvas-setting" class="offcanvas offcanvas-cart theme1">
-        <div class="inner">
-            <div class="head d-flex justify-content-between">
-                <span class="title">Setting</span>
-                <button class="offcanvas-close">×</button>
-            </div>
-            <div class="content_setting">
-                <div class="info_setting">
-                    <h3 class="title_setting">My account</h3>
-                    <ul>
-                        <li>
-                            <a href="myaccount.html">My account</a>
-                        </li>
-                        <li>
-                            <a href="checkout.html">Checkout</a>
-                        </li>
-                        <li>
-                            <a href="login.html">Sign in</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--offcanvas-setting End -->
+   
     <!-- Login Modal -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">

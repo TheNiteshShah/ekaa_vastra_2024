@@ -232,6 +232,17 @@
                                         <div style="color:red">{{$message}}</div>
                                         @enderror
                                     </div>
+                                    <div class="col-sm-6 my-3">
+                                        <label for="size_chart">Size Chart &nbsp;<span style="color:red;"></span></label>
+                                        <input type="file" class="form-control" type="text" value="" id="size_chart" name="size_chart" placeholder="Size Chart">
+                                        @if($data->size_chart)
+                                        <img id="size_chart" height=100 width=100 src="{{asset($data->size_chart)}} ">
+                                        <a href="{{route('products.img_remove',[base64_encode($data->id),'size_chart'])}}">Remove</a>
+                                        @endif
+                                        @error('size_chart')
+                                        <div style="color:red">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <div class="w-100 text-center">
                                             <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-user"></i> Submit</button>
