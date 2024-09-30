@@ -19,7 +19,7 @@ $('#add-to-cart-btn').click(function (e) {
     return;
   }
   $.ajax({
-    url: baseUrl + 'add-to-cart',
+    url: baseUrl + '/add-to-cart',
     method: 'post',
     data: {
       product_id: product_id,
