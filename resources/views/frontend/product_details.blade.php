@@ -16,14 +16,13 @@
         <div class="content_setting">
             <div class="info_setting">
                 <div class="mb-30 border-bottom pb-30 border-bottom">
-                    <h3 class="title_setting">Outfits (Garment Size)</h3>
+                    <h3 class="title_setting">Garment sizes, measured in INCHES.</h3>
                     <img src="{{asset($productData->size_chart)}}" alt="Size Chart" class="img-fluid d-block mx-auto">
-                    <p class="mt-2"><b>Measured in 'Inches'</b></p>
-                    <p class="">These are Garment sizes, take your body measurements and match the garment accordingly</p>
+                    <p class="mt-2"><b>Note -</b> These are Garment sizes, take your body measurements and match the garment accordingly.</p>
                 </div>
                 <div>
                     <h2 class="title_setting ">Garment Measuring Guide</h2>
-                    <img src="{{ asset('frontend/img/garment-guide.webp') }}" alt="Garment-Guide" class="img-fluid d-block mx-auto">
+                    <img src="{{ asset('frontend/img/garment-guide.jpg') }}" alt="Garment-Guide" class="img-fluid d-block mx-auto">
                 </div>
 
 
@@ -179,9 +178,12 @@
                         </p>
                     </div>
                     <div class="product-footer">
-                        
-                        <h6>Select Size   <a class="offcanvas-toggle pl-3" style="font-weight: 400;color:black" href="#offcanvas-size-chart"><span>Size chart →</span></a></h6>
-                        <nav class="shop-grid-nav mt-20">
+                        <div class="row align-items-center mb-10">
+                            <img src="{{ asset('frontend/img/tape.png') }}" style="width:50px" class="img-fluid" alt="measuring-tape">
+                            <a class="offcanvas-toggle pl-3 ml-1" style="font-weight: 400;color:black;display: contents;font-size:14px" href="#offcanvas-size-chart"><span>Size chart</span></a>
+                        </div>
+                        <h6>Select Size </h6>
+                        <nav class="shop-grid-nav mt-10">
                             <ul class="product-tag d-flex flex-wrap">
                                 @foreach($productData->types as $index=>$type)
                                 <li><a href="javascript:void(0)" value="{{$type->id}}" class="{{$type->inventory==0?'out':''}}" onclick="updateTypeId(this, {{$type->id}})">{{$type->size->name}}</a></li>
@@ -249,7 +251,7 @@
                         <ul class="d-flex align-items-center">
                             <li class="share">Share</li>
                             <li>
-                                <a href="#"><i class="ion-social-facebook"></i></a>
+                                <a href="#" ><i class="ion-social-facebook"></i></a>
                             </li>
                             <li>
                                 <a href="#"><i class="ion-social-instagram-outline"></i></a>

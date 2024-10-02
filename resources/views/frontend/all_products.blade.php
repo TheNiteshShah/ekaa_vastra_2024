@@ -71,7 +71,7 @@
                 </div>
                 <div class="row grid-view theme1">
                     @foreach($productData as $product)
-                    <div class="col-sm-6 col-md-4 mb-30">
+                    <div class="col-sm-6 col-md-4 col-6 mb-30">
                         <div class="card product-card">
                             <div class="card-body p-0">
                                 <div class="media flex-column">

@@ -262,7 +262,7 @@
             <!-- <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p> -->
             @else
             <div class="text-center ">
-                <img src="{{asset('frontend/img/empty_bag.png')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
+                <img src="{{asset('frontend/img/empty_bag.jpg')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
             </div>
             <h6 class="text-center mt-2">Your cart is empty!</h6>
             @endif
