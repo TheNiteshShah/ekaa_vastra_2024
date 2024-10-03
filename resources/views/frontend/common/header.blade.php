@@ -201,6 +201,9 @@
                 @endforeach
             </ul>
             @else
+            <div class="text-center ">
+                <img src="{{asset('frontend/img/empty_wishlist.jpg')}}" alt="Empty-Wishlist" class="img-fluid" style="width:50%">
+            </div>
             <h6 class="text-center mt-2">Your wishlist is empty!</h6>
             @endif
             <!-- <a href="wishlist.html" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-30">view

@@ -191,7 +191,7 @@
 <!-- common-banner end -->
 <!-- testimonial-section start -->
 @if(!empty($testimonialsData))
-<section class="testimonial-section pb-70">
+<section class="testimonial-section pb-30">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -229,7 +229,26 @@
 </section>
 @endif
 <!-- testimonial-section end -->
-
+<!-- common-banner start -->
+<div class="common-banner pb-30 bg-white">
+    <div class="">
+        <div class="row">
+            <div class="col-12">
+                <div class="position-relative overflow-hidden">
+                    <div class="banner-thumb banner-lagre">
+                        <picture>
+                            <!-- Source for mobile -->
+                            <source srcset="{{asset('frontend/img/promises.jpg')}}" loading="lazy" media="(max-width: 768px)">
+                            <!-- Source for web -->
+                            <img src="{{asset('frontend/img/promises.jpg')}}" loading="lazy" alt="Slider Image">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common-banner end -->
 
 
 <!-- blog-section start -->
