@@ -320,8 +320,8 @@
     }
 
     .checkout-steps .active {
-        color: #20BD99;
-        border-bottom: 2px solid #20BD99;
+        color: #262626;
+        border-bottom: 2px solid #262626;
     }
 
     .checkout-steps .divider {

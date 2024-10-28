@@ -91,6 +91,9 @@
                                                     ($order->order_status == 3 ? 'Dispatched' : 
                                                     ($order->order_status == 4 ? 'Delivered' : 'Unknown')))
                                                 }}
+                                                @if($order->tracking_url)
+                                                <a href="{{$order->tracking_url}}" style="display:block;color:blue;font-size:12px"  target="_blank" rel="noopener noreferrer">Track Order</a>
+                                                @endif
                                             </td>
                                             <td>{{$order->payment_mode==1?"COD":"Prepaid"}}</td>
                                             <td>₹{{$order->final_amount}}</td>
