@@ -26,8 +26,8 @@
     <style>
         .btn-info {
             color: #fff;
-            background-color: #ed3338 !important;
-            border: 1px solid #ed3338;
+            background-color: #292929 !important;
+            border: 1px solid #292929;
         }
 
         li.list-style {
@@ -62,7 +62,7 @@
         .enlarged #wrapper .left.side-menu #sidebar-menu ul>li:hover>a.waves-effect.metismenu-2 {
             position: relative;
             width: 260px;
-            color: #ed3338 !important;
+            color: #292929 !important;
             background-color: #ffffff;
         }
 
@@ -179,7 +179,7 @@
         }
 
         .circle-icon4 {
-            background: #ed3338;
+            background: #292929;
             color: #f9f9f9;
             width: 35px;
             height: 35px;
@@ -209,7 +209,7 @@
 
         .navbar-custom,
         .button-menu-mobile {
-            background-color: #ed3338 !important;
+            background-color: #292929 !important;
         }
 
         .app-search .form_control,

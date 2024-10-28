@@ -75,9 +75,9 @@
                                                     @endif
                                                 </th>
                                                 <th>{{$data->product->name}}</th>
-                                                <th>{{$data->type->name}}</th>
+                                                <th>{{$data->type->size->name}}</th>
                                                 <th>{{$data->quantity}}</th>
-                                                <th>₹{{$data->type->selling_price*$data->quantity}}</th>
+                                                <th>₹{{$data->product->selling_price*$data->quantity}}</th>
                                                 <th>{{$data->created_at->format('Y-m-d H:i:s')}}</th>
                                             </tr>
                                             @endforeach
