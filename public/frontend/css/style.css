@@ -7231,7 +7231,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50% !important;
   z-index: 999;
   text-align: center !important;
-  height: 50px;
+  height: 53px;
   min-width: 50px;
   visibility: visible;
   transition: none !important;
