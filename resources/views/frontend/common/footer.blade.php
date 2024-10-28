@@ -121,7 +121,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <!-- search-box and overlay start -->
 <div class="overlay">
     <div class="scale"></div>
-    <form class="search-box" action="#">
+    <form class="search-box" action="{{ route('search.product') }}" method="GET">
         <input type="text" name="search" placeholder="Search products..." />
         <button id="close" type="submit"><i class="ion-ios-search-strong"></i></button>
     </form>

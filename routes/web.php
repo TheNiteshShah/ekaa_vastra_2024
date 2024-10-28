@@ -67,6 +67,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/terms-and-conditions', [HomeController::class, 'termsAndConditions'])->name('terms-and-conditions');
     Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('/shipping-policy', [HomeController::class, 'shippingPolicy'])->name('shipping-policy');
+    Route::get('/search-product', [HomeController::class, 'searchProduct'])->name('search.product');
     Route::get('/order-bill', [HomeController::class, 'OrderInvoice'])->name('order-bill');
     Route::get('/my-account', [HomeController::class, 'myAccount'])->name('my-account')->middleware('auth');
     Route::get('/order-detail/{id}', [HomeController::class, 'orderDetail'])->name('order-detail')->middleware('auth');

@@ -37,7 +37,7 @@ class HomeController extends Controller
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        return view('frontend/index', compact('sliderData','bannerData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
@@ -46,7 +46,7 @@ class HomeController extends Controller
         $originalName = urldecode(str_replace('-', '+', $encodeSub));
         $subcategoryData = SubCategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
         $title = $subcategoryData->name . ' - Ekaa Vastra';
-        $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);;
+        $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
         return view('frontend/all_products', compact('subcategoryData', 'productData', 'title'));
     }
     // ============================= END ALL PRODUCTS ============================ 
@@ -117,7 +117,7 @@ class HomeController extends Controller
     public function myAccount(Request $req)
     {
         $user_id = Auth::id();
-        $orders = Order1Modal::where(['user_id' => $user_id, 'payment_status' => 1])->orderBy('id','desc')->get();
+        $orders = Order1Modal::where(['user_id' => $user_id, 'payment_status' => 1])->orderBy('id', 'desc')->get();
 
         return view('frontend.my_account', compact('orders'));
     }
@@ -128,12 +128,12 @@ class HomeController extends Controller
         $user_id = Auth::id();
         $user = User::where(['id' => $user_id])->first();
         $ordersDetail = Order1Modal::where(['id' => base64_decode($id)])->first();
-        if(empty($ordersDetail)){
+        if (empty($ordersDetail)) {
             return redirect('/')->with('status-error', 'Something Went Wrong');
         }
         $orderAddress = UserAddressModal::where('id', $ordersDetail->address_id)->first();
 
-        return view('frontend.order_detail', compact('ordersDetail','orderAddress'));
+        return view('frontend.order_detail', compact('ordersDetail', 'orderAddress'));
     }
     // ============================= END MY ACCOUNT ============================ 
     // ============================= START CONTACT US STORE ============================ 
@@ -171,6 +171,19 @@ class HomeController extends Controller
         }
     }
     // ============================= END CONTACT US STORE ============================ 
+    // ============================= START SEARCH PRODUCT ============================ 
+    public function searchProduct(Request $request)
+    {
+        $query = $request->input('search');
+
+        // Query products by name (case-insensitive search)
+        $productData = ProductModal::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
+
+        $title = $query;
+        return view('frontend/search_products', compact( 'productData', 'title'));
+
+    }
+    // ============================= END SEARCH PRODUCT ============================ 
     public function OrderInvoice(Request $req)
     {
 
