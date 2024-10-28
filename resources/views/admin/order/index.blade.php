@@ -75,8 +75,8 @@
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
                                                 <th>#{{$data->id}}</th>
-                                                <th>{{$data->user->name}} - {{$data->user->phone}}</th>
-                                                <th>{{$data->address}}</th>
+                                                <th>{{$data->address->first_name}} {{$data->address->last_name}} - {{$data->address->phone}}</th>
+                                                <th>{{$data->address->address}} - {{$data->address->pincode}}</th>
                                                 <th>₹{{$data->final_amount}}</th>
                                                 <th>{{$data->payment_mode==1?"COD":"Online"}}</th>
                                                 <th>{{$order_details}}</th>

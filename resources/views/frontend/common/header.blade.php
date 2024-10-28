@@ -216,7 +216,7 @@
     <div id="offcanvas-cart" class="offcanvas offcanvas-cart theme1">
         <div class="inner">
             <div class="head d-flex flex-wrap justify-content-between">
-                <span class="title">Cart</span>
+                <span class="title">Bag</span>
                 <button class="offcanvas-close">×</button>
             </div>
             @if(!empty($cartItems) && $cartItems!='[]')
@@ -260,14 +260,14 @@
                 <span class="amount">₹{{$cart_total}}</span>
             </div>
             <a href="{{route('cart')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block me-sm-2">view
-                cart</a>
+                Bag</a>
             <a href="{{route('checkout')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
             <!-- <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p> -->
             @else
             <div class="text-center ">
                 <img src="{{asset('frontend/img/empty_bag.jpg')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
             </div>
-            <h6 class="text-center mt-2">Your cart is empty!</h6>
+            <h6 class="text-center mt-2">Your bag is empty!</h6>
             @endif
         </div>
     </div>

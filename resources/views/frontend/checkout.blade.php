@@ -373,7 +373,19 @@
     </div>
 </nav>
 <!-- breadcrumb-section end -->
-
+<style>
+    .clear-icon {
+    position: absolute;
+    right: 21%; /* Adjust according to button width */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    user-select: none;
+    font-size: 25px !important;
+}
+</style>
 <!-- product tab start -->
 <section class="check-out-section pb-40">
     <div class="container grid-wraper">
@@ -452,31 +464,35 @@
 
             </div>
             <div class="col-lg-6 mb-30">
-                <!-- <ul id="offcanvas-menu3" class="blog-ctry-menu blog-ctry-menu_1">
+                <ul id="offcanvas-menu3" class="blog-ctry-menu blog-ctry-menu_1">
                     <l class=" active"><a href="javascript:void(0)">Have Any Promo Code ?</a>
                         <ul class="category-sub-menu">
-                            <form>
+                            <form id="promo_code_submit" class="position-relative">
                                 <div class="form-group d-flex">
+                                    <input type="text" placeholder="Apply Coupon" class="p-2 w-100" id="promoCodeInput" required="">
 
-                                    <input type="text" placeholder="Apply Coupon" class="p-2 w-100" required="">
                                     <button type="submit" value="submit" id="submit" class="btn theme-btn--dark1 btn--xl" name="submit">Apply</button>
+
+                                    <!-- "X" icon for clearing promo code -->
+                                    <span id="clearPromoCode" class="clear-icon d-none" onclick="removePromoCode()">&times;</span>
                                 </div>
                             </form>
+
                         </ul>
 
                         </li>
-                </ul> -->
+                </ul>
 
 
-                <!-- <div class="mt-2 blog-ctry-menu_1">
+                <div class="mt-2 blog-ctry-menu_1">
                     <div class="check-box-inner p-0">
                         <h4 class="sub-title">Apply Wallet</h4>
                         <div class="filter-check-box">
-                            <input type="checkbox" id="20824">
-                            <label for="20824">Wallet (₹0)</label>
+                            <input type="checkbox" id="wallet" name="wallet">
+                            <label for="wallet">Wallet (₹<span id="in_wallet">{{$cart->user->wallet}}</span>)</label>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <div class="mt-2 blog-ctry-menu_1">
                     <div class="check-box-inner p-0">
@@ -491,11 +507,19 @@
                         </div>
                         <div class="filter-check-box_1">
                             <p>Total</p>
-                            <p>₹{{$cart_total}}</p>
+                            <p>₹<span id="cart_total">{{$cart_total}}</span></p>
                         </div>
                         <div class="filter-check-box_1">
                             <p>Shipping</p>
                             <p>₹<span id="shipping">0</span></p>
+                        </div>
+                        <div class="filter-check-box_1 d-none" id="promoDive">
+                            <p>Promo Code Discount</p>
+                            <p>₹<span id="promo_code_discount">0</span></p>
+                        </div>
+                        <div class="filter-check-box_1 d-none" id="walletDiv">
+                            <p>Wallet Discount</p>
+                            <p>₹<span id="wallet_discount">0</span></p>
                         </div>
                         <!-- <div class="filter-check-box_1">
                             <p>Prepaid Discount</p>
@@ -507,8 +531,9 @@
                         </div> -->
                         <div class="filter-check-box_1">
                             <p>SubTotal</p>
-                            <p>₹ <span id="subTotal">{{$cart_total}}</span></p>
+                            <p>₹ <span id="subTotal" data-original-total="{{$cart_total}}">{{$cart_total}}</span></p>
                         </div>
+
                         <!-- <div class="filter-check-box_3 filter-check-box_1">
                             <p>Platform Fee <span style="color: #d52700;"> Know More</span></p>
                             <p style="    color: #03a685;">FREE</p>
@@ -540,7 +565,7 @@
                                         <input type="radio" id="prePaid" name="payment_mode" value="2">
                                         <label for="prePaid">
                                             <b style=" font-size:  15px; margin-bottom:  10px;"> Online Payment </b>
-                                            <p class="mt-2">Get upto 2% discount on prepaid order</p>
+                                            <p class="mt-2">Get upto 5% discount on prepaid order</p>
                                         </label>
                                     </div>
                                     <div class="custom-radio mt-3">

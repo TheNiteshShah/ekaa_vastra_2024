@@ -47,7 +47,7 @@
                             <li style="padding-left: 0px;">Address<span style="margin-left:16px">:</span></li>
                         </ul>
                         <ul style="list-style-type:none">
-                            <li>{{$OrderData->address->name}}</li>
+                            <li>{{$OrderData->address->first_name}} {{$OrderData->address->last_name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
                             @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
                             <li>{{$OrderData->address->address}}</li>
@@ -68,8 +68,8 @@
                         </ul>
                         <ul style="list-style-type:none">
                             <li>#{{$OrderData->id}}</li>
-                            <li>{{$OrderData->invoice_no}}</li>
-                            <li>{{$OrderData->payment_mode}}</li>
+                            <li>{{$OrderData->invoice_year?$OrderData->invoice_year:'--'}}</li>
+                            <li>{{$OrderData->payment_mode==1?'Cash On Delivery':'Prepaid'}}</li>
                             <li>{{$OrderData->created_at}}</li>
                         </ul>
                     </div>
@@ -84,7 +84,7 @@
                             <li style="padding-left: 0px;">Address<span style="margin-left:16px">:</span></li>
                         </ul>
                         <ul style="list-style-type:none">
-                            <li>{{$OrderData->address->name}}</li>
+                            <li>{{$OrderData->address->first_name}} {{$OrderData->address->last_name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
                             @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
                             <li>{{$OrderData->address->address}}</li>
@@ -140,17 +140,24 @@
                                 <td class="product_table text-right">-₹{{$OrderData->discount}}</td>
                             </tr>
                             @endif
+                            @if($OrderData->wallet_discount)
+                            <tr>
+                                <td colspan="6"></td>
+                                <td>Wallet Discount</td>
+                                <td class="product_table text-right">-₹{{$OrderData->wallet_discount}}</td>
+                            </tr>
+                            @endif
                             @if($OrderData->shipping)
                             <tr>
                                 <td colspan="6"></td>
                                 <td>Shipping</td>
                                 <td class="product_table text-right">+₹{{$OrderData->shipping}}</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="6"></td>
                                 <td>Free Shipping (First Order)</td>
                                 <td class="product_table text-right">-₹{{$OrderData->shipping}}</td>
-                            </tr>
+                            </tr> -->
                             @endif
 
 

@@ -14,11 +14,13 @@ use App\Models\UserAddressModal;
 use App\Models\Order1Modal;
 use App\Models\Order2Modal;
 use App\Models\OrderAddressModal;
+use App\Models\PromoModal;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewOrderEmail;
+use Carbon\Carbon;
 
 class UserOrderController extends Controller
 {
@@ -146,11 +148,120 @@ class UserOrderController extends Controller
         }
     }
     // ============================= END CALCULATE SHIPPING CHARGES ============================ 
+    // ============================= START CALCULATE WALLET DISCOUNT ============================ 
+    public function calculateWalletDiscount()
+    {
+        $cart_total = 0;
+        $user_id = Auth::id();
+        $cartItems = CartModal::where(['user_id' => $user_id])->get();
+        foreach ($cartItems as $cart) {
+            $cart_total += ($cart->product->selling_price * $cart->quantity);
+        }
+        $user = User::find($user_id);
+        $Discount = $cart_total * 0.10;
+
+        $walletDiscount = min($Discount, $user->wallet);
+        return response()->json([
+            'status' => true,
+            'message' => 'Wallet applied successfully!',
+            'walletDiscount' => $walletDiscount,
+        ]);
+    }
+    // ============================= END CALCULATE WALLET DISCOUNT ============================
+    // ============================= START CALL PROMO CODE DISCOUNT ============================
+
+    public function applyPromoCode(Request $request)
+    {
+        $promo_code = $request->input('promo_code');
+        $wallet = $request->input('wallet');
+
+        if (!$promo_code) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Promo code is required!',
+            ]);
+        }
+
+        // Call the internal function to calculate discount
+        $promoDiscount =  $this->calculatePromoCodeDiscount($promo_code);
+        return $promoDiscount;
+    }
+    // ============================= END CALL PROMO CODE DISCOUNT ============================ 
+    // ============================= START CALCULATE PROMO CODE DISCOUNT ============================ 
+    public function calculatePromoCodeDiscount($promo_code)
+    {
+        $cart_total = 0;
+        $user_id = Auth::id();
+
+        // Calculate cart total
+        $cartItems = CartModal::where('user_id', $user_id)->get();
+        foreach ($cartItems as $cart) {
+            $cart_total += ($cart->product->selling_price * $cart->quantity);
+        }
+
+        // Check promo code validity and expiry
+        $PromoData = PromoModal::where('name', $promo_code)
+            ->where('expiry_date', '>=', Carbon::now()->format('Y-m-d'))
+            ->where('is_active', 1)
+            ->first();
+
+        if (!$PromoData) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid or expired promo code!',
+            ]);
+        }
+
+        // Check if promo code is 'one-time use' and already used by the user
+        if ($PromoData->type == 1) { // Type 1 = One-time use
+            $isUsed = Order1Modal::where('user_id', $user_id)
+                ->where('promo_id', $PromoData->id)
+                ->where('payment_status', 1)
+                ->exists();
+
+            if ($isUsed) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Promo code has already been used!',
+                ]);
+            }
+        }
+
+        // Check if cart total meets the minimum order limit
+        if ($cart_total < $PromoData->mini_amount) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Minimum order amount not reached for this promo code!',
+            ]);
+        }
+
+        // Calculate discount based on promo code type (Percentage or Flat Off)
+        $PromoDiscount = 0;
+        if ($PromoData->discount_type == 1) { // Percentage Off
+            $PromoDiscount = ($cart_total * $PromoData->discount) / 100;
+
+            // Ensure discount does not exceed the max discount limit
+            $PromoDiscount = min($PromoDiscount, $PromoData->max_discount);
+        } else if ($PromoData->discount_type == 2) { // Flat Off
+            $PromoDiscount = min($PromoData->discount, $PromoData->max_discount);
+        }
+
+        // Return success response with the discount amount
+        return response()->json([
+            'status' => true,
+            'message' => 'Promo code applied successfully!',
+            'promoDiscount' => $PromoDiscount,
+            'promoId' => $PromoData->id,
+        ]);
+    }
+
+    // ============================= END CALCULATE PROMO CODE DISCOUNT ============================ 
     // ============================= START CHECKOUT PROCESS ============================ 
     public function checkout(Request $request)
     {
         $request->validate([
             'payment_mode' => 'required|in:1,2',
+            'isWalletChecked' => 'required',
         ]);
         $user_id = Auth::id();
         $ip = request()->ip();
@@ -191,13 +302,31 @@ class UserOrderController extends Controller
             $pt = 'Pre-paid';
             $cod = 0;
         }
-        $response = $this->calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total);
+        $ShippingResponse = $this->calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total);
+        if ($request->isWalletChecked) {
+            $walletResponse = json_decode($this->calculateWalletDiscount()->getContent(), true); // Decode JSON
+            $walletDiscount = $walletResponse['walletDiscount']; // Access the value
+
+        } else {
+            $walletDiscount = 0;
+        }
+        if ($request->promoCodeValue) {
+            $promoCodeResponse = json_decode($this->calculatePromoCodeDiscount($request->promoCodeValue)->getContent(), true);
+            $promo_discount = $promoCodeResponse['promoDiscount'];
+            $promoId = $promoCodeResponse['promoId'];
+        } else {
+            $promo_discount = 0;
+            $promoId = null;
+        }
         $txn_id = bin2hex(random_bytes(12));
         //---------- ORDER1 Entry -----------
         $order1Update = Order1Modal::where('id', $order1Upload->id)->first();
         $order1Update->total_amount = $cart_total;
-        $order1Update->shipping = $response['data']['shipping'];
-        $order1Update->final_amount = $response['data']['sub_total'];
+        $order1Update->shipping = $ShippingResponse['data']['shipping'];
+        $order1Update->wallet_discount = $walletDiscount;
+        $order1Update->promo_id = $promoId;
+        $order1Update->promo_discount = $promo_discount;
+        $order1Update->final_amount = ($cart_total + $ShippingResponse['data']['shipping']) - $walletDiscount - $promo_discount;
         $order1Update->txn_id = $txn_id;
         $order1Update->save();
         //---------- ORDER Address Entry -----------
@@ -219,6 +348,13 @@ class UserOrderController extends Controller
             $res = $this->getPhonePeUrl($order1Update, $orderAddressUpload);
             return $res;
         } else {
+            //---------- UPDATE INVENTORY ---------
+            $cartData = CartModal::where('user_id', $order1Update->user_id)->get();
+            foreach ($cartData as $cart) {
+                $type_data = TypeModal::where(['id' => $cart->type_id, 'is_active' => 1])->first();
+                $type_data->inventory = $type_data->inventory - $cart->quantity;
+                $type_data->save();
+            }
             //------------ EMPTY CART ---------
             CartModal::where('user_id', $user_id)->delete();
             // Mail::to('ekaavastra@gmail.com')->send(new NewOrderEmail($order1Upload));
@@ -255,7 +391,7 @@ class UserOrderController extends Controller
             "merchantId" => $this->PHONE_PE_MERCHANT_ID, // Get from config
             "merchantTransactionId" => $order1Update->txn_id,
             "merchantUserId" => $order1Update->user_id,
-            "amount" => $order1Update->final_amount*100,
+            "amount" => $order1Update->final_amount * 100,
             "redirectUrl" => route('verify-phone-pe-payment'), // Route to handle PhonePe response
             "callbackUrl" => route('verify-phone-pe-payment'), // Route for PhonePe callbacks
             "mobileNumber" => $orderAddressUpload->phone,
@@ -326,6 +462,13 @@ class UserOrderController extends Controller
                     $order1Update->payment_status = 1;
                     $order1Update->order_status = 1;
                     $order1Update->save();
+                    //---------- UPDATE INVENTORY ---------
+                    $cartData = CartModal::where('user_id', $order1Update->user_id)->get();
+                    foreach ($cartData as $cart) {
+                        $type_data = TypeModal::where(['id' => $cart->type_id, 'is_active' => 1])->first();
+                        $type_data->inventory = $type_data->inventory - $cart->quantity;
+                        $type_data->save();
+                    }
                     //------------ EMPTY CART ---------
                     CartModal::where('user_id', $order1Update->user_id)->delete();
                     return Redirect('/order-success/' . $order1Update->id);

@@ -214,7 +214,7 @@
                                 @else
                                 <button id="add-to-cart-btn" class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0">
                                     <span class="me-2"><i class="ion-bag"></i></span>
-                                    Add to cart
+                                    Add to Bag
                                 </button>
                                 <button class="btn theme-btn--dark3 btn--xl mt-30 mt-sm-0" id="add-cart-loader" style="border-color:#09080A;padding: 17px 40px;display:none;" type="button" disabled>
                                     <span style="color:#09080A;">Adding...</span>

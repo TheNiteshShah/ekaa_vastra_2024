@@ -23,4 +23,8 @@ class CartModal extends Model
     {
         return $this->belongsTo(TypeModal::class, 'type_id')->withTrashed();
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+    }
 }

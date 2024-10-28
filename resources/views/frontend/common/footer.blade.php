@@ -481,7 +481,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         errorToast('Failed to fetch charges');
                     } else {
                         document.getElementById('shipping').innerText = data.data.shipping;
-                        document.getElementById('subTotal').innerText = data.data.sub_total;
+                        updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), parseFloat(document.getElementById('wallet_discount').innerText));
+                        // document.getElementById('subTotal').innerText = data.data.sub_total;
                     }
                 })
                 .catch(error => {
@@ -507,11 +508,15 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             $('#placeOrder').hide();
             $('#checkout-loader').show();
             const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
+            const isWalletChecked =  document.getElementById('wallet').checked;
+            const promoCodeValue = document.getElementById('promoCodeInput').value.trim();
             $.ajax({
                 url: baseUrl + 'checkout-process',
                 type: 'POST',
                 data: {
                     payment_mode: selectedPaymentMode,
+                    isWalletChecked: isWalletChecked,
+                    promoCodeValue: promoCodeValue,
                     _token: '{{ csrf_token() }}' // Laravel CSRF token
                 },
                 success: function(response) {
@@ -543,6 +548,122 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 }
             });
         });
+    }
+    document.getElementById('wallet').addEventListener('change', function() {
+        if (this.checked) {
+            applyWalletDiscount();
+        } else {
+            removeWalletDiscount();
+        }
+    });
+
+    function applyWalletDiscount() {
+        fetch(baseUrl + 'apply-wallet-discount', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    // Show wallet discount in the UI
+                    updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), data.walletDiscount);
+                    document.getElementById('walletDiv').classList.remove('d-none'); // Show the wallet discount section
+                    successToast(data.message);
+                } else {
+                    errorToast(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function removeWalletDiscount() {
+        const walletDiscount = 0; // Or however you calculate this
+        document.getElementById('walletDiv').classList.add('d-none'); // Hide wallet discount
+        updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), walletDiscount);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Target the promo code form by its ID
+        const promoForm = document.getElementById('promo_code_submit');
+
+        promoForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const promoCodeInput = promoForm.querySelector('input[placeholder="Apply Coupon"]');
+            const promoCode = promoCodeInput.value.trim();
+
+            if (!promoCode) {
+                errorToast('Please enter a promo code!');
+                return;
+            }
+
+            applyPromoCode(promoCode);
+        });
+    });
+
+    let appliedWalletDiscount = 0;
+
+    function applyPromoCode(promoCode) {
+        fetch(baseUrl + 'apply-promo-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({
+                    promo_code: promoCode
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    // Apply promo code discount
+                    document.getElementById('promo_code_discount').innerText = data.PromoDiscount;
+
+                    // Update subtotal with promo discount, wallet, and shipping
+                    updateSubTotal(data.promoDiscount, parseFloat(document.getElementById('wallet_discount').innerText));
+                    document.getElementById('clearPromoCode').classList.remove('d-none'); // Show the promo discount
+                    document.getElementById('promoDive').classList.remove('d-none'); // Show the promo discount
+                    successToast(data.message);
+                } else {
+                    errorToast(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function removePromoCode() {
+        document.getElementById('promoCodeInput').value = ''; 
+        document.getElementById('promoDive').classList.add('d-none');
+        document.getElementById('clearPromoCode').classList.add('d-none'); // Show the promo discount
+        // Reset promo discount to 0 and update the subtotal
+        updateSubTotal(0, parseFloat(document.getElementById('wallet_discount').innerText));
+
+    }
+
+    function updateSubTotal(promoDiscount = 0, walletDiscount = 0) {
+        // Get the original subtotal from your HTML
+        const originalSubTotal = parseFloat(document.getElementById('cart_total').innerText);
+        const originalShipping = parseFloat(document.getElementById('shipping').innerText);
+        // Calculate the total discount
+        const totalDiscount = parseFloat(promoDiscount) + parseFloat(walletDiscount);
+
+        // Calculate the new subtotal
+        const newSubTotal = originalSubTotal - totalDiscount;
+
+        // Update the subtotal display in the HTML
+        document.getElementById('subTotal').innerText = newSubTotal.toFixed(2); // 2 decimal places
+
+        // Update promo and wallet discounts in the UI
+        document.getElementById('promo_code_discount').innerText = promoDiscount;
+        document.getElementById('wallet_discount').innerText = walletDiscount;
+
+        // Calculate final total (subtotal + shipping)
+        const finalTotal = newSubTotal + originalShipping; // Assuming final total is subtotal + shipping
+        console.log(finalTotal);
+        document.getElementById('subTotal').innerText = finalTotal;
     }
 </script>
 @if(auth()->check() && !auth()->user()->name)

@@ -84,6 +84,10 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/checkout-process', [UserOrderController::class, 'checkout'])->name('checkout-process')->middleware('auth');
     Route::get('/order-success/{order_id}', [UserOrderController::class, 'showOrderSuccess'])->name('order.success');
     Route::get('/checkMail', [UserOrderController::class, 'checkMail'])->name('checkMail');
+    Route::post('/apply-wallet-discount', [UserOrderController::class, 'calculateWalletDiscount']);
+    Route::post('/apply-promo-code', [UserOrderController::class, 'applyPromoCode']);
+
+
     //------------ ADDRESS ----------------
     Route::get('fetch-pin-data/{pincode}', [AddressController::class, 'fetchPincodeData']);
     Route::post('add-address', [AddressController::class, 'addAddress'])->name('addAddress')->middleware('auth');
