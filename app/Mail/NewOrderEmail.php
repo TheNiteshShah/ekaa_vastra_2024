@@ -13,10 +13,9 @@ class NewOrderEmail extends Mailable
     public $orderData;
     public $orderDetails;
 
-    public function __construct($orderData, $orderDetails)
+    public function __construct($orderData)
     {
         $this->orderData = $orderData;
-        $this->orderDetails = $orderDetails;
     }
 
     public function build()

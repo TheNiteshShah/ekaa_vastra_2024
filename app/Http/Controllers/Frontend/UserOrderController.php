@@ -367,10 +367,9 @@ class UserOrderController extends Controller
     {
         $toEmail = 'ekaavastra@gmail.com';
         $orderData = Order1Modal::where('id', $order_id)->first();
-        $orderDetails = Order2Modal::where('main_id', $order_id)->get();
 
         try {
-            Mail::to($toEmail)->send(new NewOrderEmail($orderData, $orderDetails));
+            Mail::to($toEmail)->send(new NewOrderEmail($orderData));
             // echo "Email sent successfully!";
         } catch (Exception $e) {
             // Log the error or handle it as needed

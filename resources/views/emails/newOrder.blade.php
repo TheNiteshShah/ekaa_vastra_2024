@@ -183,7 +183,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($orderDetails as $item)
+                @foreach($orderData->details as $item)
                 <tr>
                     <td>
                         <img src="{{asset($item->image)}}" alt="{{ $item->product->name }}">
@@ -200,7 +200,7 @@
 
         <!-- Footer Section -->
         <div class="footer">
-            <p>Thank you ❤,</p>
+            <p>Thank you ❤</p>
             <p>Team Ekaa Vastra 👨‍💻</p>
         </div>
     </div>
