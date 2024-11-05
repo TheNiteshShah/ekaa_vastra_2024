@@ -345,6 +345,10 @@ class UserOrderController extends Controller
         $orderAddressUpload->city = $defaultAddress->city;
         $orderAddressUpload->ip = $request->ip();
         $orderAddressUpload->save();
+        // ------ Update address id -------
+        $orderData = Order1Modal::where('id', $order1Upload->id)->first();
+        $orderData->address_id = $orderAddressUpload->id;
+        $orderData->save();
         if ($request->input('payment_mode') == 2) { // for prepaid orders
             $res = $this->getPhonePeUrl($order1Update, $orderAddressUpload);
             return $res;
