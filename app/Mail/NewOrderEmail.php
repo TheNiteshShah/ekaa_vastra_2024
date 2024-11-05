@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -11,24 +10,18 @@ class NewOrderEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $orderData;
+    public $orderDetails;
+
+    public function __construct($orderData, $orderDetails)
     {
-        //
+        $this->orderData = $orderData;
+        $this->orderDetails = $orderDetails;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->subject('Order Confirmation')
-            ->view('emails.newOrder', ['order' => 1]);
+        return $this->subject('New Order Received')
+            ->view('emails.newOrder'); // Blade file to use
     }
 }

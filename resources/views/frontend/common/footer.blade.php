@@ -87,7 +87,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <!-- <div class="col-12 col-md-5 col-lg-4 col-xl-3 order-last order-md-first"> -->
                             <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-last order-md-first text">
                                 <div class="text-center">
-                                    <p class="mb-3 mb-md-0">&copy; 2024 <a href="#">Ekaa Vastra</a>. All
+                                    <p class="mb-3 mb-md-0">&copy; <script>
+                                            document.write(new Date().getFullYear())
+                                        </script> <a href="#">Ekaa Vastra</a>. All
                                         Rights Reserved</p>
                                 </div>
                             </div>
@@ -508,7 +510,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             $('#placeOrder').hide();
             $('#checkout-loader').show();
             const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
-            const isWalletChecked =  document.getElementById('wallet').checked;
+            const isWalletChecked = document.getElementById('wallet').checked;
             const promoCodeValue = document.getElementById('promoCodeInput').value.trim();
             $.ajax({
                 url: baseUrl + 'checkout-process',
@@ -635,7 +637,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     }
 
     function removePromoCode() {
-        document.getElementById('promoCodeInput').value = ''; 
+        document.getElementById('promoCodeInput').value = '';
         document.getElementById('promoDive').classList.add('d-none');
         document.getElementById('clearPromoCode').classList.add('d-none'); // Show the promo discount
         // Reset promo discount to 0 and update the subtotal

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewOrderEmail;
 use Carbon\Carbon;
+use Exception;
 
 class UserOrderController extends Controller
 {
@@ -357,29 +358,39 @@ class UserOrderController extends Controller
             }
             //------------ EMPTY CART ---------
             CartModal::where('user_id', $user_id)->delete();
-            // Mail::to('ekaavastra@gmail.com')->send(new NewOrderEmail($order1Upload));
-            // Return a response
+            //---------- Send Admin Email -------
+            $this->sendOrderMailToAdmin($order1Upload->id);
             return response()->json(['status' => true, 'message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
+        }
+    }
+    public function sendOrderMailToAdmin($order_id)
+    {
+        $toEmail = 'ekaavastra@gmail.com';
+        $orderData = Order1Modal::where('id', $order_id)->first();
+        $orderDetails = Order2Modal::where('main_id', $order_id)->get();
+
+        try {
+            Mail::to($toEmail)->send(new NewOrderEmail($orderData, $orderDetails));
+            // echo "Email sent successfully!";
+        } catch (Exception $e) {
+            // Log the error or handle it as needed
+            \Log::error('Failed to send email: ' . $e->getMessage());
+            // echo "Email failed: " . $e->getMessage();
         }
     }
     public function checkMail()
     {
         $toEmail = 'ekaavastra@gmail.com';
-        $orderId = '1';
+        $orderData = Order1Modal::where('id', 76)->first();
+        $orderDetails = Order2Modal::where('main_id', 76)->get();
 
         try {
-            Mail::to($toEmail)->send(new NewOrderEmail($orderId));
+            Mail::to($toEmail)->send(new NewOrderEmail($orderData, $orderDetails));
             echo "Email sent successfully!";
         } catch (Exception $e) {
+            // Log the error or handle it as needed
+            \Log::error('Failed to send email: ' . $e->getMessage());
             echo "Email failed: " . $e->getMessage();
-        }
-
-        if (count(Mail::failures()) > 0) {
-            $failedEmails = Mail::failures();
-            echo "The following emails failed to send: ";
-            foreach ($failedEmails as $failedEmail) {
-                echo " - $failedEmail";
-            }
         }
     }
     // ============================= END CHECKOUT PROCESS ============================ 
@@ -471,6 +482,8 @@ class UserOrderController extends Controller
                     }
                     //------------ EMPTY CART ---------
                     CartModal::where('user_id', $order1Update->user_id)->delete();
+                    //---------- Send Admin Email -------
+                    $this->sendOrderMailToAdmin($order1Update->id);
                     return Redirect('/order-success/' . $order1Update->id);
                 } else {
                 }
