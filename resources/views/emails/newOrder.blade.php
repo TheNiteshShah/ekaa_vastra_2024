@@ -106,7 +106,7 @@
         <!-- Header with Centered Logo and Title -->
         <div class="header">
             <img src="https://www.ekaavastra.com/frontend/img/logo.png" alt="Logo">
-            <h2>રાધે રાધે 🙏🌺𓃔🦚❤</h2>
+            <h2>રાધે રાધે</h2>
             <h1>🛍️ New Order Received!</h1>
         </div>
 

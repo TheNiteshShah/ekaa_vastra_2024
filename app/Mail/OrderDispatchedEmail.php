@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrderEmail extends Mailable
+class OrderDispatchedEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,7 @@ class NewOrderEmail extends Mailable
 
     public function build()
     {
-        return $this->subject('New Order Received')
-            ->view('emails.newOrder'); // Blade file to use
+        return $this->subject('Order Dispatched')
+            ->view('emails.OrderDispatched'); // Blade file to use
     }
 }

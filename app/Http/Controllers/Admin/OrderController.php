@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order1Modal;
 use App\Models\Order2Modal;
+use App\Services\OrderNotificationService;
 
 class OrderController extends Controller
 {
+    protected $orderNotificationService;
+
+    public function __construct(OrderNotificationService $orderNotificationService)
+    {
+        $this->orderNotificationService = $orderNotificationService;
+    }
     public function new_orders(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
@@ -79,25 +86,26 @@ class OrderController extends Controller
                         $data = Order1Modal::findOrFail($id);
                         $data->order_status = 2;
                         $data->save();
-                        break;
-                    case "dispatch":
-                        $data = Order1Modal::findOrFail($id);
-                        $data->order_status = 3;
-                        $data->save();
+                        $notificationType = "user_order_accepted";
                         break;
                     case "deliver":
                         $data = Order1Modal::findOrFail($id);
                         $data->order_status = 4;
                         $data->save();
+                        $notificationType = "user_order_delivered";
                         break;
                     case "reject":
                         $data = Order1Modal::findOrFail($id);
                         $data->order_status = 5;
                         $data->save();
+                        $notificationType = "user_order_rejected";
                         break;
                     default:
                         return redirect()->back()->with('error', 'Some error occured!');
                 }
+                //---------- Send User Email -------
+                $orderData = Order1Modal::where('id', $id)->first();
+                $this->orderNotificationService->sendOrderNotification($orderData->address->email, $orderData, $notificationType);
                 return redirect()->back()->with('success', 'Status updated Successfully!');
             } else {
                 return redirect()->back()->with('error', 'Sorry you dont have Permission to delete admin, Only Super admin can change status');
@@ -129,6 +137,9 @@ class OrderController extends Controller
             $uploadData->tracking_url = $req->tracking_url;
             $uploadData->order_status = 3;
             $uploadData->save();
+            //---------- Send User Email -------
+            $orderData = Order1Modal::where('id', $req->id)->first();
+            $this->orderNotificationService->sendOrderNotification($orderData->address->email, $orderData, 'user_order_dispatched');
             if ($uploadData) {
                 return redirect()->route('accepted_orders')->with('success', 'Status updated Successfully!');
             } else {

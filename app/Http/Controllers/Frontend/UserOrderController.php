@@ -18,22 +18,25 @@ use App\Models\PromoModal;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\NewOrderEmail;
 use Carbon\Carbon;
 use Exception;
+use App\Services\OrderNotificationService;
 
 class UserOrderController extends Controller
 {
     private $PHONE_PE_SALT; // Replace with your PhonePe API Key
     private $PHONE_PE_MERCHANT_ID; // Replace with your PhonePe Salt Key
     private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
-    public function __construct()
+    protected $orderNotificationService;
+
+    public function __construct(OrderNotificationService $orderNotificationService)
     {
-        $this->PHONE_PE_SALT = env('PHONE_PE_SALT'); // Get API Key from config
+        $this->orderNotificationService = $orderNotificationService;
         $this->PHONE_PE_MERCHANT_ID = env('PHONE_PE_MERCHANT_ID'); // Get Salt Key from config
         $this->PHONE_PE_URL = env('PHONE_PE_URL'); // Get Salt Key from config
+        $this->PHONE_PE_SALT = env('PHONE_PE_SALT'); // Get API Key from config
     }
+
     // ============================= START VIEW CHECKOUT ============================ 
     public function index(Request $req)
     {
@@ -363,37 +366,27 @@ class UserOrderController extends Controller
             //------------ EMPTY CART ---------
             CartModal::where('user_id', $user_id)->delete();
             //---------- Send Admin Email -------
-            $this->sendOrderMailToAdmin($order1Upload->id);
-            return response()->json(['status' => true, 'message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
-        }
-    }
-    public function sendOrderMailToAdmin($order_id)
-    {
-        $toEmail = 'ekaavastra@gmail.com';
-        $orderData = Order1Modal::where('id', $order_id)->first();
+            $orderData = Order1Modal::where('id', $order1Upload->id)->first();
+            $this->orderNotificationService->sendOrderNotification('ekaavastra@gmail.com', $orderData, 'admin_order');
+            //---------- Send User Email -------
+            $this->orderNotificationService->sendOrderNotification($orderData->address->email, $orderData, 'user_order_placed');
 
-        try {
-            Mail::to($toEmail)->send(new NewOrderEmail($orderData));
-            // echo "Email sent successfully!";
-        } catch (Exception $e) {
-            // Log the error or handle it as needed
-            \Log::error('Failed to send email: ' . $e->getMessage());
-            // echo "Email failed: " . $e->getMessage();
+            return response()->json(['status' => true, 'message' => 'Order placed successfully!', 'order_id' => $order1Upload->id]);
         }
     }
     public function checkMail()
     {
         $toEmail = 'ekaavastra@gmail.com';
         $orderData = Order1Modal::where('id', 76)->first();
-        $orderDetails = Order2Modal::where('main_id', 76)->get();
 
         try {
-            Mail::to($toEmail)->send(new NewOrderEmail($orderData, $orderDetails));
+            $this->orderNotificationService->sendOrderNotification('ekaavastra@gmail.com', $orderData, 'admin_order_canceled');
+
             echo "Email sent successfully!";
         } catch (Exception $e) {
             // Log the error or handle it as needed
             \Log::error('Failed to send email: ' . $e->getMessage());
-            echo "Email failed: " . $e->getMessage();
+            // echo "Email failed: " . $e->getMessage();
         }
     }
     // ============================= END CHECKOUT PROCESS ============================ 
@@ -486,7 +479,10 @@ class UserOrderController extends Controller
                     //------------ EMPTY CART ---------
                     CartModal::where('user_id', $order1Update->user_id)->delete();
                     //---------- Send Admin Email -------
-                    $this->sendOrderMailToAdmin($order1Update->id);
+                    $orderData = Order1Modal::where('id', $order1Update->id)->first();
+                    $this->orderNotificationService->sendOrderNotification('ekaavastra@gmail.com', $orderData, 'admin_order');
+                    //---------- Send User Email -------
+                    $this->orderNotificationService->sendOrderNotification($orderData->address->email, $orderData, 'user_order_placed');
                     return Redirect('/order-success/' . $order1Update->id);
                 } else {
                 }
