@@ -71,9 +71,12 @@
                                             <img class="first-img" src="{{asset($product->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- @if(auth()->check())
-                                        <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart-outline"></i></span></a>
-                                        @endif -->
+                                        @if(auth()->check())
+                                        @php
+                                        $isInWishlist = in_array($product->id, $wishlistProductIds);
+                                        @endphp
+                                        <a href="javascript:void(0)" onclick="toggleWishlist({{ $product->id }}, this)"><span class="hear-icon top-right product{{ $product->id }}"> <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i></span></a>
+                                        @endif
 
                                     </div>
                                     <div class="media-body">
@@ -109,117 +112,116 @@
 <div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff;z-index:9999;">
     <div class="row text-center">
         <div class="col-6 p-2">
-            <a href="#"data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="assets/img/icon/filter.png"> FILTER</a>
-          </div>
-      <div class="col-6 p-2" style="border-right: 2px solid #dee2e6 ;">
-        <a href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="assets/img/icon/sort.png"> SORT BY </a>
-      </div>
-     
- 
-     
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="assets/img/icon/filter.png"> FILTER</a>
+        </div>
+        <div class="col-6 p-2" style="border-right: 2px solid #dee2e6 ;">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="assets/img/icon/sort.png"> SORT BY </a>
+        </div>
+
+
+
     </div>
-  </div>
+</div>
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="d-flex justify-content-center">
-    <div class="modal-dialog" style="width: 100% !important;
+        <div class="modal-dialog" style="width: 100% !important;
     position: absolute;
     bottom: 27px;
     margin:  0px;">
-      <div class="modal-content">
-        <div class="modal-header">
-          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="popup_content">
-                <div class="popup-text">
-                  <div class="heading_s1 text-center" >
-                    <h6>SORT BY</h6>
-                  </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <ul style="list-style-type: none; text-align: center;">
-                  <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('ASC')">Sort by price: Low to High</a></li>
-                  <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('DESC')">Sort by price: High to Low</a></li>
-                </ul>
-              </div>
-        </div>
-       
-      </div>
-    </div>
-</div>
-  </div>
+                <div class="modal-body">
+                    <div class="popup_content">
+                        <div class="popup-text">
+                            <div class="heading_s1 text-center">
+                                <h6>SORT BY</h6>
+                            </div>
+                        </div>
+                        <ul style="list-style-type: none; text-align: center;">
+                            <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('ASC')">Sort by price: Low to High</a></li>
+                            <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('DESC')">Sort by price: High to Low</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content"  style="height: 100vh;">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"> FILTER</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="row" style="height: 100vh;">
-
-       
-        <div class="modal-body col-3" style="padding-right:  0px;">
-            <div class="myaccount-tab-menu nav" role="tablist" style="display: grid;">
-                <!-- <a href="#dashboad" data-bs-toggle="tab" class="active"><i class="fas fa-tachometer-alt"></i>
-                    Categories</a> -->
-                    <a href="#account-info" data-bs-toggle="tab" class="active">
-                        Price</a>
-
-                <a href="#orders" data-bs-toggle="tab">
-                    Size</a>
-
-                <!-- <a href="#download" data-bs-toggle="tab">
-                    Color</a> -->
-              
             </div>
         </div>
-        <div class="col-9" style="padding-left:  0px; border-left: 1px solid;">
-            <div class="tab-content" id="myaccountContent">
-                <!-- Single Tab Content Start -->
-                <div class="tab-pane fade active show" id="account-info" role="tabpanel">
-                    <div class="myaccount-content" style="border-bottom:  0px ;">
-                        <div class="check-box-inner mt-10">
-                            <h4 class="sub-title">Price</h4>
-                            <div class="price-filter mt-10">
-                                <div class="price-slider-amount">
-                                    <input type="text" id="amount" name="price" readonly
-                                        placeholder="Add Your Price" />
-                                </div>
-                                <div id="slider-range2"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Tab Content End -->
+    </div>
+</div>
 
-                <!-- Single Tab Content Start -->
-                <div class="tab-pane fade" id="orders" role="tabpanel">
-                    <div class="myaccount-content" style="border-bottom: 0px;">
-                        <div class="check-box-inner mt-10">
-                            <h4 class="sub-title">Size</h4>
-                            <div class="filter-check-box">
-                                <input type="checkbox" id="test9">
-                                <label for="test9">s <span>(2)</span></label>
-                            </div>
-                            <div class="filter-check-box">
-                                <input type="checkbox" id="test10">
-                                <label for="test10">m <span>(2)</span></label>
-                            </div>
-                            <div class="filter-check-box">
-                                <input type="checkbox" id="test11">
-                                <label for="test11">l <span>(2)</span></label>
-                            </div>
-                            <div class="filter-check-box">
-                                <input type="checkbox" id="test12">
-                                <label for="test12">xl <span>(2)</span></label>
-                            </div>
-                        </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height: 100vh;">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"> FILTER</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row" style="height: 100vh;">
+
+
+                <div class="modal-body col-3" style="padding-right:  0px;">
+                    <div class="myaccount-tab-menu nav" role="tablist" style="display: grid;">
+                        <!-- <a href="#dashboad" data-bs-toggle="tab" class="active"><i class="fas fa-tachometer-alt"></i>
+                    Categories</a> -->
+                        <a href="#account-info" data-bs-toggle="tab" class="active">
+                            Price</a>
+
+                        <a href="#orders" data-bs-toggle="tab">
+                            Size</a>
+
+                        <!-- <a href="#download" data-bs-toggle="tab">
+                    Color</a> -->
+
                     </div>
                 </div>
-                <!-- <div class="tab-pane fade" id="download" role="tabpanel">
+                <div class="col-9" style="padding-left:  0px; border-left: 1px solid;">
+                    <div class="tab-content" id="myaccountContent">
+                        <!-- Single Tab Content Start -->
+                        <div class="tab-pane fade active show" id="account-info" role="tabpanel">
+                            <div class="myaccount-content" style="border-bottom:  0px ;">
+                                <div class="check-box-inner mt-10">
+                                    <h4 class="sub-title">Price</h4>
+                                    <div class="price-filter mt-10">
+                                        <div class="price-slider-amount">
+                                            <input type="text" id="amount" name="price" readonly placeholder="Add Your Price" />
+                                        </div>
+                                        <div id="slider-range2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Tab Content End -->
+
+                        <!-- Single Tab Content Start -->
+                        <div class="tab-pane fade" id="orders" role="tabpanel">
+                            <div class="myaccount-content" style="border-bottom: 0px;">
+                                <div class="check-box-inner mt-10">
+                                    <h4 class="sub-title">Size</h4>
+                                    <div class="filter-check-box">
+                                        <input type="checkbox" id="test9">
+                                        <label for="test9">s <span>(2)</span></label>
+                                    </div>
+                                    <div class="filter-check-box">
+                                        <input type="checkbox" id="test10">
+                                        <label for="test10">m <span>(2)</span></label>
+                                    </div>
+                                    <div class="filter-check-box">
+                                        <input type="checkbox" id="test11">
+                                        <label for="test11">l <span>(2)</span></label>
+                                    </div>
+                                    <div class="filter-check-box">
+                                        <input type="checkbox" id="test12">
+                                        <label for="test12">xl <span>(2)</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="tab-pane fade" id="download" role="tabpanel">
                     <div class="myaccount-content" style="border-bottom: 0px;">
                         <div class="check-box-inner mt-10">
                             <h4 class="sub-title">Color</h4>
@@ -242,14 +244,14 @@
                         </div>
                     </div>
                 </div> -->
-                
+
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
-        
-      </div>
-    </div>
-  </div>
+</div>
 
 
 <!-- modals end -->

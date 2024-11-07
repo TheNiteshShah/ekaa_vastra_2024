@@ -83,10 +83,12 @@
                                             <img class="first-img" src="{{asset($product->image)}}" alt="thumbnail">
                                             <img class="second-img" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- @if(auth()->check())
-                                        <a href="#"><span class="hear-icon top-right"><i class="ion-ios-heart-outline"></i></span></a>
-                                        @endif -->
-
+                                        @if(auth()->check())
+                                        @php
+                                        $isInWishlist = in_array($product->id, $wishlistProductIds);
+                                        @endphp
+                                        <a href="javascript:void(0)" onclick="toggleWishlist({{ $product->id }}, this)"><span class="hear-icon top-right product{{ $product->id }}"> <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i></span></a>
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">

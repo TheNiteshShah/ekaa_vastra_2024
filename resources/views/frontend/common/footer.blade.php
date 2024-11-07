@@ -551,13 +551,20 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     }
-    document.getElementById('wallet').addEventListener('change', function() {
-        if (this.checked) {
-            applyWalletDiscount();
-        } else {
-            removeWalletDiscount();
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var walletElement = document.getElementById('wallet');
+        if (walletElement) {
+            walletElement.addEventListener('change', function() {
+                if (this.checked) {
+                    applyWalletDiscount();
+                } else {
+                    removeWalletDiscount();
+                }
+            });
         }
-    });
+    })
+
 
     function applyWalletDiscount() {
         fetch(baseUrl + 'apply-wallet-discount', {
@@ -589,20 +596,21 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     document.addEventListener('DOMContentLoaded', function() {
         // Target the promo code form by its ID
         const promoForm = document.getElementById('promo_code_submit');
+        if (promoForm) {
+            promoForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
 
-        promoForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
+                const promoCodeInput = promoForm.querySelector('input[placeholder="Apply Coupon"]');
+                const promoCode = promoCodeInput.value.trim();
 
-            const promoCodeInput = promoForm.querySelector('input[placeholder="Apply Coupon"]');
-            const promoCode = promoCodeInput.value.trim();
+                if (!promoCode) {
+                    errorToast('Please enter a promo code!');
+                    return;
+                }
 
-            if (!promoCode) {
-                errorToast('Please enter a promo code!');
-                return;
-            }
-
-            applyPromoCode(promoCode);
-        });
+                applyPromoCode(promoCode);
+            });
+        }
     });
 
     let appliedWalletDiscount = 0;
@@ -666,6 +674,78 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         const finalTotal = newSubTotal + originalShipping; // Assuming final total is subtotal + shipping
         console.log(finalTotal);
         document.getElementById('subTotal').innerText = finalTotal;
+    }
+
+
+
+    function toggleWishlist(productId, element) {
+        $.ajax({
+            url: baseUrl + 'wishlist/toggle',
+            type: 'POST',
+            data: {
+                product_id: productId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                var productElement = $('.product' + productId);
+                if (response.status === 'added') {
+                    productElement.find('i').removeClass('ion-ios-heart-outline').addClass('ion-ios-heart');
+                    successToast('Product added to wishlist');
+
+                } else if (response.status === 'removed') {
+                    productElement.find('i').removeClass('ion-ios-heart').addClass('ion-ios-heart-outline');
+                    successToast('Product removed from wishlist');
+
+                }
+
+                // Update the wishlist count
+                $('.wishCount').text(response.wishlistCount);
+
+                // Update the wishlist items in the offcanvas
+                var wishlistHtml = '';
+                if (response.wishlistItems.length > 0) {
+                    $.each(response.wishlistItems, function(index, wish) {
+                          var imageUrl = "{{ asset($wish->product->image) }}"
+                        wishlistHtml += '<li>';
+                        wishlistHtml += '<a href="' + wish.image + '" class="image"><img src="' + "{{ asset($wish->product->image) }}" + '" alt="Product Image"></a>';
+
+                        wishlistHtml += '<div class="content">'; 
+                        wishlistHtml += '<a href="' + wish.product_url + '" class="title">' + wish.product.name + '</a>';
+                        wishlistHtml += '<button class="btn theme-btn--dark3 btn--sm mt-10"> <span class="me-2"><i class="ion-bag"></i></span> Move to bag </button>';
+                        wishlistHtml += '</div>';
+                        wishlistHtml += '</li>';
+                    });
+                } else {
+                    wishlistHtml = '<div class="text-center"><img src="' + response.emptyWishlistImage + '" alt="Empty-Wishlist" class="img-fluid" style="width:50%"></div>';
+                    wishlistHtml += '<h6 class="text-center mt-2">Your wishlist is empty!</h6>';
+                }
+
+                // Update the wishlist content in the offcanvas
+                $('#offcanvas-wishlist .minicart-product-list').html(wishlistHtml);
+            },
+            error: function(xhr) {
+                errorToast('An error occurred. Please try again');
+
+            }
+        });
+    }
+
+    function updateWishlistItems(items) {
+        let wishlistContainer = $('#offcanvas-wishlist-items');
+        wishlistContainer.empty();
+
+        if (items.length === 0) {
+            wishlistContainer.append('<p>Your wishlist is empty.</p>');
+        } else {
+            items.forEach(function(item) {
+                wishlistContainer.append(`
+                <div class="wishlist-item">
+                    <p>${item.product.name}</p>
+                    <p>Price: ₹${item.product.selling_price}</p>
+                </div>
+            `);
+            });
+        }
     }
 </script>
 @if(auth()->check() && !auth()->user()->name)

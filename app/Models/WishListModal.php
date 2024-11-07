@@ -19,8 +19,4 @@ class WishListModal extends Model
     {
         return $this->belongsTo(ProductModal::class, 'product_id')->withTrashed();
     }
-    public function type()
-    {
-        return $this->belongsTo(TypeModal::class, 'type_id')->withTrashed();
-    }
 }

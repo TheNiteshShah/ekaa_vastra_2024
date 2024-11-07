@@ -69,9 +69,12 @@
                                             <img class="first-img" loading="lazy" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" loading="lazy" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- @if(auth()->check())
-                                        <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
-                                        @endif -->
+                                        @if(auth()->check())
+                                        @php
+                                        $isInWishlist = in_array($trend->id, $wishlistProductIds);
+                                        @endphp
+                                        <a href="javascript:void(0)" onclick="toggleWishlist({{ $trend->id }}, this)"><span class="hear-icon top-right product{{ $trend->id }}"> <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i></span></a>
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">
@@ -142,9 +145,12 @@
                                             <img class="first-img" loading="lazy" src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img" loading="lazy" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
-                                        <!-- @if(auth()->check())
-                                        <a href="javascript:void(0)"><span class="hear-icon top-right"><i class="ion-ios-heart"></i></span></a>
-                                        @endif -->
+                                        @if(auth()->check())
+                                        @php
+                                        $isInWishlist = in_array($trend->id, $wishlistProductIds);
+                                        @endphp
+                                        <a href="javascript:void(0)" onclick="toggleWishlist({{ $trend->id }}, this)"><span class="hear-icon top-right product{{ $trend->id }}"> <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i></span></a>
+                                        @endif
                                     </div>
                                     <div class="media-body">
                                         <div class="product-desc">

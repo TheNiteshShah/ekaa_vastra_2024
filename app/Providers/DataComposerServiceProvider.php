@@ -31,11 +31,15 @@ class DataComposerServiceProvider extends ServiceProvider
                 $wishlistItems = WishListModal::where('user_id', $userId)->get();
                 $cartCount = $cartItems->count();
                 $wishlistCount = $wishlistItems->count();
+                $wishlistProductIds = WishListModal::where('user_id', auth()->id())
+                    ->pluck('product_id')
+                    ->toArray();
             } else {
-                $cartItems = Session::get('cart_data',[]);
+                $cartItems = Session::get('cart_data', []);
                 $cartCount = count($cartItems);
                 $wishlistItems = [];
                 $wishlistCount = 0;
+                $wishlistProductIds = [];
             }
 
             $view->with([
@@ -44,6 +48,7 @@ class DataComposerServiceProvider extends ServiceProvider
                 'cartCount' => $cartCount,
                 'wishlistItems' => $wishlistItems,
                 'wishlistCount' => $wishlistCount,
+                'wishlistProductIds' => $wishlistProductIds,
             ]);
         });
     }

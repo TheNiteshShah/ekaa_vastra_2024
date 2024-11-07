@@ -23,6 +23,7 @@ use App\Models\Order1Modal;
 use App\Models\Order2Modal;
 use App\Models\UserAddressModal;
 use App\Models\BannerModal;
+use App\Models\WishListModal;
 
 
 class HomeController extends Controller
@@ -35,9 +36,10 @@ class HomeController extends Controller
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
+        
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData'))->withTitle('Ekaa Vastra');
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData',))->withTitle('Ekaa Vastra');
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
@@ -179,9 +181,8 @@ class HomeController extends Controller
         // Query products by name (case-insensitive search)
         $productData = ProductModal::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
 
-        $title = 'Search - '.$query;
-        return view('frontend/search_products', compact( 'productData', 'title'));
-
+        $title = 'Search - ' . $query;
+        return view('frontend/search_products', compact('productData', 'title'));
     }
     // ============================= END SEARCH PRODUCT ============================ 
     public function OrderInvoice(Request $req)

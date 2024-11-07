@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\AddressController;
+use App\Http\Controllers\Frontend\WishlistController;
 //============== BACKEND CONTROLLERS =================
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\TeamController;
@@ -79,6 +80,8 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/get-sizes/{id}', [TypeController::class, 'getSizes'])->name('getSizes');
     Route::get('/get-qty/{id}', [TypeController::class, 'getQty'])->name('getQty');
     Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart');
+    //------------ Wishlist ----------------
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle')->middleware('auth');
     //------------ Order ----------------
     Route::get('/checkout', [UserOrderController::class, 'index'])->name('checkout')->middleware('auth');
     Route::get('/get-shipping-charges/{id}', [UserOrderController::class, 'getShippingCharges'])->name('getShippingCharges')->middleware('auth');

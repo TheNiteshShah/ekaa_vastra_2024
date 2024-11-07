@@ -189,9 +189,12 @@
             <ul class="minicart-product-list">
                 @foreach($wishlistItems as $wish)
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$wish->product->name}}</a>
+                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="title">{{$wish->product->name}}</a>
+                        <h6 class="product-price"><del class="del" style="font-size: 13px;">₹{{$wish->product->mrp}}</del>
+                            <span class="onsale" style="font-size: 13px;">₹{{$wish->product->selling_price}}</span>
+                        </h6>
                         <button class="btn theme-btn--dark3 btn--sm mt-10">
                             <span class="me-2"><i class="ion-bag"></i></span>
                             Move to bag
@@ -273,7 +276,7 @@
     </div>
     <!-- OffCanvas Cart End -->
 
-   
+
     <!-- Login Modal -->
     <div class="modal fade" id="login" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -486,7 +489,7 @@
                                     <li class="position-relative ">
                                         <a class="offcanvas-toggle" href="#offcanvas-wishlist">
                                             <i class="ion-android-favorite-outline"></i>
-                                            <span class="badge cbdg1">{{$wishlistCount}}</span>
+                                            <span class="badge cbdg1 wishCount">{{$wishlistCount}}</span>
                                         </a>
                                     </li>
                                     @endif
