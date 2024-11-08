@@ -19,14 +19,13 @@ class EnsureHttpsAndWww
         $host = $request->getHost();
         $scheme = $request->getScheme();
 
+        // Check if the scheme is not HTTPS or if the host does not start with 'www.'
         if ($scheme !== 'https' || strpos($host, 'www.') !== 0) {
-            // Redirect to the corrected URL
-            $newUrl = 'https://www.' . ltrim($request->getRequestUri(), '/');
-            if (strpos($host, 'www.') === 0) {
-                $newUrl = "https://$host" . $request->getRequestUri();
-            }
+            // Construct the new URL with 'https://www.'
+            $newHost = (strpos($host, 'www.') === 0) ? $host : 'www.' . $host;
+            $newUrl = 'https://' . $newHost . $request->getRequestUri();
 
-            return redirect($newUrl);
+            return redirect($newUrl, 301); // Permanent redirect
         }
 
         return $next($request);
