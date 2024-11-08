@@ -119,7 +119,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 </footer>
 <!-- footer end -->
 
-
 <!-- search-box and overlay start -->
 <div class="overlay">
     <div class="scale"></div>
@@ -194,7 +193,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
     });
-
+    window.addEventListener('load', function() {
+        document.getElementById('loader').style.display = 'none';
+    });
     //------------ Login ---------------- 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -437,6 +438,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     });
+
     function updateWishTypeId(element, typeId) {
         // Update the hidden input value
         document.getElementById('wishTypeId').value = typeId;

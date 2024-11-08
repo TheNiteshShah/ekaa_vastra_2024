@@ -29,6 +29,12 @@
             body {
                 overflow-x: hidden !important;
             }
+
+            .rotating-image {
+                width: 120px;
+                /* Adjust as needed */
+                height: 120px;
+            }
         }
 
         .out {
@@ -47,6 +53,40 @@
             width: 100%;
             display: block;
             transform: rotate(140deg);
+        }
+
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            /* Slightly transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Rotating image */
+        .rotating-image {
+            width: 140px;
+            /* Adjust as needed */
+            height: 140px;
+            /* Adjust as needed */
+            animation: rotate360 4s linear infinite;
+        }
+
+        /* Rotation animation */
+        @keyframes rotate360 {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
         }
     </style>
     <!-- Meta Pixel Code -->
@@ -109,6 +149,9 @@
 </head>
 
 <body>
+    <div class="loader-overlay" id="loader">
+        <img src="{{asset('frontend/img/loader.png')}}" alt="Loading..." class="rotating-image">
+    </div>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ4GPFRC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
@@ -428,113 +471,113 @@
         </div>
     </div>
     <!-- OTP Modal -->
-    <!-- header start -->
-    <header id="sticky" class="header2 style1 theme1">
-        <!-- custom marquee start -->
+        <!-- header start -->
+        <header id="sticky" class="header2 style1 theme1">
+            <!-- custom marquee start -->
 
-        <div class="custom-marquee" role="region">
-            <div class="track ">
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
-                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+            <div class="custom-marquee" role="region">
+                <div class="track ">
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                    <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                </div>
             </div>
-        </div>
-        <!-- custom marquee end -->
+            <!-- custom marquee end -->
 
-        <!-- header-middle start -->
-        <div class="header-middle">
-            <div class="container">
-                <div class="row align-items-center position-relative">
-                    <div class="col-6 col-lg-2 col-xl-3 order-first">
-                        <div class="logo">
-                            <a href="{{route('/')}}"><img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:45%" class="img-fluid"></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
-                        <nav class="header-bottom theme1">
-                            <ul class="main-menu d-flex align-items-center">
-                                <li><a href="{{route('/')}}">Home</a></li>
-                                @foreach($categoryData as $category)
-                                <li>
-                                    <a href="javascript:void(0)">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
-                                    <ul class="sub-menu">
-                                        @foreach($category->SubCategory as $subcategory)
-                                        <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                @endforeach
-                                <li><a href="{{route('contact-us')}}">contact Us</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-6 col-lg-3 col-xl-3">
-                        <!-- search-form end -->
-                        <div class="d-flex align-items-center justify-content-end">
-                            <div class="cart-block-links theme1">
-                                <ul class="side-menu d-flex align-items-center">
-                                    <li>
-                                        <a href="javascript:void(0)" class="search search-toggle">
-                                            <i class="ion-ios-search-strong"></i>
-                                        </a>
-                                    </li>
-                                    @if(auth()->check())
-                                    <li class="position-relative ">
-                                        <a class="offcanvas-toggle" href="#offcanvas-wishlist">
-                                            <i class="ion-android-favorite-outline"></i>
-                                            <span class="badge cbdg1 wishCount">{{$wishlistCount}}</span>
-                                        </a>
-                                    </li>
-                                    @endif
-                                    <li class="cart-block position-relative ">
-                                        <a class="offcanvas-toggle" href="#offcanvas-cart">
-                                            <i class="ion-bag"></i>
-                                            <span class="badge cbdg1">{{$cartCount}}</span>
-                                        </a>
-                                    </li>
-                                    <li class="me-0 cart-block position-relative d-none d-sm-block">
-                                        @if(auth()->check())
-                                        <a href="javascript:void(0)"><i class="icon-user"></i> <i class="ion-ios-arrow-down"></i></a>
-                                        <ul class="sub-menu side-ul">
-                                            <li><a href="{{route('my-account')}}">My Account</a></li>
-                                            <li>
-                                                <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <button type="submit" class="logout-btn">Logout</button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                        @else
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
-                                            <i class="icon-user"></i>
-                                        </a>
-                                        @endif
-                                    </li>
-                                    <!-- cart block end -->
-                                </ul>
+            <!-- header-middle start -->
+            <div class="header-middle">
+                <div class="container">
+                    <div class="row align-items-center position-relative">
+                        <div class="col-6 col-lg-2 col-xl-3 order-first">
+                            <div class="logo">
+                                <a href="{{route('/')}}"><img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:45%" class="img-fluid"></a>
                             </div>
-                            <div class="mobile-menu-toggle theme1 d-lg-none">
-                                <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
-                                    <svg viewbox="0 0 800 600">
-                                        <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
-                                        <path d="M300,320 L540,320" id="middle"></path>
-                                        <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318)">
-                                        </path>
-                                    </svg>
-                                </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
+                            <nav class="header-bottom theme1">
+                                <ul class="main-menu d-flex align-items-center">
+                                    <li><a href="{{route('/')}}">Home</a></li>
+                                    @foreach($categoryData as $category)
+                                    <li>
+                                        <a href="javascript:void(0)">{{$category->name}} <i class="ion-ios-arrow-down"></i></a>
+                                        <ul class="sub-menu">
+                                            @foreach($category->SubCategory as $subcategory)
+                                            <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @endforeach
+                                    <li><a href="{{route('contact-us')}}">contact Us</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-6 col-lg-3 col-xl-3">
+                            <!-- search-form end -->
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div class="cart-block-links theme1">
+                                    <ul class="side-menu d-flex align-items-center">
+                                        <li>
+                                            <a href="javascript:void(0)" class="search search-toggle">
+                                                <i class="ion-ios-search-strong"></i>
+                                            </a>
+                                        </li>
+                                        @if(auth()->check())
+                                        <li class="position-relative ">
+                                            <a class="offcanvas-toggle" href="#offcanvas-wishlist">
+                                                <i class="ion-android-favorite-outline"></i>
+                                                <span class="badge cbdg1 wishCount">{{$wishlistCount}}</span>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        <li class="cart-block position-relative ">
+                                            <a class="offcanvas-toggle" href="#offcanvas-cart">
+                                                <i class="ion-bag"></i>
+                                                <span class="badge cbdg1">{{$cartCount}}</span>
+                                            </a>
+                                        </li>
+                                        <li class="me-0 cart-block position-relative d-none d-sm-block">
+                                            @if(auth()->check())
+                                            <a href="javascript:void(0)"><i class="icon-user"></i> <i class="ion-ios-arrow-down"></i></a>
+                                            <ul class="sub-menu side-ul">
+                                                <li><a href="{{route('my-account')}}">My Account</a></li>
+                                                <li>
+                                                    <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <button type="submit" class="logout-btn">Logout</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                            @else
+                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
+                                                <i class="icon-user"></i>
+                                            </a>
+                                            @endif
+                                        </li>
+                                        <!-- cart block end -->
+                                    </ul>
+                                </div>
+                                <div class="mobile-menu-toggle theme1 d-lg-none">
+                                    <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
+                                        <svg viewbox="0 0 800 600">
+                                            <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                            <path d="M300,320 L540,320" id="middle"></path>
+                                            <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318)">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- header-middle end -->
-    </header>
-    <!-- header end -->
+            <!-- header-middle end -->
+        </header>
+        <!-- header end -->
