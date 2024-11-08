@@ -305,9 +305,15 @@
                 <strong>Subtotal :</strong>
                 <span class="amount">₹{{$cart_total}}</span>
             </div>
-            <a href="{{route('cart')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block me-sm-2">view
-                Bag</a>
-            <a href="{{route('checkout')}}" class="btn theme--btn1 btn--lg text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
+            <div class="justify-content-center" style="display:flex">
+                <a href="{{route('cart')}}" class="btn theme--btn1 btn--cm text-uppercase  d-block d-sm-inline-block me-sm-2">view
+                    Bag</a>
+                @if(auth()->check())
+                <a href="{{route('checkout')}}" class="btn theme--btn1 btn--cm text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
+                @else
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login" class="btn theme--btn1 btn--cm text-uppercase  d-block d-sm-inline-block mt-4 mt-sm-0">checkout</a>
+                @endif
+            </div>
             <!-- <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p> -->
             @else
             <div class="text-center ">

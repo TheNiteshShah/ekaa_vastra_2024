@@ -1656,6 +1656,9 @@ textarea:active::placeholder {
 .btn--md {
   padding: 10px 25px;
 }
+.btn--cm {
+  padding: 10px 50px;
+}
 
 .btn--lg {
   padding: 22px 55px;
