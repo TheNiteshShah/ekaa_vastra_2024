@@ -534,6 +534,7 @@
     function updateTypeId(element, typeId) {
         // Update the hidden input value
         document.getElementById('activeTypeId').value = typeId;
+        document.getElementById('activeTypeId').value = typeId;
         // Remove the "active" class from all <a> elements
         var links = document.querySelectorAll('#sizeList li a');
         links.forEach(function(link) {

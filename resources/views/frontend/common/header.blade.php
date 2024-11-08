@@ -195,7 +195,7 @@
                         <h6 class="product-price"><del class="del" style="font-size: 13px;">₹{{$wish->product->mrp}}</del>
                             <span class="onsale" style="font-size: 13px;">₹{{$wish->product->selling_price}}</span>
                         </h6>
-                        <button class="btn theme-btn--dark3 btn--sm mt-10">
+                        <button class="btn theme-btn--dark3 btn--sm mt-10" data-bs-toggle="modal" data-bs-target="#wishSizeModal" data-product-id="{{ $wish->product->id }}" data-type-id="" data-qty="1">
                             <span class="me-2"><i class="ion-bag"></i></span>
                             Move to bag
                         </button>

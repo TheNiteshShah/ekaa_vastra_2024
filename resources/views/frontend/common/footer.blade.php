@@ -130,7 +130,32 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     <button class="btn-close"><i class="ion-android-close"></i></button>
 </div>
 <!-- search-box and overlay end -->
+<div class="modal fade" id="wishSizeModal" tabindex="-1" aria-labelledby="wishSizeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="wishSizeModalLabel">Select Size</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <nav class="shop-grid-nav mt-20">
+                    <ul class="product-tag d-flex flex-wrap sizeList" id="wishSizeList">
+                    </ul>
+                </nav>
+                <hr>
+                <div style="text-align: center;">
+                    <button onclick="event.preventDefault(); document.getElementById('move-product').submit();" class="btn theme-btn--dark1 btn--md">Done </button>
+                </div>
+            </div>
+        </div>
 
+    </div>
+</div>
+<form method="post" id="move-product" action="{{ route('moveToCart')}}">
+    @csrf
+    <input type="hidden" name="ProductId" id="wishProductId" value="">
+    <input type="hidden" name="TypeId" id="wishTypeId" value="">
+</form>
 
 
 
@@ -388,6 +413,42 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     });
+    $(document).ready(function() {
+        $('.btn[data-bs-target="#wishSizeModal"]').on('click', function() {
+            var productId = $(this).data('product-id');
+            var activeTypeId = $(this).data('type-id');
+            var sizesList = $('#wishSizeList');
+            sizesList.html('loading...');
+            $.ajax({
+                url: baseUrl + 'get-sizes/' + productId,
+                method: 'GET',
+                success: function(response) {
+                    sizesList.empty();
+                    response.forEach(function(item) {
+                        var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                    });
+                    document.getElementById('wishProductId').value = productId;
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching sizes:', error);
+                }
+            });
+        });
+    });
+    function updateWishTypeId(element, typeId) {
+        // Update the hidden input value
+        document.getElementById('wishTypeId').value = typeId;
+        // Remove the "active" class from all <a> elements
+        var links = document.querySelectorAll('#wishSizeList li a');
+        links.forEach(function(link) {
+            link.classList.remove('active');
+        });
+        // Add the "active" class to the clicked <a> element
+        element.classList.add('active');
+    }
+
     $(document).ready(function() {
         $('.btn[data-bs-target="#quantityModal"]').on('click', function() {
             var productId = $(this).data('product-id');
@@ -705,13 +766,17 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 var wishlistHtml = '';
                 if (response.wishlistItems.length > 0) {
                     $.each(response.wishlistItems, function(index, wish) {
-                          var imageUrl = "{{ asset($wish->product->image) }}"
                         wishlistHtml += '<li>';
-                        wishlistHtml += '<a href="' + wish.image + '" class="image"><img src="' + "{{ asset($wish->product->image) }}" + '" alt="Product Image"></a>';
-
-                        wishlistHtml += '<div class="content">'; 
-                        wishlistHtml += '<a href="' + wish.product_url + '" class="title">' + wish.product.name + '</a>';
-                        wishlistHtml += '<button class="btn theme-btn--dark3 btn--sm mt-10"> <span class="me-2"><i class="ion-bag"></i></span> Move to bag </button>';
+                        wishlistHtml += '<a href="' + wish.product_url + '" class="image"><img src="' + wish.product_image + '" alt="Product Image"></a>';
+                        wishlistHtml += '<div class="content">';
+                        wishlistHtml += '<a href="' + wish.product_url + '" class="title">' + wish.product_name + '</a>';
+                        wishlistHtml += '<h6 class="product-price">';
+                        wishlistHtml += '<del class="del" style="font-size: 13px;">₹' + wish.product_mrp + '</del>';
+                        wishlistHtml += '<span class="onsale" style="font-size: 13px;">₹' + wish.product_selling_price + '</span>';
+                        wishlistHtml += '</h6>';
+                        wishlistHtml += '<button class="btn theme-btn--dark3 btn--sm mt-10" data-bs-toggle="modal" data-bs-target="#wishSizeModal"';
+                        wishlistHtml += ' data-product-id="' + wish.id + '" data-type-id="' + wish.type_id + '" >';
+                        wishlistHtml += '<span class="me-2"><i class="ion-bag"></i></span> Move to bag</button>';
                         wishlistHtml += '</div>';
                         wishlistHtml += '</li>';
                     });

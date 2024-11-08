@@ -82,6 +82,7 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/update-cart', [CartController::class, 'updateCart'])->name('updateCart');
     //------------ Wishlist ----------------
     Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle')->middleware('auth');
+    Route::post('/move-to-cart', [WishlistController::class, 'moveToCart'])->name('moveToCart')->middleware('auth');
     //------------ Order ----------------
     Route::get('/checkout', [UserOrderController::class, 'index'])->name('checkout')->middleware('auth');
     Route::get('/get-shipping-charges/{id}', [UserOrderController::class, 'getShippingCharges'])->name('getShippingCharges')->middleware('auth');
