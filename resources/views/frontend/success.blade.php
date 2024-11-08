@@ -21,8 +21,14 @@
         <h4>Order Success!</h4>
         <p class="mt-3">Your order has been placed successfully.</p>
         <p class="mt-1">Order ID: #{{ $order_id }}</p>
-        <a class="mt-2" href="{{ route('/') }}" class="btn theme-btn--dark1 btn--md">Return to Home</a><br>
-        <a class="mt-2" href="{{ route('my-account') }}" class="btn theme-btn--dark1 btn--md">My Orders</a>
+        <div class="gap-3 justify-content-center mt-2"style="display: flex;">
+            <a class="mt-2" href="{{ route('/') }}">
+                <button class="btn theme-btn--dark1 btn--md">Return to Home</button>
+            </a>
+            <a class="mt-2" href="{{ route('my-account') }}">
+                <button class="btn theme-btn--dark1 btn--md">My Orders</button>
+            </a>
+        </div>
     </div>
 </section>
 @endsection
