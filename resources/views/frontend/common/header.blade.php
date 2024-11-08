@@ -31,9 +31,9 @@
             }
 
             .rotating-image {
-                width: 100px;
+                width: 80px;
                 /* Adjust as needed */
-                height: 100px;
+                height: 80px;
             }
         }
 
