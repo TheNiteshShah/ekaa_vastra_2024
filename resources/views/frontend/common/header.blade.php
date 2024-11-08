@@ -31,9 +31,9 @@
             }
 
             .rotating-image {
-                width: 120px;
+                width: 100px;
                 /* Adjust as needed */
-                height: 120px;
+                height: 100px;
             }
         }
 
@@ -71,11 +71,11 @@
 
         /* Rotating image */
         .rotating-image {
-            width: 140px;
+            width: 120px;
             /* Adjust as needed */
-            height: 140px;
+            height: 120px;
             /* Adjust as needed */
-            animation: rotate360 4s linear infinite;
+            animation: rotate360 3s linear infinite;
         }
 
         /* Rotation animation */
