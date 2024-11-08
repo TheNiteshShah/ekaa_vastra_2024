@@ -235,17 +235,63 @@
 </section>
 @endif
 <!-- testimonial-section end -->
+ <!-- Start promises-->
+<section class="static-media-section bg-white pt-70 pb-40">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-2 col-sm-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/free-shipping.png')}}" alt="icon">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">Free Shipping*</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/india.png')}}" alt="icon">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">Shipping pan-India</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/card.png')}}" alt="icon">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">Secure Payment</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" alt="icon">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">Cod Available</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/customer-service.png')}}" alt="icon">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">Active Support</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End promises -->
 <!-- common-banner start -->
-<div class="common-banner pb-30 bg-white">
+<!-- <div class="common-banner pb-30 bg-white">
     <div class="">
         <div class="row">
             <div class="col-12">
                 <div class="position-relative overflow-hidden">
                     <div class="banner-thumb banner-lagre">
                         <picture>
-                            <!-- Source for mobile -->
                             <source srcset="{{asset('frontend/img/promises.jpg')}}" loading="lazy" media="(max-width: 768px)">
-                            <!-- Source for web -->
                             <img src="{{asset('frontend/img/promises.jpg')}}" loading="lazy" alt="Slider Image">
                         </picture>
                     </div>
@@ -253,7 +299,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- common-banner end -->
 
 
