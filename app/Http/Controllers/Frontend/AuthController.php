@@ -20,7 +20,7 @@ class AuthController extends Controller
         $phone = $request->input('phone');
         $uid = $request->input('token');
         $user = User::firstOrCreate(['firebase_id' => $uid, 'phone' => $phone]);
-        $user_id = Auth::id();
+        $user_id =$user->id;
         $ip = request()->ip();
         $cart_data = Session::get('cart_data', []);
         if ($cart_data) {
@@ -30,7 +30,7 @@ class AuthController extends Controller
                     continue;
                 }
                 $cartInfo = CartModal::where(['user_id' => $user_id, 'type_id' => $item['type_id']])->first();
-                if (!$cartInfo) {
+                if (empty($cartInfo)) {
                     $cart_insert = new CartModal();
                     $cart_insert->user_id = $user_id;
                     $cart_insert->product_id = $item['product_id'];
