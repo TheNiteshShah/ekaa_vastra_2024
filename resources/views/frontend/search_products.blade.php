@@ -112,10 +112,10 @@
 <div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff;z-index:9999;">
     <div class="row text-center">
         <div class="col-6 p-2">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="assets/img/icon/filter.png"> FILTER</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="{{asset('frontend/img/icon/filter.png')}}"> FILTER</a>
         </div>
         <div class="col-6 p-2" style="border-right: 2px solid #dee2e6 ;">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="assets/img/icon/sort.png"> SORT BY </a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="{{asset('frontend/img/icon/sort.png')}}"> SORT BY </a>
         </div>
 
 

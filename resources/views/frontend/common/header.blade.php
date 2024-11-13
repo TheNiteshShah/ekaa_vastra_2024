@@ -305,7 +305,7 @@
                 <strong>Subtotal :</strong>
                 <span class="amount">₹{{$cart_total}}</span>
             </div>
-            <div class="justify-content-center" style="display:flex">
+            <div class="d-md-flex d-lg-flex d-xl-flex justify-content-center">
                 <a href="{{route('cart')}}" class="btn theme--btn1 btn--cm text-uppercase  d-block d-sm-inline-block me-sm-2">view
                     Bag</a>
                 @if(auth()->check())
@@ -327,15 +327,15 @@
 
 
     <!-- Login Modal -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog">
+    <div class="modal fade " id="login" tabindex="-1" role="dialog" style="z-index:99999">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="border:none">
                 <div class="modal-header">
                     <div class="row">
-                        <div class="col-md-11 text-center">
+                        <div class="col-md-11 col-11 text-center">
                             <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1 col-1">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>
@@ -344,8 +344,8 @@
                     <h4 class="title text-capitalize pb-30 text-center">Log in to your account</h4>
                     <form class="log-in-form" id="login-form">
                         <div class="form-group row">
-                            <label for="loginPhone" class="col-md-2 col-form-label" style="text-align:end">+91</label>
-                            <div class="col-md-10">
+                            <label for="loginPhone" class="col-md-2 col-2 col-form-label" style="text-align:end">+91</label>
+                            <div class="col-md-10 col-10">
                                 <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="loginPhone" placeholder="Mobile Number" required>
                             </div>
                         </div>
@@ -365,7 +365,7 @@
     </div>
     <!-- Login Modal -->
     <!-- Signup Modal -->
-    <div class="modal fade" id="signup" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal fade" id="signup" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="z-index:9999999">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="border:none">
                 <div class="modal-header">
@@ -435,15 +435,15 @@
         }
     </style>
     <!-- OTP Modal -->
-    <div class="modal fade" id="otp" tabindex="-1" role="dialog">
+    <div class="modal fade" id="otp" tabindex="-1" role="dialog" style="z-index:9999999">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="border:none">
                 <div class="modal-header">
                     <div class="row">
-                        <div class="col-md-11 text-center">
+                        <div class="col-md-11 col-11 text-center">
                             <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1 col-1">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>

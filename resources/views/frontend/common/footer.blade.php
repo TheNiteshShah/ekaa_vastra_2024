@@ -400,8 +400,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     sizesList.empty();
                     response.forEach(function(item) {
+                        var out='';
+                        if(item.inventory==0){
+                            out="out";
+                        }
                         var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;
@@ -415,7 +419,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         });
     });
     $(document).ready(function() {
-        $('.btn[data-bs-target="#wishSizeModal"]').on('click', function() {
+        $(document).on('click', '.btn[data-bs-target="#wishSizeModal"]', function() {
             var productId = $(this).data('product-id');
             var activeTypeId = $(this).data('type-id');
             var sizesList = $('#wishSizeList');
@@ -426,8 +430,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     sizesList.empty();
                     response.forEach(function(item) {
+                        var out='';
+                        if(item.inventory==0){
+                            out="out";
+                        }
                         var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
                     });
                     document.getElementById('wishProductId').value = productId;
 
@@ -464,8 +472,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     QtyList.empty();
                     response.forEach(function(item) {
+                        var out='';
+                            if(!item.stock){
+                                out="out";
+                            }
                         var activeClass = (item.qty == activeQty) ? 'active' : '';
-                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + '"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
+                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;
@@ -777,7 +789,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         wishlistHtml += '<span class="onsale" style="font-size: 13px;">₹' + wish.product_selling_price + '</span>';
                         wishlistHtml += '</h6>';
                         wishlistHtml += '<button class="btn theme-btn--dark3 btn--sm mt-10" data-bs-toggle="modal" data-bs-target="#wishSizeModal"';
-                        wishlistHtml += ' data-product-id="' + wish.id + '" data-type-id="' + wish.type_id + '" >';
+                        wishlistHtml += ' data-product-id="' + wish.product_id + '" data-type-id="' + wish.type_id + '" >';
                         wishlistHtml += '<span class="me-2"><i class="ion-bag"></i></span> Move to bag</button>';
                         wishlistHtml += '</div>';
                         wishlistHtml += '</li>';

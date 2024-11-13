@@ -281,7 +281,7 @@ class CartController extends Controller
         }
         $cartInfo = CartModal::where(['user_id' => $user_id, 'type_id' => $CartTypeId])->first();
 
-        $cartInfo->type_id = $CartTypeId;
+        $cartInfo->type_id = $activeTypeId;
         $cartInfo->quantity = $activeQty;
         $cartInfo->save();
         if ($cartInfo) {

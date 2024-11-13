@@ -179,7 +179,7 @@ class HomeController extends Controller
         $query = $request->input('search');
 
         // Query products by name (case-insensitive search)
-        $productData = ProductModal::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
+        $productData = ProductModal::where('name', 'LIKE', '%' . $query . '%')->where('is_active', 1)->paginate(10);
 
         $title = 'Search - ' . $query;
         return view('frontend/search_products', compact('productData', 'title'));

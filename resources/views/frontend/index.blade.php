@@ -239,7 +239,7 @@
 <section class="static-media-section bg-white pt-70 pb-40">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-2 col-sm-6 mb-30">
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
                     <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/free-shipping.png')}}" alt="icon">
                     <div class="media-body text-center">
@@ -247,7 +247,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 mb-30">
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
                     <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/india.png')}}" alt="icon">
                     <div class="media-body text-center">
@@ -255,7 +255,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 mb-30">
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
                     <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/card.png')}}" alt="icon">
                     <div class="media-body text-center">
@@ -263,7 +263,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 mb-30">
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
                     <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" alt="icon">
                     <div class="media-body text-center">
@@ -271,7 +271,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 mb-30">
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
                     <img class="align-self-center mb-20" src="{{asset('frontend/img/icon/customer-service.png')}}" alt="icon">
                     <div class="media-body text-center">

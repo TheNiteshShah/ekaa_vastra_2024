@@ -183,7 +183,8 @@ class TypeController extends Controller
             $size = $type->size;
             return [
                 'type_id' => $type->id,
-                'size' => $size
+                'inventory' => $type->inventory,
+                'size' => $size,
             ];
         });
         return response()->json($sizes);
@@ -191,12 +192,13 @@ class TypeController extends Controller
     public function getQty(Request $req, $id)
     {
         $type = TypeModal::Find($id);
-        $loop = ($type->inventory > 5) ? 5 : $type->inventory;
+        $loop = 5;
         $inventory = [];
         for ($i = 1; $i <= $loop; $i++) {
             $inventory[] = [
                 'type_id' => $id,
-                'qty' => $i
+                'qty' => $i,
+                'stock' => $type->inventory >= $i
             ];
         }
         return response()->json($inventory);

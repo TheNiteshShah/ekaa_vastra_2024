@@ -85,7 +85,7 @@ class WishlistController extends Controller
                 'message' => 'Product is out of stock'
             ];
         }
-        $cartInfo = CartModal::where(['user_id' => $user_id, 'type_id' => $TypeId])->first();
+        $cartInfo = CartModal::where(['user_id' => $user_id, 'product_id' => $ProductId])->first();
         if (empty($cartInfo)) {
             //---- Add in cart -------
             $cartInfo = CartModal::create([
@@ -95,6 +95,9 @@ class WishlistController extends Controller
                 'quantity' => 1,
                 'ip' => $request->ip(),
             ]);
+        } else {
+            $cartInfo->type_id=$TypeId;
+            $cartInfo->save();
         }
         //---- Remove from wishlist -------
         $wishlistItem = WishListModal::where(['user_id' => $user_id, 'product_id' => $ProductId])->first();
@@ -106,7 +109,6 @@ class WishlistController extends Controller
             return redirect()->back()->with('status-success', 'Item successfully move to your cart');
         } else {
             return redirect()->back()->with('error-success', 'Item successfully move to your cart');
-
         }
     }
     // ============================= END MOVE TO CART ============================ 

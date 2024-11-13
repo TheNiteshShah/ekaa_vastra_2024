@@ -46,6 +46,12 @@ class UserOrderController extends Controller
         if (count($cartItems) == 0) {
             return Redirect('/');
         }
+        foreach ($cartItems as $item) {
+            $type_data = TypeModal::where(['id' => $item->type_id, 'is_active' => 1])->first();
+            if (!$type_data || $type_data->inventory < $item->quantity) {
+                return redirect()->back()->with('status-error', $type_data->product->name . ' is out of stock');
+            }
+        }
         $defaultAddress = UserAddressModal::where('id', $user->default_address_id)->first();
         $userAddressData = UserAddressModal::where('user_id', $user_id)->get();
         $PinCodeServiceable = false;
@@ -270,6 +276,12 @@ class UserOrderController extends Controller
         $user_id = Auth::id();
         $ip = request()->ip();
         $cartItems = CartModal::where(['user_id' => $user_id])->get();
+        foreach ($cartItems as $item) {
+            $type_data = TypeModal::where(['id' => $item->type_id, 'is_active' => 1])->first();
+            if (!$type_data || $type_data->inventory < $item->quantity) {
+                return redirect()->back()->with('status-error', $type_data->product->name . ' is out of stock');
+            }
+        }
         $user = User::where(['id' => $user_id])->first();
         $defaultAddress = UserAddressModal::where('id', $user->default_address_id)->first();
         //---------- ORDER1 Entry -----------
