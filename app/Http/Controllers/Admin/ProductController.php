@@ -102,6 +102,9 @@ class ProductController extends Controller
             $uploadData->image4 = $image4;
             $uploadData->size_chart = $size_chart;
             $uploadData->label = $req->label;
+            $uploadData->seo_title = $req->seo_title;
+            $uploadData->seo_description = $req->seo_description;
+            $uploadData->seo_keywords = $req->seo_keywords;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();

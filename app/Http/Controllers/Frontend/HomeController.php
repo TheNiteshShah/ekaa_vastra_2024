@@ -36,7 +36,7 @@ class HomeController extends Controller
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
-        
+
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
         return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData',))->withTitle('Ekaa Vastra');
@@ -75,8 +75,10 @@ class HomeController extends Controller
             ->where('id', '!=', $productData->id)
             ->limit(10)
             ->get();
-        $title = $productData->name . ' - Ekaa Vastra';
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo'));
+        $title = $productData->seo_title ? $productData->seo_title : $productData->name . ' - Ekaa Vastra';
+        $seo_description = $productData->seo_description;
+        $seo_keywords = $productData->seo_keywords;
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo','seo_description','seo_keywords'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 

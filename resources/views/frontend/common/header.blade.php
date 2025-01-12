@@ -8,6 +8,9 @@
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ !empty($seo_description)?$seo_description:'' }}">
+    <meta name="keywords" content="{{ !empty($seo_keywords)?$seo_keywords:'' }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/img/favicon.png')}}" />
 
@@ -171,7 +174,7 @@
             <div class="border-bottom mb-4 pb-4 d-flex align-items-center justify-content-between">
                 <!-- Logo -->
                 <img src="{{asset('frontend/img/logo.svg')}}" alt="logo" width="80" class="img-fluid">
-    
+
                 <!-- Close Button -->
                 <button class="offcanvas-close">×</button>
             </div>
