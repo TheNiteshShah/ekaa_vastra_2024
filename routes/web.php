@@ -45,6 +45,9 @@ use App\Http\Controllers\Admin\FabricController;
 |
 */
 
+Route::get('/sitemap.xml', function () {
+    return response()->file(public_path('sitemap.xml'));
+});
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     // $exitCode = Artisan::call('route:clear');
