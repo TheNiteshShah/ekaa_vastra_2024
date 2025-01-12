@@ -518,14 +518,14 @@ dt {
   background-color: left-bar;
 }
 .submenu li a:hover {
-  color: #ed3338;
+  color: #292929;
 }
 
 .submenu > li > a {
   padding-left: 55px;
 }
 .submenu li.active > a {
-  color: #ed3338;
+  color: #292929;
   background-color: #ffffff;
 }
 .topbar {
@@ -627,7 +627,7 @@ dt {
   transition: all 0.5s;
 }
 #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
-  color: #ed3338;
+  color: #292929;
   text-decoration: none;
 }
 #sidebar-menu > ul > li > a > span {
@@ -651,8 +651,8 @@ dt {
   width: auto;
 }
 #sidebar-menu > ul > li > a.active {
-  color: #ed3338 !important;
-  background-color: #f9f9f9;
+  color: #f6f6f6 !important;
+  background-color: #292929;
 }
 .menu-title {
   padding: 12px 20px !important;

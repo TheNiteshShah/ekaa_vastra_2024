@@ -333,7 +333,7 @@
                                 <a class="dropdown-item" href="{{route('admin_profile')}}"><i class="mdi mdi-account-circle m-r-5"></i> Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <?php if (!empty(Session::get('admin_data'))) { ?>
-                                    <a class="dropdown-item text-danger" href="{{route('admin_logout')}}"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                                    <a class="dropdown-item" style="color:#292929" href="{{route('admin_logout')}}"><i class="mdi mdi-power"></i> Logout</a>
                                 <?php } ?>
                             </div>
                         </div>

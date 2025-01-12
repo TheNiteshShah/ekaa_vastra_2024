@@ -168,29 +168,45 @@
     <!-- offcanvas-mobile-menu start -->
     <div id="offcanvas-mobile-menu" class="offcanvas theme1 offcanvas-mobile-menu">
         <div class="inner">
-            <div class="border-bottom mb-4 pb-4 text-end">
+            <div class="border-bottom mb-4 pb-4 d-flex align-items-center justify-content-between">
+                <!-- Logo -->
+                <img src="{{asset('frontend/img/logo.svg')}}" alt="logo" width="80" class="img-fluid">
+    
+                <!-- Close Button -->
                 <button class="offcanvas-close">×</button>
             </div>
+
             <div class="offcanvas-head mb-4">
                 <nav class="offcanvas-top-nav">
                     <ul class="d-flex justify-content-center align-items-center">
+                        @if(auth()->check())
+                        <li class="mx-3 btn theme-btn--dark3 btn-md"><a href="{{route('my-account')}}">My Account</a></li>
+                        @endif
                         <li class="mx-3">
-                            <!-- <a href="wishlist.html"> <i class="ion-android-favorite-outline"></i> Wishlist
-                                <span>(0)</span></a> -->
                             @if(auth()->check())
+                            <!-- Logout Button -->
                             <form method="POST" id="logout-form" action="">
                                 @csrf
-                                <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <button type="button" class="btn theme-btn--dark3 btn-md d-none d-md-inline" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </button>
+                                <a href="javascript:void(0)" class="btn theme-btn--dark3 btn-md btn-sm d-inline d-md-none" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                    <!-- <i class="icon-logout"></i> -->
+                                </a>
                             </form>
                             @else
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login">
-                                <i class="icon-user"></i>
+                            <!-- Login Button -->
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#login" class="btn theme-btn--dark3 btn-md">
+                                <i class="icon-user d-none d-md-inline"></i>
+                                <span class="d-inline d-md-none">Login</span>
                             </a>
                             @endif
                         </li>
                     </ul>
                 </nav>
             </div>
+
             <nav class="offcanvas-menu">
                 <ul>
                     <li><a href="{{route('/')}}">Home</a></li>

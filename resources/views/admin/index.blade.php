@@ -4,6 +4,10 @@
     page-title-box {
         background-image: url("..\images\bg.jpg") !important;
     }
+
+    .bg-theme {
+        background-color: #292929;
+    }
 </style>
 
 
@@ -27,7 +31,7 @@
         <div class="page-content-wrapper">
             <div class="row">
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-danger mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('all_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -69,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-info mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('category.index')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -90,7 +94,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-danger mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('subcategory.index')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -111,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-success  mini-stat position-relative">
+                    <div class="card bg-secondary  mini-stat position-relative">
                         <a href="{{route('new_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -132,7 +136,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-info mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('accepted_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -174,7 +178,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-success  mini-stat position-relative">
+                    <div class="card bg-secondary  mini-stat position-relative">
                         <a href="{{route('delivered_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -195,7 +199,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-danger mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('rejected_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -237,7 +241,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-success  mini-stat position-relative">
+                    <div class="card bg-secondary  mini-stat position-relative">
                         <a href="{{route('users.index')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
@@ -258,7 +262,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-info mini-stat position-relative">
+                    <div class="card bg-secondary mini-stat position-relative">
                         <a href="{{route('all_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
