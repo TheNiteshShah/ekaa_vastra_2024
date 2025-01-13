@@ -7,9 +7,9 @@
         @foreach($sliderData as $index => $slider)
         <picture>
             <!-- Mobile optimized image with WebP support and explicit dimensions -->
-            <source srcset="{{ asset($slider->mob_image) }}" loading="lazy" media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
+            <source srcset="{{ asset($slider->mob_image) }}"  media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
             <!-- Fallback image with proper alt text -->
-            <img src="{{ asset($slider->web_image) }}" loading="lazy" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
+            <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
         </picture>
         @endforeach
     </div>
