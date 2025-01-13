@@ -41,7 +41,7 @@ class HomeController extends Controller
         $seo_keywords = "Ekaa Vastra, women's clothing, kurta sets, kurtas, co-ord sets, tops, pants, 3-piece suit sets, ethnic wear, stylish women's fashion, premium quality clothing";
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData','title','seo_description','seo_keywords'));
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords'));
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
@@ -80,43 +80,50 @@ class HomeController extends Controller
         $title = $productData->seo_title ? $productData->seo_title : $productData->name . ' - Ekaa Vastra';
         $seo_description = $productData->seo_description;
         $seo_keywords = $productData->seo_keywords;
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo','seo_description','seo_keywords'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo', 'seo_description', 'seo_keywords'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 
     public function contactUs(Request $req)
     {
-        return view('frontend.contact_us');
+        $seo_description = "Contact Us Ekaa Vastra for all your ethnic and western wear inquiries. Email: ekaavastra@gmail.com | Contact: +91-ekaavastra@gmail.com";
+        return view('frontend.contact_us', compact('seo_description'));
     }
     // ============================= END CONTACT US ============================ 
     // ============================= START REFUND POLICY ============================ 
     public function refundPolicy(Request $req)
     {
-        return view('frontend.refund_policy');
+
+        $seo_description = "Discover Ekaa Vastra's Return and Refund Policy for hassle-free returns and refunds on products. Learn about eligibility, timelines, and the return process.";
+        return view('frontend.refund_policy', compact('seo_description'));
     }
     // ============================= END REFUND POLICY ============================ 
     // ============================= START TERMS AND CONDITIONS ============================ 
     public function termsAndConditions(Request $req)
     {
-        return view('frontend.terms_and_conditions');
+        $seo_description = "Review Ekaa Vastra's Terms and Conditions to understand the guidelines for using our website, placing orders, and accessing our women's ethnic wear collection.";
+        return view('frontend.terms_and_conditions', compact('seo_description'));
     }
     // ============================= END TERMS AND CONDITIONS ============================ 
     // ============================= START PRIVACY POLICY ============================ 
     public function privacyPolicy(Request $req)
     {
-        return view('frontend.privacy_policy');
+        $seo_description = "Explore Ekaa Vastra's Privacy Policy to understand how we collect, use, and protect your personal information. Your privacy and data security are our top priorities.";
+        return view('frontend.privacy_policy', compact('seo_description'));
     }
     // ============================= END PRIVACY POLICY ============================ 
     // ============================= START SHIPPING POLICY ============================ 
     public function shippingPolicy(Request $req)
     {
-        return view('frontend.shipping_policy');
+        $seo_description = "Explore Ekaa Vastra's Shipping Policy to learn about our delivery process, shipping timelines, charges, and order handling for clothing.";
+        return view('frontend.shipping_policy', compact('seo_description'));
     }
     // ============================= END SHIPPING POLICY ============================ 
     // ============================= START PRIVACY POLICY ============================ 
     public function aboutUs(Request $req)
     {
-        return view('frontend.about_us');
+        $seo_description = 'The story behind our name, Ekaa Vastra, is one of strength and beauty. Ekaa, meaning "one of its own kind," and Vastra, Hindi for "clothes," represent our commitment to uniqueness and individuality. Our founder\'s vision is to create a brand that celebrates the distinct beauty of each wearer, just like the multifaceted Goddess Durga, who inspires us with her strength, grace, and resilience';
+        return view('frontend.about_us', compact('seo_description'));
     }
     // ============================= END PRIVACY POLICY ============================ 
     // ============================= START MY ACCOUNT ============================ 

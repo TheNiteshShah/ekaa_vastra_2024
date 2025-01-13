@@ -541,10 +541,17 @@
     <header id="sticky" class="header2 style1 theme1" style="position: sticky; top: 0; left: 0; width: 100%; background: #ffffff; z-index: 999;">
         <!-- custom marquee start -->
         <div class="custom-marquee" role="region">
-            <div class="track">
-                <span class="content marquee-text">
-                    Our website is currently under development, but you can still place your order by contacting us on WhatsApp.
-                </span>
+            <div class="track ">
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
+                <span class="content marquee-text">Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our website is currently under development, but you can still place your order by contacting us on WhatsApp.</span>
             </div>
         </div>
         <!-- custom marquee end -->
@@ -563,18 +570,18 @@
                     <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
                         <nav class="header-bottom theme1">
                             <ul class="main-menu d-flex align-items-center">
-                                <li><a href="{{ route('/') }}" title="Home Page">Home</a></li>
+                                <li><a href="{{ route('/') }}">Home</a></li>
                                 @foreach($categoryData as $category)
                                 <li>
-                                    <a href="javascript:void(0)" title="View {{ $category->name }} Collection">{{ $category->name }} <i class="ion-ios-arrow-down"></i></a>
+                                    <a href="javascript:void(0)">{{ $category->name }} <i class="ion-ios-arrow-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($category->SubCategory as $subcategory)
-                                        <li><a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($subcategory->name)))) }}" title="Explore {{ $subcategory->name }} Collection">{{ $subcategory->name }}</a></li>
+                                        <li><a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($subcategory->name)))) }}">{{ $subcategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
                                 @endforeach
-                                <li><a href="{{ route('contact-us') }}" title="Contact Us">Contact Us</a></li>
+                                <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
