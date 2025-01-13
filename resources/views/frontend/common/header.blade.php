@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="preload" href="{{ !empty($imageUrl)?$imageUrl:'' }}" as="image">
+    <link rel="preload" href="{{ !empty($imageUrl)?asset($imageUrl):'' }}" as="image">
     <style>
         @media screen and (max-width: 768px) {
             body {
