@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- SEO Meta Tags -->
+    <meta name="title" content="@yield('title')">
     <meta name="description" content="{{ !empty($seo_description)?$seo_description:'' }}">
     <meta name="keywords" content="{{ !empty($seo_keywords)?$seo_keywords:'' }}">
     <meta name="robots" content="index, follow">
