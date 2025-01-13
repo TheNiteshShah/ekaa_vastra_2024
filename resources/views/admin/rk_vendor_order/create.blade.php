@@ -113,7 +113,7 @@
                                     <div id="more"></div>
                                     <div class="form-group">
                                         <div class="w-100 text-center">
-                                            <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-file"></i> Generate Invoice</button>
+                                            <button type="submit" style="margin-top: 10px;" class="btn btn-info"><i class="fa fa-save"></i> Generate Invoice</button>
 
                                         </div>
                                     </div>

@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="w-100 text-center">
-                                            <button type="submit" style="margin-top: 10px;" class="btn btn-danger"><i class="fa fa-user"></i> Submit</button>
+                                            <button type="submit" style="margin-top: 10px;" class="btn btn-info"><i class="fa fa-save"></i> Submit</button>
 
                                         </div>
                                     </div>

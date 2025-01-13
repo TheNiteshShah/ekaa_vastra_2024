@@ -1,29 +1,33 @@
 @php
 $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
 @endphp
-<!-- footer strat -->
-<footer class="bg-lighten2 theme1 position-relative">
-    <!-- footer bottom start -->
+<!-- Footer Start -->
+<footer class="bg-lighten2 theme1 position-relative" aria-label="Footer">
+    <!-- Footer Bottom Start -->
     <div class="footer-bottom pt-70 pb-30">
         <div class="container">
             <div class="row">
+                <!-- Footer Logo and Description -->
                 <div class="col-12 col-sm-6 col-lg-4 mb-10">
                     <div class="footer-widget">
                         <div class="footer-logo mb-10">
-                            <a href="{{ route('/') }}">
-                                <img src="{{asset('frontend/img/logo.png')}}" style="width:30%" alt="footer logo">
+                            <a href="{{ route('/') }}" title="Ekaa Vastra Home">
+                                <img src="{{asset('frontend/img/logo.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
                             </a>
                         </div>
-                        <p class="text mb-35">Founded in 2024, our journey began with a passion that burned bright, a desire to empower people to embrace their unique spirit through the clothes they wear. </p>
+                        <p class="text mb-35">
+                            Founded in 2024, our journey began with a passion to empower individuals through the clothes they wear.
+                        </p>
                         <div class="social-network">
-                            <!-- <h2 class="title text mb-20 text-capitalize">Stay Connected:</h2> -->
                             <ul class="d-flex">
-                                <li><a target="_blank" rel="noopener" href="https://www.facebook.com/ekaavastra"><span class="ion-social-facebook"></span></a></li>
-                                <li class="me-0"><a target="_blank" rel="noopener" href="https://www.instagram.com/ekaavastra"><span class="ion-social-instagram-outline"></span></a></li>
+                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/ekaavastra" title="Ekaa Vastra Facebook"><span class="ion-social-facebook"></span></a></li>
+                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ekaavastra" title="Ekaa Vastra Instagram"><span class="ion-social-instagram-outline"></span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
+                <!-- Categories Section -->
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
@@ -31,125 +35,113 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         </div>
                         <ul class="footer-menu">
                             @foreach($categoryData as $category)
-                            <li>
-                                <a href="javascript:void(0)">{{$category->name}}</a>
-                            </li>
+                            <li><a href="/category/{{$category->slug}}" title="Shop {{$category->name}}">{{$category->name}}</a></li>
                             @endforeach
                         </ul>
-
-
                     </div>
                 </div>
+
+                <!-- Information Section -->
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
                             <h2 class="title text-dark text-capitalize">Information</h2>
                         </div>
-                        <!-- footer-menu start -->
                         <ul class="footer-menu">
-                            <li><a href="{{ route('about-us')}}">About Us</a></li>
-                            <li><a href="{{ route('privacy-policy')}}">Privacy Policy</a></li>
-                            <li><a href="{{ route('terms-and-conditions')}}">Terms & Conditions</a></li>
-                            <li><a href="{{ route('return-refund-policy')}}">Return & Refund Policy</a></li>
-                            <li><a href="{{ route('shipping-policy')}}">Shipping Policy</a></li>
+                            <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
+                            <li><a href="{{ route('privacy-policy') }}" title="Read our Privacy Policy">Privacy Policy</a></li>
+                            <li><a href="{{ route('terms-and-conditions') }}" title="Terms & Conditions">Terms & Conditions</a></li>
+                            <li><a href="{{ route('return-refund-policy') }}" title="Return & Refund Policy">Return & Refund Policy</a></li>
+                            <li><a href="{{ route('shipping-policy') }}" title="Shipping Policy">Shipping Policy</a></li>
                         </ul>
-                        <!-- footer-menu end -->
                     </div>
                 </div>
+
+                <!-- Customer Service Section -->
                 <div class="col-12 col-sm-6 col-lg-4 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
                             <h2 class="title text-dark text-capitalize">Customer Service</h2>
                         </div>
-                        <!-- footer-menu start -->
                         <ul class="footer-menu">
                             <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
-                            <li><a href="tel:+919636373743"><i class="ion-ios-telephone mr-10"></i><span>+919636373743</span></a></li>
-                            <li><a href="mailto:ekaavastra@gmail.com"><i class="ion-email mr-10"></i>
-                                    <span style="text-transform:none">ekaavastra@gmail.com</span></a></li>
+                            <li><a href="tel:+919636373743" title="Call Ekaa Vastra"><i class="ion-ios-telephone mr-10"></i><span>+91 9636373743</span></a></li>
+                            <li><a href="mailto:ekaavastra@gmail.com" title="Email Us"><i class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
                             <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Kundra Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
                         </ul>
-                        <!-- footer-menu end -->
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <!-- footer bottom end -->
-    <!-- coppy-right start -->
+    <!-- Footer Bottom End -->
+
+    <!-- Copyright Start -->
     <div class="coppy-right">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="border-top py-20">
                         <div class="row">
-                            <!-- <div class="col-12 col-md-5 col-lg-4 col-xl-3 order-last order-md-first"> -->
                             <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-last order-md-first text">
                                 <div class="text-center">
                                     <p class="mb-3 mb-md-0">&copy; <script>
                                             document.write(new Date().getFullYear())
-                                        </script> <a href="#">Ekaa Vastra</a>. All
-                                        Rights Reserved</p>
+                                        </script> <a href="{{ route('/') }}" title="Ekaa Vastra Home">Ekaa Vastra</a>. All Rights Reserved</p>
                                 </div>
                             </div>
-                            <!-- <div class="col-12 col-md-7 col-lg-8 col-xl-9">
-                                    <ul
-                                        class="footer-menu copyright-menu d-flex flex-wrap justify-content-center justify-content-md-end">
-                                        <li><a href="#">Legal Notice</a></li>
-                                        <li><a href="#">Prices drop</a></li>
-
-                                        <li><a href="#">New products</a></li>
-
-                                        <li><a href="#">Best sales</a></li>
-
-                                        <li><a href="login.html">Login</a></li>
-
-                                        <li><a href="myaccount.html">My account</a></li>
-                                    </ul>
-                                </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- copy-right end -->
-    <a class="btn btn-success white btn-lg mt-3 button-fixed-left green" href="https://wa.me/+919636373743/?text=Hi" role="button"><i class="ion-social-whatsapp-outline" style="font-size:25px"></i></a>
-</footer>
-<!-- footer end -->
+    <!-- Copyright End -->
 
-<!-- search-box and overlay start -->
-<div class="overlay">
+    <!-- WhatsApp Button -->
+    <a class="btn btn-success white btn-lg mt-3 button-fixed-left green" href="https://wa.me/+919636373743/?text=Hi" role="button" title="Contact us on WhatsApp">
+        <i class="ion-social-whatsapp-outline" style="font-size:25px"></i>
+    </a>
+</footer>
+<!-- Footer End -->
+
+
+<!-- Search Box and Overlay Start -->
+<div class="overlay" aria-hidden="true" id="search-overlay">
     <div class="scale"></div>
-    <form class="search-box" action="{{ route('search.product') }}" method="GET">
-        <input type="text" name="search" placeholder="Search products..." />
-        <button id="close" type="submit"><i class="ion-ios-search-strong"></i></button>
+    <form class="search-box" action="{{ route('search.product') }}" method="GET" role="search" aria-labelledby="search-form">
+        <label for="search-input" class="sr-only" id="search-form">Search products</label>
+        <input type="text" id="search-input" name="search" placeholder="Search products..." aria-label="Search for products" required>
+        <button id="close" type="submit" aria-label="Submit search"><i class="ion-ios-search-strong"></i></button>
     </form>
-    <button class="btn-close"><i class="ion-android-close"></i></button>
+    <button class="btn-close" aria-label="Close search overlay" onclick="closeSearchOverlay()"><i class="ion-android-close"></i></button>
 </div>
-<!-- search-box and overlay end -->
+<!-- Search Box and Overlay End -->
+
+<!-- Modal for Selecting Size -->
 <div class="modal fade" id="wishSizeModal" tabindex="-1" aria-labelledby="wishSizeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="wishSizeModalLabel">Select Size</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close modal"></button>
             </div>
             <div class="modal-body">
-                <nav class="shop-grid-nav mt-20">
-                    <ul class="product-tag d-flex flex-wrap sizeList" id="wishSizeList">
+                <p id="size-description" class="text-muted">Please select the size for your product from the available options.</p>
+                <nav class="shop-grid-nav mt-20" aria-labelledby="size-description">
+                    <ul class="product-tag d-flex flex-wrap sizeList" id="wishSizeList" aria-labelledby="size-description">
+                        <!-- Dynamically populated list of sizes will go here -->
                     </ul>
                 </nav>
                 <hr>
-                <div style="text-align: center;">
-                    <button onclick="event.preventDefault(); document.getElementById('move-product').submit();" class="btn theme-btn--dark1 btn--md">Done </button>
+                <div class="text-center">
+                    <button type="submit" onclick="event.preventDefault(); document.getElementById('move-product').submit();" class="btn theme-btn--dark1 btn--md" aria-label="Confirm size selection">Done</button>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
 <form method="post" id="move-product" action="{{ route('moveToCart')}}">
     @csrf
     <input type="hidden" name="ProductId" id="wishProductId" value="">
@@ -400,12 +392,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     sizesList.empty();
                     response.forEach(function(item) {
-                        var out='';
-                        if(item.inventory==0){
-                            out="out";
+                        var out = '';
+                        if (item.inventory == 0) {
+                            out = "out";
                         }
                         var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;
@@ -430,12 +422,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     sizesList.empty();
                     response.forEach(function(item) {
-                        var out='';
-                        if(item.inventory==0){
-                            out="out";
+                        var out = '';
+                        if (item.inventory == 0) {
+                            out = "out";
                         }
                         var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
                     });
                     document.getElementById('wishProductId').value = productId;
 
@@ -472,12 +464,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 success: function(response) {
                     QtyList.empty();
                     response.forEach(function(item) {
-                        var out='';
-                            if(!item.stock){
-                                out="out";
-                            }
+                        var out = '';
+                        if (!item.stock) {
+                            out = "out";
+                        }
                         var activeClass = (item.qty == activeQty) ? 'active' : '';
-                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + ' '+out+'"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
+                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;

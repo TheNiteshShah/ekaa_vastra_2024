@@ -253,7 +253,7 @@
             <div class="topbar-left">
                 <a href="{{route('admin_index')}}" class="logo">
                     <span>
-                        <img src="{{asset('admin/assets/images/logo.png')}}" alt="" style="width: 90px;">
+                        <img src="{{asset('frontend/img/logo.svg')}}" alt="" style="width: 100px;">
                     </span>
                     <i>
                         <img src="{{asset('admin/assets/images/favicon-bae.png')}}" alt="">
