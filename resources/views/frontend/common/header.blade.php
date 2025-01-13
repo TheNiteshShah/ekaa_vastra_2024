@@ -393,7 +393,7 @@
                 <div class="modal-header">
                     <div class="row">
                         <div class="col-md-11 col-11 text-center">
-                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                            <img src="{{asset('frontend/img/logo.svg')}}" alt="logo" style="width:30%" class="img-fluid">
                         </div>
                         <div class="col-md-1 col-1">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
