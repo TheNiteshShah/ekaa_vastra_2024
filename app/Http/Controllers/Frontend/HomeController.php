@@ -41,7 +41,8 @@ class HomeController extends Controller
         $seo_keywords = "Ekaa Vastra, women's clothing, kurta sets, kurtas, co-ord sets, tops, pants, 3-piece suit sets, ethnic wear, stylish women's fashion, premium quality clothing";
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords'));
+        $imageUrl=$sliderData->first()->web_image;
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords','imageUrl'));
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
