@@ -153,10 +153,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <!--*********************** 
         all js files
      ***********************-->
-
-<!--****************************************************** 
-        jquery,modernizr ,poppe,bootstrap,plugins and main js
-     ******************************************************-->
 <script>
     const baseUrl = "{{config('app.url')}}";
 </script>
@@ -168,8 +164,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
 <script src="{{asset('frontend/js/main.js')}}"></script>
 <script src="{{asset('frontend/custom/custom.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{{asset('frontend/js/fancybox.umd.js')}}"></script>
+<script src="{{asset('frontend/js/toastify.js')}}"></script>
 <script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
 @if (session('status-success'))
 <script>
@@ -619,7 +615,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         });
     }
     document.addEventListener('DOMContentLoaded', function() {
-
         var walletElement = document.getElementById('wallet');
         if (walletElement) {
             walletElement.addEventListener('change', function() {
@@ -742,8 +737,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         console.log(finalTotal);
         document.getElementById('subTotal').innerText = finalTotal;
     }
-
-
 
     function toggleWishlist(productId, element) {
         $.ajax({

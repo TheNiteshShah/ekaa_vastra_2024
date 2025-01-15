@@ -2,134 +2,44 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+
     <!-- SEO Meta Tags -->
-    <meta name="title" content="@yield('title')">
-    <meta name="description" content="{{ !empty($seo_description)?$seo_description:'' }}">
-    <meta name="keywords" content="{{ !empty($seo_keywords)?$seo_keywords:'' }}">
+    <title>@yield('title') | Ekaa Vastra</title>
+    <meta name="title" content="@yield('title') | Ekaa Vastra">
+    <meta name="description" content="{{ !empty($seo_description) ? $seo_description : 'Explore premium women\'s clothing including kurta sets, co-ord sets, and more at Ekaa Vastra.' }}">
+    <meta name="keywords" content="{{ !empty($seo_keywords) ? $seo_keywords : 'women clothing, kurta sets, co-ord sets, fashion, Ekaa Vastra' }}">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
     <link rel="canonical" href="{{ url()->current() }}">
+
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend/img/favicon.png')}}" />
+    <link rel="icon" href="{{ asset('frontend/img/favicon.png') }}" type="image/x-icon">
 
-    <!--********************************** 
-        all css files 
-    *************************************-->
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/fontawesome.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/ionicons.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/simple-line-icons.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/plugins/jquery-ui.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/plugins/plugins.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="preload" href="{{ !empty($imageUrl)?asset($imageUrl):'' }}" as="image">
-    <style>
-        @media screen and (max-width: 768px) {
-            body {
-                overflow-x: hidden !important;
-            }
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('frontend/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/simple-line-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/plugins/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/plugins/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/fancybox.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/toastify.min.css') }}">
 
-            .rotating-image {
-                width: 100px !important;
-                /* Adjust as needed */
-                height: 100px !important;
-            }
-        }
+    <!-- Image Preloading -->
+    @if(!empty($imageUrl))
+    <link rel="preload" href="{{ asset($imageUrl) }}" as="image">
+    @endif
+    @if(!empty($image2Url))
+    <link rel="preload" href="{{ asset($image2Url) }}" as="image">
+    @endif
 
-        .out {
-            pointer-events: none;
-            opacity: 0.3;
-            position: relative;
-        }
-
-        .out:after {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            height: 1px;
-            background: rgb(80, 80, 80);
-            content: "";
-            width: 100%;
-            display: block;
-            transform: rotate(140deg);
-        }
-
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 1);
-            /* Slightly transparent background */
-            display: flex;
-            flex-direction: column;
-            /* Stack items vertically */
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        /* Rotating image */
-        .rotating-image {
-            width: 120px;
-            /* Adjust as needed */
-            height: 120px;
-            /* Adjust as needed */
-            animation: rotate360 3s linear infinite;
-        }
-
-        /* Rotation animation */
-        @keyframes rotate360 {
-            from {
-                transform: rotateY(0deg);
-            }
-
-            to {
-                transform: rotateY(360deg);
-            }
-        }
-
-        .loading-text {
-            font-size: 20px;
-            /* font-weight: bold; */
-            color: #292929;
-            text-align: center;
-        }
-
-        /* Ticking Dots Animation */
-        .dots::after {
-            content: '...';
-            animation: dotsAnimation 1.5s steps(4, end) infinite;
-            color: #292929;
-        }
-
-        @keyframes dotsAnimation {
-            0% {
-                content: '';
-            }
-
-            25% {
-                content: '.';
-            }
-
-            50% {
-                content: '..';
-            }
-
-            75% {
-                content: '...';
-            }
-        }
-    </style>
     <!-- Meta Pixel Code -->
     <script>
         ! function(f, b, e, v, n, t, s) {

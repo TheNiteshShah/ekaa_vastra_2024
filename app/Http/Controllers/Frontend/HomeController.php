@@ -42,7 +42,8 @@ class HomeController extends Controller
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
         $imageUrl=$sliderData->first()->web_image;
-        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords','imageUrl'));
+        $image2Url=$sliderData->first()->mob_image;
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords','imageUrl','image2Url'));
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
