@@ -438,7 +438,7 @@
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
                         </button>
                         <div class="resend pt-30 text-center pb-30">
-                            <button id="resendOtpButton" class="btn btn-link" style="color:'#292929" disabled>Resend OTP in <span id="timer">30</span>s</button>
+                            <button id="resendOtpButton" class="btn btn-link" style="color:#292929" disabled>Resend OTP in <span id="timer">30</span>s</button>
                         </div>
                     </form>
                 </div>
