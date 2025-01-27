@@ -60,6 +60,7 @@ Route::get('/clear-cache', function () {
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('/');
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/verify-otp', [AuthController::class, 'otpVerify']);
     Route::post('/user-signup', [AuthController::class, 'signup'])->name('user-signup')->middleware('auth');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/collection/{id}', [HomeController::class, 'collection'])->name('collection');

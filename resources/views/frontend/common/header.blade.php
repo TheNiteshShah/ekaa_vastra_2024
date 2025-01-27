@@ -315,9 +315,9 @@
                     <h4 class="title text-capitalize pb-30 text-center">Log in to your account</h4>
                     <form class="log-in-form" id="login-form">
                         <div class="form-group row">
-                            <label for="loginPhone" class="col-md-2 col-2 col-form-label" style="text-align:end">+91</label>
+                            <label for="loginEmail" class="col-md-2 col-2 col-form-label" style="text-align:end">Email</label>
                             <div class="col-md-10 col-10">
-                                <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="loginPhone" placeholder="Mobile Number" required>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
                             </div>
                         </div>
                         <p class="mt-2 mb-2">By Continuing, I agree to the Terms of use & Privacy Policy</p>
@@ -355,7 +355,9 @@
                                 <input type="text" class="form-control" id="signupName" name="signupName" placeholder="Name" required>
                             </div>
                             <div class="col-md-12 mt-2">
-                                <input type="email" class="form-control" id="signupEmail" name="signupEmail" placeholder="Email" required>
+                                <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="signupPhone" name="signupPhone" placeholder="Mobile Number +91" required>
+                            <div class="col-md-10 col-10">
+                            </div>
                             </div>
                         </div>
                         <div id="recaptcha-container"></div>
@@ -420,22 +422,22 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <h4 class="title text-capitalize pb-30 text-center">Mobile Phone Verification</h4>
-                    <p class="text-center pb-30">Enter the 6-digit verification code that was sent to your phone number.</p>
+                    <h4 class="title text-capitalize pb-30 text-center">Email Verification</h4>
+                    <p class="text-center pb-30">Enter the 6-digit verification code that was sent to your email address.</p>
                     <form class="otp-form" id="otp-form">
                         <div class="otp-field mb-4">
                             <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
-                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
-                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
-                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
-                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
-                            <input type="text" onkeypress="return isNumberKey(event)" disabled maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
+                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="1" />
                         </div>
 
                         <button type="submit" class="btn theme-btn--dark1 btn--md w-100" id="verifyOtpButton">
                             Verify
                         </button>
-                        <button class="btn theme-btn--dark1 btn--md w-100 d-none" id="otp-loader" style="border-color:#09080A;;" type="button" disabled>
+                        <button class="btn theme-btn--dark1 btn--md w-100 d-none" id="otp-loader" style="border-color:#09080A;" type="button" disabled>
                             <span style="color:#09080A;">Loading...</span>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
                         </button>
@@ -444,6 +446,7 @@
                         </p>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

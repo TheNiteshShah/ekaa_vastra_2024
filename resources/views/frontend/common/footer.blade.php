@@ -184,197 +184,194 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     window.addEventListener('load', function() {
         document.getElementById('loader').style.display = 'none';
     });
-    //------------ Login ---------------- 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBCxbeIgKW2_sfszxWcStTpYisjfFl49YE",
-        authDomain: "ekaa-vastra.firebaseapp.com",
-        projectId: "ekaa-vastra",
-        storageBucket: "ekaa-vastra.appspot.com",
-        messagingSenderId: "493392459476",
-        appId: "1:493392459476:web:92320171f6620fde5d2d41",
-        measurementId: "G-PPX8ZRHYSZ"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    //---- LOGIN FUNCTION
     document.addEventListener('DOMContentLoaded', function() {
-
         const loginModal = new bootstrap.Modal(document.getElementById('login'));
         const otpModal = new bootstrap.Modal(document.getElementById('otp'));
         const loginForm = document.getElementById('login-form');
         const otpForm = document.getElementById('otp-form');
-        const loginPhone = document.getElementById('loginPhone');
+        const loginEmail = document.getElementById('loginEmail'); // Email input instead of phone number
         const sendOtpButton = document.getElementById('sendOtpButton');
         const loginLoader = document.getElementById('login-loader');
         const otpInputs = document.querySelectorAll('.otp-field > input'); // Assuming class for OTP inputs
 
-        // Helper function to validate phone number (optional)
-        function validatePhoneNumber(phoneNumber) {
-            // Add your phone number validation logic here
-            // (e.g., check for minimum length, presence of digits)
-            return phoneNumber.length === 10 && /^\d+$/.test(phoneNumber);
+        // Helper function to validate email address
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
         }
 
         loginForm.addEventListener('submit', async (event) => {
             event.preventDefault(); // Prevent default form submission
 
-            const Number = loginPhone.value;
+            const email = loginEmail.value;
 
-            if (!validatePhoneNumber(Number)) {
-                errorToast('Invalid phone number');
+            if (!validateEmail(email)) {
+                errorToast('Invalid email address');
                 return;
             }
+
             try {
                 sendOtpButton.classList.add('d-none'); // Hide button
                 loginLoader.classList.remove('d-none'); // Show loader
 
-                // Initialize reCAPTCHA verifier (optional: set 'size': 'invisible' for smoother UX)
-                const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                    'size': 'invisible' // Optional: Use invisible reCAPTCHA
+                // Send OTP to the email (Implement backend logic for generating and sending OTP)
+                const response = await fetch(baseUrl + 'login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Assuming you have CSRF protection
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
                 });
-                const phoneNumber = '+91' + Number;
-                // Trigger reCAPTCHA challenge and send OTP
-                const confirmationResult = await firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier);
 
-                // Open OTP modal
-                otpModal.show();
+                const data = await response.json();
+                if (data.success) {
+                    otpModal.show(); // Show OTP modal after email is sent
+                    // Close the login modal
+                    loginModal.hide();
+                    // Reset the login form
+                    // loginForm.reset();
+                    // Optionally, if you want to clear any additional states (like hiding the loader and showing the button again)
+                    sendOtpButton.classList.remove('d-none'); // Show the "Send OTP" button again
+                    loginLoader.classList.add('d-none'); // Hide the login loader
+                } else {
+                    sendOtpButton.classList.remove('d-none'); // Show the "Send OTP" button again
+                    loginLoader.classList.add('d-none'); // Hide the login loader
+                    errorToast(data.message || 'Failed to send OTP.');
+                }
 
-                otpForm.addEventListener('submit', async (event) => {
-                    event.preventDefault(); // Prevent default form submission
-                    const otpArray = Object.values(otpInputs); // Convert object to array
-                    const otp = otpArray.reduce((acc, input) => acc + (input.value || ''), '');
-                    if (otp.length != 6) {
-                        errorToast('OTP must be 6 digit!');
-                        return;
-                    }
-                    try {
-                        document.getElementById('verifyOtpButton').classList.add('d-none'); // Hide button
-                        document.getElementById('otp-loader').classList.remove('d-none'); // Show loader
-                        // Confirm OTP
-                        const result = await confirmationResult.confirm(otp);
-                        const user = result.user;
-
-                        console.log('User signed in successfully:', user);
-
-                        // Handle successful login based on your backend logic
-                        // (Example: Send ID token for backend verification)
-                        const idToken = await user.getIdToken();
-                        const response = await fetch(baseUrl + 'login', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Assuming you have CSRF protection
-                            },
-                            body: JSON.stringify({
-                                phone: Number,
-                                token: user.uid
-                            })
-                        });
-                        const data = await response.json();
-                        console.log('Backend response:', data);
-
-                        if (data.success) {
-                            successToast('Successfully Logged In!');
-                            setTimeout(() => {
-                                location.reload();
-                            }, 1000);
-                            otpModal.hide(); // Close OTP modal on successful login
-                        } else {
-                            document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
-                            document.getElementById('otp-loader').classList.add('d-none'); // hide loader
-                            console.error('Backend verification failed:', data.message || 'Unknown error');
-                            errorToast(data.message || 'Login failed. Please try again.');
-                        }
-                    } catch (error) {
-                        document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
-                        document.getElementById('otp-loader').classList.add('d-none'); // hide loader
-                        console.error('Error during OTP confirmation:', error);
-                        errorToast('Wrong OTP entered. Please try again.'); // Consistent error message
-                    } finally {
-                        // Reset UI state
-                        document.getElementById('verifyOtpButton').classList.remove('d-none'); // show button
-                        document.getElementById('otp-loader').classList.add('d-none'); // hide loader
-                        otpForm.reset(); // Clear OTP form inputs
-                    }
-                });
             } catch (error) {
-                // console.error('Error during sign in:', error);
                 sendOtpButton.classList.remove('d-none'); // Show button again
                 loginLoader.classList.add('d-none'); // Hide loader
-                errorToast('An error occurred. Please try again.'); // Generic error message
+                errorToast('An error occurred. Please try again.');
             }
         });
-    });
 
-    const inputs = document.querySelectorAll(".otp-field > input");
-    // const button = document.getElementById('verifyOtpButton');
+        otpForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+            const otpArray = Object.values(otpInputs); // Convert object to array
+            const otp = otpArray.reduce((acc, input) => acc + (input.value || ''), '');
 
-    window.addEventListener("load", () => inputs[0].focus());
-    // button.setAttribute("disabled", "disabled");
-
-    inputs[0].addEventListener("paste", function(event) {
-        event.preventDefault();
-
-        const pastedValue = (event.clipboardData || window.clipboardData).getData(
-            "text"
-        );
-        const otpLength = inputs.length;
-
-        for (let i = 0; i < otpLength; i++) {
-            if (i < pastedValue.length) {
-                inputs[i].value = pastedValue[i];
-                inputs[i].removeAttribute("disabled");
-                inputs[i].focus;
-            } else {
-                inputs[i].value = ""; // Clear any remaining inputs
-                inputs[i].focus;
-            }
-        }
-    });
-
-    inputs.forEach((input, index1) => {
-        input.addEventListener("keyup", (e) => {
-            const currentInput = input;
-            const nextInput = input.nextElementSibling;
-            const prevInput = input.previousElementSibling;
-
-            if (currentInput.value.length > 1) {
-                currentInput.value = "";
+            if (otp.length !== 6) {
+                errorToast('OTP must be 6 digits!');
                 return;
             }
 
-            if (
-                nextInput &&
-                nextInput.hasAttribute("disabled") &&
-                currentInput.value !== ""
-            ) {
-                nextInput.removeAttribute("disabled");
-                nextInput.focus();
-            }
+            try {
+                document.getElementById('verifyOtpButton').classList.add('d-none'); // Hide button
+                document.getElementById('otp-loader').classList.remove('d-none'); // Show loader
 
-            if (e.key === "Backspace") {
-                inputs.forEach((input, index2) => {
-                    if (index1 <= index2 && prevInput) {
-                        input.setAttribute("disabled", true);
-                        input.value = "";
-                        prevInput.focus();
-                    }
+                // Verify OTP (Implement backend logic for OTP verification)
+                const response = await fetch(baseUrl + 'verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        email: loginEmail.value,
+                        otp: otp
+                    })
                 });
+
+                const data = await response.json();
+                if (data.success) {
+                    // Handle successful login (Backend verification, etc.)
+                    successToast('Successfully Logged In!');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                    otpModal.hide(); // Close OTP modal on successful login
+                } else {
+                    document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                    document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
+                    errorToast(data.message || 'OTP verification failed.');
+                }
+            } catch (error) {
+                document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
+                errorToast('Error during OTP verification. Please try again.');
+            } finally {
+                // Reset UI state
+                document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
+                otpForm.reset(); // Clear OTP form inputs
             }
+        });
 
-            // button.classList.remove("active");
-            // button.setAttribute("disabled", "disabled");
+        // OTP Inputs Handling
+        const inputs = document.querySelectorAll(".otp-field > input");
 
-            // const inputsNo = inputs.length;
-            // if (!inputs[inputsNo - 1].disabled && inputs[inputsNo - 1].value !== "") {
-            //     button.classList.add("active");
-            //     button.removeAttribute("disabled");
+        // Focus the first input field on page load
+        window.addEventListener("load", () => inputs[0].focus());
 
-            //     return;
-            // }
+        // Handle paste event to populate OTP fields
+        inputs[0].addEventListener("paste", function(event) {
+            event.preventDefault();
+
+            const pastedValue = (event.clipboardData || window.clipboardData).getData("text");
+            const otpLength = inputs.length;
+
+            for (let i = 0; i < otpLength; i++) {
+                if (i < pastedValue.length) {
+                    inputs[i].value = pastedValue[i];
+                    inputs[i].removeAttribute("disabled");
+                    inputs[i].focus(); // Corrected to focus as a function
+                } else {
+                    inputs[i].value = ""; // Clear any remaining inputs
+                    inputs[i].focus(); // Corrected to focus as a function
+                }
+            }
+        });
+
+        // Handle keyup event to manage OTP input flow
+        inputs.forEach((input, index1) => {
+            input.addEventListener("keyup", (e) => {
+                const currentInput = input;
+                const nextInput = input.nextElementSibling;
+                const prevInput = input.previousElementSibling;
+
+                if (currentInput.value.length > 1) {
+                    currentInput.value = "";
+                    return;
+                }
+
+                if (
+                    nextInput &&
+                    nextInput.hasAttribute("disabled") &&
+                    currentInput.value !== ""
+                ) {
+                    nextInput.removeAttribute("disabled");
+                    nextInput.focus(); // Move focus to the next input
+                }
+
+                if (e.key === "Backspace") {
+                    if (prevInput) {
+                        prevInput.setAttribute("disabled", true);
+                        prevInput.value = ""; // Clear value of the previous input
+                        prevInput.focus(); // Focus the previous input
+                    }
+                }
+            });
         });
     });
 
+    // Helper function to show error toast (adjust based on your implementation)
+    function errorToast(message) {
+        // Implement your error toast logic here
+        console.error(message);
+    }
+
+    // Helper function to show success toast (adjust based on your implementation)
+    function successToast(message) {
+        // Implement your success toast logic here
+        console.log(message);
+    }
+
+    //------ SIZE MODAL FUNCTION ------
     $(document).ready(function() {
         $('.btn[data-bs-target="#sizeModal"]').on('click', function() {
             var productId = $(this).data('product-id');
@@ -406,6 +403,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     });
+    //------ WISHLIST MODAL FUNCTION ------
     $(document).ready(function() {
         $(document).on('click', '.btn[data-bs-target="#wishSizeModal"]', function() {
             var productId = $(this).data('product-id');
@@ -446,7 +444,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         // Add the "active" class to the clicked <a> element
         element.classList.add('active');
     }
-
+    //------ QUANTITY MODAL FUNCTION ------
     $(document).ready(function() {
         $('.btn[data-bs-target="#quantityModal"]').on('click', function() {
             var productId = $(this).data('product-id');
@@ -528,6 +526,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 .catch(error => console.error('Error fetching address details:', error));
         });
     });
+    //------ FETCH CHARGES ------
     document.addEventListener('DOMContentLoaded', function() {
         function fetchCharges(paymentMode) {
             const url = baseUrl + 'get-shipping-charges';
@@ -614,6 +613,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     }
+    //------ WALLET CHANGE ------
     document.addEventListener('DOMContentLoaded', function() {
         var walletElement = document.getElementById('wallet');
         if (walletElement) {
@@ -626,7 +626,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         }
     })
-
 
     function applyWalletDiscount() {
         fetch(baseUrl + 'apply-wallet-discount', {
@@ -655,6 +654,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         document.getElementById('walletDiv').classList.add('d-none'); // Hide wallet discount
         updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), walletDiscount);
     }
+    //------ APPLY PROMO CODE ------
     document.addEventListener('DOMContentLoaded', function() {
         // Target the promo code form by its ID
         const promoForm = document.getElementById('promo_code_submit');
