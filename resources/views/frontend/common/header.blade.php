@@ -110,7 +110,7 @@
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ4GPFRC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-  
+
 
     <!-- offcanvas-overlay start -->
     <div class="offcanvas-overlay"></div>
@@ -352,8 +352,8 @@
                             </div>
                             <div class="col-md-12 mt-2">
                                 <input type="text" onkeypress="return isNumberKey(event)" maxlength="10" minlength="10" class="form-control" id="signupPhone" name="signupPhone" placeholder="Mobile Number +91" required>
-                            <div class="col-md-10 col-10">
-                            </div>
+                                <div class="col-md-10 col-10">
+                                </div>
                             </div>
                         </div>
                         <div id="recaptcha-container"></div>
@@ -437,9 +437,9 @@
                             <span style="color:#09080A;">Loading...</span>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="color:#09080A;"></span>
                         </button>
-                        <p class="resend pt-30 text-center pb-30">
-                            Didn't receive code? <a href="">Request again</a>
-                        </p>
+                        <div class="resend pt-30 text-center pb-30">
+                            <button id="resendOtpButton" class="btn btn-link" style="color:'#292929" disabled>Resend OTP in <span id="timer">30</span>s</button>
+                        </div>
                     </form>
                 </div>
 

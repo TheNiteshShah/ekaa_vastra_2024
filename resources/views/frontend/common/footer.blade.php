@@ -184,7 +184,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     window.addEventListener('load', function() {
         document.getElementById('loader').style.display = 'none';
     });
-    //---- LOGIN FUNCTION
+    //---- LOGIN FUNCTION ------
     document.addEventListener('DOMContentLoaded', function() {
         const loginModal = new bootstrap.Modal(document.getElementById('login'));
         const otpModal = new bootstrap.Modal(document.getElementById('otp'));
@@ -358,19 +358,73 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         });
     });
+    //---- RESEND OTP FUNCTION ------
+    let timerDuration = 60; // Timer duration in seconds
+    let timerInterval; // To store the timer interval
 
-    // Helper function to show error toast (adjust based on your implementation)
-    function errorToast(message) {
-        // Implement your error toast logic here
-        console.error(message);
+    function startTimer() {
+        const resendOtpButton = document.getElementById('resendOtpButton');
+        const timerElement = document.getElementById('timer');
+
+        resendOtpButton.disabled = true; // Disable the button
+        timerElement.textContent = timerDuration; // Reset the timer display
+
+        timerInterval = setInterval(() => {
+            let currentTime = parseInt(timerElement.textContent);
+            if (currentTime > 1) {
+                timerElement.textContent = currentTime - 1;
+            } else {
+                clearInterval(timerInterval); // Stop the timer
+                resendOtpButton.disabled = false; // Enable the button
+                timerElement.textContent = '0';
+                resendOtpButton.textContent = 'Resend OTP'; // Change button text
+            }
+        }, 1000);
     }
 
-    // Helper function to show success toast (adjust based on your implementation)
-    function successToast(message) {
-        // Implement your success toast logic here
-        console.log(message);
-    }
+    // Call startTimer when the page loads to begin the countdown
+    document.addEventListener('DOMContentLoaded', () => {
+        startTimer();
+    });
 
+    // Handle the Resend OTP button click
+    document.getElementById('resendOtpButton').addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent default behavior
+        const email = document.getElementById('loginEmail').value; // Fetch email value
+
+        const resendOtpButton = event.target;
+        resendOtpButton.disabled = true; // Disable the button during the request
+        resendOtpButton.textContent = 'Sending...';
+
+        try {
+            const response = await fetch(baseUrl + 'login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    resend: true, // Indicate it's a resend request
+                }),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                successToast(data.message || 'OTP resent successfully.');
+                resendOtpButton.textContent = 'Resend OTP in <span id="timer">30</span>s'; // Reset button text
+                startTimer(); // Restart the timer
+            } else {
+                errorToast(data.message || 'Failed to resend OTP. Please try again.');
+                resendOtpButton.disabled = false; // Re-enable the button
+                resendOtpButton.textContent = 'Resend OTP';
+            }
+        } catch (error) {
+            errorToast('An error occurred while resending OTP. Please try again.',error);
+            resendOtpButton.disabled = false; // Re-enable the button
+            resendOtpButton.textContent = 'Resend OTP';
+        }
+    });
     //------ SIZE MODAL FUNCTION ------
     $(document).ready(function() {
         $('.btn[data-bs-target="#sizeModal"]').on('click', function() {
