@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SEO Meta Tags -->
-    <title>@yield('title') | Ekaa Vastra</title>
-    <meta name="title" content="@yield('title') | Ekaa Vastra">
+    <title>@yield('title')</title>
+    <meta name="title" content="@yield('title')">
     <meta name="description" content="{{ !empty($seo_description) ? $seo_description : 'Explore premium women\'s clothing including kurta sets, co-ord sets, and more at Ekaa Vastra.' }}">
     <meta name="keywords" content="{{ !empty($seo_keywords) ? $seo_keywords : 'women clothing, kurta sets, co-ord sets, fashion, Ekaa Vastra' }}">
     <meta name="robots" content="index, follow">
