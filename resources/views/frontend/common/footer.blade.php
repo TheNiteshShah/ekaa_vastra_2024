@@ -811,6 +811,45 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             });
         }
     }
+
+    //---------------START TAB ATTRACT USER START ---------------
+    // Original title of the website
+    const originalTitle = document.title;
+
+    // Messages to attract attention
+    const attentionMessages = [
+        "👗 Don't miss our latest styles!",
+        "👚 Your wardrobe deserves an upgrade!",
+        "🛒 New arrivals just for you!",
+    ];
+
+    let messageIndex = 0;
+    let attentionInterval;
+
+    // Function to start attracting the user
+    function startAttractingUser() {
+        attentionInterval = setInterval(() => {
+            // Change the document title periodically
+            document.title = attentionMessages[messageIndex];
+            messageIndex = (messageIndex + 1) % attentionMessages.length;
+        }, 2000); // Change message every 2 second
+    }
+
+    // Function to stop attracting and reset the title
+    function stopAttractingUser() {
+        clearInterval(attentionInterval);
+        document.title = originalTitle; // Restore the original title
+    }
+
+    // Event listener for visibility change
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            startAttractingUser(); // Tab is unfocused
+        } else {
+            stopAttractingUser(); // Tab is focused
+        }
+    });
+    //---------------STOP TAB ATTRACT USER START ---------------
 </script>
 @if(auth()->check() && !auth()->user()->name)
 <script>
