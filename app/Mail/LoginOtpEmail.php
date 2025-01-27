@@ -20,6 +20,6 @@ class LoginOtpEmail extends Mailable
     public function build()
     {
         return $this->subject('Your OTP for Login')
-                    ->view('emails.loginOtp');  // Use the Blade template for OTP
+                    ->view('emails.LoginOtp');  // Use the Blade template for OTP
     }
 }
