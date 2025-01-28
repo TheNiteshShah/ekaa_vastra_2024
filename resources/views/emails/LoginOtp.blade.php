@@ -87,7 +87,7 @@
         <!-- Greeting and OTP Info -->
         <div class="otp-details">
             <p>Hi,</p>
-            <p>Greeting!</p>
+            <p>Greetings!</p>
             <p>We received a request to log in to your account. Please use the following one-time password (OTP) to complete the login process.</p>
 
             <h3>OTP Details:</h3>

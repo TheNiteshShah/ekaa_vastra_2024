@@ -36,14 +36,14 @@ class HomeController extends Controller
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
-        $title = "Ekaa Vastra | Shop stylish and affordable ethnic wear";
-        $seo_description = "Explore Ekaa Vastra's collection of women's clothing, including kurta sets, kurtas, co-ord sets, tops, pants, and 3-piece suit sets. Discover stylish, comfortable, and high-quality ethnic wear for every occasion.";
-        $seo_keywords = "Ekaa Vastra, women's clothing, kurta sets, kurtas, co-ord sets, tops, pants, 3-piece suit sets, ethnic wear, stylish women's fashion, premium quality clothing";
+        $title = "Ekaa Vastra | Shop stylish and affordable women's wear";
+        $seo_description = "Explore Ekaa Vastra's collection of women's clothing, including kurta sets, kurtas, co-ord sets, tops, pants, shirts, and 3-piece suit sets. Discover stylish, comfortable, and high-quality ethnic wear for every occasion.";
+        $seo_keywords = "Ekaa Vastra, women's clothing, kurta sets, kurtas, co-ord sets, tops, pants, shirts, 3-piece suit sets, ethnic wear, stylish women's fashion, premium quality clothing";
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
-        $imageUrl=$sliderData->first()->web_image;
-        $image2Url=$sliderData->first()->mob_image;
-        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords','imageUrl','image2Url'));
+        $imageUrl = $sliderData->first()->web_image;
+        $image2Url = $sliderData->first()->mob_image;
+        return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords', 'imageUrl', 'image2Url'));
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 

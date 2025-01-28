@@ -18,7 +18,7 @@
 <section class="product-single theme1 mb-3 p-3">
     <div class="container grid-wraper text-center">
         <img src="{{ asset('frontend/img/check.png') }}" alt="Order Success" style="width:6%" class="img-fluid mb-3">
-        <h4>Order Success!</h4>
+        <h4>Order Successful!</h4>
         <p class="mt-3">Your order has been placed successfully.</p>
         <p class="mt-1">Order ID: #{{ $order_id }}</p>
         <div class="gap-3 justify-content-center mt-2"style="display: flex;">

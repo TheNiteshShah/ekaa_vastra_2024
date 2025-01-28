@@ -34,11 +34,36 @@
 
     <!-- Image Preloading -->
     @if(!empty($imageUrl))
-    <link rel="preload" href="{{ asset($imageUrl) }}" as="image">
+    <script>
+        // Check if the screen width is below 768px (common breakpoint for smaller devices)
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            // Create a <link> element for preloading the image
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = "{{ asset($imageUrl) }}";
+
+            // Append it to the <head> section
+            document.head.appendChild(link);
+        }
+    </script>
     @endif
     @if(!empty($image2Url))
-    <link rel="preload" href="{{ asset($image2Url) }}" as="image">
+    <script>
+        // Check if the screen width is below 768px (common breakpoint for smaller devices)
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            // Create a <link> element for preloading the image
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = "{{ asset($image2Url) }}";
+
+            // Append it to the <head> section
+            document.head.appendChild(link);
+        }
+    </script>
     @endif
+
 
     <!-- Meta Pixel Code -->
     <script>

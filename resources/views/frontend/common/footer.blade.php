@@ -66,8 +66,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         <ul class="footer-menu">
                             <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
                             <li><a href="tel:+919636373743" title="Call Ekaa Vastra"><i class="ion-ios-telephone mr-10"></i><span>+91 9636373743</span></a></li>
-                            <li><a href="mailto:ekaavastra@gmail.com" title="Email Us"><i class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
-                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Kundra Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
+                            <li><a href="mailto:ekaavastra@gmail.com" title="Email Us" style="text-transform: lowercase;"><i class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
+                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, kunda Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
                         </ul>
                     </div>
                 </div>
@@ -328,35 +328,62 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         });
 
         // Handle keyup event to manage OTP input flow
-        inputs.forEach((input, index1) => {
-            input.addEventListener("keyup", (e) => {
-                const currentInput = input;
-                const nextInput = input.nextElementSibling;
-                const prevInput = input.previousElementSibling;
+        inputs.forEach((input, index) => {
+    input.addEventListener("input", (e) => {
+        const currentInput = input;
+        const nextInput = input.nextElementSibling;
 
-                if (currentInput.value.length > 1) {
-                    currentInput.value = "";
-                    return;
-                }
+        // Restrict each input to a single character
+        if (currentInput.value.length > 1) {
+            currentInput.value = currentInput.value.slice(0, 1);
+        }
 
-                if (
-                    nextInput &&
-                    nextInput.hasAttribute("disabled") &&
-                    currentInput.value !== ""
-                ) {
-                    nextInput.removeAttribute("disabled");
-                    nextInput.focus(); // Move focus to the next input
-                }
+        // Move focus to the next input if the current input is filled
+        if (currentInput.value !== "" && nextInput) {
+            nextInput.removeAttribute("disabled");
+            nextInput.focus();
+        }
+    });
 
-                if (e.key === "Backspace") {
-                    if (prevInput) {
-                        prevInput.setAttribute("disabled", true);
-                        prevInput.value = ""; // Clear value of the previous input
-                        prevInput.focus(); // Focus the previous input
-                    }
-                }
-            });
-        });
+    input.addEventListener("keydown", (e) => {
+        const currentInput = input;
+        const prevInput = input.previousElementSibling;
+        const nextInput = input.nextElementSibling;
+
+        if (e.key === "Backspace") {
+            e.preventDefault(); // Prevent default backspace behavior
+
+            // Clear the current input
+            if (currentInput.value !== "") {
+                currentInput.value = "";
+            } else if (prevInput) {
+                // Move focus to the previous input if empty
+                prevInput.focus();
+            }
+        }
+
+        // Allow moving forward when pressing a key after backspacing
+        if (e.key.length === 1 && currentInput.value.length === 1 && nextInput) {
+            nextInput.removeAttribute("disabled");
+            nextInput.focus();
+        }
+    });
+
+    input.addEventListener("click", () => {
+        // Clear the value of the clicked input only
+        input.value = "";
+    });
+
+    // Enable the first input and disable all others on page load
+    if (index === 0) {
+        input.removeAttribute("disabled");
+    } else {
+        input.setAttribute("disabled", true);
+    }
+});
+
+
+
     });
     //---- RESEND OTP FUNCTION ------
     let timerDuration = 60; // Timer duration in seconds
@@ -412,7 +439,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             const data = await response.json();
             if (data.success) {
                 successToast(data.message || 'OTP resent successfully.');
-                resendOtpButton.textContent = 'Resend OTP in <span id="timer">30</span>s'; // Reset button text
+
+                // Update button text and start timer
+                resendOtpButton.innerHTML = 'Resend OTP in <span id="timer">30</span>s';
                 startTimer(); // Restart the timer
             } else {
                 errorToast(data.message || 'Failed to resend OTP. Please try again.');
@@ -420,11 +449,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 resendOtpButton.textContent = 'Resend OTP';
             }
         } catch (error) {
-            errorToast('An error occurred while resending OTP. Please try again.',error);
+            errorToast('An error occurred while resending OTP. Please try again.');
+            console.log('Error:', error);
             resendOtpButton.disabled = false; // Re-enable the button
             resendOtpButton.textContent = 'Resend OTP';
         }
     });
+
     //------ SIZE MODAL FUNCTION ------
     $(document).ready(function() {
         $('.btn[data-bs-target="#sizeModal"]').on('click', function() {
@@ -872,9 +903,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 
     // Messages to attract attention
     const attentionMessages = [
-        "👗 Don't miss our latest styles!",
-        "👚 Your wardrobe deserves an upgrade!",
-        "🛒 New arrivals just for you!",
+        "Don't miss our latest styles!👗",
+        "Your wardrobe deserves an upgrade!👚",
+        "New arrivals just for you!🛒",
     ];
 
     let messageIndex = 0;

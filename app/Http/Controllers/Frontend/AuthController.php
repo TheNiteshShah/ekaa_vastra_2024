@@ -26,6 +26,7 @@ class AuthController extends Controller
     {
         // Get email from the request
         $email = $request->input('email');
+        $isResend = $request->input('resend', false); // Check if it's a resend request
 
         // Validate email format
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -46,19 +47,20 @@ class AuthController extends Controller
         session(['otp' => $otp]);
 
         // Log the email and OTP for debugging (DO NOT use this in production)
-        
-        
+
+
         // Call the service method to send the OTP and check if it's sent successfully
         $emailSent = $this->EmailService->sendEmail($email, $otp, 'login');
-        
+
         // Check if the email was sent successfully
         if (!$emailSent) {
             return response()->json(['success' => false, 'message' => 'Failed to send OTP email']);
         }
         Log::info("OTP {$otp} sent to email: {$email} for login successfully.");
+        // Return a success response
+        $message = $isResend ? 'OTP resent successfully.' : 'OTP sent successfully.';
 
-
-        return response()->json(['success' => true, 'message' => 'OTP sent. Please verify.']);
+        return response()->json(['success' => true, 'message' => $message]);
     }
     // ============================= END LOGIN ============================ 
     public function otpVerify(Request $request)
