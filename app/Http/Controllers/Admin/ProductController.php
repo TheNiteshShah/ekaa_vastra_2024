@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SubCategoryModal;
+use App\Models\CategoryModal;
 use App\Models\ProductModal;
 use App\Models\TypeModal;
 
@@ -21,25 +22,37 @@ class ProductController extends Controller
             return view('admin/login/index');
         }
     }
-    public function index(Request $req, $subcategory_id)
+    public function index(Request $req, $type, $parent_id)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $id = base64_decode($subcategory_id);
-            $foreachData = ProductModal::where('subcategory_id', $id)->latest()->get();
+            $id = base64_decode($parent_id);
+            if ($type == 'category') {
+                $parentData = CategoryModal::where('id', $id)->first();
+                $foreachData = ProductModal::where('category_id', $id)->latest()->get();
+            } else {
+                $parentData = SubcategoryModal::where('id', $id)->first();
+                $foreachData = ProductModal::where('subcategory_id', $id)->latest()->get();
+            }
             $title =  "Products";
-            $parentData = SubcategoryModal::where('id', $id)->first();
-            return view('admin/product.index', compact('foreachData', 'title', 'subcategory_id', 'parentData'));
+            return view('admin/product.index', compact('foreachData', 'title', 'parent_id', 'parentData', 'type'));
         } else {
             return view('admin/login/index');
         }
     }
-    public function create(Request $req, $subcategory_id)
+    public function create(Request $req, $type, $parent_id)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $subcategory_id = base64_decode($subcategory_id);
+            $parent_id = base64_decode($parent_id);
+            $category_id = '';
+            $subcategory_id = '';
+            if ($type == 'category') {
+                $category_id = $parent_id;
+            } else {
+                $subcategory_id = $parent_id;
+            }
             $data = new ProductModal();
             $title =  "Add Products";
-            return view('admin/product.create', compact('data', 'title', 'subcategory_id'));
+            return view('admin/product.create', compact('data', 'title', 'category_id', 'subcategory_id'));
         } else {
             return view('admin/login/index');
         }
@@ -48,7 +61,6 @@ class ProductController extends Controller
     {
         if (!empty($req->session()->has('admin_data'))) {
             $this->validate($req, [
-                'subcategory_id' => $req->id === null ? 'required' : 'required',
                 'name' => $req->id === null ? 'required' : 'required',
                 'sku' => $req->id === null ? '' : '',
                 'description' => $req->id === null ? 'required' : 'required',
@@ -82,7 +94,7 @@ class ProductController extends Controller
             }
             $parentData = SubcategoryModal::where('id', $req->subcategory_id)->first();
             $userId = $req->session()->get('admin_id');
-            $uploadData->category_id = $parentData->category_id;
+            $uploadData->category_id = $req->category_id ? $req->category_id : $parentData->category_id;
             $uploadData->subcategory_id = $req->subcategory_id;
             $uploadData->name =  ucwords($req->name);
             $uploadData->sku = $req->sku;
@@ -112,7 +124,7 @@ class ProductController extends Controller
                 if ($req->id === null) {
                     return redirect()->route('types.index', base64_encode($uploadData->id))->with('success', 'Product Added Successfully!');
                 } else {
-                    return redirect()->route('products.index', base64_encode($req->subcategory_id))->with('success', 'Product Updated Successfully');
+                    return redirect()->route('products.index', [$req->subcategory_id ? 'subcategory' : 'category', base64_encode($req->subcategory_id?$req->subcategory_id:$req->category_id)])->with('success', 'Product Updated Successfully');
                 }
             } else {
                 return redirect()->back()->with('error', 'Something Went Wrong');
@@ -204,5 +216,4 @@ class ProductController extends Controller
             return view('admin/login/index');
         }
     }
-    
 }

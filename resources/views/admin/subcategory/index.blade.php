@@ -100,7 +100,7 @@
                                                         @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>
                                                         @endif
-                                                        <a href="{{route('products.index',base64_encode($data->id))}}"><i class="fa fa-arrow-right info-icon" data-toggle="tooltip" data-placement="top" title="Products"></i></a>
+                                                        <a href="{{route('products.index',['subcategory',base64_encode($data->id)])}}"><i class="fa fa-arrow-right info-icon" data-toggle="tooltip" data-placement="top" title="Products"></i></a>
                                                     </div>
                                                     <div style="display:none" id="cnfbox{{$loop->iteration}}">
                                                         <p> Are you sure delete this </p>

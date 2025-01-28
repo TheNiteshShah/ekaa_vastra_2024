@@ -47,14 +47,39 @@ class HomeController extends Controller
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
-    public function collection(Request $req, $encodeSub)
+    public function collection(Request $req, $encodeName)
     {
-        $originalName = urldecode(str_replace('-', '+', $encodeSub));
+        // Decode the name and handle both categories and subcategories
+        $originalName = urldecode(str_replace('-', '+', $encodeName));
+
+        // Check if the name matches a subcategory
         $subcategoryData = SubCategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
-        $title = $subcategoryData->name . ' - Ekaa Vastra';
-        $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
-        return view('frontend/all_products', compact('subcategoryData', 'productData', 'title'));
+
+        if ($subcategoryData) {
+            // Handle subcategory
+            $title = $subcategoryData->name . ' - Ekaa Vastra';
+            $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
+            $parentData=$subcategoryData;
+
+        } else {
+            // If not a subcategory, check if it's a category
+            $categoryData = CategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
+
+            if ($categoryData) {
+                // Handle category
+                $title = $categoryData->name . ' - Ekaa Vastra';
+                $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->paginate(10);
+                $parentData=$categoryData;
+            } else {
+                // If neither category nor subcategory, redirect or show an error
+                return redirect()->route('home')->with('error', 'Category or Subcategory not found.');
+            }
+        }
+
+        // Return the view with the data
+        return view('frontend/all_products', compact('parentData', 'productData', 'title'));
     }
+
     // ============================= END ALL PRODUCTS ============================ 
     // ============================= START PRODUCTS DETAILS ============================ 
     public function product(Request $req, $encodeSub)

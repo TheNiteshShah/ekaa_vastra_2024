@@ -39,7 +39,7 @@
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center ">
                     <li class="breadcrumb-item"><a href="{{route('/')}}">Home</a></li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($productData->subcategory->name))))}}">{{$productData->subcategory->name}}</a>
+                        <a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($productData->subcategory?$productData->subcategory->name:$productData->category->name))))}}">{{$productData->subcategory?$productData->subcategory->name:$productData->category->name}}</a>
                     </li>
                     <!-- <li class="breadcrumb-item active" aria-current="page">
                         Product Details

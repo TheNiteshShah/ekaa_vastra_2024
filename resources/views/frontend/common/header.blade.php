@@ -507,14 +507,22 @@
                                 <li><a href="{{ route('/') }}">Home</a></li>
                                 @foreach($categoryData as $category)
                                 <li>
+                                    @if($category->SubCategory->count() > 0)
                                     <a href="javascript:void(0)">{{ $category->name }} <i class="ion-ios-arrow-down"></i></a>
                                     <ul class="sub-menu">
                                         @foreach($category->SubCategory as $subcategory)
-                                        <li><a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($subcategory->name)))) }}">{{ $subcategory->name }}</a></li>
+                                        <li>
+                                            <a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($subcategory->name)))) }}">{{ $subcategory->name }}</a>
+                                        </li>
                                         @endforeach
                                     </ul>
+                                    @else
+                                    <a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($category->name)))) }}">{{ $category->name }}</a>
+                                    @endif
                                 </li>
                                 @endforeach
+
+
                                 <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                             </ul>
                         </nav>

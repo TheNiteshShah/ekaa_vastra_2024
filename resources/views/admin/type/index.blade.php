@@ -9,7 +9,7 @@
                 <div class="page-title-box">
                     <h4 class="page-title">View <b>{{$parentData->name}}</b> > {{$title}}</h4>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('products.index',base64_encode($parentData->subcategory_id)) }}">Back</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('products.index',[$parentData->subcategory_id ? 'subcategory' : 'category',base64_encode($parentData->subcategory_id?$parentData->subcategory_id:$parentData->category_id)]) }}">Back</a></li>
                         <li class="breadcrumb-item active">View {{$title}}</li>
                     </ol>
                     <div class="state-information d-none d-sm-block">

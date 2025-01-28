@@ -60,7 +60,8 @@
                             <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$data->id}}">
-                                <input type="hidden" name="subcategory_id" value="{{!empty($subcategory_id)?$subcategory_id:$data->subcategory_id}}">
+                                <input type="hidden" name="category_id" value="{{ !empty($category_id) ? $category_id : (!empty($data->category_id) ? $data->category_id : '') }}">
+                                <input type="hidden" name="subcategory_id" value="{{ !empty($subcategory_id) ? $subcategory_id : (!empty($data->subcategory_id) ? $data->subcategory_id : '') }}">
                                 <div class="form-group row">
                                     <div class="col-sm-6 my-3" style="margin-top: 23px!important">
                                         <div class="form-floating">

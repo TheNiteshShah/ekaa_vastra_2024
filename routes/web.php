@@ -138,8 +138,8 @@ Route::get('/popup_enquiry', [PopUpEnquiryController::class, 'index'])->name('po
 //------ Subcategory ----------
 Route::resource('/subcategory', SubCategoryController::class);
 //------ products ----------
-Route::get('/products/{id}', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products-create/{id}', [ProductController::class, 'create'])->name('products.create');
+Route::get('/products/{type}/{id}', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products-create/{type}/{id}', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products-store', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products-show/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('products.edit');

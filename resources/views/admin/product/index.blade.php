@@ -9,7 +9,7 @@
                 <div class="page-title-box">
                     <h4 class="page-title">View <b>{{$parentData->name}}</b> > {{$title}}</h4>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('subcategory.index')}}">Back</a></li>
+                        <li class="breadcrumb-item"><a href="{{$type=='category'?route('category.index'):route('subcategory.index')}}">Back</a></li>
                         <li class="breadcrumb-item active">View {{$title}}</li>
                     </ol>
                     <div class="state-information d-none d-sm-block">
@@ -44,7 +44,7 @@
                                     <h4 class="mt-0 header-title">View <b>{{$parentData->name}}</b> > {{$title}} List</h4>
                                 </div>
                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
-                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('products.create',$subcategory_id)}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
+                                <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('products.create',[$type,$parent_id])}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
                                 @endif
                             </div>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
@@ -88,7 +88,7 @@
                                                     @if (!empty($data->image))
                                                     <img src="{{asset($data->image)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
                                                     @endif
-                                                   
+
                                                 </th>
                                                 <th>{{$data->label}}</th>
                                                 <th>{{$data->seq}}</th>

@@ -20,6 +20,10 @@ class ProductModal extends Model
     {
         return $this->hasMany(TypeModal::class, 'product_id')->where('is_active', 1);
     }
+    public function category()
+    {
+        return $this->belongsTo(CategoryModal::class, 'category_id')->withTrashed();
+    }
     public function subcategory()
     {
         return $this->belongsTo(SubCategoryModal::class, 'subcategory_id')->withTrashed();
