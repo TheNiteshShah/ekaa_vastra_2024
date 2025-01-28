@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\CategoryModal; // Adjust namespaces as per your application
 use App\Models\CartModal;
 use App\Models\WishListModal;
+use App\Models\TopBarModal;
 use Illuminate\Support\Facades\Session;
 
 class DataComposerServiceProvider extends ServiceProvider
@@ -22,6 +23,7 @@ class DataComposerServiceProvider extends ServiceProvider
             $categories = CategoryModal::orderBy('seq', 'asc')
                 ->where('is_active', 1)
                 ->get();
+            $topBarData = TopBarModal::where('is_active', 1)->orderBy('seq', 'asc')->get();
 
 
             // Cart data
@@ -43,6 +45,7 @@ class DataComposerServiceProvider extends ServiceProvider
             }
 
             $view->with([
+                'topBarData' => $topBarData,
                 'categoryData' => $categories,
                 'cartItems' => $cartItems,
                 'cartCount' => $cartCount,

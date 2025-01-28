@@ -178,6 +178,52 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 </script>
 @endif
 <script>
+    $(document).ready(function(){
+  $('.offer-slider').slick({
+    infinite: true,            // Loop the slider
+    slidesToShow: 1,           // Show one slide at a time
+    slidesToScroll: 1,         // Scroll one slide at a time
+    autoplay: true,            // Enable autoplay
+    autoplaySpeed: 3000,       // Slide interval (3 seconds)
+    speed: 500,                // Transition speed between slides (500ms)
+    arrows: false,             // Disable previous/next arrows
+    dots: true,                // Enable navigation dots
+    fade: false,               // Disable fade effect (set to true for fade)
+    pauseOnHover: true,        // Pause autoplay when hovered
+    draggable: true,           // Allow dragging to scroll slides
+    touchThreshold: 10,        // The amount of drag distance to trigger a scroll (for mobile devices)
+
+    // Responsive settings
+    responsive: [
+      {
+        breakpoint: 1024,       // For screens >= 1024px (e.g., laptops and desktops)
+        settings: {
+          slidesToShow: 3,      // Show 3 slides
+          slidesToScroll: 1,    // Scroll 1 slide at a time
+          arrows: true,         // Enable arrows
+          autoplaySpeed: 2000   // Set autoplay speed to 2 seconds
+        }
+      },
+      {
+        breakpoint: 768,        // For screens >= 768px (e.g., tablets)
+        settings: {
+          slidesToShow: 2,      // Show 2 slides
+          slidesToScroll: 1,    // Scroll 1 slide at a time
+          autoplaySpeed: 2500   // Set autoplay speed to 2.5 seconds
+        }
+      },
+      {
+        breakpoint: 480,        // For screens >= 480px (e.g., mobile devices)
+        settings: {
+          slidesToShow: 1,      // Show 1 slide
+          slidesToScroll: 1,    // Scroll 1 slide at a time
+          autoplaySpeed: 3000   // Set autoplay speed to 3 seconds
+        }
+      }
+    ]
+  });
+});
+
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
     });

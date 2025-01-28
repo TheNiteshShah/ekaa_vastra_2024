@@ -198,7 +198,7 @@
                             <input type="hidden" id="product_id" name="product_id" value="{{$productData->id}}">
                             <input type="hidden" id="type_id" name="type_id" value="">
                         </nav>
-                        <span style="font-size:11px">Note: Only one size selection is permitted for each product</span>
+                        <span style="font-size:11px">Note: Only one size selection is permitted for each product.</span>
                         <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
                             <div class="count d-flex">
                                 <input type="number" min="1" max="10" step="1" value="1" name="quantity" id="quantity" />
