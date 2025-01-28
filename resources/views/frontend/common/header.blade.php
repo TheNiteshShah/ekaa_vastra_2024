@@ -480,7 +480,7 @@
             <div class="carousel-inner">
                 @foreach($topBarData as $index => $item)
                 <div class="carousel-item @if($index === 0) active @endif">
-                    <div class="d-block w-100 text-center py-2">
+                    <div class="d-block w-100 text-center">
                         <p class="offer-text">{{ $item->content }}</p>
                     </div>
                 </div>
