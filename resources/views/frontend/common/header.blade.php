@@ -504,7 +504,6 @@
                     <div class="col-sm-6 col-lg-7 col-xl-6 d-none d-lg-block">
                         <nav class="header-bottom theme1">
                             <ul class="main-menu d-flex align-items-center">
-                                <li><a href="{{ route('/') }}">Home</a></li>
                                 @foreach($categoryData as $category)
                                 <li>
                                     @if($category->SubCategory->count() > 0)
@@ -521,9 +520,18 @@
                                     @endif
                                 </li>
                                 @endforeach
+                                <li>
+                                    <a href="javascript:void(0)">About<i class="ion-ios-arrow-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                                        <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
+                                        <li><a href="{{ route('shipping-policy') }}" title="Shipping Policy">Shipping Policy</a></li>
+                                        <li><a href="{{ route('privacy-policy') }}" title="Read our Privacy Policy">Privacy Policy</a></li>
+                                        <li><a href="{{ route('terms-and-conditions') }}" title="Terms & Conditions">Terms & Conditions</a></li>
+                                        <li><a href="{{ route('return-refund-policy') }}" title="Return & Refund Policy">Return & Refund Policy</a></li>
+                                    </ul>
+                                </li>
 
-
-                                <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>

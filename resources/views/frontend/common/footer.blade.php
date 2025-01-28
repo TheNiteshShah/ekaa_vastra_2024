@@ -178,52 +178,51 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 </script>
 @endif
 <script>
-    $(document).ready(function(){
-  $('.offer-slider').slick({
-    infinite: true,            // Loop the slider
-    slidesToShow: 1,           // Show one slide at a time
-    slidesToScroll: 1,         // Scroll one slide at a time
-    autoplay: true,            // Enable autoplay
-    autoplaySpeed: 3000,       // Slide interval (3 seconds)
-    speed: 500,                // Transition speed between slides (500ms)
-    arrows: false,             // Disable previous/next arrows
-    dots: true,                // Enable navigation dots
-    fade: false,               // Disable fade effect (set to true for fade)
-    pauseOnHover: true,        // Pause autoplay when hovered
-    draggable: true,           // Allow dragging to scroll slides
-    touchThreshold: 10,        // The amount of drag distance to trigger a scroll (for mobile devices)
+    //------ TOP BAR ---------
+    $(document).ready(function() {
+        $('.offer-slider').slick({
+            infinite: true, // Loop the slider
+            slidesToShow: 1, // Show one slide at a time
+            slidesToScroll: 1, // Scroll one slide at a time
+            autoplay: true, // Enable autoplay
+            autoplaySpeed: 3000, // Slide interval (3 seconds)
+            speed: 500, // Transition speed between slides (500ms)
+            arrows: false, // Disable previous/next arrows
+            dots: true, // Enable navigation dots
+            fade: false, // Disable fade effect (set to true for fade)
+            pauseOnHover: true, // Pause autoplay when hovered
+            draggable: true, // Allow dragging to scroll slides
+            touchThreshold: 10, // The amount of drag distance to trigger a scroll (for mobile devices)
 
-    // Responsive settings
-    responsive: [
-      {
-        breakpoint: 1024,       // For screens >= 1024px (e.g., laptops and desktops)
-        settings: {
-          slidesToShow: 3,      // Show 3 slides
-          slidesToScroll: 1,    // Scroll 1 slide at a time
-          arrows: true,         // Enable arrows
-          autoplaySpeed: 2000   // Set autoplay speed to 2 seconds
-        }
-      },
-      {
-        breakpoint: 768,        // For screens >= 768px (e.g., tablets)
-        settings: {
-          slidesToShow: 2,      // Show 2 slides
-          slidesToScroll: 1,    // Scroll 1 slide at a time
-          autoplaySpeed: 2500   // Set autoplay speed to 2.5 seconds
-        }
-      },
-      {
-        breakpoint: 480,        // For screens >= 480px (e.g., mobile devices)
-        settings: {
-          slidesToShow: 1,      // Show 1 slide
-          slidesToScroll: 1,    // Scroll 1 slide at a time
-          autoplaySpeed: 3000   // Set autoplay speed to 3 seconds
-        }
-      }
-    ]
-  });
-});
-
+            // Responsive settings
+            responsive: [{
+                    breakpoint: 1024, // For screens >= 1024px (e.g., laptops and desktops)
+                    settings: {
+                        slidesToShow: 3, // Show 3 slides
+                        slidesToScroll: 1, // Scroll 1 slide at a time
+                        arrows: true, // Enable arrows
+                        autoplaySpeed: 2000 // Set autoplay speed to 2 seconds
+                    }
+                },
+                {
+                    breakpoint: 768, // For screens >= 768px (e.g., tablets)
+                    settings: {
+                        slidesToShow: 2, // Show 2 slides
+                        slidesToScroll: 1, // Scroll 1 slide at a time
+                        autoplaySpeed: 2500 // Set autoplay speed to 2.5 seconds
+                    }
+                },
+                {
+                    breakpoint: 480, // For screens >= 480px (e.g., mobile devices)
+                    settings: {
+                        slidesToShow: 1, // Show 1 slide
+                        slidesToScroll: 1, // Scroll 1 slide at a time
+                        autoplaySpeed: 3000 // Set autoplay speed to 3 seconds
+                    }
+                }
+            ]
+        });
+    });
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
     });
@@ -375,58 +374,58 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 
         // Handle keyup event to manage OTP input flow
         inputs.forEach((input, index) => {
-    input.addEventListener("input", (e) => {
-        const currentInput = input;
-        const nextInput = input.nextElementSibling;
+            input.addEventListener("input", (e) => {
+                const currentInput = input;
+                const nextInput = input.nextElementSibling;
 
-        // Restrict each input to a single character
-        if (currentInput.value.length > 1) {
-            currentInput.value = currentInput.value.slice(0, 1);
-        }
+                // Restrict each input to a single character
+                if (currentInput.value.length > 1) {
+                    currentInput.value = currentInput.value.slice(0, 1);
+                }
 
-        // Move focus to the next input if the current input is filled
-        if (currentInput.value !== "" && nextInput) {
-            nextInput.removeAttribute("disabled");
-            nextInput.focus();
-        }
-    });
+                // Move focus to the next input if the current input is filled
+                if (currentInput.value !== "" && nextInput) {
+                    nextInput.removeAttribute("disabled");
+                    nextInput.focus();
+                }
+            });
 
-    input.addEventListener("keydown", (e) => {
-        const currentInput = input;
-        const prevInput = input.previousElementSibling;
-        const nextInput = input.nextElementSibling;
+            input.addEventListener("keydown", (e) => {
+                const currentInput = input;
+                const prevInput = input.previousElementSibling;
+                const nextInput = input.nextElementSibling;
 
-        if (e.key === "Backspace") {
-            e.preventDefault(); // Prevent default backspace behavior
+                if (e.key === "Backspace") {
+                    e.preventDefault(); // Prevent default backspace behavior
 
-            // Clear the current input
-            if (currentInput.value !== "") {
-                currentInput.value = "";
-            } else if (prevInput) {
-                // Move focus to the previous input if empty
-                prevInput.focus();
+                    // Clear the current input
+                    if (currentInput.value !== "") {
+                        currentInput.value = "";
+                    } else if (prevInput) {
+                        // Move focus to the previous input if empty
+                        prevInput.focus();
+                    }
+                }
+
+                // Allow moving forward when pressing a key after backspacing
+                if (e.key.length === 1 && currentInput.value.length === 1 && nextInput) {
+                    nextInput.removeAttribute("disabled");
+                    nextInput.focus();
+                }
+            });
+
+            input.addEventListener("click", () => {
+                // Clear the value of the clicked input only
+                input.value = "";
+            });
+
+            // Enable the first input and disable all others on page load
+            if (index === 0) {
+                input.removeAttribute("disabled");
+            } else {
+                input.setAttribute("disabled", true);
             }
-        }
-
-        // Allow moving forward when pressing a key after backspacing
-        if (e.key.length === 1 && currentInput.value.length === 1 && nextInput) {
-            nextInput.removeAttribute("disabled");
-            nextInput.focus();
-        }
-    });
-
-    input.addEventListener("click", () => {
-        // Clear the value of the clicked input only
-        input.value = "";
-    });
-
-    // Enable the first input and disable all others on page load
-    if (index === 0) {
-        input.removeAttribute("disabled");
-    } else {
-        input.setAttribute("disabled", true);
-    }
-});
+        });
 
 
 
