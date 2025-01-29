@@ -53,7 +53,7 @@
             <div class="col-12">
                 <!-- Section Title -->
                 <div class="section-title text-center mb-30">
-                    <h2 class="title text-dark text-capitalize mb-20">New Arrivals - Ekaa Vastra</h2>
+                    <h2 class="title text-dark text-capitalize mb-20">New Arrivals</h2>
                     <p class="text">Explore our latest collection of women's ethnic wear, including kurtas, co-ord sets, and suit sets.</p>
                 </div>
             </div>
