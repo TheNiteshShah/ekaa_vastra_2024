@@ -187,6 +187,7 @@
                 <ul>
                     <li><a href="{{route('/')}}">Home</a></li>
                     @foreach($categoryData as $category)
+                    @if($category->SubCategory->count() > 0)
                     <li><a href="javascript:void(0)"><span class="menu-text">{{$category->name}}</span></a>
                         <ul class="offcanvas-submenu">
                             @foreach($category->SubCategory as $subcategory)
@@ -194,9 +195,12 @@
                             @endforeach
                         </ul>
                     </li>
+                    @else
+                    <li><a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($category->name)))) }}">{{ $category->name }}</a></li>
+                    @endif
                     @endforeach
-                    <li><a href="{{route('contact-us')}}">Contact Us</a></li>
-
+                    <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                    <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
                 </ul>
             </nav>
             <div class="offcanvas-social py-30">
@@ -324,10 +328,10 @@
             <div class="modal-content" style="border:none">
                 <div class="modal-header">
                     <div class="row">
-                        <div class="col-md-11 col-11 text-center">
+                        <div class="col-md-11 col-10 text-center">
                             <img src="{{asset('frontend/img/logo.svg')}}" alt="logo" style="width:30%" class="img-fluid">
                         </div>
-                        <div class="col-md-1 col-1">
+                        <div class="col-md-1 col-2">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </div>
@@ -395,39 +399,6 @@
         </div>
     </div>
 
-    <!-- Signup Modal -->
-    <style>
-        .otp-field {
-            flex-direction: row;
-            column-gap: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .otp-field input {
-            height: 45px;
-            width: 42px;
-            border-radius: 6px;
-            outline: none;
-            font-size: 1.125rem;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        .otp-field input:focus {
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .otp-field input::-webkit-inner-spin-button,
-        .otp-field input::-webkit-outer-spin-button {
-            display: none;
-        }
-
-        .resend {
-            font-size: 12px;
-        }
-    </style>
     <!-- OTP Modal -->
     <div class="modal fade" id="otp" tabindex="-1" role="dialog" style="z-index:9999999">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -520,7 +491,9 @@
                                     @endif
                                 </li>
                                 @endforeach
-                                <li>
+                                <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
+                                <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                                <!-- <li>
                                     <a href="javascript:void(0)">About<i class="ion-ios-arrow-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
@@ -530,7 +503,7 @@
                                         <li><a href="{{ route('terms-and-conditions') }}" title="Terms & Conditions">Terms & Conditions</a></li>
                                         <li><a href="{{ route('return-refund-policy') }}" title="Return & Refund Policy">Return & Refund Policy</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
 
                             </ul>
                         </nav>
