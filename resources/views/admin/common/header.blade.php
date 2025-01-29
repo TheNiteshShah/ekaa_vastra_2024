@@ -325,7 +325,7 @@
                                 ?>
                                     <img src="{{asset($admin_image)}}" alt="user" class="rounded-circle">
                                 <?php } else { ?>
-                                    <img src="{{asset('admin/assets/images/users/profile.png')}}" alt="user" class="rounded-circle">
+                                    <img src="{{asset('admin/assets/images/users/user.jpeg')}}" alt="user" class="rounded-circle">
                                 <?php } ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

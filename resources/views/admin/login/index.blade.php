@@ -115,7 +115,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<input id="email" name="email" type="email" class="form-control" placeholder="Enter your email" required />
+								<input id="email" name="email" type="email" class="form-control" placeholder="Enter your email" required autocomplete="username" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -124,7 +124,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-key"></i>
 								</div>
-								<input id="passwordField" name="password" type="password" class="form-control" placeholder="Enter your password" required />
+								<input id="passwordField" name="password" type="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password" />
 								<div class="input-group-addon" style="cursor: pointer;" onclick="togglePasswordVisibility()">
 									<i id="eyeIcon" class="fa fa-eye"></i>
 								</div>
