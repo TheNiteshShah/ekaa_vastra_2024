@@ -201,16 +201,23 @@
                         <span style="font-size:11px">Note: Only one size selection is permitted for each product.</span>
                         <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
                             <div class="count d-flex">
-                                <input type="number" min="1" max="10" step="1" value="1" name="quantity" id="quantity" />
+                                <!-- Label for Quantity input -->
+                                <label for="quantity" class="visually-hidden">Quantity</label>
+                                <input type="number" min="1" max="10" step="1" value="1" name="quantity" id="quantity" aria-labelledby="quantity" />
+
                                 <div class="button-group">
-                                    <button class="count-btn increment">
+                                    <!-- Increase button with aria-label -->
+                                    <button class="count-btn increment" aria-label="Increase quantity" aria-controls="quantity" aria-describedby="quantity">
                                         <i class="fas fa-chevron-up"></i>
                                     </button>
-                                    <button class="count-btn decrement">
+
+                                    <!-- Decrease button with aria-label -->
+                                    <button class="count-btn decrement" aria-label="Decrease quantity" aria-controls="quantity" aria-describedby="quantity">
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                 </div>
                             </div>
+
 
                             <div>
                                 @if($cartInfo)
@@ -286,8 +293,9 @@
                     <ul id="offcanvas-menu2" class="blog-ctry-menu">
                         <li class="active"><a href="javascript:void(0)">Description</a>
                             <ul class="category-sub-menu" style="display:block">
-                                {!!$productData->description!!}
+                                <li>{!!$productData->description!!}</li>
                             </ul>
+
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>
                             <ul class="category-sub-menu">
