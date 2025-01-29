@@ -105,10 +105,11 @@ class HomeController extends Controller
             ->limit(10)
             ->get();
         $imageUrl = $productData->image;
+        $image2Url = $productData->image;
         $title = $productData->seo_title ? $productData->seo_title : $productData->name . ' - Ekaa Vastra';
         $seo_description = $productData->seo_description;
         $seo_keywords = $productData->seo_keywords;
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo', 'seo_description', 'seo_keywords','imageUrl'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo', 'seo_description', 'seo_keywords','imageUrl','image2Url'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 
