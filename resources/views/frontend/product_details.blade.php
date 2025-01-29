@@ -67,7 +67,7 @@
                     <div class="single-product">
                         <div class="product-thumb">
                             <a data-fancybox="gallery" data-src="{{asset($productData->image)}}">
-                                <img src="{{asset($productData->image)}}" alt="product-thumb">
+                                <img src="{{asset($productData->image)}}" loading="lazy" alt="product-thumb">
                             </a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                     <div class="single-product">
                         <div class="product-thumb">
                             <a data-fancybox="gallery" data-src="{{asset($productData->image2)}}">
-                                <img src="{{asset($productData->image2)}}" alt="product-thumb">
+                                <img src="{{asset($productData->image2)}}" loading="lazy" alt="product-thumb">
                             </a>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="single-product">
                         <div class="product-thumb">
                             <a data-fancybox="gallery" data-src="{{asset($productData->image3)}}">
-                                <img src="{{asset($productData->image3)}}" alt="product-thumb">
+                                <img src="{{asset($productData->image3)}}" loading="lazy" alt="product-thumb">
                             </a>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                     <div class="single-product">
                         <div class="product-thumb">
                             <a data-fancybox="gallery" data-src="{{asset($productData->image4)}}">
-                                <img src="{{asset($productData->image4)}}" alt="product-thumb">
+                                <img src="{{asset($productData->image4)}}" loading="lazy" alt="product-thumb">
                             </a>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     @if($productData->image)
                     <div class="single-product">
                         <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{asset($productData->image)}}" alt="product-thumb"></a>
+                            <a href="javascript:void(0)"> <img src="{{asset($productData->image)}}" loading="lazy" alt="product-thumb"></a>
                         </div>
                     </div>
                     <!-- single-product end -->
@@ -116,7 +116,7 @@
                     @if($productData->image2)
                     <div class="single-product">
                         <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{asset($productData->image2)}}" alt="product-thumb"></a>
+                            <a href="javascript:void(0)"> <img src="{{asset($productData->image2)}}" loading="lazy" alt="product-thumb"></a>
                         </div>
                     </div>
                     <!-- single-product end -->
@@ -124,7 +124,7 @@
                     @if($productData->image3)
                     <div class="single-product">
                         <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{asset($productData->image3)}}" alt="product-thumb"></a>
+                            <a href="javascript:void(0)"> <img src="{{asset($productData->image3)}}" loading="lazy" alt="product-thumb"></a>
                         </div>
                     </div>
                     <!-- single-product end -->
@@ -132,7 +132,7 @@
                     @if($productData->image4)
                     <div class="single-product">
                         <div class="product-thumb">
-                            <a href="javascript:void(0)"> <img src="{{asset($productData->image4)}}" alt="product-thumb"></a>
+                            <a href="javascript:void(0)"> <img src="{{asset($productData->image4)}}" loading="lazy" alt="product-thumb"></a>
                         </div>
                     </div>
                     <!-- single-product end -->
@@ -185,7 +185,7 @@
                     </div>
                     <div class="product-footer">
                         <div class="row align-items-center mb-10">
-                            <img src="{{ asset('frontend/img/tape.png') }}" style="width:50px" class="img-fluid" alt="measuring-tape">
+                            <img src="{{ asset('frontend/img/tape.png') }}" loading="lazy" style="width:50px" class="img-fluid" alt="measuring-tape">
                             <a class="offcanvas-toggle pl-3 ml-1" style="font-weight: 400;color:black;display: contents;font-size:14px" href="#offcanvas-size-chart"><span>Size chart</span></a>
                         </div>
                         <h6>Select Size </h6>
@@ -276,11 +276,11 @@
                 <div class="block-reassurance">
                     <ul>
                         <li>
-                            <img src="{{asset('frontend/img/icon/10.png')}}" alt="img" />
+                            <img src="{{asset('frontend/img/icon/10.png')}}" loading="lazy" alt="img" />
                             Cash on delivery available
                         </li>
                         <li>
-                            <img src="{{asset('frontend/img/icon/11.png')}}" alt="img" />
+                            <img src="{{asset('frontend/img/icon/11.png')}}" loading="lazy" alt="img" />
                             Usually ships in 5-6 days
                         </li>
                         <!-- <li>
@@ -336,8 +336,8 @@
                                         <span class="badge badge-danger top-left">{{$trend->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
-                                            <img class="first-img" src="{{asset($trend->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
+                                            <img class="first-img"loading="lazy"  src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img"loading="lazy"  src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         @if(auth()->check())
                                         @php
