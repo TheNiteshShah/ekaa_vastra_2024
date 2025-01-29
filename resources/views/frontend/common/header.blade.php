@@ -127,7 +127,7 @@
 <body>
     <div class="loader-overlay" id="loader">
         <!-- Rotating Loader Image -->
-        <img src="{{ asset('frontend/img/loader.svg') }}" alt="Loading..." class="rotating-image">
+        <img src="{{ asset('frontend/img/loader.svg') }}" loading="lazy" alt="Loading..." class="rotating-image">
 
         <!-- Loading Text with Ticking Dots -->
         <div class="loading-text">Loading<span class="dots"></span></div>
@@ -228,7 +228,7 @@
             <ul class="minicart-product-list">
                 @foreach($wishlistItems as $wish)
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
                         <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="title">{{$wish->product->name}}</a>
                         <h6 class="product-price"><del class="del" style="font-size: 13px;">₹{{$wish->product->mrp}}</del>
@@ -244,7 +244,7 @@
             </ul>
             @else
             <div class="text-center ">
-                <img src="{{asset('frontend/img/empty_wishlist.jpg')}}" alt="Empty-Wishlist" class="img-fluid" style="width:50%">
+                <img src="{{asset('frontend/img/empty_wishlist.jpg')}}" loading="lazy" alt="Empty-Wishlist" class="img-fluid" style="width:50%">
             </div>
             <h6 class="text-center mt-2">Your wishlist is empty!</h6>
             @endif
@@ -273,7 +273,7 @@
                 $cart_total += ($type->product->selling_price*$cart['quantity']);
                 @endphp
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
                         <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="title">{{$type->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$type->size->name}}</span>
@@ -286,7 +286,7 @@
                 $cart_total += ($cart->product->selling_price*$cart->quantity);
                 @endphp
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" alt="Cart product Image"></a>
+                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
                         <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$cart->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$cart->type->size->name}}</span>
@@ -313,7 +313,7 @@
             <!-- <p class="minicart-message">Free Shipping on All Orders Over ₹100!</p> -->
             @else
             <div class="text-center ">
-                <img src="{{asset('frontend/img/empty_bag.jpg')}}" alt="Empty-Bag" class="img-fluid" style="width:50%">
+                <img src="{{asset('frontend/img/empty_bag.jpg')}}" loading="lazy" alt="Empty-Bag" class="img-fluid" style="width:50%">
             </div>
             <h6 class="text-center mt-2">Your bag is empty!</h6>
             @endif
@@ -367,7 +367,7 @@
                 <div class="modal-header">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                            <img src="{{asset('frontend/img/logo.svg')}}" loading="lazy" alt="logo" style="width:30%" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -406,7 +406,7 @@
                 <div class="modal-header">
                     <div class="row">
                         <div class="col-md-11 col-11 text-center">
-                            <img src="{{asset('frontend/img/logo.png')}}" alt="logo" style="width:30%" class="img-fluid">
+                            <img src="{{asset('frontend/img/logo.svg')}}" loading="lazy" alt="logo" style="width:30%" class="img-fluid">
                         </div>
                         <div class="col-md-1 col-1">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -468,7 +468,7 @@
                     <div class="col-6 col-lg-2 col-xl-3 order-first">
                         <div class="logo">
                             <a href="{{ route('/') }}">
-                                <img src="{{ asset('frontend/img/logo.png') }}" alt="Ekaa Vastra - Women's Clothing" style="width:45%" class="img-fluid">
+                                <img src="{{ asset('frontend/img/logo.svg') }}" loading="lazy" alt="Ekaa Vastra - Women's Clothing" style="width:45%" class="img-fluid">
                             </a>
                         </div>
                     </div>

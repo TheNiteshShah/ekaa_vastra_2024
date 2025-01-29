@@ -17,12 +17,12 @@
             <div class="info_setting">
                 <div class="mb-30 border-bottom pb-30 border-bottom">
                     <h3 class="title_setting">Garment sizes, measured in INCHES.</h3>
-                    <img src="{{asset($productData->size_chart)}}" alt="Size Chart" class="img-fluid d-block mx-auto">
+                    <img src="{{asset($productData->size_chart)}}" loading="lazy" alt="Size Chart" class="img-fluid d-block mx-auto">
                     <p class="mt-2"><b>Note -</b> These are Garment sizes, take your body measurements and match the garment accordingly.</p>
                 </div>
                 <div>
                     <h2 class="title_setting ">Garment Measuring Guide</h2>
-                    <img src="{{ asset('frontend/img/garment-guide.jpg') }}" alt="Garment-Guide" class="img-fluid d-block mx-auto">
+                    <img src="{{ asset('frontend/img/garment-guide.jpg') }}" loading="lazy" alt="Garment-Guide" class="img-fluid d-block mx-auto">
                 </div>
 
 
