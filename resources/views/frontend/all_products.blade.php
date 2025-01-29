@@ -75,8 +75,8 @@
                                         <span class="badge badge-danger top-left">{{$product->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($product->name))))}}">
-                                            <img class="first-img" src="{{asset($product->image)}}" alt="thumbnail">
-                                            <img class="second-img" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
+                                            <img class="first-img" loading="lazy" src="{{asset($product->image)}}" alt="thumbnail">
+                                            <img class="second-img" loading="lazy" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
                                         </a>
                                         @if(auth()->check())
                                         @php
@@ -179,10 +179,10 @@
 <div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff;z-index:9999;">
     <div class="row text-center">
         <div class="col-6 p-2">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="{{asset('frontend/img/icon/filter.png')}}"> FILTER</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="{{asset('frontend/img/icon/filter.png')}}" loading="lazy"> FILTER</a>
         </div>
         <div class="col-6 p-2" style="border-right: 2px solid #dee2e6 ;">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="{{asset('frontend/img/icon/sort.png')}}"> SORT BY </a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="{{asset('frontend/img/icon/sort.png')}}" loading="lazy"> SORT BY </a>
         </div>
 
 
