@@ -50,7 +50,6 @@ class HomeController extends Controller
             QrDetailModal::create([
                 'ip' => $ipAddress,
                 'user_agent' => $userAgent,
-                'scanned_at' => now(),
             ]);
         }
         $imageUrl = $sliderData->first()->web_image;

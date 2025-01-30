@@ -11,6 +11,6 @@ class QrDetailModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_agent', 'ip', 'scanned_at'
+        'user_agent', 'ip'
     ];
 }
