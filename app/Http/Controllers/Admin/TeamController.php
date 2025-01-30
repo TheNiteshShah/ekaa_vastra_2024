@@ -11,6 +11,7 @@ use App\Models\Order1Modal;
 use App\Models\User;
 use App\Models\CategoryModal;
 use App\Models\ProductModal;
+use App\Models\QrDetailModal;
 
 class TeamController extends Controller
 {
@@ -23,6 +24,7 @@ class TeamController extends Controller
 				$totalUsers = User::count();
 				$totalCategory = CategoryModal::count();
 				$totalProducts = ProductModal::count();
+				$qr_count = QrDetailModal::count();
 				$TotalNewOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 1])->count();
 				$TotalAcceptedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 2])->count();
 				$TotalDispatchedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 3])->count();
@@ -45,7 +47,7 @@ class TeamController extends Controller
 					->where('payment_status', 1)
 					->whereNotIn('order_status', [5])
 					->sum('final_amount');
-				return view('admin/index', compact(['totalOrders', 'totalUsers', 'totalCategory', 'totalProducts', 'TotalNewOrders', 'TotalAcceptedOrders', 'TotalDispatchedOrders', 'TotalDeliveredOrders', 'TotalRejectedOrders', 'TotalTodaysOrders', 'TotalTodaysUsers', 'sumFinalAmount', 'TodaysSumFinalAmount']));
+				return view('admin/index', compact(['totalOrders', 'totalUsers', 'totalCategory', 'totalProducts', 'TotalNewOrders', 'TotalAcceptedOrders', 'TotalDispatchedOrders', 'TotalDeliveredOrders', 'TotalRejectedOrders', 'TotalTodaysOrders', 'TotalTodaysUsers', 'sumFinalAmount', 'TodaysSumFinalAmount','qr_count']));
 			} else {
 				$service = AdminSidebar::where('id', $services[0])->first();
 				if ($service->url == "#") {

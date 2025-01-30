@@ -35,6 +35,27 @@
                         <a href="{{route('all_orders')}}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
+                                    <h6 class="text-uppercase verti-label text-white-50">Total QR Scanned</h6>
+                                    <div class="text-white">
+                                        <h6 class="text-uppercase mt-0 text-white-50">Total QR Scanned</h6>
+                                        <h3 class="mb-3 mt-0">{{$qr_count}}</h3>
+                                        <div class="">
+                                            <span class="ml-2">Total QR Scanned</span>
+                                        </div>
+                                    </div>
+                                    <div class="mini-stat-icon">
+                                        <i class="mdi mdi-shopping display-2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-secondary mini-stat position-relative">
+                        <a href="{{route('all_orders')}}">
+                            <div class="card-body">
+                                <div class="mini-stat-desc">
                                     <h6 class="text-uppercase verti-label text-white-50">Total Orders</h6>
                                     <div class="text-white">
                                         <h6 class="text-uppercase mt-0 text-white-50">Total Orders</h6>

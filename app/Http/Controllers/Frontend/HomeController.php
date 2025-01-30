@@ -23,7 +23,7 @@ use App\Models\Order1Modal;
 use App\Models\Order2Modal;
 use App\Models\UserAddressModal;
 use App\Models\BannerModal;
-use App\Models\WishListModal;
+use App\Models\QrDetailModal;
 
 
 class HomeController extends Controller
@@ -41,6 +41,18 @@ class HomeController extends Controller
         $seo_keywords = "Ekaa Vastra, women's clothing, kurta sets, kurtas, co-ord sets, tops, pants, shirts, 3-piece suit sets, ethnic wear, stylish women's fashion, premium quality clothing";
         // $user = User::where(['phone' => '8387039990'])->first();
         // Auth::login($user);
+
+        // Check if the request is from a QR scan
+        if ($req->has('qr') && $req->qr == 'true') {
+            $ipAddress = $req->ip();
+            $userAgent = $req->header('User-Agent');
+            // Store the visit details
+            QrDetailModal::create([
+                'ip' => $ipAddress,
+                'user_agent' => $userAgent,
+                'scanned_at' => now(),
+            ]);
+        }
         $imageUrl = $sliderData->first()->web_image;
         $image2Url = $sliderData->get(1)->mob_image;
         return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords', 'imageUrl', 'image2Url'));
@@ -59,8 +71,7 @@ class HomeController extends Controller
             // Handle subcategory
             $title = $subcategoryData->name . ' - Ekaa Vastra';
             $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
-            $parentData=$subcategoryData;
-
+            $parentData = $subcategoryData;
         } else {
             // If not a subcategory, check if it's a category
             $categoryData = CategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
@@ -69,7 +80,7 @@ class HomeController extends Controller
                 // Handle category
                 $title = $categoryData->name . ' - Ekaa Vastra';
                 $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->paginate(10);
-                $parentData=$categoryData;
+                $parentData = $categoryData;
             } else {
                 // If neither category nor subcategory, redirect or show an error
                 return redirect()->route('home')->with('error', 'Category or Subcategory not found.');
@@ -109,7 +120,7 @@ class HomeController extends Controller
         $title = $productData->seo_title ? $productData->seo_title : $productData->name . ' - Ekaa Vastra';
         $seo_description = $productData->seo_description;
         $seo_keywords = $productData->seo_keywords;
-        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo', 'seo_description', 'seo_keywords','imageUrl','image2Url'));
+        return view('frontend/product_details', compact('productData', 'relatedData', 'title', 'cartInfo', 'seo_description', 'seo_keywords', 'imageUrl', 'image2Url'));
     }
     // ============================= END PRODUCTS DETAILS ============================ 
     // ============================= START CONTACT US ============================ 
