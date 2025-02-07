@@ -130,14 +130,20 @@
         .footer_bg {
             background-image: url('{{ asset('frontend/img/footer_bg.png') }}');
         }
-
+        .top_bg {
+            background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
+        }
         @media (max-width: 768px) {
 
             /* Mobile */
             .footer_bg {
                 background-image: url('{{ asset('frontend/img/footer_bg_mob.png') }}');
             }
+            .top_bg {
+                background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
+            }
         }
+      
     </style>
 </head>
 
@@ -464,10 +470,10 @@
     <header id="sticky" class="header2 style1 theme1" style="position: sticky; top: 0; left: 0; width: 100%; background: #ffffff; z-index: 999;">
         <!-- top bar start -->
         @if(!empty($topBarData))
-        <div id="offerSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div id="offerSlider" class="carousel slide " data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-inner">
                 @foreach($topBarData as $index => $item)
-                <div class="carousel-item @if($index === 0) active @endif">
+                <div class="carousel-item  @if($index === 0) active @endif">
                     <div class="d-block w-100 text-center">
                         <p class="offer-text">{{ $item->content }}</p>
                     </div>

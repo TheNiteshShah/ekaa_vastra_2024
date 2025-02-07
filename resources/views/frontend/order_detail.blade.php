@@ -380,8 +380,8 @@
                             <h4 class="sub-title"> <b>Shipping Address </b></h4>
                         </div>
                         <div class="filter-check-box_1 border-bottom-0" style="display:block;">
-                            <p>Deliver to: <b>{{$orderAddress->first_name.' '.$orderAddress->last_name}}, {{$orderAddress->pincode}}</b></p>
-                            <p>{{$orderAddress->address}}, {{$orderAddress->city}}</p>
+                            <p>Deliver to: <b>{{$ordersDetail->address->first_name.' '.$ordersDetail->address->last_name}}, {{$ordersDetail->address->pincode}}</b></p>
+                            <p>{{$ordersDetail->address->address}}, {{$ordersDetail->address->city}}</p>
                         </div>
                     </div>
                 </div>

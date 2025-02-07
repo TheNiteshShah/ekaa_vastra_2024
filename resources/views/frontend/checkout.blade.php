@@ -506,7 +506,7 @@
                             <p>₹{{$cart_mrp-$cart_total}}</p>
                         </div>
                         <div class="filter-check-box_1">
-                            <p>Total</p>
+                            <p>Subtotal</p>
                             <p>₹<span id="cart_total">{{$cart_total}}</span></p>
                         </div>
                         <div class="filter-check-box_1">
@@ -530,7 +530,7 @@
                             <p style="    color: #03a685;">FREE</p>
                         </div> -->
                         <div class="filter-check-box_1">
-                            <p>SubTotal</p>
+                            <p>Total</p>
                             <p>₹ <span id="subTotal" data-original-total="{{$cart_total}}">{{$cart_total}}</span></p>
                         </div>
 

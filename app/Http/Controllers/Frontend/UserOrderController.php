@@ -114,6 +114,13 @@ class UserOrderController extends Controller
     // ============================= START CALCULATE SHIPPING CHARGES ============================ 
     public function calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total)
     {
+        if ($cart_total > 1999) {
+            $res = array('sub_total' => $cart_total, 'shipping' => 0);
+            $respone['status'] = true;
+            $respone['message'] = 'Shipping Calculated Successfully!';
+            $respone['data'] = $res;
+            return $respone;
+        }
         // $apiToken = '213d2fa2e824f912efb21c4dd460f6b70c4ba05a'; // Replace with your actual API token
         $apiToken = '26f91c3bde997aedc80c250b71b70b2e0fd279e4'; // Replace with your actual API token
         $url = 'https://track.delhivery.com/api/kinko/v1/invoice/charges/.json';
@@ -139,7 +146,7 @@ class UserOrderController extends Controller
             if (!empty($decoded)) {
                 $shipping = $decoded[0]->total_amount;
                 $new_total = $cart_total + $shipping;
-                $res = array('sub_total' => round($new_total, 2), 'shipping' => round($shipping, 2));
+                $res = array('sub_total' => round($new_total), 'shipping' => round($shipping));
                 $respone['status'] = true;
                 $respone['message'] = 'Shipping Calculated Successfully!';
                 $respone['data'] = $res;
@@ -168,7 +175,7 @@ class UserOrderController extends Controller
             $cart_total += ($cart->product->selling_price * $cart->quantity);
         }
         $user = User::find($user_id);
-        $Discount = $cart_total * 0.10;
+        $Discount = round($cart_total * 0.10);
 
         $walletDiscount = min($Discount, $user->wallet);
         return response()->json([
@@ -241,7 +248,7 @@ class UserOrderController extends Controller
         if ($cart_total < $PromoData->mini_amount) {
             return response()->json([
                 'status' => false,
-                'message' => 'Minimum order amount not reached for this promo code!',
+                'message' => 'Your cart total must be at least ' . number_format($PromoData->mini_amount, 2) . ' to use this promo code.',
             ]);
         }
 
@@ -260,7 +267,7 @@ class UserOrderController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Promo code applied successfully!',
-            'promoDiscount' => $PromoDiscount,
+            'promoDiscount' => round($PromoDiscount),
             'promoId' => $PromoData->id,
         ]);
     }
@@ -368,6 +375,17 @@ class UserOrderController extends Controller
             $res = $this->getPhonePeUrl($order1Update, $orderAddressUpload);
             return $res;
         } else {
+            //-------- GENERATE INVOICE NUMBER ----------
+            $currentYear = Carbon::now()->year;
+            $nextYear = $currentYear + 1;
+            $financialYear = substr($currentYear, -2) . '-' . substr($nextYear, -2);
+            $orderCount = Order1Modal::whereYear('created_at', $currentYear)
+                ->where('payment_status', 1)
+                ->count();
+            $invoiceNumber = str_pad($orderCount + 1, 3, '0', STR_PAD_LEFT) . "/EV/" . $financialYear;
+            $orderData = Order1Modal::where('id', $order1Upload->id)->first();
+            $orderData->invoice_no = $invoiceNumber;
+            $orderData->save();
             //---------- UPDATE INVENTORY ---------
             $cartData = CartModal::where('user_id', $order1Update->user_id)->get();
             foreach ($cartData as $cart) {
@@ -480,6 +498,15 @@ class UserOrderController extends Controller
                     $order1Update = Order1Modal::where('txn_id', $decodeRes->data->merchantTransactionId)->first();
                     $order1Update->payment_status = 1;
                     $order1Update->order_status = 1;
+                    //-------- GENERATE INVOICE NUMBER ----------
+                    $currentYear = Carbon::now()->year;
+                    $nextYear = $currentYear + 1;
+                    $financialYear = substr($currentYear, -2) . '-' . substr($nextYear, -2);
+                    $orderCount = Order1Modal::whereYear('created_at', $currentYear)
+                        ->where('payment_status', 1)
+                        ->count();
+                    $invoiceNumber = str_pad($orderCount + 1, 3, '0', STR_PAD_LEFT) . "/EV/" . $financialYear;
+                    $order1Update->invoice_no = $invoiceNumber;
                     $order1Update->save();
                     //---------- UPDATE INVENTORY ---------
                     $cartData = CartModal::where('user_id', $order1Update->user_id)->get();

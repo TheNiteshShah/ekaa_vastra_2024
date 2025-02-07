@@ -660,21 +660,17 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     document.addEventListener('DOMContentLoaded', function() {
         function fetchCharges(paymentMode) {
             const url = baseUrl + 'get-shipping-charges';
-            const params = new URLSearchParams({
-                d_pin: '302020', // Replace with actual destination pin code
-                o_pin: '302021', // Replace with actual origin pin code
-                cgm: 200,
-                pt: paymentMode == 2 ? 'Pre-paid' : 'COD',
-                cod: paymentMode == 1 ? 1 : 0
-            });
-
             fetch(`${url}/${paymentMode}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
                         errorToast('Failed to fetch charges');
                     } else {
-                        document.getElementById('shipping').innerText = data.data.shipping;
+                        if (data.data.shipping == 0) {
+                            document.getElementById('shipping').innerText = 'Free';
+                        } else {
+                            document.getElementById('shipping').innerText = data.data.shipping;
+                        }
                         updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), parseFloat(document.getElementById('wallet_discount').innerText));
                         // document.getElementById('subTotal').innerText = data.data.sub_total;
                     }
@@ -848,7 +844,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     function updateSubTotal(promoDiscount = 0, walletDiscount = 0) {
         // Get the original subtotal from your HTML
         const originalSubTotal = parseFloat(document.getElementById('cart_total').innerText);
-        const originalShipping = parseFloat(document.getElementById('shipping').innerText);
+        let shippingText = document.getElementById('shipping').innerText.trim();
+        const originalShipping = isNaN(parseFloat(shippingText)) ? 0 : parseFloat(shippingText);
+
         // Calculate the total discount
         const totalDiscount = parseFloat(promoDiscount) + parseFloat(walletDiscount);
 

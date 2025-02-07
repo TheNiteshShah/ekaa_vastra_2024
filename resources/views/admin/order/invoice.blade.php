@@ -68,7 +68,7 @@
                         </ul>
                         <ul style="list-style-type:none">
                             <li>#{{$OrderData->id}}</li>
-                            <li>{{$OrderData->invoice_year?$OrderData->invoice_year:'--'}}</li>
+                            <li>{{$OrderData->invoice_no?$OrderData->invoice_no:'--'}}</li>
                             <li>{{$OrderData->payment_mode==1?'Cash On Delivery':'Prepaid'}}</li>
                             <li>{{$OrderData->created_at}}</li>
                         </ul>
@@ -118,7 +118,7 @@
                             @endphp
                             <tr class="product_table2">
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$data->product->name}} - {{$data->type->name}}</td>
+                                <td>{{$data->product->name}} - {{$data->type->size->name}}</td>
                                 <td>{{$data->product->sku?$data->product->sku:'-'}}</td>
                                 <td>{{$data->quantity}}</td>
                                 <!-- <td>₹{{$unit_price}}</td>
@@ -129,27 +129,26 @@
                             @endforeach
                             @endif
                             <tr>
-                                <td colspan="6"></td>
+                                <td colspan="3"></td>
                                 <td>SubTotal</td>
                                 <td class="product_table text-right">₹{{$OrderData->total_amount}}</td>
                             </tr>
                             @if($OrderData->promo_discount)
                             <tr>
-                                <td colspan="6"></td>
+                                <td colspan="3"></td>
                                 <td>Discount</td>
                                 <td class="product_table text-right">-₹{{$OrderData->promo_discount}}</td>
                             </tr>
                             @endif
                             @if($OrderData->wallet_discount)
                             <tr>
-                                <td colspan="6"></td>
+                                <td colspan="3"></td>
                                 <td>Wallet Discount</td>
                                 <td class="product_table text-right">-₹{{$OrderData->wallet_discount}}</td>
                             </tr>
                             @endif
-                            @if($OrderData->shipping)
                             <tr>
-                                <td colspan="6"></td>
+                                <td colspan="3"></td>
                                 <td>Shipping</td>
                                 <td class="product_table text-right">+₹{{$OrderData->shipping}}</td>
                             </tr>
@@ -158,11 +157,10 @@
                                 <td>Free Shipping (First Order)</td>
                                 <td class="product_table text-right">-₹{{$OrderData->shipping}}</td>
                             </tr> -->
-                            @endif
 
 
                             <tr>
-                                <th colspan="6"></th>
+                                <th colspan="3"></th>
                                 <th>Total</th>
                                 <th class="product_table text-right">₹{{$OrderData->final_amount}}</th>
                             </tr>

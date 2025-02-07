@@ -13,13 +13,13 @@
         </picture>
         @endforeach
     </div>
-
     <!-- slick-progress -->
     <div class="slick-progress" aria-hidden="true">
         <span></span>
     </div>
     <!-- slick-progress end-->
 </section>
+
 
 <!-- main slider end -->
 
@@ -169,10 +169,14 @@
                                         </a>
                                         <!-- Wishlist Toggle -->
                                         @if(auth()->check())
-                                        @php $isInWishlist = in_array($trend->id, $wishlistProductIds); @endphp
-                                        <button type="button" onclick="toggleWishlist({{ $trend->id }}, this)" class="wishlist-btn" aria-label="{{ $isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist' }}">
-                                            <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i>
-                                        </button>
+                                        @php
+                                        $isInWishlist = in_array($trend->id, $wishlistProductIds);
+                                        @endphp
+                                        <a href="javascript:void(0)" onclick="toggleWishlist({{ $trend->id }}, this)" aria-label="Toggle Wishlist for {{ $trend->name }}">
+                                            <span class="hear-icon top-right product{{ $trend->id }}">
+                                                <i class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i>
+                                            </span>
+                                        </a>
                                         @endif
                                     </figure>
                                     <!-- Product Info -->

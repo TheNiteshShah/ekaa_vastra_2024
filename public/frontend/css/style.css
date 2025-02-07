@@ -2312,8 +2312,8 @@ body.open {
 }
 
 .check-box-inner .ui-widget-header,
-.testimonial-init.dots-style .slick-dots li.slick-active button,
-.testimonial-init.dots-style .slick-dots li:hover button,
+/* .testimonial-init.dots-style .slick-dots li.slick-active button,
+.testimonial-init.dots-style .slick-dots li:hover button, */
 .theme1 .offcanvas-menu li:hover>.menu-expand:after,
 .theme1 .offcanvas-menu li:hover>.menu-expand:before,
 .theme1 .popular-slider-init.dots-style .slick-dots li button:hover {
@@ -3014,33 +3014,46 @@ input[type=number]::-webkit-outer-spin-button {
     bottom: 30px;
     width: 100%;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.dots-style .slick-dots li {
+    margin: 0 5px;
 }
 
 .dots-style .slick-dots li button {
-    width: 14px;
-    height: 14px;
-    text-indent: 2000px;
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: none;
     font-size: 0px;
-    display: block;
-    margin: 0 3px;
-    border: 2px solid transparent;
-    -webkit-transition: .3s;
-    transition: .3s;
-    -webkit-transform: scale3d(.7, .7, .7);
-    transform: scale3d(.7, .7, .7);
-    border-radius: 50%
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
 }
 
-.dots-style .slick-dots li button:hover {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1)
+/* Heart Icon */
+.dots-style .slick-dots li button::before {
+    content: "\f004"; /* Font Awesome Heart Icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    color: gray;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
+
+/* Active and Hover State */
+.dots-style .slick-dots li.slick-active button::before,
+.dots-style .slick-dots li button:hover::before {
+    color: red; /* Active Heart Color */
+    transform: scale(1.2);
+}
+
 
 .testimonial-init.dots-style .slick-dots {
     position: static;
@@ -3058,9 +3071,9 @@ input[type=number]::-webkit-outer-spin-button {
     transform: scale3d(1, 1, 1)
 }
 
-.theme1 .slick-dots li button {
+/* .theme1 .slick-dots li button {
     background: #b0b0b0
-}
+} */
 
 .blog-ctry-menu li:hover>a {
     transform: none !important
@@ -5921,6 +5934,24 @@ body::-webkit-scrollbar-thumb {
     display: none
 }
 
+.top_bg {
+    background-color: #292929;
+    background-size: cover;
+    /* Ensures the whole image is visible */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* height: 100vh; /* Makes it full screen */
+    /* width: 100%; */
+}
+
+@media (max-width: 768px) {
+
+    /* Mobile */
+    .top_bg {
+        background-size: cover;
+        /* Ensures better fitting */
+    }
+}
 .footer_bg {
     background-color: #f6f6f6;
     background-size: contain;
@@ -5929,7 +5960,6 @@ body::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
     /* height: 100vh; /* Makes it full screen */
     /* width: 100%; */
-    */
 }
 
 @media (max-width: 768px) {

@@ -183,9 +183,8 @@ class HomeController extends Controller
         if (empty($ordersDetail)) {
             return redirect('/')->with('status-error', 'Something Went Wrong');
         }
-        $orderAddress = UserAddressModal::where('id', $ordersDetail->address_id)->first();
 
-        return view('frontend.order_detail', compact('ordersDetail', 'orderAddress'));
+        return view('frontend.order_detail', compact('ordersDetail'));
     }
     // ============================= END MY ACCOUNT ============================ 
     // ============================= START CONTACT US STORE ============================ 
