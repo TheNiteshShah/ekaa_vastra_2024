@@ -5920,17 +5920,23 @@ body::-webkit-scrollbar-thumb {
 .otp-field input::-webkit-outer-spin-button {
     display: none
 }
+
 .footer_bg {
     background-color: #f6f6f6;
-    background-size: contain; /* Ensures the whole image is visible */
+    background-size: contain;
+    /* Ensures the whole image is visible */
     background-position: center;
-    background-repeat: no-repeat;       
+    background-repeat: no-repeat;
     /* height: 100vh; /* Makes it full screen */
-    /* width: 100%; */ */
+    /* width: 100%; */
+    */
 }
 
-@media (max-width: 768px) { /* Mobile */
+@media (max-width: 768px) {
+
+    /* Mobile */
     .footer_bg {
-        background-size: cover; /* Ensures better fitting */
+        background-size: cover;
+        /* Ensures better fitting */
     }
 }
