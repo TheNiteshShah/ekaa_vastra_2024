@@ -126,7 +126,19 @@
         gtag('config', 'G-RDBXV3VHBN');
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        .footer_bg {
+            background-image: url('{{ asset('frontend/img/footer_bg.png') }}');
+        }
 
+        @media (max-width: 768px) {
+
+            /* Mobile */
+            .footer_bg {
+                background-image: url('{{ asset('frontend/img/footer_bg_mob.png') }}');
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -465,15 +477,14 @@
         </div>
         @endif
         <!-- top bar end -->
-
         <!-- header-middle start -->
         <div class="header-middle">
             <div class="container">
                 <div class="row align-items-center position-relative">
                     <div class="col-6 col-lg-2 col-xl-3 order-first">
-                        <div class="logo">
+                        <div class="logo ">
                             <a href="{{ route('/') }}">
-                                <img src="{{ asset('frontend/img/logo.svg') }}" loading="lazy" alt="Ekaa Vastra - Women's Clothing" style="width:45%" class="img-fluid">
+                                <img src="{{ asset('frontend/img/logo.svg') }}" loading="lazy" alt="Ekaa Vastra - Women's Clothing" style="width:45%" class="img-fluid ">
                             </a>
                         </div>
                     </div>

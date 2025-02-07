@@ -103,9 +103,9 @@
                                 <th>Description</th>
                                 <th>SKU</th>
                                 <th>Qty</th>
-                                <th>Net Amount</th>
+                                <!-- <th>Net Amount</th>
                                 <th>GST(%)</th>
-                                <th>Tax Amount</th>
+                                <th>Tax Amount</th> -->
                                 <th>Total Amount</th>
                         </thead>
                         <tbody>
@@ -121,9 +121,9 @@
                                 <td>{{$data->product->name}} - {{$data->type->name}}</td>
                                 <td>{{$data->product->sku?$data->product->sku:'-'}}</td>
                                 <td>{{$data->quantity}}</td>
-                                <td>₹{{$unit_price}}</td>
+                                <!-- <td>₹{{$unit_price}}</td>
                                 <td>CGST {{$data->gst_percentage/2}}% <br> SGST {{$data->gst_percentage/2}}%</td>
-                                <td>₹{{round($tax_amt/2,2)}}<br>₹{{round($tax_amt/2,2)}}</td>
+                                <td>₹{{round($tax_amt/2,2)}}<br>₹{{round($tax_amt/2,2)}}</td> -->
                                 <td class=" text-right">₹{{$data->price* $data->quantity}}</td>
                             </tr>
                             @endforeach
@@ -133,11 +133,11 @@
                                 <td>SubTotal</td>
                                 <td class="product_table text-right">₹{{$OrderData->total_amount}}</td>
                             </tr>
-                            @if($OrderData->discount)
+                            @if($OrderData->promo_discount)
                             <tr>
                                 <td colspan="6"></td>
                                 <td>Discount</td>
-                                <td class="product_table text-right">-₹{{$OrderData->discount}}</td>
+                                <td class="product_table text-right">-₹{{$OrderData->promo_discount}}</td>
                             </tr>
                             @endif
                             @if($OrderData->wallet_discount)
