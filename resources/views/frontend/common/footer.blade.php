@@ -2,7 +2,7 @@
 $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
 @endphp
 <!-- Footer Start -->
-<footer class="bg-lighten2 theme1 position-relative" aria-label="Footer">
+<footer class="bg-lighten2 theme1 position-relative footer_bg" aria-label="Footer">
     <!-- Footer Bottom Start -->
     <div class="footer-bottom pt-70 pb-30">
         <div class="container">
