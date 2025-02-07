@@ -375,16 +375,17 @@
 <!-- breadcrumb-section end -->
 <style>
     .clear-icon {
-    position: absolute;
-    right: 21%; /* Adjust according to button width */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-    user-select: none;
-    font-size: 25px !important;
-}
+        position: absolute;
+        right: 21%;
+        /* Adjust according to button width */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        cursor: pointer;
+        color: #333;
+        user-select: none;
+        font-size: 25px !important;
+    }
 </style>
 <!-- product tab start -->
 <section class="check-out-section pb-40">
@@ -521,6 +522,14 @@
                             <p>Wallet Discount</p>
                             <p>₹<span id="wallet_discount">0</span></p>
                         </div>
+                        <div class="filter-check-box_1" id="CodDiv">
+                            <p>COD Charges</p>
+                            <p>₹<span id="cod_charge">0</span></p>
+                        </div>
+                        <div class="filter-check-box_1 d-none" id="prePaidDiv">
+                            <p>Prepaid Discount</p>
+                            <p>₹<span id="prepaid_discount">0</span></p>
+                        </div>
                         <!-- <div class="filter-check-box_1">
                             <p>Prepaid Discount</p>
                             <p>- ₹100</p>
@@ -572,7 +581,7 @@
                                         <input type="radio" id="COD" name="payment_mode" value="1" checked>
                                         <label for="COD">
                                             <b style="font-size:15px; margin-bottom:10px;"> Cash On Delivery (COD) </b>
-                                            <!-- <p class="mt-2">₹40 Will be charged extra for cash on delivery</p> -->
+                                            <p class="mt-2">₹40 Will be charged extra for cash on delivery</p>
                                         </label>
                                     </div>
                                 </div>

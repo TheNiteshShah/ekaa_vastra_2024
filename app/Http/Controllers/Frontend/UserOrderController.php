@@ -28,6 +28,8 @@ class UserOrderController extends Controller
     private $PHONE_PE_MERCHANT_ID; // Replace with your PhonePe Salt Key
     private $PHONE_PE_URL; // Replace with your PhonePe Salt Key
     protected $orderNotificationService;
+    protected $FREE_SHIPPING;
+    protected $COD_CHARGE;
 
     public function __construct(OrderNotificationService $orderNotificationService)
     {
@@ -35,6 +37,8 @@ class UserOrderController extends Controller
         $this->PHONE_PE_MERCHANT_ID = env('PHONE_PE_MERCHANT_ID'); // Get Salt Key from config
         $this->PHONE_PE_URL = env('PHONE_PE_URL'); // Get Salt Key from config
         $this->PHONE_PE_SALT = env('PHONE_PE_SALT'); // Get API Key from config
+        $this->FREE_SHIPPING = env('FREE_SHIPPING'); // Get API Key from config
+        $this->COD_CHARGE = env('COD_CHARGE'); // Get API Key from config
     }
 
     // ============================= START VIEW CHECKOUT ============================ 
@@ -104,8 +108,10 @@ class UserOrderController extends Controller
             $pt = 'COD';
             $cod = $cart_total;
         } else {
-            $pt = 'Pre-paid';
-            $cod = 0;
+            // $pt = 'Pre-paid';
+            // $cod = 0;
+            $pt = 'COD';
+            $cod = $cart_total;
         }
         $response = $this->calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total);
         return json_encode($response);
@@ -114,7 +120,7 @@ class UserOrderController extends Controller
     // ============================= START CALCULATE SHIPPING CHARGES ============================ 
     public function calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total)
     {
-        if ($cart_total > 1999) {
+        if ($cart_total > $this->FREE_SHIPPING) {
             $res = array('sub_total' => $cart_total, 'shipping' => 0);
             $respone['status'] = true;
             $respone['message'] = 'Shipping Calculated Successfully!';
@@ -182,6 +188,35 @@ class UserOrderController extends Controller
             'status' => true,
             'message' => 'Wallet applied successfully!',
             'walletDiscount' => $walletDiscount,
+        ]);
+    }
+    // ============================= END CALCULATE WALLET DISCOUNT ============================
+    // ============================= START CALCULATE WALLET DISCOUNT ============================ 
+    public function calculatePaymentCharges(Request $request)
+    {
+        $cart_total = 0;
+        $user_id = Auth::id();
+        // Calculate cart total
+        $cartItems = CartModal::where('user_id', $user_id)->get();
+        foreach ($cartItems as $cart) {
+            $cart_total += ($cart->product->selling_price * $cart->quantity);
+        }
+        if ($request->input('payment_mode') == 2) {
+            $cod_charge = 0;
+            $min = 30;
+            $max = 40;
+            // Generate a consistent "random" number based on $cart_total
+            $hash = crc32($cart_total);
+            $prepaid_discount = $min + ($hash % ($max - $min + 1));
+        } else {
+            $cod_charge = $this->COD_CHARGE;
+            $prepaid_discount = 0;
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'Payment charges calculated successfully!',
+            'prepaid_discount' => $prepaid_discount,
+            'cod_charge' => $cod_charge,
         ]);
     }
     // ============================= END CALCULATE WALLET DISCOUNT ============================
@@ -322,8 +357,10 @@ class UserOrderController extends Controller
             $pt = 'COD';
             $cod = $cart_total;
         } else {
-            $pt = 'Pre-paid';
-            $cod = 0;
+            // $pt = 'Pre-paid';
+            // $cod = 0;
+            $pt = 'COD';
+            $cod = $cart_total;
         }
         $ShippingResponse = $this->calculateShippingCharges($d_pin, $weight, $pt, $cod, $cart_total);
         if ($request->isWalletChecked) {
@@ -342,14 +379,28 @@ class UserOrderController extends Controller
             $promoId = null;
         }
         $txn_id = bin2hex(random_bytes(12));
+        //---- calculate payment charges -------
+        if ($request->input('payment_mode') == 2) {
+            $cod_charge = 0;
+            $min = 30;
+            $max = 40;
+            // Generate a consistent "random" number based on $cart_total
+            $hash = crc32($cart_total);
+            $prepaid_discount = $min + ($hash % ($max - $min + 1));
+        } else {
+            $cod_charge = $this->COD_CHARGE;
+            $prepaid_discount = 0;
+        }
         //---------- ORDER1 Entry -----------
         $order1Update = Order1Modal::where('id', $order1Upload->id)->first();
         $order1Update->total_amount = $cart_total;
         $order1Update->shipping = $ShippingResponse['data']['shipping'];
         $order1Update->wallet_discount = $walletDiscount;
+        $order1Update->prepaid_discount = $prepaid_discount;
+        $order1Update->cod_charge = $cod_charge;
         $order1Update->promo_id = $promoId;
         $order1Update->promo_discount = $promo_discount;
-        $order1Update->final_amount = ($cart_total + $ShippingResponse['data']['shipping']) - $walletDiscount - $promo_discount;
+        $order1Update->final_amount = ($cart_total + $ShippingResponse['data']['shipping'] + $cod_charge) - $walletDiscount - $promo_discount - $prepaid_discount;
         $order1Update->txn_id = $txn_id;
         $order1Update->save();
         //---------- ORDER Address Entry -----------

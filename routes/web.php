@@ -96,6 +96,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/checkMail', [UserOrderController::class, 'checkMail'])->name('checkMail');
     Route::post('/apply-wallet-discount', [UserOrderController::class, 'calculateWalletDiscount']);
     Route::post('/apply-promo-code', [UserOrderController::class, 'applyPromoCode']);
+    Route::post('/calculate-payment-charges', [UserOrderController::class, 'calculatePaymentCharges']);
 
 
     //------------ ADDRESS ----------------

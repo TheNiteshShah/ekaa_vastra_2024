@@ -658,28 +658,34 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     });
     //------ FETCH CHARGES ------
     document.addEventListener('DOMContentLoaded', function() {
-        function fetchCharges(paymentMode) {
+        async function fetchCharges(paymentMode) {
             const url = baseUrl + 'get-shipping-charges';
-            fetch(`${url}/${paymentMode}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        errorToast('Failed to fetch charges');
+            try {
+                const response = await fetch(`${url}/${paymentMode}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    errorToast('Failed to fetch charges');
+                } else {
+                    if (data.data.shipping === 0) {
+                        document.getElementById('shipping').innerText = 'Free';
                     } else {
-                        if (data.data.shipping == 0) {
-                            document.getElementById('shipping').innerText = 'Free';
-                        } else {
-                            document.getElementById('shipping').innerText = data.data.shipping;
-                        }
-                        updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), parseFloat(document.getElementById('wallet_discount').innerText));
-                        // document.getElementById('subTotal').innerText = data.data.sub_total;
+                        document.getElementById('shipping').innerText = data.data.shipping;
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching charges:', error);
-                    errorToast('Error fetching charges');
-                });
+                    await fetchPaymentCharges(paymentMode); // Ensure this function is also async
+                    updateSubTotal(
+                        parseFloat(document.getElementById('promo_code_discount').innerText),
+                        parseFloat(document.getElementById('wallet_discount').innerText)
+                    );
+                    // Uncomment and adjust if needed
+                    // document.getElementById('subTotal').innerText = data.data.sub_total;
+                }
+            } catch (error) {
+                console.error('Error fetching charges:', error);
+                errorToast('Error fetching charges');
+            }
         }
+
 
         document.querySelectorAll('input[name="payment_mode"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -846,9 +852,10 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         const originalSubTotal = parseFloat(document.getElementById('cart_total').innerText);
         let shippingText = document.getElementById('shipping').innerText.trim();
         const originalShipping = isNaN(parseFloat(shippingText)) ? 0 : parseFloat(shippingText);
-
+        const codCharge = parseFloat(document.getElementById('cod_charge').innerText);
+        const prepaidDiscount = parseFloat(document.getElementById('prepaid_discount').innerText);
         // Calculate the total discount
-        const totalDiscount = parseFloat(promoDiscount) + parseFloat(walletDiscount);
+        const totalDiscount = parseFloat(promoDiscount) + parseFloat(walletDiscount) + prepaidDiscount;
 
         // Calculate the new subtotal
         const newSubTotal = originalSubTotal - totalDiscount;
@@ -861,9 +868,43 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         document.getElementById('wallet_discount').innerText = walletDiscount;
 
         // Calculate final total (subtotal + shipping)
-        const finalTotal = newSubTotal + originalShipping; // Assuming final total is subtotal + shipping
+        const finalTotal = newSubTotal + originalShipping + codCharge; // Assuming final total is subtotal + shipping
         console.log(finalTotal);
         document.getElementById('subTotal').innerText = finalTotal;
+    }
+
+    function fetchPaymentCharges(paymentMode) {
+        fetch(baseUrl + 'calculate-payment-charges', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({
+                    payment_mode: paymentMode
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    // Apply promo code discount
+                    document.getElementById('cod_charge').innerText = data.cod_charge;
+                    document.getElementById('prepaid_discount').innerText = data.prepaid_discount;
+
+                    // Update subtotal with promo discount, wallet, and shipping
+                    updateSubTotal(data.promoDiscount, parseFloat(document.getElementById('wallet_discount').innerText));
+                    if (data.prepaid_discount != '0') {
+                        document.getElementById('CodDiv').classList.add('d-none'); // hide the cod charge
+                        document.getElementById('prePaidDiv').classList.remove('d-none'); // Show the prepaid discount
+                    } else {
+                        document.getElementById('CodDiv').classList.remove('d-none'); // show the cod charge
+                        document.getElementById('prePaidDiv').classList.add('d-none'); // hide the prepaid discount
+                    }
+                } else {
+                    errorToast(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
     }
 
     function toggleWishlist(productId, element) {

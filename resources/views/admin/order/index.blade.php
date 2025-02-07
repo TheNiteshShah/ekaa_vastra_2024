@@ -97,7 +97,7 @@
                                                     @endif
                                                     @endif
                                                     <a href="{{route('order-details',base64_encode($data->id))}}" data-toggle="tooltip" data-placement="top" title="Order Details"><i class="fas fa-eye  info-icon"></i></a>
-                                                    @if($data->order_status > 1 && $data->order_status <= 4) <a href="{{route('order-invoice',base64_encode($data->id))}}" target="_blank" rel="noopener noreferrer" data-toggle="tooltip" data-placement="top" title="Invoice"><i class="fas fa-receipt  info2-icon"></i></a>
+                                                    @if($data->order_status > 0 && $data->order_status <= 4) <a href="{{route('order-invoice',base64_encode($data->id))}}" target="_blank" rel="noopener noreferrer" data-toggle="tooltip" data-placement="top" title="Invoice"><i class="fas fa-receipt  info2-icon"></i></a>
                                                         @endif
                                                 </th>
                                             </tr>

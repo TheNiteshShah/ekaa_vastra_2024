@@ -147,6 +147,20 @@
                                 <td class="product_table text-right">-₹{{$OrderData->wallet_discount}}</td>
                             </tr>
                             @endif
+                            @if($OrderData->cod_charge)
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>COD Charges</td>
+                                <td class="product_table text-right">+₹{{$OrderData->cod_charge}}</td>
+                            </tr>
+                            @endif
+                            @if($OrderData->prepaid_discount)
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>Prepaid Discount</td>
+                                <td class="product_table text-right">-₹{{$OrderData->prepaid_discount}}</td>
+                            </tr>
+                            @endif
                             <tr>
                                 <td colspan="3"></td>
                                 <td>Shipping</td>

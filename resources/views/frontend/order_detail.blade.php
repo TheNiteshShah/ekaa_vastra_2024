@@ -427,6 +427,30 @@
                             <p>Shipping</p>
                             <p>₹{{$ordersDetail->shipping}}</p>
                         </div>
+                        @if($ordersDetail->promo_discount)
+                        <div class="filter-check-box_1">
+                            <p>Promo Code Discount</p>
+                            <p>₹{{$ordersDetail->promo_discount}}</p>
+                        </div>
+                        @endif
+                        @if($ordersDetail->wallet_discount)
+                        <div class="filter-check-box_1">
+                            <p>Wallet Discount</p>
+                            <p>₹<span id="wallet_discount">{{$ordersDetail->wallet_discount}}</span></p>
+                        </div>
+                        @endif
+                        @if($ordersDetail->cod_charge)
+                        <div class="filter-check-box_1">
+                            <p>COD Charges</p>
+                            <p>₹<span id="cod_charge">{{$ordersDetail->cod_charge}}</span></p>
+                        </div>
+                        @endif
+                        @if($ordersDetail->prepaid_discount)
+                        <div class="filter-check-box_1">
+                            <p>Prepaid Discount</p>
+                            <p>₹<span id="prepaid_discount">{{$ordersDetail->prepaid_discount}}</span></p>
+                        </div>
+                        @endif
                         <div class="filter-check-box_1">
                             <p>SubTotal</p>
                             <p>₹{{$ordersDetail->final_amount}}</p>
