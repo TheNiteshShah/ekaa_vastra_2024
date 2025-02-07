@@ -48,7 +48,7 @@ class SubCategoryController extends Controller
                 $allowedFormats = ['jpeg', 'jpg', 'webp'];
                 $extension = strtolower($req->image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
-                    $file = time() . '.' . $req->image->extension();
+                    $file = time() . '_' . uniqid() . '.'. $req->image->extension();
                     $req->image->move(public_path('uploads/image/subcategory/'), $file);
                     $image = 'uploads/image/subcategory/' . $file;
                 } else {

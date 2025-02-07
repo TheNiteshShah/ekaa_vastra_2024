@@ -41,7 +41,7 @@ class BannerController extends Controller
                 $allowedFormats = ['jpeg', 'jpg', 'webp'];
                 $extension = strtolower($req->web_image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
-                    $file = time() . '.' . $req->web_image->extension();
+                    $file = time() . '_' . uniqid() . '.' . $req->web_image->extension();
                     $req->web_image->move(public_path('uploads/image/banners/'), $file);
                     $web_image = 'uploads/image/banners/' . $file;
                 } else {
@@ -55,7 +55,7 @@ class BannerController extends Controller
                 $allowedFormats = ['jpeg', 'jpg', 'webp'];
                 $extension = strtolower($req->mob_image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
-                    $file = time() . '.' . $req->mob_image->extension();
+                    $file = time() . '_' . uniqid() . '.' . $req->mob_image->extension();
                     $req->mob_image->move(public_path('uploads/image/banners/'), $file);
                     $mob_image = 'uploads/image/banners/' . $file;
                 } else {

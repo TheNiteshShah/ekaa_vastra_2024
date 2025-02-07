@@ -46,7 +46,7 @@ class TestimonialController extends Controller
                 $allowedFormats = ['jpeg', 'jpg', 'webp'];
                 $extension = strtolower($req->image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
-                    $file = time() . '.' . $req->image->extension();
+                    $file = time() . '_' . uniqid() . '.' . $req->image->extension();
                     $req->image->move(public_path('uploads/image/testimonial/'), $file);
                     $image = 'uploads/image/testimonial/' . $file;
                 } else {
