@@ -7,7 +7,7 @@
         @foreach($sliderData as $index => $slider)
         <picture>
             <!-- Mobile optimized image with WebP support and explicit dimensions -->
-            <source srcset="{{ asset($slider->mob_image) }}"  media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
+            <source srcset="{{ asset($slider->mob_image) }}" media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
             <!-- Fallback image with proper alt text -->
             <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
         </picture>
@@ -124,12 +124,18 @@
         <div class="col-12">
             <div class="position-relative overflow-hidden">
                 <div class="banner-thumb banner-large">
-                    <picture>
-                        <!-- Source for mobile -->
-                        <source srcset="{{ asset($bannerData[0]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
-                        <!-- Source for desktop -->
-                        <img src="{{ asset($bannerData[0]->web_image) }}" loading="lazy" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}">
-                    </picture>
+                    @if(!empty($bannerData[0]->link))
+                    <a href="{{ $bannerData[0]->link }}">
+                        @endif
+                        <picture>
+                            <!-- Source for mobile -->
+                            <source srcset="{{ asset($bannerData[0]->mob_image) }}" loading="lazy" media="(max-width: 768px)" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}">
+                            <!-- Source for desktop -->
+                            <img src="{{ asset($bannerData[0]->web_image) }}" loading="lazy" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}">
+                        </picture>
+                        @if(!empty($bannerData[0]->link))
+                    </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -212,12 +218,18 @@
     <div class="row">
         <div class="col-12">
             <figure class="banner-thumb banner-large position-relative overflow-hidden">
-                <picture>
-                    <!-- Mobile Image -->
-                    <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
-                    <!-- Web Image -->
-                    <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Promotional Banner' }}">
-                </picture>
+                @if(!empty($bannerData[1]->link))
+                <a href="{{ $bannerData[1]->link }}">
+                    @endif
+                    <picture>
+                        <!-- Mobile Image -->
+                        <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
+                        <!-- Web Image -->
+                        <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Promotional Banner' }}">
+                    </picture>
+                    @if(!empty($bannerData[1]->link))
+                </a>
+                @endif
             </figure>
         </div>
     </div>
@@ -246,21 +258,17 @@
                         <div class="testimonial-content text-center">
                             <!-- Testimonial Image -->
                             <figure class="d-inline-block mb-30 mx-auto">
-                                <img 
-                                    loading="lazy" 
-                                    src="{{ asset($test->image ?? 'frontend/img/profile/default.jpg') }}" 
-                                    alt="{{ $test->name }}'s Testimonial" 
-                                    itemprop="image">
+                                <img loading="lazy" src="{{ asset($test->image ?? 'frontend/img/profile/default.jpg') }}" alt="{{ $test->name }}'s Testimonial" itemprop="image">
                             </figure>
 
                             <!-- Star Rating -->
                             <div class="star-rating" aria-label="Rating: {{ $test->rating }} out of 5">
                                 @for ($i = 0; $i < floor($test->rating); $i++)
                                     <span class="ion-ios-star" aria-hidden="true"></span>
-                                @endfor
-                                @if ($test->rating - floor($test->rating) > 0)
+                                    @endfor
+                                    @if ($test->rating - floor($test->rating) > 0)
                                     <span class="ion-android-star-half" aria-hidden="true"></span>
-                                @endif
+                                    @endif
                             </div>
 
                             <!-- Review Text -->
@@ -294,10 +302,7 @@
             <!-- Free Shipping Promise -->
             <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" 
-                         src="{{asset('frontend/img/icon/free-shipping.png')}}" 
-                         alt="Free shipping on all orders" 
-                         title="Free Shipping on All Orders">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/free-shipping.png')}}" alt="Free shipping on all orders" title="Free Shipping on All Orders">
                     <div class="media-body text-center">
                         <h4 class="title text-uppercase text-dark mb-25">
                             <a href="/shipping-policy" title="Learn more about our free shipping offer">Free Shipping*</a>
@@ -308,10 +313,7 @@
             <!-- Shipping pan-India -->
             <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" 
-                         src="{{asset('frontend/img/icon/india.png')}}" 
-                         alt="Shipping available across India" 
-                         title="Shipping Available Across India">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/india.png')}}" alt="Shipping available across India" title="Shipping Available Across India">
                     <div class="media-body text-center">
                         <h4 class="title text-uppercase text-dark mb-25">
                             <a href="/shipping-info" title="Learn more about pan-India shipping">Shipping Pan-India</a>
@@ -322,10 +324,7 @@
             <!-- Secure Payment -->
             <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" 
-                         src="{{asset('frontend/img/icon/card.png')}}" 
-                         alt="Secure payment options" 
-                         title="Safe and Secure Payment Options">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/card.png')}}" alt="Secure payment options" title="Safe and Secure Payment Options">
                     <div class="media-body text-center">
                         <h4 class="title text-uppercase text-dark mb-25">
                             <a href="/payment-methods" title="Explore our secure payment methods">Secure Payment</a>
@@ -336,10 +335,7 @@
             <!-- COD Available -->
             <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" 
-                         src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" 
-                         alt="Cash on Delivery Available" 
-                         title="Cash on Delivery Available for Your Convenience">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" alt="Cash on Delivery Available" title="Cash on Delivery Available for Your Convenience">
                     <div class="media-body text-center">
                         <h4 class="title text-uppercase text-dark mb-25">
                             <a href="/cod-availability" title="Learn more about Cash on Delivery availability">COD Available</a>
@@ -350,10 +346,7 @@
             <!-- Active Support -->
             <div class="col-md-2 col-sm-6 col-6 mb-30">
                 <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" 
-                         src="{{asset('frontend/img/icon/customer-service.png')}}" 
-                         alt="Active customer support" 
-                         title="24/7 Active Customer Support">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/customer-service.png')}}" alt="Active customer support" title="24/7 Active Customer Support">
                     <div class="media-body text-center">
                         <h4 class="title text-uppercase text-dark mb-25">
                             <a href="/customer-support" title="Contact our customer support for assistance">Active Support</a>
