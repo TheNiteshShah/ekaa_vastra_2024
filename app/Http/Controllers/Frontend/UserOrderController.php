@@ -260,7 +260,7 @@ class UserOrderController extends Controller
             // Ensure discount does not exceed the max discount limit
             $PromoDiscount = min($PromoDiscount, $PromoData->max_discount);
         } else if ($PromoData->discount_type == 2) { // Flat Off
-            $PromoDiscount = min($PromoData->discount, $PromoData->max_discount);
+            $PromoDiscount = $PromoData->discount;
         }
 
         // Return success response with the discount amount
