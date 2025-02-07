@@ -726,7 +726,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         window.location.href = baseUrl + 'order-success/' + response.order_id;
                     } else if (selectedPaymentMode === '2') {
                         // Handle prepaid payment success
-                        console.log('response', response)
+                        // console.log('response', response)
                         if (response.data.success) {
                             // alert('Prepaid order placed successfully. Order ID: ' + response.order_id);
                             window.location.href = response.redirectUrl;
@@ -869,7 +869,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 
         // Calculate final total (subtotal + shipping)
         const finalTotal = newSubTotal + originalShipping + codCharge; // Assuming final total is subtotal + shipping
-        console.log(finalTotal);
+        // console.log(finalTotal);
         document.getElementById('subTotal').innerText = finalTotal;
     }
 
@@ -890,9 +890,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     // Apply promo code discount
                     document.getElementById('cod_charge').innerText = data.cod_charge;
                     document.getElementById('prepaid_discount').innerText = data.prepaid_discount;
-
-                    // Update subtotal with promo discount, wallet, and shipping
-                    updateSubTotal(data.promoDiscount, parseFloat(document.getElementById('wallet_discount').innerText));
                     if (data.prepaid_discount != '0') {
                         document.getElementById('CodDiv').classList.add('d-none'); // hide the cod charge
                         document.getElementById('prePaidDiv').classList.remove('d-none'); // Show the prepaid discount
