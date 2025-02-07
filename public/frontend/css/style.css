@@ -3050,7 +3050,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* Active and Hover State */
 .dots-style .slick-dots li.slick-active button::before,
 .dots-style .slick-dots li button:hover::before {
-    color: red; /* Active Heart Color */
+    color: 292929; /* Active Heart Color */
     transform: scale(1.2);
 }
 
