@@ -283,7 +283,7 @@ class UserOrderController extends Controller
         if ($cart_total < $PromoData->mini_amount) {
             return response()->json([
                 'status' => false,
-                'message' => 'Your cart total must be at least ' . number_format($PromoData->mini_amount) . ' to use this promo code.',
+                'message' => 'Your cart total must be at least ₹' . number_format($PromoData->mini_amount) . ' to use this promo code.',
             ]);
         }
 
