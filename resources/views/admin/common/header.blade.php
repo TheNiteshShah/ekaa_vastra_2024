@@ -24,11 +24,53 @@
 
 
     <style>
+        /* Material UI Inspired Button */
         .btn-info {
-            color: #fff;
-            background-color: #292929 !important;
+            display: inline-block;
+            padding: 8px 16px;
+            /* Appropriate padding for a button */
+            font-size: 14px;
+            /* Smaller font size */
+            font-weight: 500;
+            text-align: center;
+            border-radius: 20px;
+            /* Rounded corners for material look */
+            background-color: #292929;
+            /* Dark background color */
+            color: white;
             border: 1px solid #292929;
+            text-transform: uppercase;
+            /* Uppercase text for emphasis */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            /* Smooth transition for all states */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            /* Subtle shadow */
+            outline: none;
+            /* Remove outline on click */
         }
+
+        /* Hover and Focus States */
+        .btn-info:hover,
+        .btn-info:focus {
+            background-color: #424242;
+            /* Slightly lighter shade on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            /* Larger shadow on hover */
+            transform: translateY(-2px);
+            /* Slight "lifting" effect */
+        }
+
+        /* Active State (when button is clicked) */
+        .btn-info:active {
+            background-color: #616161;
+            /* Darker shade when active */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            /* Smaller shadow */
+            transform: translateY(0);
+            /* Reset lift effect on click */
+        }
+
 
         li.list-style {
             display: block !important;
@@ -191,21 +233,54 @@
             font-size: 20px;
         }
 
-        .status-active {
-            background-color: green;
-            color: white;
+        /* Common Styles for Status Labels */
+        .label {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 14px;
+            font-weight: 500;
             text-align: center;
             border-radius: 20px;
-            padding: 3px;
+            text-transform: capitalize;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for depth */
         }
 
-        .status-inactive {
-            background-color: Red;
+        /* Active Status Label */
+        .status-active {
+            background-color: #4caf50;
+            /* Material Green */
             color: white;
-            text-align: center;
-            border-radius: 20px;
-            padding: 3px;
         }
+
+        /* Inactive Status Label */
+        .status-inactive {
+            background-color: #f44336;
+            /* Material Red */
+            color: white;
+        }
+
+        /* Hover Effects for Material Design */
+        .status-label:hover {
+            transform: translateY(-2px);
+            /* Slight lift effect on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Increased shadow for hover effect */
+        }
+
+        /* Active Status Hover */
+        .status-active:hover {
+            background-color: #388e3c;
+            /* Darker green on hover */
+        }
+
+        /* Inactive Status Hover */
+        .status-inactive:hover {
+            background-color: #d32f2f;
+            /* Darker red on hover */
+        }
+
 
         .navbar-custom,
         .button-menu-mobile {

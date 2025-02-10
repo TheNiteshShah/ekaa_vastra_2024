@@ -263,7 +263,7 @@
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-secondary  mini-stat position-relative">
-                        <a href="{{route('users.index')}}">
+                        <a href="{{ route('users.index', ['filter' => 'today']) }}">
                             <div class="card-body">
                                 <div class="mini-stat-desc">
                                     <h6 class="text-uppercase verti-label text-white-50">Todays Users</h6>

@@ -6,19 +6,41 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\CartModal;
+use Carbon\Carbon; // Import Carbon class at the top
 
 class UserController extends Controller
 {
+
     public function index(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $foreachData = User::wherenull('deleted_at')->latest()->get();
-            $title =  "Users";
+            // Check if the filter parameter is set to 'today'
+            if ($req->has('filter') && $req->filter == 'today') {
+                // Get today's date
+                $today = Carbon::today();
+
+                // Fetch users created today
+                $foreachData = User::whereDate('created_at', $today)
+                    ->whereNull('deleted_at')
+                    ->latest()
+                    ->get();
+
+                    $title = "Users";
+            } else {
+                // Fetch all users excluding soft-deleted ones
+                $foreachData = User::whereNull('deleted_at')
+                    ->latest()
+                    ->get();
+
+                $title = "Users";
+            }
+
             return view('admin/user.index', compact('foreachData', 'title'));
         } else {
             return view('admin/login/index');
         }
     }
+
     public function create(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
