@@ -378,9 +378,9 @@
                             </a>
                         </li>
                         <li class="menu-title">Main</li>
-                        <!-- <li>
+                        <li>
                             <a href="{{route('/')}}" target="_blank" class="waves-effect"><i class="bi bi-eye-fill"></i><span> View Site </span></a>
-                        </li> -->
+                        </li>
                         <?php
                         $admin_services = Session::get('services');
                         $ser = json_decode($admin_services);
