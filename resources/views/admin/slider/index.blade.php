@@ -57,6 +57,7 @@
                                                 <th data-priority="1">Web Image</th>
                                                 <th data-priority="1">Mobile Image</th>
                                                 <th data-priority="1">Link</th>
+                                                <th data-priority="1">Sequence</th>
                                                 <th data-priority="6">Status</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <th data-priority="6">Action</th>
@@ -83,6 +84,7 @@
                                                     @endif
                                                 </td>
                                                 <th>{{$data->link}}</th>
+                                                <th>{{$data->seq}}</th>
                                                 @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>

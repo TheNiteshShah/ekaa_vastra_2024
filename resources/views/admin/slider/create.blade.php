@@ -90,6 +90,15 @@
                                         <div style="color:red">{{$message}}</div>
                                         @enderror
                                     </div>
+                                    <div class="col-sm-6 my-3" style="margin-top: 23px!important">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control @error('seq') is-invalid @enderror" value="{{old('seq') ? old('seq') : $data->seq}}" id="seq" name="seq" placeholder="Enter Sequence" onkeypress="return isNumberKey(event)" required>
+                                            <label for="seq">Enter Sequence &nbsp;<span style="color:red;">*</span></label>
+                                        </div>
+                                        @error('seq')
+                                        <div style="color:red">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <div class="w-100 text-center">
                                             <button type="submit" style="margin-top: 10px;" class="btn btn-info"><i class="fa fa-save"></i> Submit</button>

@@ -31,7 +31,7 @@ class HomeController extends Controller
     // ============================= START INDEX ============================ 
     public function index(Request $req)
     {
-        $sliderData = SliderModal::where('is_active', 1)->orderBy('id', 'desc')->get();
+        $sliderData = SliderModal::where('is_active', 1)->orderBy('seq', 'asc')->get();
         $bannerData = BannerModal::where('is_active', 1)->get();
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->get();
         $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->get();

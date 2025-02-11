@@ -71,6 +71,7 @@ class SliderController extends Controller
             $uploadData->mob_image = $mob_image;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
+            $uploadData->seq = $req->seq;
             $uploadData->save();
             if ($uploadData) {
                 if ($req->id === null) {
