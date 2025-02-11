@@ -4402,20 +4402,14 @@ ul.items li {
 .single-product-info .product-body .product-price .del {
     font-weight: 400;
     line-height: 20px;
-    color: #929292;
-    margin-right: 10px;
     font-size: 13px
 }
 
 .single-product-info .product-body .product-price .onsale {
     font-weight: 600;
     color: #292929;
-    font-size: 14px;
-    line-height: 1;
-    margin-bottom: 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .product-discountPercentage {

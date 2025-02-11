@@ -55,7 +55,7 @@
 <section class="product-single theme1 mb-3">
     <div class="container grid-wraper">
         <div class="row">
-            <div class="col-md-9 mx-auto col-lg-6 mb-5 mb-lg-0">
+            <div class="col-md-9 mx-auto col-lg-7 mb-5 mb-lg-0">
                 <div class="position-relative">
                     @if($productData->label)
                     <span class="badge badge-danger top-left">{{$productData->label}}</span>
@@ -140,7 +140,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-6 mt-5 mt-md-0">
+            <div class="col-lg-5 mt-5 mt-md-0">
                 <div class="single-product-info">
                     <div class="single-product-head">
                         <div class="row justify-content-between align-items-center">
@@ -156,39 +156,43 @@
                             @endif
                         </div>
                         <div class="star-content mb-20">
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
+                            <!-- <span class="star-on"><i class="ion-ios-star"></i> </span> -->
+                            <span class="star-off"><i class="ion-ios-star-outline"></i></span>
+                            <span class="star-off"><i class="ion-ios-star-outline"></i></span>
+                            <span class="star-off"><i class="ion-ios-star-outline"></i></span>
+                            <span class="star-off"><i class="ion-ios-star-outline"></i></span>
+                            <span class="star-off"><i class="ion-ios-star-outline"></i></span>
+
                             <a href="#" id="write-comment"><span class="ms-2"><i class="far fa-comment-dots"></i></span>
                                 Read reviews <span>(0)</span></a>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><span class="edite"><i class="far fa-edit"></i></span> Write a
                                 review</a>
                         </div>
                     </div>
-                    <div class="product-body mb-40">
-                        <div class="d-flex align-items-center mb-30 border-bottom pb-30">
-                            <h6 class="product-price me-2">
-                                <del class="del">₹{{$productData->mrp}}</del> <span class="onsale">₹{{$productData->selling_price}}</span>
-                            </h6>
-                            @php
-                            $percentageSaved = $productData->mrp > 0 ? (($productData->mrp - $productData->selling_price) / $productData->mrp) * 100 : 0;
-                            @endphp
-                            @if($percentageSaved > 0)
-                            <span class="badge my-badge position-static bg-dark">Save {{ number_format($percentageSaved, 2) }}%</span>
-                            @endif
+                    <div class="product-body mb-30">
+                        <div class="d-flex align-items-center mb-10 border-bottom pb-10">
+                            <p class="product-price">
+                                <span class="onsale">₹{{ number_format($productData->selling_price) }}</span>
+                                <del class="del">₹{{ number_format($productData->mrp) }}</del>
+                                @php
+                                $percentageSaved = $productData->mrp > 0 ? (($productData->mrp - $productData->selling_price) / $productData->mrp) * 100 : 0;
+                                @endphp
+                                @if($percentageSaved > 0)
+                                <span class="product-discountPercentage">({{number_format($percentageSaved)}}% Off)</span>
+                                @endif
+                            </p>
                         </div>
                         <p class="font-size">
                             {!!$productData->short_description!!}
                         </p>
                     </div>
                     <div class="product-footer">
-                        <div class="row align-items-center mb-10">
-                            <img src="{{ asset('frontend/img/tape.png') }}" loading="lazy" style="width:50px" class="img-fluid" alt="measuring-tape">
-                            <a class="offcanvas-toggle pl-3 ml-1" style="font-weight: 400;color:black;display: contents;font-size:14px" href="#offcanvas-size-chart"><span>Size chart</span></a>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">Select Size</h6>
+                            <a class="offcanvas-toggle" href="#offcanvas-size-chart" style="font-weight: 400; color: black; font-size: 14px; text-decoration: none;">
+                                Size Chart <i class="fa fa-chevron-right"></i> 
+                            </a>
                         </div>
-                        <h6>Select Size </h6>
                         <nav class="shop-grid-nav mt-10">
                             <ul class="product-tag d-flex flex-wrap">
                                 @foreach($productData->types as $index=>$type)
@@ -198,7 +202,7 @@
                             <input type="hidden" id="product_id" name="product_id" value="{{$productData->id}}">
                             <input type="hidden" id="type_id" name="type_id" value="">
                         </nav>
-                        <span style="font-size:11px">Note: Only one size selection is permitted for each product.</span>
+                        <span style="font-size:11px">Note: Only one size selection is allowed for each product.</span>
                         <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
                             <div class="count d-flex">
                                 <!-- Label for Quantity input -->
