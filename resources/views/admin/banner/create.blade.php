@@ -71,7 +71,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 my-3">
-                                        <label for="web_image">Web Image &nbsp;<span style="color:red;">1920*842</span></label>
+                                        <label for="web_image">Web Image &nbsp;<span style="color:red;">1920*600</span></label>
                                         <input type="file" class="form-control" type="text" value="" id="web_image" name="web_image" placeholder="Enter Web Image">
                                         @if($data->web_image)
                                         <img id="web_image_img" height=100 width=150 src="{{asset($data->web_image)}} ">

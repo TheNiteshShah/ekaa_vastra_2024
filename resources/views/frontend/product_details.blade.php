@@ -336,8 +336,8 @@
                                         <span class="badge badge-danger top-left">{{$trend->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',$trend->slug)}}">
-                                            <img class="first-img"loading="lazy"  src="{{asset($trend->image)}}" alt="thumbnail">
-                                            <img class="second-img"loading="lazy"  src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
+                                            <img class="first-img" loading="lazy" src="{{asset($trend->image)}}" alt="thumbnail">
+                                            <img class="second-img" loading="lazy" src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
                                         @if(auth()->check())
                                         @php
@@ -350,9 +350,16 @@
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
                                             <h3 class="title mb-10"><a href="{{route('product',$trend->slug)}}">{{$trend->name}}</a></h3>
-                                            <h6 class="product-price"><del class="del">₹{{$trend->mrp}}</del>
-                                                <span class="onsale">₹{{$trend->selling_price}}</span>
-                                            </h6>
+                                            <p class="product-price">
+                                                <span class="onsale">₹{{ number_format($trend->selling_price) }}</span>
+                                                <del class="del">₹{{ number_format($trend->mrp) }}</del>
+                                                @php
+                                                $percentageSaved = $trend->mrp > 0 ? (($trend->mrp - $trend->selling_price) / $trend->mrp) * 100 : 0;
+                                                @endphp
+                                                @if($percentageSaved > 0)
+                                                <span class="product-discountPercentage">({{number_format($percentageSaved)}}% Off)</span>
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

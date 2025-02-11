@@ -38,7 +38,7 @@ class SliderController extends Controller
                 $uploadData = SliderModal::where('id', $req->id)->first();
             }
             if (!empty($req->web_image)) {
-                $allowedFormats = ['jpeg', 'jpg', 'webp'];
+                $allowedFormats = ['jpeg', 'jpg', 'webp','png'];
                 $extension = strtolower($req->web_image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
                     $file = time() . '_' . uniqid() . '.' . $req->web_image->extension();
@@ -46,7 +46,7 @@ class SliderController extends Controller
                     $web_image = 'uploads/image/sliders/' . $file;
                 } else {
                     // Handle invalid file format (not allowed)
-                    return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+                    return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, png and webp files are allowed.');
                 }
             } else {
                 $web_image = $uploadData->web_image;

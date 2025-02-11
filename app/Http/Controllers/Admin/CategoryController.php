@@ -44,7 +44,7 @@ class CategoryController extends Controller
                 $uploadData = CategoryModal::where('id', $req->id)->first();
             }
             if (!empty($req->image)) {
-                $allowedFormats = ['jpeg', 'jpg', 'webp'];
+                $allowedFormats = ['jpeg', 'jpg', 'webp', 'png'];
                 $extension = strtolower($req->image->getClientOriginalExtension());
                 if (in_array($extension, $allowedFormats)) {
                     $file = time() . '_' . uniqid() . '.' . $req->image->extension();
@@ -52,7 +52,7 @@ class CategoryController extends Controller
                     $image = 'uploads/image/category/' . $file;
                 } else {
                     // Handle invalid file format (not allowed)
-                    return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+                    return redirect()->back()->with('error', 'Invalid file format. Only jpeg, jpg, png and webp files are allowed.');
                 }
             } else {
                 $image = $uploadData->image;

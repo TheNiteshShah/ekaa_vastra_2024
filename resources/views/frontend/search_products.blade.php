@@ -83,9 +83,16 @@
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
                                             <h3 class="title mb-10"><a href="{{route('product',$product->slug)}}">{{$product->name}}</a></h3>
-                                            <h6 class="product-price"><del class="del">₹{{$product->mrp}}</del>
-                                                <span class="onsale">₹{{$product->selling_price}}</span>
-                                            </h6>
+                                            <p class="product-price">
+                                                <span class="onsale">₹{{ number_format($product->selling_price) }}</span>
+                                                <del class="del">₹{{ number_format($product->mrp) }}</del>
+                                                @php
+                                                $percentageSaved = $product->mrp > 0 ? (($product->mrp - $product->selling_price) / $product->mrp) * 100 : 0;
+                                                @endphp
+                                                @if($percentageSaved > 0)
+                                                <span class="product-discountPercentage">({{number_format($percentageSaved)}}% Off)</span>
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@
             <!-- Mobile optimized image with WebP support and explicit dimensions -->
             <source srcset="{{ asset($slider->mob_image) }}" media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
             <!-- Fallback image with proper alt text -->
-            <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
+            <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }} style="object-fit: contain;width: 100%; height: auto;">
         </picture>
         @endforeach
     </div>
@@ -48,7 +48,7 @@
 @if(!empty($trendingData))
 <!-- New Arrivals Section Start -->
 <section class="theme1 bg-white pt-70 pb-70">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <!-- Section Title -->
@@ -95,12 +95,16 @@
                                             <h3 class="title mb-10">
                                                 <a href="{{ route('product', $trend->slug) }}" itemprop="name">{{ $trend->name }}</a>
                                             </h3>
-                                            <h6 class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                                                <meta itemprop="priceCurrency" content="INR">
-                                                <del class="del">₹{{ $trend->mrp }}</del>
-                                                <span class="onsale" itemprop="price">₹{{ $trend->selling_price }}</span>
-                                                <link itemprop="availability" href="https://schema.org/InStock">
-                                            </h6>
+                                            <p class="product-price">
+                                                <span class="onsale">₹{{ number_format($trend->selling_price) }}</span>
+                                                <del class="del">₹{{ number_format($trend->mrp) }}</del>
+                                                @php
+                                                $percentageSaved = $trend->mrp > 0 ? (($trend->mrp - $trend->selling_price) / $trend->mrp) * 100 : 0;
+                                                @endphp
+                                                @if($percentageSaved > 0)
+                                                <span class="product-discountPercentage">({{number_format($percentageSaved)}}% Off)</span>
+                                                @endif
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +126,7 @@
 <section class="common-banner pb-70 bg-white">
     <div class="row">
         <div class="col-12">
-            <div class="position-relative overflow-hidden">
+            <div class="position-relative overflow-hidden d-flex justify-content-center align-items-center">
                 <div class="banner-thumb banner-large">
                     @if(!empty($bannerData[0]->link))
                     <a href="{{ $bannerData[0]->link }}">
@@ -131,7 +135,7 @@
                             <!-- Source for mobile -->
                             <source srcset="{{ asset($bannerData[0]->mob_image) }}" loading="lazy" media="(max-width: 768px)" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}">
                             <!-- Source for desktop -->
-                            <img src="{{ asset($bannerData[0]->web_image) }}" loading="lazy" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}">
+                            <img src="{{ asset($bannerData[0]->web_image) }}" loading="lazy" alt="{{ $bannerData[0]->alt_text ?? 'Ekaa Vastra Banner' }}" style="object-fit: cover; width: 100%; height: auto; display: block;">
                         </picture>
                         @if(!empty($bannerData[0]->link))
                     </a>
@@ -146,7 +150,7 @@
 
 <!-- Featured Products Section Start -->
 <section class="theme1 bg-white pb-70">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- Section Title -->
             <div class="col-12">
@@ -164,7 +168,7 @@
                             <div class="card-body p-0">
                                 <div class="media flex-column">
                                     <!-- Product Thumbnail -->
-                                    <figure class="product-thumbnail w-100 position-relative">
+                                    <figure class="product-thumbnail w-100 position-relative mb-0">
                                         @if($trend->label)
                                         <span class="badge badge-danger top-left">{{ $trend->label }}</span>
                                         @endif
@@ -195,8 +199,14 @@
                                                 </a>
                                             </h2>
                                             <p class="product-price">
-                                                <del class="del">₹{{ number_format($trend->mrp) }}</del>
                                                 <span class="onsale">₹{{ number_format($trend->selling_price) }}</span>
+                                                <del class="del">₹{{ number_format($trend->mrp) }}</del>
+                                                @php
+                                                $percentageSaved = $trend->mrp > 0 ? (($trend->mrp - $trend->selling_price) / $trend->mrp) * 100 : 0;
+                                                @endphp
+                                                @if($percentageSaved > 0)
+                                                <span class="product-discountPercentage">({{number_format($percentageSaved)}}% Off)</span>
+                                                @endif
                                             </p>
                                         </div>
                                     </div>
@@ -217,23 +227,26 @@
 <section class="common-banner pb-70 bg-white">
     <div class="row">
         <div class="col-12">
-            <figure class="banner-thumb banner-large position-relative overflow-hidden">
-                @if(!empty($bannerData[1]->link))
-                <a href="{{ $bannerData[1]->link }}">
-                    @endif
-                    <picture>
-                        <!-- Mobile Image -->
-                        <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)">
-                        <!-- Web Image -->
-                        <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Promotional Banner' }}">
-                    </picture>
+            <div class="position-relative overflow-hidden d-flex justify-content-center align-items-center">
+                <div class="banner-thumb banner-large">
                     @if(!empty($bannerData[1]->link))
-                </a>
-                @endif
-            </figure>
+                    <a href="{{ $bannerData[0]->link }}">
+                        @endif
+                        <picture>
+                            <!-- Source for mobile -->
+                            <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}">
+                            <!-- Source for desktop -->
+                            <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}" style="object-fit: cover; width: 100%; height: auto; display: block;">
+                        </picture>
+                        @if(!empty($bannerData[0]->link))
+                    </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
 @endif
 <!-- Common Banner Section End -->
 
