@@ -62,7 +62,7 @@ class ProductController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             $this->validate($req, [
                 'name' => $req->id === null ? 'required' : 'required',
-                'sku' => $req->id === null ? '' : '',
+                'sku' => $req->id === null ? 'unique:products|sku' : '',
                 'description' => $req->id === null ? 'required' : 'required',
                 'is_top' => $req->id === null ? 'required' : 'required',
                 'is_trending' => $req->id === null ? 'required' : 'required',

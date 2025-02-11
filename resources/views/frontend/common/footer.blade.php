@@ -188,8 +188,6 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 
     /*****************************
      *JavaScript Love Heart Cursor*
-     *  (c)2013+ mf2fm web-design *
-     *   http://www.mf2fm.com/rv  *
      *  DON'T EDIT BELOW THIS BOX *
      *****************************/
     var x = ox = 400;
