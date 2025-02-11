@@ -293,9 +293,9 @@
 
                             <!-- Reviewer Name -->
                             <footer>
-                                <h4 class="text-uppercase mb-15 mt-10" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                <h5 class="text-uppercase mb-15 mt-10" itemprop="author" itemscope itemtype="https://schema.org/Person">
                                     <span itemprop="name">{{ $test->name }}</span>
-                                </h4>
+                                </h5>
                             </footer>
                         </div>
                     </article>

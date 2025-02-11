@@ -52,8 +52,8 @@ class HomeController extends Controller
                 'user_agent' => $userAgent,
             ]);
         }
-        $imageUrl = $sliderData->first()->web_image;
-        $image2Url = $sliderData->get(1)->mob_image;
+        $imageUrl = $sliderData->has(1) ? $sliderData->get(1)->web_image : ($sliderData->has(0) ? $sliderData->get(0)->web_image : null);
+        $image2Url = $sliderData->has(1) ? $sliderData->get(1)->mob_image : ($sliderData->has(0) ? $sliderData->get(0)->mob_image : null);        
         return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords', 'imageUrl', 'image2Url'));
     }
     // ============================= END INDEX ============================ 
