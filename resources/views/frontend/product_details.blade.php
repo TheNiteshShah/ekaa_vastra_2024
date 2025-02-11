@@ -39,7 +39,7 @@
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center ">
                     <li class="breadcrumb-item"><a href="{{route('/')}}">Home</a></li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($productData->subcategory?$productData->subcategory->name:$productData->category->name))))}}">{{$productData->subcategory?$productData->subcategory->name:$productData->category->name}}</a>
+                        <a href="{{route('collection',$productData->subcategory?$productData->subcategory->slug:$productData->category->slug)}}">{{$productData->subcategory?$productData->subcategory->name:$productData->category->name}}</a>
                     </li>
                     <!-- <li class="breadcrumb-item active" aria-current="page">
                         Product Details
@@ -335,7 +335,7 @@
                                         @if($trend->label)
                                         <span class="badge badge-danger top-left">{{$trend->label}}</span>
                                         @endif
-                                        <a class="d-block" href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">
+                                        <a class="d-block" href="{{route('product',$trend->slug)}}">
                                             <img class="first-img"loading="lazy"  src="{{asset($trend->image)}}" alt="thumbnail">
                                             <img class="second-img"loading="lazy"  src="{{asset($trend->image2?$trend->image2:$trend->image1)}}" alt="thumbnail">
                                         </a>
@@ -349,7 +349,7 @@
                                     <div class="media-body">
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
-                                            <h3 class="title mb-10"><a href="{{route('product',strtolower(str_replace('+', '-', urlencode($trend->name))))}}">{{$trend->name}}</a></h3>
+                                            <h3 class="title mb-10"><a href="{{route('product',$trend->slug)}}">{{$trend->name}}</a></h3>
                                             <h6 class="product-price"><del class="del">₹{{$trend->mrp}}</del>
                                                 <span class="onsale">₹{{$trend->selling_price}}</span>
                                             </h6>

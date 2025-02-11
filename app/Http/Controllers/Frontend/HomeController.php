@@ -58,13 +58,11 @@ class HomeController extends Controller
     }
     // ============================= END INDEX ============================ 
     // ============================= START ALL PRODUCTS ============================ 
-    public function collection(Request $req, $encodeName)
+    public function collection(Request $req, $slug)
     {
-        // Decode the name and handle both categories and subcategories
-        $originalName = urldecode(str_replace('-', '+', $encodeName));
 
         // Check if the name matches a subcategory
-        $subcategoryData = SubCategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
+        $subcategoryData = SubCategoryModal::where(['is_active' => 1, 'slug' => $slug])->first();
 
         if ($subcategoryData) {
             // Handle subcategory
@@ -73,7 +71,7 @@ class HomeController extends Controller
             $parentData = $subcategoryData;
         } else {
             // If not a subcategory, check if it's a category
-            $categoryData = CategoryModal::where(['is_active' => 1, 'name' => $originalName])->first();
+            $categoryData = CategoryModal::where(['is_active' => 1, 'slug' => $slug])->first();
 
             if ($categoryData) {
                 // Handle category
@@ -92,10 +90,9 @@ class HomeController extends Controller
 
     // ============================= END ALL PRODUCTS ============================ 
     // ============================= START PRODUCTS DETAILS ============================ 
-    public function product(Request $req, $encodeSub)
+    public function product(Request $req, $slug)
     {
-        $originalName = urldecode(str_replace('-', '+', $encodeSub));
-        $productData = ProductModal::where(['is_active' => 1, 'name' => $originalName])->first();
+        $productData = ProductModal::where(['is_active' => 1, 'slug' => $slug])->first();
         $cartInfo = 0;
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -230,10 +227,10 @@ class HomeController extends Controller
         // Query products by name (case-insensitive search)
         $productData = ProductModal::where(function ($q) use ($query) {
             $q->where('name', 'LIKE', '%' . $query . '%')
-              ->orWhere('sku', 'LIKE', '%' . $query . '%');
+                ->orWhere('sku', 'LIKE', '%' . $query . '%');
         })
-        ->where('is_active', 1)
-        ->paginate(10);    
+            ->where('is_active', 1)
+            ->paginate(10);
 
         $title = 'Search - ' . $query;
         return view('frontend/search_products', compact('productData', 'title'));

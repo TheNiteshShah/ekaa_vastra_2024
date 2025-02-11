@@ -435,7 +435,7 @@
                             @endphp
                             <tr>
                                 <th class="text-center" scope="row" style="width: 23%;">
-                                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" class="view_checkout_image mt-0" alt="img"></a>
+                                    <a href="{{route('product',$cart->product->slug)}}" class="image"><img src="{{asset($cart->product->image)}}" class="view_checkout_image mt-0" alt="img"></a>
                                 </th>
                                 <td class="text-start" style="width: 60%;">
                                     <div>

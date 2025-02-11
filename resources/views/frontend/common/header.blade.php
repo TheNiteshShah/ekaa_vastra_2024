@@ -130,20 +130,22 @@
         .footer_bg {
             background-image: url('{{ asset('frontend/img/footer_bg.png') }}');
         }
+
         .top_bg {
             background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
         }
+
         @media (max-width: 768px) {
 
             /* Mobile */
             .footer_bg {
                 background-image: url('{{ asset('frontend/img/footer_bg_mob.png') }}');
             }
+
             .top_bg {
                 background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
             }
         }
-      
     </style>
 </head>
 
@@ -214,12 +216,12 @@
                     <li><a href="javascript:void(0)"><span class="menu-text">{{$category->name}}</span></a>
                         <ul class="offcanvas-submenu">
                             @foreach($category->SubCategory as $subcategory)
-                            <li><a href="{{route('collection',strtolower(str_replace('+', '-', urlencode($subcategory->name))))}}">{{$subcategory->name}}</a></li>
+                            <li><a href="{{route('collection',$subcategory->slug)}}">{{$subcategory->name}}</a></li>
                             @endforeach
                         </ul>
                     </li>
                     @else
-                    <li><a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($category->name)))) }}">{{ $category->name }}</a></li>
+                    <li><a href="{{ route('collection', $category->slug) }}">{{ $category->name }}</a></li>
                     @endif
                     @endforeach
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
@@ -251,9 +253,9 @@
             <ul class="minicart-product-list">
                 @foreach($wishlistItems as $wish)
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="image"><img src="{{asset($wish->product->image)}}" loading="lazy" alt="Cart product Image"></a>
+                    <a href="{{route('product',$wish->product->slug)}}" class="image"><img src="{{asset($wish->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($wish->product->name))))}}" class="title">{{$wish->product->name}}</a>
+                        <a href="{{route('product',$wish->product->slug)}}" class="title">{{$wish->product->name}}</a>
                         <h6 class="product-price"><del class="del" style="font-size: 13px;">₹{{$wish->product->mrp}}</del>
                             <span class="onsale" style="font-size: 13px;">₹{{$wish->product->selling_price}}</span>
                         </h6>
@@ -296,9 +298,9 @@
                 $cart_total += ($type->product->selling_price*$cart['quantity']);
                 @endphp
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="image"><img src="{{asset($type->product->image)}}" loading="lazy" alt="Cart product Image"></a>
+                    <a href="{{route('product',$type->product->slug)}}" class="image"><img src="{{asset($type->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($type->product->name))))}}" class="title">{{$type->product->name}}</a>
+                        <a href="{{route('product',$type->product->slug)}}" class="title">{{$type->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$type->size->name}}</span>
                         <span class="quantity-price mt-0">{{$cart['quantity']}} x <span class="amount">₹{{$type->product->selling_price}}</span></span>
                         <!-- <a href="javascript:void(0)" class="remove">×</a> -->
@@ -309,9 +311,9 @@
                 $cart_total += ($cart->product->selling_price*$cart->quantity);
                 @endphp
                 <li>
-                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="image"><img src="{{asset($cart->product->image)}}" loading="lazy" alt="Cart product Image"></a>
+                    <a href="{{route('product',$cart->product->slug)}}" class="image"><img src="{{asset($cart->product->image)}}" loading="lazy" alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($cart->product->name))))}}" class="title">{{$cart->product->name}}</a>
+                        <a href="{{route('product',$cart->product->slug)}}" class="title">{{$cart->product->name}}</a>
                         <span class="quantity-price mt-0"><b>Size:</b> {{$cart->type->size->name}}</span>
                         <span class="quantity-price mt-0">{{$cart->quantity}} x <span class="amount">₹{{$cart->product->selling_price}}</span></span>
                         <!-- <a href="javascript:void(0)" class="remove">×</a> -->
@@ -504,12 +506,12 @@
                                     <ul class="sub-menu">
                                         @foreach($category->SubCategory as $subcategory)
                                         <li>
-                                            <a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($subcategory->name)))) }}">{{ $subcategory->name }}</a>
+                                            <a href="{{ route('collection', $subcategory->slug) }}">{{ $subcategory->name }}</a>
                                         </li>
                                         @endforeach
                                     </ul>
                                     @else
-                                    <a href="{{ route('collection', strtolower(str_replace('+', '-', urlencode($category->name)))) }}">{{ $category->name }}</a>
+                                    <a href="{{ route('collection', $category->slug) }}">{{ $category->name }}</a>
                                     @endif
                                 </li>
                                 @endforeach

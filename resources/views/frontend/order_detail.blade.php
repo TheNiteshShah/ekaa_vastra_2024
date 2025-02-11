@@ -393,7 +393,7 @@
                             @foreach($ordersDetail->details as $data)
                             <tr>
                                 <th class="text-center" scope="row" style="width: 23%;">
-                                    <a href="{{route('product',strtolower(str_replace('+', '-', urlencode($data->product->name))))}}" class="image"><img src="{{asset($data->product->image)}}" class="view_checkout_image mt-0" alt="img"></a>
+                                    <a href="{{route('product',$data->product->slug)}}" class="image"><img src="{{asset($data->product->image)}}" class="view_checkout_image mt-0" alt="img"></a>
                                 </th>
                                 <td class="text-start" style="width: 60%;">
                                     <div>

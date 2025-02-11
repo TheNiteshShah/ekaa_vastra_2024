@@ -46,7 +46,7 @@ class WishlistController extends Controller
                 'type_id' => $item->type ? $item->type->id : null, // Adjust if type may be null
                 'product_name' => $item->product->name,
                 'product_image' => asset($item->product->image),
-                'product_url' => route('product', strtolower(str_replace('+', '-', urlencode($item->product->name)))),
+                'product_url' => route('product', $item->product->slug),
                 'product_mrp' => $item->product->mrp,
                 'product_selling_price' => $item->product->selling_price,
             ];

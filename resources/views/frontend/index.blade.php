@@ -71,7 +71,7 @@
                                         <span class="badge badge-danger top-left" itemprop="keywords">{{ $trend->label }}</span>
                                         @endif
 
-                                        <a class="d-block" href="{{ route('product', strtolower(str_replace('+', '-', urlencode($trend->name)))) }}" itemprop="url">
+                                        <a class="d-block" href="{{ route('product', $trend->slug) }}" itemprop="url">
                                             <img class="first-img" loading="lazy" src="{{ asset($trend->image) }}" alt="{{ $trend->name }}" itemprop="image">
                                             <img class="second-img" loading="lazy" src="{{ asset($trend->image2 ?: $trend->image1) }}" alt="{{ $trend->name }} - Alternative View">
                                         </a>
@@ -93,7 +93,7 @@
                                         <div class="product-desc">
                                             <span class="logo-text" itemprop="brand">Ekaa Vastra</span>
                                             <h3 class="title mb-10">
-                                                <a href="{{ route('product', strtolower(str_replace('+', '-', urlencode($trend->name)))) }}" itemprop="name">{{ $trend->name }}</a>
+                                                <a href="{{ route('product', $trend->slug) }}" itemprop="name">{{ $trend->name }}</a>
                                             </h3>
                                             <h6 class="product-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                                                 <meta itemprop="priceCurrency" content="INR">
@@ -168,7 +168,7 @@
                                         @if($trend->label)
                                         <span class="badge badge-danger top-left">{{ $trend->label }}</span>
                                         @endif
-                                        <a class="d-block" href="{{ route('product', strtolower(str_replace('+', '-', urlencode($trend->name)))) }}" aria-label="View {{ $trend->name }}">
+                                        <a class="d-block" href="{{ route('product', $trend->slug) }}" aria-label="View {{ $trend->name }}">
                                             <!-- Primary and Secondary Images -->
                                             <img class="first-img" loading="lazy" src="{{ asset($trend->image) }}" alt="{{ $trend->name }} - Front View">
                                             <img class="second-img" loading="lazy" src="{{ asset($trend->image2 ? $trend->image2 : $trend->image1) }}" alt="{{ $trend->name }} - Alternate View">
@@ -190,7 +190,7 @@
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
                                             <h2 class="title mb-10">
-                                                <a href="{{ route('product', strtolower(str_replace('+', '-', urlencode($trend->name)))) }}" aria-label="Explore {{ $trend->name }}">
+                                                <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}">
                                                     {{ $trend->name }}
                                                 </a>
                                             </h2>
