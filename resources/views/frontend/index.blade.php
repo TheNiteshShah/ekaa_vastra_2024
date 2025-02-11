@@ -48,7 +48,7 @@
 @if(!empty($trendingData))
 <!-- New Arrivals Section Start -->
 <section class="theme1 bg-white pt-70 pb-70">
-    <div class="container-fluid">
+    <div class="container-custom">
         <div class="row">
             <div class="col-12">
                 <!-- Section Title -->
@@ -150,7 +150,7 @@
 
 <!-- Featured Products Section Start -->
 <section class="theme1 bg-white pb-70">
-    <div class="container-fluid">
+    <div class="container-custom">
         <div class="row">
             <!-- Section Title -->
             <div class="col-12">
@@ -195,7 +195,7 @@
                                             <span class="logo-text">Ekaa Vastra</span>
                                             <h2 class="title mb-10">
                                                 <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}">
-                                                    {{ $trend->name }}
+                                                <span class="truncate-text">{{ $trend->name }}</span>
                                                 </a>
                                             </h2>
                                             <p class="product-price">

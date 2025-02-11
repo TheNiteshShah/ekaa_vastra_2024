@@ -2779,13 +2779,15 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
     -webkit-box-align: start;
     -ms-flex-align: start;
-    align-items: flex-start
+    align-items: flex-start;
+    max-width: 100%; /* Prevents content from overflowing */
 }
 
 .media-body {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* Ensures text doesn't overflow */
 }
 
 .static-media-wrap {
@@ -3572,9 +3574,27 @@ img.second-img {
     line-height: 1;
     color: #282c3f;
     margin-bottom: 6px;
+    display: block;
+    /* Ensures block-level behavior */
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product-desc .title a {
+    display: block;
+    /* Make <a> behave as a block element */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.truncate-text {
+    display: block;
+    /* Make text respect parent width */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .check-box .title,
@@ -3588,6 +3608,13 @@ img.second-img {
     font-size: 13px;
     margin-bottom: 6px;
     line-height: 1;
+}
+
+.container-custom {
+    width: 95%;
+    max-width: 1500px;
+    /* Adjust for your layout */
+    margin: 0 auto;
 }
 
 .star-rating span {

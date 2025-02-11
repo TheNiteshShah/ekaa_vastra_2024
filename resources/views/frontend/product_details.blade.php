@@ -316,7 +316,7 @@
 @if(!$relatedData->isEmpty())
 <!-- new arrival section start -->
 <section class="theme1 bg-white pt-70 pb-70">
-    <div class="container">
+    <div class="container-custom">
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center mb-30">
