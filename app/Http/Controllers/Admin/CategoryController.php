@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryModal;
 use App\Models\SubCategoryModal;
 use App\Models\ProductModal;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -62,6 +63,7 @@ class CategoryController extends Controller
             $uploadData->image = $image;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
+            $uploadData->slug = Str::slug($req->name);
             $uploadData->save();
             if ($uploadData) {
                 if ($req->id === null) {

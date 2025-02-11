@@ -8,6 +8,8 @@ use App\Models\SubCategoryModal;
 use App\Models\CategoryModal;
 use App\Models\ProductModal;
 use App\Models\TypeModal;
+use App\Models\MasterTypeModal;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -62,7 +64,9 @@ class ProductController extends Controller
         if (!empty($req->session()->has('admin_data'))) {
             $this->validate($req, [
                 'name' => $req->id === null ? 'required' : 'required',
-                'sku' => $req->id === null ? 'unique:products|sku' : '',
+                'sku' => $req->id === null
+                    ? 'required|unique:products,sku'
+                    : 'required|unique:products,sku,' . $req->id,
                 'description' => $req->id === null ? 'required' : 'required',
                 'is_top' => $req->id === null ? 'required' : 'required',
                 'is_trending' => $req->id === null ? 'required' : 'required',
@@ -119,12 +123,13 @@ class ProductController extends Controller
             $uploadData->seo_keywords = $req->seo_keywords;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
+            $uploadData->slug = Str::slug($req->name);
             $uploadData->save();
             if ($uploadData) {
                 if ($req->id === null) {
                     return redirect()->route('types.index', base64_encode($uploadData->id))->with('success', 'Product Added Successfully!');
                 } else {
-                    return redirect()->route('products.index', [$req->subcategory_id ? 'subcategory' : 'category', base64_encode($req->subcategory_id?$req->subcategory_id:$req->category_id)])->with('success', 'Product Updated Successfully');
+                    return redirect()->route('products.index', [$req->subcategory_id ? 'subcategory' : 'category', base64_encode($req->subcategory_id ? $req->subcategory_id : $req->category_id)])->with('success', 'Product Updated Successfully');
                 }
             } else {
                 return redirect()->back()->with('error', 'Something Went Wrong');

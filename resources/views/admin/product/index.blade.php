@@ -86,7 +86,7 @@
                                                 <th>{{$data->is_top==1?'Yes':'No'}}</th>
                                                 <th>
                                                     @if (!empty($data->image))
-                                                    <img src="{{asset($data->image)}}" alt="image" style="border:solid red 1px;padding: 5px;" height=50 width=80>
+                                                    <img src="{{asset($data->image)}}" alt="image" height=50 width=80>
                                                     @endif
 
                                                 </th>

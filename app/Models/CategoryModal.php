@@ -11,7 +11,7 @@ class CategoryModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name','image','seq','ip', 'added_by', 'is_active'
+        'name','image','seq','ip', 'added_by', 'is_active','slug'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

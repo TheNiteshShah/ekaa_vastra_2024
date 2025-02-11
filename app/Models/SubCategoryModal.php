@@ -11,7 +11,7 @@ class SubCategoryModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'category_id','name','image','seq','ip', 'added_by', 'is_active'
+        'category_id','name','image','seq','ip', 'added_by', 'is_active','slug'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

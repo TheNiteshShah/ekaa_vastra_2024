@@ -64,11 +64,19 @@
         /* Active State (when button is clicked) */
         .btn-info:active {
             background-color: #616161;
+            border-color: #292929 !important;
             /* Darker shade when active */
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             /* Smaller shadow */
             transform: translateY(0);
             /* Reset lift effect on click */
+        }
+
+        .btn-info:not(:disabled):not(.disabled):active,
+        .show>.btn-info.dropdown-toggle {
+            border-color: #292929 !important;
+            background-color: #292929 !important;
+            border: 1px solid #292929 !important;
         }
 
 

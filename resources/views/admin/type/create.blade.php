@@ -87,7 +87,7 @@
                                     @endphp
                                     @endforeach
                                 
-                                    <div class="col-sm-6 my-3" style="margin-top: 23px!important">
+                                    <div class="col-sm-6 my-3" style="margin-top: 37px!important">
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('inventory') is-invalid @enderror" value="{{old('inventory') ? old('inventory') : $data->inventory}}" id="sku" name="inventory" placeholder="Enter Inventory">
                                             <label for="inventory">Enter Inventory &nbsp;<span style="color:red;"></span></label>
