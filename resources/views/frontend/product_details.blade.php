@@ -349,7 +349,7 @@
                                     <div class="media-body">
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
-                                            <h3 class="title mb-10"><a href="{{route('product',$trend->slug)}}">{{$trend->name}}</a></h3>
+                                            <h3 class="title mb-10"><a href="{{route('product',$trend->slug)}}" class="truncate-text">{{$trend->name}}</a></h3>
                                             <p class="product-price">
                                                 <span class="onsale">₹{{ number_format($trend->selling_price) }}</span>
                                                 <del class="del">₹{{ number_format($trend->mrp) }}</del>

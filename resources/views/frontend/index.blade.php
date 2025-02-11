@@ -93,7 +93,9 @@
                                         <div class="product-desc">
                                             <span class="logo-text" itemprop="brand">Ekaa Vastra</span>
                                             <h3 class="title mb-10">
-                                                <a href="{{ route('product', $trend->slug) }}" itemprop="name">{{ $trend->name }}</a>
+                                            <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}" class="truncate-text">
+                                                    {{ $trend->name }}
+                                                </a>
                                             </h3>
                                             <p class="product-price">
                                                 <span class="onsale">₹{{ number_format($trend->selling_price) }}</span>
@@ -194,8 +196,8 @@
                                         <div class="product-desc">
                                             <span class="logo-text">Ekaa Vastra</span>
                                             <h2 class="title mb-10">
-                                                <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}">
-                                                <span class="truncate-text">{{ $trend->name }}</span>
+                                                <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}" class="truncate-text">
+                                                    {{ $trend->name }}
                                                 </a>
                                             </h2>
                                             <p class="product-price">
