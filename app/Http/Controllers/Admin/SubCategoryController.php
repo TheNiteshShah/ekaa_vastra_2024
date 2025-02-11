@@ -67,6 +67,9 @@ class SubCategoryController extends Controller
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->slug = Str::slug($req->name);
+            $uploadData->seo_title = $req->seo_title;
+            $uploadData->seo_description = $req->seo_description;
+            $uploadData->seo_keywords = $req->seo_keywords;
             $uploadData->save();
             if ($uploadData) {
                 if ($req->id === null) {

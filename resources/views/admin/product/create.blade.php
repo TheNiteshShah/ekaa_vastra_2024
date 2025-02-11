@@ -245,7 +245,7 @@
                                         @enderror
                                     </div>
                                     <!-- SEO Tags Input Section -->
-                                    <div class="col-sm-6 my-3">
+                                    <div class="col-sm-6 my-3" style="margin-top:37px !important">
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('seo_title') is-invalid @enderror" value="{{old('seo_title') ? old('seo_title') : $data->seo_title}}" id="seo_title" name="seo_title" placeholder="Enter SEO Title">
                                             <label for="seo_title">SEO Title</label>
@@ -255,7 +255,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-sm-6 my-3">
+                                    <div class="col-sm-12 my-3">
                                         <div class="form-floating">
                                             <textarea class="form-control @error('seo_description') is-invalid @enderror" id="seo_description" name="seo_description" placeholder="Enter SEO Description">{{old('seo_description') ? old('seo_description') : $data->seo_description}}</textarea>
                                             <label for="seo_description">SEO Description</label>
@@ -265,15 +265,16 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-sm-6 my-3">
+                                    <div class="col-sm-12 my-3">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control @error('seo_keywords') is-invalid @enderror" value="{{old('seo_keywords') ? old('seo_keywords') : $data->seo_keywords}}" id="seo_keywords" name="seo_keywords" placeholder="Enter SEO Keywords (comma-separated)">
+                                            <textarea class="form-control @error('seo_keywords') is-invalid @enderror" id="seo_keywords" name="seo_keywords" placeholder="Enter SEO Keywords (comma-separated)">{{old('seo_keywords') ? old('seo_keywords') : $data->seo_keywords}}</textarea>
                                             <label for="seo_keywords">SEO Keywords (comma-separated)</label>
                                         </div>
                                         @error('seo_keywords')
                                         <div style="color:red">{{$message}}</div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group">
                                         <div class="w-100 text-center">
                                             <button type="submit" style="margin-top: 10px;" class="btn btn-info"><i class="fa fa-save"></i> Submit</button>

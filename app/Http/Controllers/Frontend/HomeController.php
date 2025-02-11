@@ -66,7 +66,9 @@ class HomeController extends Controller
 
         if ($subcategoryData) {
             // Handle subcategory
-            $title = $subcategoryData->name . ' - Ekaa Vastra';
+            $title = $subcategoryData->seo_title ? $subcategoryData->seo_title : $subcategoryData->name . ' - Ekaa Vastra';
+            $seo_description = $subcategoryData->seo_description;
+            $seo_keywords = $subcategoryData->seo_keywords;
             $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
             $parentData = $subcategoryData;
         } else {
@@ -75,7 +77,9 @@ class HomeController extends Controller
 
             if ($categoryData) {
                 // Handle category
-                $title = $categoryData->name . ' - Ekaa Vastra';
+                $title = $categoryData->seo_title ? $categoryData->seo_title : $categoryData->name . ' - Ekaa Vastra';
+                $seo_description = $categoryData->seo_description;
+                $seo_keywords = $categoryData->seo_keywords;
                 $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->paginate(10);
                 $parentData = $categoryData;
             } else {
@@ -85,7 +89,7 @@ class HomeController extends Controller
         }
 
         // Return the view with the data
-        return view('frontend/all_products', compact('parentData', 'productData', 'title'));
+        return view('frontend/all_products', compact('parentData', 'productData', 'title', 'seo_description', 'seo_keywords'));
     }
 
     // ============================= END ALL PRODUCTS ============================ 
