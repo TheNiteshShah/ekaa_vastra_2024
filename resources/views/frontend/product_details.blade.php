@@ -190,7 +190,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="mb-0">Select Size</h6>
                             <a class="offcanvas-toggle" href="#offcanvas-size-chart" style="font-weight: 400; color: black; font-size: 14px; text-decoration: none;">
-                                Size Chart <i class="fa fa-chevron-right"></i> 
+                                Size Chart <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                         <nav class="shop-grid-nav mt-10">
@@ -269,10 +269,22 @@
                         <ul class="d-flex align-items-center">
                             <li class="share">Share</li>
                             <li>
-                                <a href="#"><i class="ion-social-facebook"></i></a>
+                                <!-- WhatsApp Share -->
+                                <a href="https://api.whatsapp.com/send?text={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="ion-social-whatsapp"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="#"><i class="ion-social-instagram-outline"></i></a>
+                                <!-- Facebook Share -->
+                                <a href="https://www.facebook.com/sharer.php?u={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="ion-social-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- Pinterest Share -->
+                                <a href="https://pinterest.com/pin/create/button/?url={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="ion-social-pinterest"></i>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -302,11 +314,26 @@
 
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>
-                            <ul class="category-sub-menu">
+                            <ul class="category-sub-menu" style="margin-left: 10px;">
+                                <li class="mb-0"><strong>Shipping Rates:</strong> Based on weight & distance.</li>
+                                <li class="mb-0"><strong>Shipping Partner:</strong> Trusted carriers for safe delivery.</li>
+                                <li class="mb-0"><strong>Processing Time:</strong> Ships within <span>5-7 business days</span>.</li>
+                                <li class="mb-0"><strong>Delivery Time:</strong> Estimated arrival in <span>7-9 business days</span>.</li>
+                                <li class="mb-0"><strong>Delivery Coverage:</strong> Available across India.</li>
+                                <li class="mb-0"><strong>Order Tracking:</strong> Tracking link provided via email/SMS.</li>
+                                <li class="mb-0"><strong>Possible Delays:</strong> Weather & logistics may affect timelines.</li>
+                                <li class="mb-0"><strong>Address Accuracy:</strong> Ensure correct details for smooth delivery.</li>
+                                <li class="mb-0"><strong>Need Help?</strong> Contact our <a href="{{ route('contact-us') }}" style="display: inline;padding: 0;line-height: 0;text-transform: lowercase;">support team</a>.</li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Return & Exchange </a>
-                            <ul class="category-sub-menu">
+                            <ul class="category-sub-menu" style="margin-left: 10px;">
+                                <li class="mb-0">Defective items can be returned within <strong>48 hours</strong> for a refund.</li>
+                                <li class="mb-0">Non-defective returns allowed within <strong>7 days</strong> (store credit only, return shipping applies).</li>
+                                <li class="mb-0">Size exchange available within <strong>7 days</strong> (subject to stock).</li>
+                                <li class="mb-0"><strong>Cancellation:</strong> Orders can be canceled <strong>before dispatch</strong>. Prepaid refunds take <strong>3-5 business days</strong>.</li>
+                                <li class="mb-0"><strong>Need Help?</strong> Email us at <a href="mailto:ekaavastra@gmail.com" style="display: inline;padding: 0;line-height: 0;text-transform: lowercase;">ekaavastra@gmail.com</a>.</li>
+
                             </ul>
                         </li>
                     </ul>
