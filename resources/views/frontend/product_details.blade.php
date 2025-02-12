@@ -270,19 +270,19 @@
                             <li class="share">Share</li>
                             <li>
                                 <!-- WhatsApp Share -->
-                                <a href="https://api.whatsapp.com/send?text={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                <a href="https://api.whatsapp.com/send?text={{ route('product', $productData->slug) }}" target="_blank" rel="noopener noreferrer">
                                     <i class="ion-social-whatsapp"></i>
                                 </a>
                             </li>
                             <li>
                                 <!-- Facebook Share -->
-                                <a href="https://www.facebook.com/sharer.php?u={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.facebook.com/sharer.php?u={{ route('product', $productData->slug) }}" target="_blank" rel="noopener noreferrer">
                                     <i class="ion-social-facebook"></i>
                                 </a>
                             </li>
                             <li>
                                 <!-- Pinterest Share -->
-                                <a href="https://pinterest.com/pin/create/button/?url={{ url($productData->slug) }}" target="_blank" rel="noopener noreferrer">
+                                <a href="https://pinterest.com/pin/create/button/?url={{ route('product', $productData->slug) }}" target="_blank" rel="noopener noreferrer">
                                     <i class="ion-social-pinterest"></i>
                                 </a>
                             </li>
