@@ -314,7 +314,7 @@
 
                         </li>
                         <li><a href="javascript:void(0)">Shipping Information </a>
-                            <ul class="category-sub-menu" style="margin-left: 10px;">
+                            <ul class="category-sub-menu">
                                 <li class="mb-0"><strong>Shipping Rates:</strong> Based on weight & distance.</li>
                                 <li class="mb-0"><strong>Shipping Partner:</strong> Trusted carriers for safe delivery.</li>
                                 <li class="mb-0"><strong>Processing Time:</strong> Ships within <span>5-7 business days</span>.</li>
@@ -327,7 +327,7 @@
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Return & Exchange </a>
-                            <ul class="category-sub-menu" style="margin-left: 10px;">
+                            <ul class="category-sub-menu">
                                 <li class="mb-0">Defective items can be returned within <strong>48 hours</strong> for a refund.</li>
                                 <li class="mb-0">Non-defective returns allowed within <strong>7 days</strong> (store credit only, return shipping applies).</li>
                                 <li class="mb-0">Size exchange available within <strong>7 days</strong> (subject to stock).</li>
