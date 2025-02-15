@@ -126,27 +126,21 @@
         gtag('config', 'G-RDBXV3VHBN');
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @if(!empty($footerBg))
     <style>
         .footer_bg {
-            background-image: url('{{ asset('frontend/img/footer_bg.png') }}');
-        }
-
-        .top_bg {
-            background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
+            background-image: url('{{ asset($footerBg->web_image) }}');
         }
 
         @media (max-width: 768px) {
 
             /* Mobile */
             .footer_bg {
-                background-image: url('{{ asset('frontend/img/footer_bg_mob.png') }}');
-            }
-
-            .top_bg {
-                background-image: url('{{ asset('frontend/img/top_bar.png.png') }}');
+                background-image: url('{{ asset($footerBg->mob_image) }}');
             }
         }
     </style>
+    @endif
 </head>
 
 <body>

@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\RkVendorProductController;
 use App\Http\Controllers\Admin\RkVendorOrderController;
 use App\Http\Controllers\Admin\EvVendorController;
 use App\Http\Controllers\Admin\FabricController;
+use App\Http\Controllers\Admin\BgImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,6 +135,7 @@ Route::resource('/promo', PromoController::class);
 Route::resource('/master_type', MasterTypeController::class);
 Route::get('/user_cart/{id}', [UserController::class, 'userCart'])->name('user_cart');
 Route::resource('/category', CategoryController::class);
+Route::resource('/bg_image', BgImageController::class);
 Route::get('/contact_enquiry', [ContactUsController::class, 'index'])->name('contact_enquiry');
 Route::get('/popup_enquiry', [PopUpEnquiryController::class, 'index'])->name('popup_enquiry');
 //------ Subcategory ----------

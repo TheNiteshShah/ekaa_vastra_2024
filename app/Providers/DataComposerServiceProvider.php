@@ -8,6 +8,7 @@ use App\Models\CategoryModal; // Adjust namespaces as per your application
 use App\Models\CartModal;
 use App\Models\WishListModal;
 use App\Models\TopBarModal;
+use App\Models\BgImageModal;
 use Illuminate\Support\Facades\Session;
 
 class DataComposerServiceProvider extends ServiceProvider
@@ -24,7 +25,8 @@ class DataComposerServiceProvider extends ServiceProvider
                 ->where('is_active', 1)
                 ->get();
             $topBarData = TopBarModal::where('is_active', 1)->orderBy('seq', 'asc')->get();
-
+            $BgImageData = BgImageModal::where('is_active', 1)->get();
+            $footerBg = $BgImageData->where('name', 'footer')->first();
 
             // Cart data
             if (auth()->check()) {
@@ -46,6 +48,7 @@ class DataComposerServiceProvider extends ServiceProvider
 
             $view->with([
                 'topBarData' => $topBarData,
+                'footerBg' => $footerBg,
                 'categoryData' => $categories,
                 'cartItems' => $cartItems,
                 'cartCount' => $cartCount,
