@@ -81,7 +81,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 my-3">
-                                        <label for="mob_image">Mobile Image &nbsp;<span style="color:red;">832*957</span></label>
+                                        <label for="mob_image">Mobile Image &nbsp;<span style="color:red;">426*480</span></label>
                                         <input type="file" class="form-control" type="text" value="" id="mob_image" name="mob_image" placeholder="Enter Mobile Image">
                                         @if($data->mob_image)
                                         <img id="mob_image_img" height=100 width=100 src="{{asset($data->mob_image)}} ">
