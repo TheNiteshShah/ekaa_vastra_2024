@@ -395,7 +395,7 @@
 
 
 <!-- blog-section start -->
-<section class="blog-section theme1 pb-70">
+<!-- <section class="blog-section theme1 pb-70">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -428,6 +428,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- blog-section end -->
 @endsection
