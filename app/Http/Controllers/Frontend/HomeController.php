@@ -53,7 +53,7 @@ class HomeController extends Controller
             ]);
         }
         $imageUrl = $sliderData->has(1) ? $sliderData->get(1)->web_image : ($sliderData->has(0) ? $sliderData->get(0)->web_image : null);
-        $image2Url = $sliderData->has(1) ? $sliderData->get(1)->mob_image : ($sliderData->has(0) ? $sliderData->get(0)->mob_image : null);        
+        $image2Url = $sliderData->has(1) ? $sliderData->get(1)->mob_image : ($sliderData->has(0) ? $sliderData->get(0)->mob_image : null);
         return view('frontend/index', compact('sliderData', 'bannerData', 'trendingData', 'topData', 'testimonialsData', 'title', 'seo_description', 'seo_keywords', 'imageUrl', 'image2Url'));
     }
     // ============================= END INDEX ============================ 
@@ -111,9 +111,14 @@ class HomeController extends Controller
             }
         }
         $relatedData = ProductModal::where('is_active', 1)
-            ->where('subcategory_id', $productData->subcategory_id)
+            ->when(!empty($productData->subcategory_id), function ($query) use ($productData) {
+                return $query->where('subcategory_id', $productData->subcategory_id);
+            }, function ($query) use ($productData) {
+                return $query->where('category_id', $productData->category_id);
+            })
             ->where('id', '!=', $productData->id)
             ->limit(10)
+            ->orderBy('seq','asc')
             ->get();
         $imageUrl = $productData->image;
         $image2Url = $productData->image;
