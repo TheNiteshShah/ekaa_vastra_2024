@@ -69,7 +69,7 @@ class HomeController extends Controller
             $title = $subcategoryData->seo_title ? $subcategoryData->seo_title : $subcategoryData->name . ' - Ekaa Vastra';
             $seo_description = $subcategoryData->seo_description;
             $seo_keywords = $subcategoryData->seo_keywords;
-            $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->paginate(10);
+            $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->orderBy('seq', 'asc')->paginate(10);
             $parentData = $subcategoryData;
         } else {
             // If not a subcategory, check if it's a category
@@ -80,7 +80,7 @@ class HomeController extends Controller
                 $title = $categoryData->seo_title ? $categoryData->seo_title : $categoryData->name . ' - Ekaa Vastra';
                 $seo_description = $categoryData->seo_description;
                 $seo_keywords = $categoryData->seo_keywords;
-                $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->paginate(10);
+                $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->orderBy('seq', 'asc')->paginate(10);
                 $parentData = $categoryData;
             } else {
                 // If neither category nor subcategory, redirect or show an error

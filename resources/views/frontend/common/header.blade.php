@@ -374,6 +374,10 @@
                             </button>
                         </div>
                     </form>
+                    <!-- <div class="text-center w-100 p-3" style="border-bottom: 1px solid #dee2e6;display:none" id="proceedAsGuestBtn">
+                        <h5 class="mb-3">Or</h5>
+                        <button type="button" id="proceedAsGuest" class="btn theme--btn1 btn--cm text-uppercase  d-block d-sm-inline-block me-sm-2">Proceed As Guest</button>
+                    </div> -->
                 </div>
             </div>
         </div>
