@@ -170,10 +170,10 @@
                     <td colspan="2" class="text-right"><strong>Subtotal:</strong></td>
                     <td class="text-right">₹{{ number_format($orderData->total_amount, 2) }}</td>
                 </tr>
-                @if($orderData->discount)
+                @if($orderData->promo_discount)
                 <tr>
-                    <td colspan="2" class="text-right"><strong>Discount:</strong></td>
-                    <td class="text-right">-₹{{ number_format($orderData->discount, 2) }}</td>
+                    <td colspan="2" class="text-right"><strong>Discount ({{$orderData->promo->name}}):</strong></td>
+                    <td class="text-right">-₹{{ number_format($orderData->promo_discount, 2) }}</td>
                 </tr>
                 @endif
                 @if($orderData->wallet_discount)

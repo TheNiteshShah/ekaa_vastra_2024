@@ -50,7 +50,7 @@
                             <li>{{$OrderData->address->first_name}} {{$OrderData->address->last_name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
                             @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
-                            <li>{{$OrderData->address->address}}</li>
+                            <li>{{$OrderData->address->address}}, {{$OrderData->address->city}}, {{$OrderData->address->state}}, {{$OrderData->address->country}} -{{$OrderData->address->pincode}}</li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                             <li>{{$OrderData->address->first_name}} {{$OrderData->address->last_name}}</li>
                             <li>{{$OrderData->address->phone}}</li>
                             @if($OrderData->address->email) <li>{{$OrderData->address->email}}</li>@endif
-                            <li>{{$OrderData->address->address}}</li>
+                            <li>{{$OrderData->address->address}}, {{$OrderData->address->city}}, {{$OrderData->address->state}}, {{$OrderData->address->country}} -{{$OrderData->address->pincode}}</li>
                         </ul>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                             @if($OrderData->promo_discount)
                             <tr>
                                 <td colspan="3"></td>
-                                <td>Discount</td>
+                                <td>Discount ({{$OrderData->promo->name}})</td>
                                 <td class="product_table text-right">-₹{{$OrderData->promo_discount}}</td>
                             </tr>
                             @endif
