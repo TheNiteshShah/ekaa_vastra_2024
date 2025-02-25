@@ -118,7 +118,7 @@ class HomeController extends Controller
             })
             ->where('id', '!=', $productData->id)
             ->limit(10)
-            ->orderBy('seq','asc')
+            ->orderBy('seq', 'asc')
             ->get();
         $imageUrl = $productData->image;
         $image2Url = $productData->image;
@@ -233,7 +233,7 @@ class HomeController extends Controller
     {
         $query = $request->input('search');
 
-        // Query products by name (case-insensitive search)
+        // Query products by name or SKU (case-insensitive search)
         $productData = ProductModal::where(function ($q) use ($query) {
             $q->where('name', 'LIKE', '%' . $query . '%')
                 ->orWhere('sku', 'LIKE', '%' . $query . '%');
@@ -241,6 +241,12 @@ class HomeController extends Controller
             ->where('is_active', 1)
             ->paginate(10);
 
+        // If only one product is found, redirect to its page
+        if ($productData->count() == 1) {
+            return redirect()->route('product', [$productData->first()->slug]);
+        }
+
+        // Otherwise, show search results page
         $title = 'Search - ' . $query;
         return view('frontend/search_products', compact('productData', 'title'));
     }
