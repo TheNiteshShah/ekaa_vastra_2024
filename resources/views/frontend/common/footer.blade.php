@@ -12,7 +12,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     <div class="footer-widget">
                         <div class="footer-logo mb-10">
                             <a href="{{ route('/') }}" title="Ekaa Vastra Home">
-                                <img src="{{asset('frontend/img/logo.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
+                                <img src="{{asset('frontend/img/logo_light.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
                             </a>
                         </div>
                         <p class="text mb-35" style="color: white;">
