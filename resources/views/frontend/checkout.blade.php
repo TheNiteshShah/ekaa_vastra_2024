@@ -12,7 +12,7 @@
     .table-responsive.wdfqw::-webkit-scrollbar {
         width: 5px;
         height: 8px;
-        background-color: #2caf4e;
+        background-color: #292929;
 
     }
 
