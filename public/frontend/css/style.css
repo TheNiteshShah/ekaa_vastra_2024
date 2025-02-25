@@ -4663,7 +4663,9 @@ address span {
 }
 
 .coppy-right p {
-    color: #929292
+    /* color: #929292 */
+    color: #eeecec
+
 }
 
 .theme1 .coppy-right a:hover {
