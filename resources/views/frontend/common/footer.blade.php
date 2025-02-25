@@ -31,7 +31,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-dark text-capitalize">Categories</h2>
+                            <h2 class="title text-light text-capitalize">Categories</h2>
                         </div>
                         <ul class="footer-menu">
                             @foreach($categoryData as $category)
@@ -45,7 +45,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-dark text-capitalize">Information</h2>
+                            <h2 class="title text-light text-capitalize">Information</h2>
                         </div>
                         <ul class="footer-menu">
                             <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
@@ -61,7 +61,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-4 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-dark text-capitalize">Customer Service</h2>
+                            <h2 class="title text-light text-capitalize">Customer Service</h2>
                         </div>
                         <ul class="footer-menu">
                             <li style="color: #ffff;"><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
