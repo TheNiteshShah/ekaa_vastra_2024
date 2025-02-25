@@ -3403,9 +3403,13 @@ input[type=number]::-webkit-outer-spin-button {
 
 .theme1 .breadcrumb-item a,
 .theme1 .footer-menu li a {
-    color: #707070
-}
+    color: #ffff
+    /* color: #707070 */
 
+}
+.theme1 .footer-menu li a:hover{
+    color: #ffff !important
+}
 .blog-post-content .separator,
 .page-item,
 .product-tab-menu .nav-item {
@@ -4654,7 +4658,8 @@ address span {
 }
 
 .coppy-right a {
-    color: #253237
+    /* color: #253237 */
+    color: #ffffff
 }
 
 .coppy-right p {
