@@ -12,10 +12,10 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     <div class="footer-widget">
                         <div class="footer-logo mb-10">
                             <a href="{{ route('/') }}" title="Ekaa Vastra Home">
-                                <img src="{{asset('frontend/img/logo_light.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
+                                <img src="{{asset('frontend/img/logo.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
                             </a>
                         </div>
-                        <p class="text mb-35" style="color: white;">
+                        <p class="text mb-35">
                             Founded in 2024, our journey began with a passion to empower individuals through the clothes they wear.
                         </p>
                         <div class="social-network">
@@ -31,7 +31,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-light text-capitalize">Categories</h2>
+                            <h2 class="title text-dark text-capitalize">Categories</h2>
                         </div>
                         <ul class="footer-menu">
                             @foreach($categoryData as $category)
@@ -45,7 +45,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-2 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-light text-capitalize">Information</h2>
+                            <h2 class="title text-dark text-capitalize">Information</h2>
                         </div>
                         <ul class="footer-menu">
                             <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
@@ -61,13 +61,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 <div class="col-12 col-sm-6 col-lg-4 mb-10">
                     <div class="footer-widget">
                         <div class="section-title mb-20">
-                            <h2 class="title text-light text-capitalize">Customer Service</h2>
+                            <h2 class="title text-dark text-capitalize">Customer Service</h2>
                         </div>
                         <ul class="footer-menu">
-                            <li style="color: #ffff;"><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
+                            <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
                             <li><a href="tel:+919636373743" title="Call Ekaa Vastra"><i class="ion-ios-telephone mr-10"></i><span>+91 9636373743</span></a></li>
                             <li><a href="mailto:ekaavastra@gmail.com" title="Email Us" style="text-transform: lowercase;"><i class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
-                            <li><span style="color: #ffff;"><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
+                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
                         </ul>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                                 <div class="text-center">
                                     <p class="mb-3 mb-md-0">&copy; <script>
                                             document.write(new Date().getFullYear())
-                                        </script> <a href="{{ route('/') }}" style="color: #ffffff;" title="Ekaa Vastra Home">Ekaa Vastra</a>. All Rights Reserved</p>
+                                        </script> <a href="{{ route('/') }}" title="Ekaa Vastra Home">Ekaa Vastra</a>. All Rights Reserved</p>
                                 </div>
                             </div>
                         </div>

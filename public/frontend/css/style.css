@@ -3403,12 +3403,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .theme1 .breadcrumb-item a,
 .theme1 .footer-menu li a {
-    color: #ffff
-    /* color: #707070 */
+    /* color: #ffff */
+    color: #707070
 
 }
 .theme1 .footer-menu li a:hover{
-    color: #ffff !important
+    color: #292929 !important
 }
 .blog-post-content .separator,
 .page-item,
@@ -4658,12 +4658,12 @@ address span {
 }
 
 .coppy-right a {
-    /* color: #253237 */
+    color: #253237
     color: #ffffff
 }
 
 .coppy-right p {
-    /* color: #929292 */
+    color: #929292
     color: #eeecec
 
 }
