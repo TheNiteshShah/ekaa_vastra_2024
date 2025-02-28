@@ -89,8 +89,8 @@
                                         <span class="badge badge-danger top-left">{{$product->label}}</span>
                                         @endif
                                         <a class="d-block" href="{{route('product',$product->slug)}}">
-                                            <img class="first-img" style="z-index:2" loading="lazy" src="{{asset($product->image)}}" alt="thumbnail">
-                                            <img class="second-img" style="z-index:2" loading="lazy" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
+                                            <img class="first-img" style="z-index:1" loading="lazy" src="{{asset($product->image)}}" alt="thumbnail">
+                                            <img class="second-img" style="z-index:1" loading="lazy" src="{{asset($product->image2?$product->image2:$product->image1)}}" alt="thumbnail">
                                         </a>
                                         @if(auth()->check())
                                         @php
@@ -199,7 +199,7 @@
 <!--  new model-->
 
 
-<div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff">
+<div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff;z-index:2">
     <div class="row text-center">
         <div class="col-6 p-2">
             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="{{asset('frontend/img/icon/filter.png')}}" loading="lazy"> FILTER</a>
