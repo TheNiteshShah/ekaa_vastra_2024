@@ -62,37 +62,63 @@ class HomeController extends Controller
     // ============================= START ALL PRODUCTS ============================ 
     public function collection(Request $req, $slug)
     {
-
         // Check if the name matches a subcategory
         $subcategoryData = SubCategoryModal::where(['is_active' => 1, 'slug' => $slug])->first();
 
         if ($subcategoryData) {
-            // Handle subcategory
             $title = $subcategoryData->seo_title ? $subcategoryData->seo_title : $subcategoryData->name . ' - Ekaa Vastra';
             $seo_description = $subcategoryData->seo_description;
             $seo_keywords = $subcategoryData->seo_keywords;
-            $productData = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id])->orderBy('seq', 'asc')->paginate(10);
+            $query = ProductModal::where(['is_active' => 1, 'subcategory_id' => $subcategoryData->id]);
             $parentData = $subcategoryData;
         } else {
             // If not a subcategory, check if it's a category
             $categoryData = CategoryModal::where(['is_active' => 1, 'slug' => $slug])->first();
 
             if ($categoryData) {
-                // Handle category
                 $title = $categoryData->seo_title ? $categoryData->seo_title : $categoryData->name . ' - Ekaa Vastra';
                 $seo_description = $categoryData->seo_description;
                 $seo_keywords = $categoryData->seo_keywords;
-                $productData = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id])->orderBy('seq', 'asc')->paginate(10);
+                $query = ProductModal::where(['is_active' => 1, 'category_id' => $categoryData->id]);
                 $parentData = $categoryData;
             } else {
-                // If neither category nor subcategory, redirect or show an error
                 return redirect()->route('home')->with('error', 'Category or Subcategory not found.');
             }
         }
 
-        // Return the view with the data
+        // **Filter by Price**
+        if ($req->has('price')) {
+            $priceRange = explode('-', $req->price);
+            if (count($priceRange) === 2) {
+                $query->whereBetween('price', [$priceRange[0], $priceRange[1]]);
+            }
+        }
+
+        // **Filter by Size**
+        if ($req->has('size')) {
+            $sizes = explode(',', $req->size);
+            $query->whereHas('sizes', function ($q) use ($sizes) {
+                $q->whereIn('size', $sizes);
+            });
+        }
+
+        // **Sorting Logic**
+        if ($req->has('sort')) {
+            if ($req->sort == 'low_to_high') {
+                $query->orderBy('selling_price', 'asc');
+            } elseif ($req->sort == 'high_to_low') {
+                $query->orderBy('selling_price', 'desc');
+            }
+        } else {
+            $query->orderBy('seq', 'asc'); // Default sorting
+        }
+
+        // **Paginate the filtered products**
+        $productData = $query->paginate(10);
+
         return view('frontend/all_products', compact('parentData', 'productData', 'title', 'seo_description', 'seo_keywords'));
     }
+
 
     // ============================= END ALL PRODUCTS ============================ 
     // ============================= START PRODUCTS DETAILS ============================ 

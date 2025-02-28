@@ -21,6 +21,11 @@
             display: none;
         }
     }
+
+    .active-sort {
+        color: #292929 !important;
+        font-weight: bold;
+    }
 </style>
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">
@@ -43,24 +48,33 @@
             <div class="col-lg-9 mb-30">
                 <div class="grid-nav-wraper mb-30">
                     <div class="row align-items-center">
-                        <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <div class="col-12 col-md-6 mb-md-0">
                             <nav class="shop-grid-nav">
                                 <ul class="nav nav-pills align-items-center">
-                                    <li> <span class="total-products text-capitalize">There are {{count($productData)}} products.</span></li>
+                                    <li>
+                                        <span class="total-products text-capitalize">
+                                            Showing {{ count($productData) }} {{ count($productData) === 1 ? 'product' : 'products' }} available.
+                                        </span>
+                                    </li>
+
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-12 col-md-6 position-relative">
+                        <div class="col-12 col-md-6 position-relative d-none d-md-block">
                             <div class="shop-grid-button d-flex align-items-center">
                                 <span class="sort-by">Sort by:</span>
                                 <button class="btn-dropdown d-flex justify-content-between" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Relevance <span class="ion-android-arrow-dropdown"></span>
+                                    {{ request('sort') == 'low_to_high' ? 'Price, low to high' : (request('sort') == 'high_to_low' ? 'Price, high to low' : 'None') }}
+                                    <span class="ion-android-arrow-dropdown"></span>
                                 </button>
                                 <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"> Price, low to high</a>
-                                    <a class="dropdown-item" href="#"> Price, high to low</a>
+                                    <a class="dropdown-item" href="{{ request()->url() }}">None</a>
+                                    <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'low_to_high']) }}">Price, low to high</a>
+                                    <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'high_to_low']) }}">Price, high to low</a>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -185,7 +199,7 @@
 <!--  new model-->
 
 
-<div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff;z-index:9999;">
+<div class="container-fluid mobilefilter" style="position: sticky; bottom: 0; background: #fff">
     <div class="row text-center">
         <div class="col-6 p-2">
             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="{{asset('frontend/img/icon/filter.png')}}" loading="lazy"> FILTER</a>
@@ -193,21 +207,13 @@
         <div class="col-6 p-2" style="border-right: 2px solid #dee2e6 ;">
             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"> <img src="{{asset('frontend/img/icon/sort.png')}}" loading="lazy"> SORT BY </a>
         </div>
-
-
-
     </div>
 </div>
-
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="d-flex justify-content-center">
-        <div class="modal-dialog" style="width: 100% !important;
-    position: absolute;
-    bottom: 27px;
-    margin:  0px;">
+        <div class="modal-dialog" style="width: 100% !important; position: absolute; bottom: 27px; margin: 0;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -217,18 +223,24 @@
                                 <h6>SORT BY</h6>
                             </div>
                         </div>
-                        <ul style="list-style-type: none; text-align: center;">
-                            <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('ASC')">Sort by price: Low to High</a></li>
-                            <li style="padding:15px 0px; border-bottom: 2px solid rgb(235, 232, 232);"> <a href="javascript:;" onclick="soryBy('DESC')">Sort by price: High to Low</a></li>
+                        <ul style="list-style-type: none; text-align: center; padding: 0; margin: 0;">
+                            <li style="padding: 15px 0; border-bottom: 2px solid rgb(235, 232, 232);">
+                                <a href="javascript:;" onclick="sortBy('low_to_high')" id="sort_low_to_high" class="{{ request('sort') == 'low_to_high' ? 'active-sort' : '' }}">
+                                    Sort by price: Low to High
+                                </a>
+                            </li>
+                            <li style="padding: 15px 0; border-bottom: 2px solid rgb(235, 232, 232);">
+                                <a href="javascript:;" onclick="sortBy('high_to_low')" id="sort_high_to_low" class="{{ request('sort') == 'high_to_low' ? 'active-sort' : '' }}">
+                                    Sort by price: High to Low
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -328,7 +340,13 @@
         </div>
     </div>
 </div>
-
+<script>
+    function sortBy(order) {
+        let url = new URL(window.location.href);
+        url.searchParams.set('sort', order);
+        window.location.href = url.toString();
+    }
+</script>
 
 <!-- modals end -->
 @endsection
