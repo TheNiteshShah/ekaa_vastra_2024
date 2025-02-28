@@ -232,10 +232,9 @@
             <div class="position-relative overflow-hidden d-flex justify-content-center align-items-center">
                 <div class="banner-thumb banner-large">
                     @if(!empty($bannerData[1]->link))
-                    <a href="{{ $bannerData[0]->link }}">
+                    <a href="{{ $bannerData[1]->link }}">
                         @endif
-                        <picture>
-                            <!-- Source for mobile -->
+                        <picture>                            <!-- Source for mobile -->
                             <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}">
                             <!-- Source for desktop -->
                             <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}" style="object-fit: cover; width: 100%; height: auto; display: block;">
