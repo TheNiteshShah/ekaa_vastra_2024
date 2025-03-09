@@ -4,6 +4,7 @@
 <!-- Start content -->
 <div class="content">
     <div class="container-fluid">
+        @if(!empty($parentData))
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
@@ -17,6 +18,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- end row -->
         <div class="page-content-wrapper">
             <div class="row">
@@ -41,9 +43,13 @@
                             <!-- End show success and error messages -->
                             <div class="row">
                                 <div class="col-md-10">
+                                @if(!empty($parentData))
                                     <h4 class="mt-0 header-title">View <b>{{$parentData->name}}</b> > {{$title}} List</h4>
+                                    @else
+                                    <h4 class="mt-0 header-title">View {{$title}} List</h4>
+                                    @endif
                                 </div>
-                                @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
+                                @if(session()->get('position') == "Super Admin" && !empty($parentData) || session()->get('position') == "Admin")
                                 <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('products.create',[$type,$parent_id])}}" role="button" style="margin-left: 20px;"> Add {{$title}}</a></div>
                                 @endif
                             </div>

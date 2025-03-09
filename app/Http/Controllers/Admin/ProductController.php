@@ -24,6 +24,16 @@ class ProductController extends Controller
             return view('admin/login/index');
         }
     }
+    public function all_products(Request $req)
+    {
+        if (!empty($req->session()->has('admin_data'))) {
+            $foreachData = ProductModal::latest()->get();
+            $title =  "All Products";
+            return view('admin/product.index', compact('foreachData', 'title'));
+        } else {
+            return view('admin/login/index');
+        }
+    }
     public function index(Request $req, $type, $parent_id)
     {
         if (!empty($req->session()->has('admin_data'))) {
