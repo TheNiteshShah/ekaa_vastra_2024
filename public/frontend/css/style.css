@@ -2841,9 +2841,9 @@ input[type=number]::-webkit-outer-spin-button {
     position: absolute;
     line-height: 40px;
     top: 50%;
-    border: 1px solid #ebebeb;
-    background: #fff;
-    color: #9d9d9d;
+    border: 1px solid #292929;
+    background: #09080a;
+    color: #fff;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     border-radius: 50%
@@ -2858,8 +2858,8 @@ input[type=number]::-webkit-outer-spin-button {
 .blog-init .slick-prev,
 .slick-nav .slick-prev {
     left: -20px;
-    opacity: 0;
-    visibility: hidden
+    /* opacity: 0;
+    visibility: hidden */
 }
 
 .blog-init:hover .slick-prev,
@@ -2872,8 +2872,8 @@ input[type=number]::-webkit-outer-spin-button {
 .blog-init .slick-next,
 .slick-nav .slick-next {
     right: -20px;
-    opacity: 0;
-    visibility: hidden
+    /* opacity: 0;
+    visibility: hidden */
 }
 
 .blog-init:hover .slick-next,
