@@ -2780,14 +2780,16 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-    max-width: 100%; /* Prevents content from overflowing */
+    max-width: 100%;
+    /* Prevents content from overflowing */
 }
 
 .media-body {
     flex: 1;
     width: 100%;
     max-width: 100%;
-    overflow: hidden; /* Ensures text doesn't overflow */
+    overflow: hidden;
+    /* Ensures text doesn't overflow */
 }
 
 .static-media-wrap {
@@ -3405,11 +3407,12 @@ input[type=number]::-webkit-outer-spin-button {
 .theme1 .footer-menu li a {
     /* color: #ffff */
     color: #707070
-
 }
-.theme1 .footer-menu li a:hover{
+
+.theme1 .footer-menu li a:hover {
     color: #292929 !important
 }
+
 .blog-post-content .separator,
 .page-item,
 .product-tab-menu .nav-item {
@@ -4658,14 +4661,11 @@ address span {
 }
 
 .coppy-right a {
-    color: #253237
-    color: #ffffff
+    color: #253237 color: #ffffff
 }
 
 .coppy-right p {
-    color: #929292
-    color: #eeecec
-
+    color: #929292 color: #eeecec
 }
 
 .theme1 .coppy-right a:hover {
@@ -5724,16 +5724,29 @@ ul.amount li {
 }
 
 body::-webkit-scrollbar {
-    width: .5125rem
+    width: 0.5125rem;
+    /* Keeping your specified width */
 }
 
 body::-webkit-scrollbar-track {
-    background-color: #fff
+    background-color: #fff;
+    /* White background */
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #09080a
+    background: #09080a;
+    /* Dark scrollbar */
+    border-radius: 10px;
+    /* Smooth edges */
+    transition: background 0.3s ease-in-out;
 }
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+    background: #1a191b;
+    /* Slightly lighter on hover */
+}
+
 
 .text-justify {
     text-align: justify

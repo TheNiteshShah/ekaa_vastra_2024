@@ -78,6 +78,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/order-bill', [HomeController::class, 'OrderInvoice'])->name('order-bill');
     Route::get('/my-account', [HomeController::class, 'myAccount'])->name('my-account')->middleware('auth');
     Route::get('/order-detail/{id}', [HomeController::class, 'orderDetail'])->name('order-detail')->middleware('auth');
+    Route::get('/somewhere-in-jaipur', [HomeController::class, 'jaipur_index'])->name('somewhere-in-jaipur');
 
     //------------ CART ----------------
     Route::get('/cart', [CartController::class, 'index'])->name('cart');;

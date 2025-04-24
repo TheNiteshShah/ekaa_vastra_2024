@@ -322,4 +322,8 @@ class HomeController extends Controller
         $foreachData = json_decode($enFor);
         return view('admin/order/invoice', compact(['OrderData', 'foreachData']));
     }
+    public function jaipur_index(Request $req)
+    {
+        return view('jaipur_index');
+    }
 }
