@@ -171,6 +171,16 @@
             .footer-logo {
                 max-width: 250px;
             }
+
+            .image-1 {
+                height: 150px;
+            }
+            .image-2 {
+                height: 240px;
+            }
+            .image-3 {
+                height: 270px;
+            }
         }
 
         .footer a:hover img {
@@ -232,6 +242,10 @@
             background-position: bottom;
             background-repeat: no-repeat;
         }
+
+        .image-wrapper {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -270,14 +284,14 @@
                 </div>
             </div>
             <div class="col-md-6 col-6">
-                <div class="image-wrapper" style="height: 150px; overflow: hidden;">
+                <div class="image-wrapper image-1">
                     <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                 </div>
             </div>
 
             <!-- Block 2 -->
             <div class="col-md-6 col-6">
-                <div class="image-wrapper" style="height: 240px; overflow: hidden;">
+                <div class="image-wrapper image-2">
                     <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                 </div>
             </div>
@@ -298,7 +312,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-6">
-                <div class="image-wrapper" style="height: 270px; overflow: hidden;">
+                <div class="image-wrapper image-3">
                     <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                 </div>
             </div>
