@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Somewhere in Jaipur</title>
-     <!-- Favicon -->
-     <link rel="icon" href="{{ asset('jaipur/favicon.png') }}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('jaipur/favicon.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Avenir&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -167,6 +167,12 @@
             height: auto;
         }
 
+        @media (max-width: 768px) {
+            .footer-logo {
+                max-width: 250px;
+            }
+        }
+
         .footer a:hover img {
             opacity: 0.75;
         }
@@ -253,8 +259,8 @@
 
     <!-- Features Section -->
     <section class="section container-fluid text-center">
-    <h4 class="features-heading mx-auto" style="padding-bottom: 4rem;text-decoration:underline">
-           BOOK NOW
+        <h4 class="features-heading mx-auto" style="padding-bottom: 4rem;text-decoration:underline">
+            BOOK NOW
         </h4>
         <div class="row g-4">
             <!-- Block 1 -->
@@ -264,12 +270,16 @@
                 </div>
             </div>
             <div class="col-md-6 col-6">
-                <img src="{{asset('jaipur/image2.jpeg')}}" class="img-fluid rounded h-100 object-fit-cover">
+                <div class="image-wrapper" style="height: 150px; overflow: hidden;">
+                    <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
+                </div>
             </div>
 
             <!-- Block 2 -->
             <div class="col-md-6 col-6">
-                <img src="{{asset('jaipur/image5.jpeg')}}" class="img-fluid rounded  h-100 object-fit-cover">
+                <div class="image-wrapper" style="height: 250px; overflow: hidden;">
+                    <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
+                </div>
             </div>
             <div class="col-md-6 col-6 d-flex align-items-center">
                 <div class="p-4 rounded-border w-100">
@@ -288,7 +298,9 @@
                 </div>
             </div>
             <div class="col-md-6 col-6">
-                <img src="{{asset('jaipur/image4.jpeg')}}" class="img-fluid rounded h-100 object-fit-cover">
+                <div class="image-wrapper" style="height: 270px; overflow: hidden;">
+                    <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
+                </div>
             </div>
         </div>
 
