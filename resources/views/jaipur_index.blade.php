@@ -277,7 +277,7 @@
 
             <!-- Block 2 -->
             <div class="col-md-6 col-6">
-                <div class="image-wrapper" style="height: 250px; overflow: hidden;">
+                <div class="image-wrapper" style="height: 240px; overflow: hidden;">
                     <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                 </div>
             </div>
