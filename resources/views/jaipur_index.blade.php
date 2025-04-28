@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Somewhere in Jaipur</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('jaipur/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('jaipur/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Avenir&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/the-bellonte" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Avenir', sans-serif;
@@ -26,8 +29,8 @@
             width: 100%;
             max-height: 550px;
             overflow: hidden;
-            border-bottom-left-radius: 50% 20%;
-            border-bottom-right-radius: 50% 20%;
+            border-bottom-left-radius: 5% 10%;
+            border-bottom-right-radius: 5% 10%;
             position: relative;
         }
 
@@ -44,8 +47,8 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
-            width: 180px;
-            height: 90px;
+            width: 200px;
+            height: 100px;
         }
 
         .hero-overlay-circle {
@@ -64,7 +67,7 @@
 
         .hero-logo {
             margin-top: 20px;
-            max-width: 130px;
+            max-width: 150px;
             height: auto;
         }
 
@@ -93,8 +96,8 @@
         }
 
         .section {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+            padding-top: 3rem;
+            padding-bottom: 1rem;
         }
 
         .badge-custom {
@@ -135,6 +138,7 @@
             color: #000;
             border: 1px solid #968070;
             font-weight: 500;
+            font-size: 0.975rem;
         }
 
         .badge-container {
@@ -145,9 +149,9 @@
         }
 
         .badge-container span {
-            padding: 6px 12px;
+            padding: 12px 18px;
             border-radius: 20px;
-            font-size: 0.875rem;
+            font-size: 0.975rem;
             white-space: nowrap;
         }
 
@@ -175,19 +179,36 @@
             .image-1 {
                 height: 150px;
             }
+
             .image-2 {
                 height: 240px;
             }
+
             .image-3 {
                 height: 270px;
+            }
+
+            .features-heading {
+                font-size: 1.5rem !important;
+            }
+
+            .badge-container span {
+                font-size: 0.870rem;
+            }
+
+            .hero-overlay-text {
+                width: 180px;
+                height: 90px;
+            }
+
+            .hero-logo {
+                max-width: 130px;
             }
         }
 
         .footer a:hover img {
             opacity: 0.75;
         }
-
-
 
         .rounded-border {
             border-radius: 10px;
@@ -246,6 +267,34 @@
         .image-wrapper {
             overflow: hidden;
         }
+
+        .features-heading {
+            color: #aac5d1;
+            font-size: 5rem;
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-on-scroll {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-on-scroll.active {
+            animation: slideInLeft 1s ease-out forwards;
+        }
     </style>
 </head>
 
@@ -265,58 +314,145 @@
     </section>
 
     <!-- Features Section -->
-    <section class="section container-fluid text-center py-5">
-        <h2 class="features-heading mx-auto">
-            LONG & SHORT TERM STAYS | CREATIVE RENTALS | POP-UPS | EXPERIENCES & MORE
-        </h2>
+    <section class="section container-fluid text-center">
+        <h1 class="features-heading mx-auto slide-on-scroll">
+            LONG & SHORT TERM STAYS | CREATIVE RENTALS | POP<br>-UPS | EXPERIENCES & MORE
+        </h1>
     </section>
+    <!-- BOOK NOW Button -->
+    <div class="w-100 text-center">
+        <h5 class="mx-auto py-1" style="text-decoration: underline; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+            BOOK NOW
+        </h5>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="bookNowModalLabel">Get in Touch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Contact us via WhatsApp or Email to book your stay or experience!</p>
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <!-- WhatsApp Button -->
+                        <a href="https://wa.me/917891922244?text=Hello,%20I%20am%20interested%20in%20booking.%20Please%20provide%20details." target="_blank" class="btn d-flex align-items-center gap-2" style="background-color:#968070;color:#000">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
+
+                        <!-- Email Button -->
+                        <a href="mailto:your@email.com" class="btn d-flex align-items-center gap-2" style="background-color:#cdd8dd;color:#000">
+                            <i class="bi bi-envelope-fill"></i> Email
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Features Section -->
     <section class="section container-fluid text-center">
-        <h4 class="features-heading mx-auto" style="padding-bottom: 4rem;text-decoration:underline">
-            BOOK NOW
-        </h4>
         <div class="row g-4">
+
             <!-- Block 1 -->
             <div class="col-md-6 col-6 d-flex align-items-center">
-                <div class="p-4 rounded-border w-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;">Designed for living, working & creating.</p>
+                <div class="p-2 rounded-border w-100">
+                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">Designed for living, working & creating.</p>
                 </div>
             </div>
             <div class="col-md-6 col-6">
-                <div class="image-wrapper image-1">
-                    <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
+                <div id="carouselBlock2" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image6.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image7.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image10.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock2" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBlock2" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
             </div>
 
             <!-- Block 2 -->
             <div class="col-md-6 col-6">
-                <div class="image-wrapper image-2">
-                    <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
+                <div id="carouselBlock3" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image7.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/bg1.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock3" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBlock3" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
             </div>
             <div class="col-md-6 col-6 d-flex align-items-center">
-                <div class="p-4 rounded-border w-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;">
-                        Thoughtfully curated spaces where comfort meets creativity, crafted for every kind of moment.
-                    </p>
+                <div class="p-4 rounded-border w-100 h-100">
                 </div>
             </div>
 
             <!-- Block 3 -->
+            <div class="col-md-6 col-6">
+                <div id="carouselBlock1" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('jaipur/image8.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image3.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image9.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image12.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock1" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBlock1" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
             <div class="col-md-6 col-6 d-flex align-items-center">
-                <div class="p-4 rounded-border w-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;">
+                <div class="p-2 rounded-border w-100">
+                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">
                         Soaked in sunlight, styled with intention, and fully equipped for restful nights, shoots, and everything in between.
                     </p>
                 </div>
             </div>
-            <div class="col-md-6 col-6">
-                <div class="image-wrapper image-3">
-                    <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
-                </div>
-            </div>
+
         </div>
+
 
         <div class="mt-5 badge-container">
             <span class="badge-custom">LONG TERM STAY</span>
@@ -341,27 +477,32 @@
 
 
         <!-- Content with another background image placed below the heading -->
-        <div class="bg-image-content py-5 container-fluid">
+        <div class="bg-image-content py-5 container-fluid" style="padding-bottom: 1rem !important;">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border h-100">
+                    <div class="p-3 rounded-border">
                         <h4><b>(1) Day out with the hosts!</b></h4>
                         <p>We'll take you to secret cafes, vintage stores,artist homes, and hidden gems — all curated to your tastes and desires. Discover the city’s rich handicrafts, unique textiles, and those
                             magical nooks that aren’t on Google Maps.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border h-100">
+                    <div class="p-3 rounded-border">
                         <h4><b>(2) Sip the Globe!</b></h4>
                         <p>Take your taste buds on a global tour! From Scotland’s finest malts to Japan’s smoothest blends, our premium spirits menu lets you sip your way around the world.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border h-100">
+                    <div class="p-3 rounded-border">
                         <h4><b>(3) A Special Something Just for You</b></h4>
                         <p>Tell us what you're in the mood for — a pasta- making date under the stars, an intimate candlelit dinner, or something delightfully unexpected. We’ll take care of the mood, the magic, and every little detail in between. Whether it’s for love, celebration, or simply joy, consider it thoughtfully arranged and beautifully yours.</p>
                     </div>
                 </div>
+            </div>
+            <div class="w-100 text-center">
+                <h5 class="mx-auto mt-5" style="text-decoration:underline;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+                    BOOK NOW
+                    </h4>
             </div>
         </div>
     </section>
@@ -377,11 +518,11 @@
 
                 <!-- Right: Text + Social -->
                 <div class="col-12 col-md-4 text-start">
-                    <h4 class="mb-1" style="font-family: 'playfair';color:#cdd8dd">Curated with care. Shared with love.</h4>
-                    <h5 class="mb-1" style="font-family: 'Avenir', sans-serif; ">Contact Us</p>
+                    <h1 class="mb-1" style="font-family: 'The Bellonte';color:#cdd8dd">Curated with care. Shared with love.</h4>
+                        <h5 class="mb-1" style="font-family: 'Avenir', sans-serif; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookNowModal">Contact Us</h5>
                         <div>
-                            <a href="#"><img src="{{ asset('jaipur/instagram-icon.png') }}" alt="Instagram" width="40"></a>
-                            <a href="#" class="ms-3"><img src="{{ asset('jaipur/pinterest-icon.png') }}" alt="Pinterest" width="40"></a>
+                            <a href="https://www.instagram.com/somewhereinjaipur/" target="_blank" rel="noopener noreferrer"><img src="{{ asset('jaipur/instagram-icon.png') }}" alt="Instagram" width="40"></a>
+                            <a href="https://in.pinterest.com/somewhereinjaipur/" target="_blank" rel="noopener noreferrer" class="ms-3"><img src="{{ asset('jaipur/pinterest-icon.png') }}" alt="Pinterest" width="40"></a>
                         </div>
                 </div>
 
@@ -391,6 +532,21 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.slide-on-scroll').forEach(elem => {
+                observer.observe(elem);
+            });
+        });
+    </script>
 </body>
 
 </html>
