@@ -321,7 +321,7 @@
     </section>
     <!-- BOOK NOW Button -->
     <div class="w-100 text-center">
-        <h5 class="mx-auto py-1" style="text-decoration: underline; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+        <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#000" data-bs-toggle="modal" data-bs-target="#bookNowModal">
             BOOK NOW
         </h5>
     </div>
@@ -343,7 +343,7 @@
                         </a>
 
                         <!-- Email Button -->
-                        <a href="mailto:your@email.com" class="btn d-flex align-items-center gap-2" style="background-color:#cdd8dd;color:#000">
+                        <a href="mailto:somewhereinjaipur@gmail.com" class="btn d-flex align-items-center gap-2" style="background-color:#cdd8dd;color:#000">
                             <i class="bi bi-envelope-fill"></i> Email
                         </a>
                     </div>
@@ -356,14 +356,13 @@
     <!-- Features Section -->
     <section class="section container-fluid text-center">
         <div class="row g-4">
-
             <!-- Block 1 -->
-            <div class="col-md-6 col-6 d-flex align-items-center">
-                <div class="p-2 rounded-border w-100">
+            <div class="col-md-4 col-6 order-1 order-md-2">
+                <div class="p-2 rounded-border w-100 h-100">
                     <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">Designed for living, working & creating.</p>
                 </div>
             </div>
-            <div class="col-md-6 col-6">
+            <div class="col-md-4 col-6 order-2 order-md-1">
                 <div id="carouselBlock2" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -387,9 +386,8 @@
                     </button>
                 </div>
             </div>
-
             <!-- Block 2 -->
-            <div class="col-md-6 col-6">
+            <div class="col-md-4 col-6 order-3 order-md-3">
                 <div id="carouselBlock3" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -413,13 +411,19 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-6 col-6 d-flex align-items-center">
+            <div class="col-md-4 col-6 order-4 order-md-4">
                 <div class="p-4 rounded-border w-100 h-100">
+                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">
+                        Sleeps up to 7 guests – 2.5 beds
+                        Open-concept kitchen with sunroof – airy and well-lit
+                        2 modern and spacious bathrooms
+                        Private terrace deck – perfect for sunbathing or morning coffee
+                        Cozy lounging area for relaxing or socializing
+                    </p>
                 </div>
             </div>
-
             <!-- Block 3 -->
-            <div class="col-md-6 col-6">
+            <div class="col-md-4 col-6 order-5 order-md-5">
                 <div id="carouselBlock1" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner h-100">
                         <div class="carousel-item active">
@@ -443,8 +447,8 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-6 col-6 d-flex align-items-center">
-                <div class="p-2 rounded-border w-100">
+            <div class="col-md-4 col-6 order-5 order-md-5">
+                <div class="p-2 rounded-border w-100 h-100">
                     <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">
                         Soaked in sunlight, styled with intention, and fully equipped for restful nights, shoots, and everything in between.
                     </p>
@@ -482,27 +486,27 @@
                 <div class="col-md-4">
                     <div class="p-3 rounded-border">
                         <h4><b>(1) Day out with the hosts!</b></h4>
-                        <p>We'll take you to secret cafes, vintage stores,artist homes, and hidden gems — all curated to your tastes and desires. Discover the city’s rich handicrafts, unique textiles, and those
+                        <p style="text-align: left;">We'll take you to secret cafes, vintage stores,artist homes, and hidden gems — all curated to your tastes and desires. Discover the city’s rich handicrafts, unique textiles, and those
                             magical nooks that aren’t on Google Maps.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="p-3 rounded-border">
                         <h4><b>(2) Sip the Globe!</b></h4>
-                        <p>Take your taste buds on a global tour! From Scotland’s finest malts to Japan’s smoothest blends, our premium spirits menu lets you sip your way around the world.</p>
+                        <p style="text-align: left;">Take your taste buds on a global tour! From Scotland’s finest malts to Japan’s smoothest blends, our premium spirits menu lets you sip your way around the world.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="p-3 rounded-border">
                         <h4><b>(3) A Special Something Just for You</b></h4>
-                        <p>Tell us what you're in the mood for — a pasta- making date under the stars, an intimate candlelit dinner, or something delightfully unexpected. We’ll take care of the mood, the magic, and every little detail in between. Whether it’s for love, celebration, or simply joy, consider it thoughtfully arranged and beautifully yours.</p>
+                        <p style="text-align: left;">Tell us what you're in the mood for — a pasta- making date under the stars, an intimate candlelit dinner, or something delightfully unexpected. We’ll take care of the mood, the magic, and every little detail in between. Whether it’s for love, celebration, or simply joy, consider it thoughtfully arranged and beautifully yours.</p>
                     </div>
                 </div>
             </div>
-            <div class="w-100 text-center">
-                <h5 class="mx-auto mt-5" style="text-decoration:underline;cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+            <div class="w-100 text-center mt-2">
+                <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#000" data-bs-toggle="modal" data-bs-target="#bookNowModal">
                     BOOK NOW
-                    </h4>
+                </h5>
             </div>
         </div>
     </section>
