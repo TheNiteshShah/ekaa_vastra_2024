@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Avenir&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/the-bellonte" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         body {
             font-family: 'Avenir', sans-serif;
@@ -204,6 +204,14 @@
             .hero-logo {
                 max-width: 130px;
             }
+
+            .feature-content {
+                font-size: 16px !important;
+            }
+        }
+
+        .feature-content {
+            font-size: 35px;
         }
 
         .footer a:hover img {
@@ -212,7 +220,7 @@
 
         .rounded-border {
             border-radius: 10px;
-            border: 1px solid #968070;
+            border: 1.7px solid #968070;
             color: #968070
         }
 
@@ -272,29 +280,6 @@
             color: #aac5d1;
             font-size: 5rem;
         }
-
-        @keyframes slideInLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .slide-on-scroll {
-            display: inline-block;
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: all 0.8s ease-out;
-        }
-
-        .slide-on-scroll.active {
-            animation: slideInLeft 1s ease-out forwards;
-        }
     </style>
 </head>
 
@@ -315,13 +300,20 @@
 
     <!-- Features Section -->
     <section class="section container-fluid text-center">
-        <h1 class="features-heading mx-auto slide-on-scroll">
-            LONG & SHORT TERM STAYS | CREATIVE RENTALS | POP<br>-UPS | EXPERIENCES & MORE
+        <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
+            LONG & SHORT TERM STAYS |
+        </h1>
+        <h1 class="features-heading mx-auto animate__animated  animate__fadeInRight">
+            CREATIVE RENTALS | POP
+        </h1>
+        <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
+            -UPS | EXPERIENCES & MORE
         </h1>
     </section>
+
     <!-- BOOK NOW Button -->
     <div class="w-100 text-center">
-        <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#000" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+        <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#fff6ef;font-family:'Playfair Display'" data-bs-toggle="modal" data-bs-target="#bookNowModal">
             BOOK NOW
         </h5>
     </div>
@@ -338,12 +330,12 @@
                     <p>Contact us via WhatsApp or Email to book your stay or experience!</p>
                     <div class="d-flex justify-content-center gap-3 mt-3">
                         <!-- WhatsApp Button -->
-                        <a href="https://wa.me/917891922244?text=Hello,%20I%20am%20interested%20in%20booking.%20Please%20provide%20details." target="_blank" class="btn d-flex align-items-center gap-2" style="background-color:#968070;color:#000">
+                        <a href="https://wa.me/917891922244?text=Hello,%20I%20am%20interested%20in%20booking.%20Please%20provide%20details." target="_blank" class="btn d-flex align-items-center gap-2" style="background-color:#968070;color:#fff6ef;font-family:'Playfair Display">
                             <i class="bi bi-whatsapp"></i> WhatsApp
                         </a>
 
                         <!-- Email Button -->
-                        <a href="mailto:somewhereinjaipur@gmail.com" class="btn d-flex align-items-center gap-2" style="background-color:#cdd8dd;color:#000">
+                        <a href="mailto:somewhereinjaipur@gmail.com" class="btn d-flex align-items-center gap-2" style="background-color:#cdd8dd;color:#000;font-family:'Playfair Display;">
                             <i class="bi bi-envelope-fill"></i> Email
                         </a>
                     </div>
@@ -354,15 +346,15 @@
     </div>
 
     <!-- Features Section -->
-    <section class="section container-fluid text-center">
-        <div class="row g-4">
+    <section class="section container text-center">
+        <div class="row g-4 justify-content-center">
             <!-- Block 1 -->
-            <div class="col-md-4 col-6 order-1 order-md-2">
-                <div class="p-2 rounded-border w-100 h-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">Designed for living, working & creating.</p>
+            <div class="col-md-5 col-6">
+                <div class="p-2 rounded-border w-100 h-100" style="border-color:#bb9c88">
+                    <p class="m-0 feature-content" style="font-family: 'Playfair Display', serif;text-align: left;color:#bb9c88">Designed for living, working & creating.</p>
                 </div>
             </div>
-            <div class="col-md-4 col-6 order-2 order-md-1">
+            <div class="col-md-5 col-6">
                 <div id="carouselBlock2" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -386,44 +378,22 @@
                     </button>
                 </div>
             </div>
-            <!-- Block 2 -->
-            <div class="col-md-4 col-6 order-3 order-md-3">
-                <div id="carouselBlock3" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image7.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('jaipur/bg1.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock3" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselBlock3" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-4 col-6 order-4 order-md-4">
-                <div class="p-4 rounded-border w-100 h-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">
-                        Sleeps up to 7 guests – 2.5 beds
-                        Open-concept kitchen with sunroof – airy and well-lit
-                        2 modern and spacious bathrooms
-                        Private terrace deck – perfect for sunbathing or morning coffee
-                        Cozy lounging area for relaxing or socializing
+            <div class="col-md-10 col-12">
+                <div class="p-4 rounded-border w-100 h-100" style="border-color:#86b2c6">
+                    <p class="m-0" style="font-family: 'Playfair Display', serif;">
+                    <ul style="list-style: none; padding-left: 0;text-align: left;color:#86b2c6">
+                        <li><strong>Sleeps up to 7 guests –</strong> 2.5 beds</li>
+                        <li><strong>Open-concept kitchen with sunroof –</strong> airy and well-lit</li>
+                        <li><strong>2 modern and spacious bathrooms</strong></li>
+                        <li><strong>Private terrace deck –</strong> perfect for sunbathing or morning coffee</li>
+                        <li><strong>Cozy lounging area </strong> for relaxing or socializing</li>
+                    </ul>
+
                     </p>
                 </div>
             </div>
             <!-- Block 3 -->
-            <div class="col-md-4 col-6 order-5 order-md-5">
+            <div class="col-md-5 col-6">
                 <div id="carouselBlock1" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner h-100">
                         <div class="carousel-item active">
@@ -447,14 +417,13 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 col-6 order-5 order-md-5">
+            <div class="col-md-5 col-6">
                 <div class="p-2 rounded-border w-100 h-100">
-                    <p class="m-0" style="font-family: 'Playfair Display', serif;text-align: left;">
+                    <p class="m-0 feature-content" style="font-family: 'Playfair Display', serif;text-align: left;">
                         Soaked in sunlight, styled with intention, and fully equipped for restful nights, shoots, and everything in between.
                     </p>
                 </div>
             </div>
-
         </div>
 
 
@@ -504,7 +473,7 @@
                 </div>
             </div>
             <div class="w-100 text-center mt-2">
-                <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#000" data-bs-toggle="modal" data-bs-target="#bookNowModal">
+                <h5 class="mx-auto py-1 btn" style="cursor: pointer;background-color:#968070;color:#fff6ef;font-family:'Playfair Display" data-bs-toggle="modal" data-bs-target="#bookNowModal">
                     BOOK NOW
                 </h5>
             </div>
