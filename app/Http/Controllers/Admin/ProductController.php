@@ -195,7 +195,7 @@ class ProductController extends Controller
     }
     function uploadImage($image, $folderName)
     {
-        $allowedFormats = ['jpeg', 'jpg', 'webp'];
+        $allowedFormats = ['jpeg', 'jpg', 'webp','avif'];
         $extension = strtolower($image->getClientOriginalExtension());
         // Check if the file format is allowed
         if (in_array($extension, $allowedFormats)) {
@@ -204,7 +204,7 @@ class ProductController extends Controller
             return "uploads/image/$folderName/" . $file;
         } else {
             // Handle invalid file format (not allowed)
-            throw new InvalidFileFormatException('Invalid file format. Only jpeg, jpg, and webp files are allowed.');
+            throw new InvalidFileFormatException('Invalid file format. Only jpeg, jpg, avif and webp files are allowed.');
         }
     }
     public function img_remove(Request $req, $idd, $column)
