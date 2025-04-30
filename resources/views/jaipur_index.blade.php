@@ -17,7 +17,6 @@
             font-family: 'Avenir', sans-serif;
             background-color: #FFF6EF;
         }
-
         h1,
         h2,
         h3,
