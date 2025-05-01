@@ -12,6 +12,9 @@
     <link href="https://fonts.cdnfonts.com/css/the-bellonte" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+
     <style>
         body {
             font-family: 'Avenir', sans-serif;
@@ -311,10 +314,10 @@
     <!-- Features Section -->
     <section class="section container-fluid text-center">
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
-            Long & Short Term Stays 
+            Long & Short Term Stays
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInRight">
-            Creative Rentals | Pop-Ups 
+            Creative Rentals | Pop-Ups
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
             Experiences & More
@@ -368,22 +371,34 @@
                 <div id="carouselBlock2" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image5.jpeg') }}">
+                                <img src="{{ asset('jaipur/image5.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image6.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image6.jpeg') }}">
+                                <img src="{{ asset('jaipur/image6.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image7.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image7.jpeg') }}">
+                                <img src="{{ asset('jaipur/image7.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image10.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image10.jpeg') }}">
+                                <img src="{{ asset('jaipur/image10.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image4.jpeg') }}">
+                                <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery1" href="{{ asset('jaipur/image2.jpeg') }}">
+                                <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock2" data-bs-slide="prev">
@@ -413,16 +428,24 @@
                 <div id="carouselBlock1" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner h-100">
                         <div class="carousel-item active">
-                            <img src="{{ asset('jaipur/image8.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery2" href="{{ asset('jaipur/image8.jpeg') }}">
+                                <img src="{{ asset('jaipur/image8.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image3.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery2" href="{{ asset('jaipur/image3.jpeg') }}">
+                                <img src="{{ asset('jaipur/image3.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image9.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery2" href="{{ asset('jaipur/image9.jpeg') }}">
+                                <img src="{{ asset('jaipur/image9.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('jaipur/image12.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            <a data-fancybox="gallery2" href="{{ asset('jaipur/image12.jpeg') }}">
+                                <img src="{{ asset('jaipur/image12.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                            </a>
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock1" data-bs-slide="prev">
@@ -518,9 +541,23 @@
             </div>
         </div>
     </footer>
+    <script>
+        Fancybox.bind("[data-fancybox='gallery1']", {
+            Thumbs: {
+                autoStart: true,
+            },
+        });
+        Fancybox.bind("[data-fancybox='gallery2']", {
+            Thumbs: {
+                autoStart: true,
+            },
+        });
+    </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver(entries => {
