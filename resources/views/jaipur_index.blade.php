@@ -17,6 +17,7 @@
             font-family: 'Avenir', sans-serif;
             background-color: #FFF6EF;
         }
+
         h1,
         h2,
         h3,
@@ -207,10 +208,20 @@
             .feature-content {
                 font-size: 16px !important;
             }
+
+            .feature-ul {
+                font-size: 16px !important;
+            }
+
         }
 
         .feature-content {
-            font-size: 35px;
+            font-size: 30px;
+        }
+
+        .feature-ul {
+            font-size: 23px;
+            font-family: 'Playfair Display' !important;
         }
 
         .footer a:hover img {
@@ -300,13 +311,13 @@
     <!-- Features Section -->
     <section class="section container-fluid text-center">
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
-            LONG & SHORT TERM STAYS |
+            Long & Short Term Stays |
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInRight">
-            CREATIVE RENTALS | POP
+            Creative Rentals | Pop-Ups 
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
-            -UPS | EXPERIENCES & MORE
+           | Experiences & More
         </h1>
     </section>
 
@@ -350,7 +361,7 @@
             <!-- Block 1 -->
             <div class="col-md-5 col-6">
                 <div class="p-2 rounded-border w-100 h-100" style="border-color:#bb9c88">
-                    <p class="m-0 feature-content" style="font-family: 'Playfair Display', serif;text-align: left;color:#bb9c88">Designed for living, working & creating.</p>
+                    <p class="m-0 feature-content p-2" style="font-family: 'Playfair Display', serif;text-align: left;color:#bb9c88">Designed for living, working & creating.</p>
                 </div>
             </div>
             <div class="col-md-5 col-6">
@@ -378,9 +389,9 @@
                 </div>
             </div>
             <div class="col-md-10 col-12">
-                <div class="p-4 rounded-border w-100 h-100" style="border-color:#86b2c6">
+                <div class="p-4 rounded-border w-100 h-100 p-2" style="border-color:#86b2c6">
                     <p class="m-0" style="font-family: 'Playfair Display', serif;">
-                    <ul style="list-style: none; padding-left: 0;text-align: left;color:#86b2c6">
+                    <ul style="list-style: none; padding-left: 0;text-align: left;color:#86b2c6" class="feature-ul">
                         <li><strong>Sleeps up to 7 guests –</strong> 2.5 beds</li>
                         <li><strong>Open-concept kitchen with sunroof –</strong> airy and well-lit</li>
                         <li><strong>2 modern and spacious bathrooms</strong></li>
@@ -418,14 +429,14 @@
             </div>
             <div class="col-md-5 col-6">
                 <div class="p-2 rounded-border w-100 h-100">
-                    <p class="m-0 feature-content" style="font-family: 'Playfair Display', serif;text-align: left;">
+                    <p class="m-0 feature-content p-2" style="font-family: 'Playfair Display', serif;text-align: left;">
                         Soaked in sunlight, styled with intention, and fully equipped for restful nights, shoots, and everything in between.
                     </p>
                 </div>
             </div>
         </div>
-
-
+    </section>
+    <section class="container-fluid text-center mb-4">
         <div class="mt-5 badge-container">
             <span class="badge-custom">LONG TERM STAY</span>
             <span class="badge-custom-2">SHORT TERM STAY</span>
@@ -452,20 +463,20 @@
         <div class="bg-image-content py-5 container-fluid" style="padding-bottom: 1rem !important;">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border">
+                    <div class="p-3 rounded-border p-2">
                         <h4><b>(1) Day out with the hosts!</b></h4>
                         <p style="text-align: left;">We'll take you to secret cafes, vintage stores,artist homes, and hidden gems — all curated to your tastes and desires. Discover the city’s rich handicrafts, unique textiles, and those
                             magical nooks that aren’t on Google Maps.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border">
+                    <div class="p-3 rounded-border p-2">
                         <h4><b>(2) Sip the Globe!</b></h4>
                         <p style="text-align: left;">Take your taste buds on a global tour! From Scotland’s finest malts to Japan’s smoothest blends, our premium spirits menu lets you sip your way around the world.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-3 rounded-border">
+                    <div class="p-3 rounded-border p-2">
                         <h4><b>(3) A Special Something Just for You</b></h4>
                         <p style="text-align: left;">Tell us what you're in the mood for — a pasta- making date under the stars, an intimate candlelit dinner, or something delightfully unexpected. We’ll take care of the mood, the magic, and every little detail in between. Whether it’s for love, celebration, or simply joy, consider it thoughtfully arranged and beautifully yours.</p>
                     </div>
