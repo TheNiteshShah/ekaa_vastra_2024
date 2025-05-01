@@ -311,13 +311,13 @@
     <!-- Features Section -->
     <section class="section container-fluid text-center">
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
-            Long & Short Term Stays |
+            Long & Short Term Stays 
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInRight">
             Creative Rentals | Pop-Ups 
         </h1>
         <h1 class="features-heading mx-auto animate__animated  animate__fadeInLeft">
-           | Experiences & More
+            Experiences & More
         </h1>
     </section>
 
