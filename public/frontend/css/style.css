@@ -145,7 +145,7 @@ a:hover {
 }
 
 .product-thumbnail:hover {
-    transform: scale(1.1) rotate(.05deg)
+    /* transform: scale(1.1) rotate(.05deg) */
 }
 
 button,
