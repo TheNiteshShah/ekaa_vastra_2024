@@ -379,6 +379,12 @@
                         <div class="carousel-item">
                             <img src="{{ asset('jaipur/image10.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
                         </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image4.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('jaipur/image2.jpeg') }}" class="img-fluid w-100 h-100" style="object-fit: cover; border-radius: 20px;">
+                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselBlock2" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
