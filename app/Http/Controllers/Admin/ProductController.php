@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function new_products(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $foreachData = ProductModal::where(['is_top' => 1, 'is_active' => 1])->orderBy('seq', 'asc')->get();
+            $foreachData = ProductModal::where(['is_top' => 1, 'is_active' => 1])->orderBy('new_seq', 'asc')->get();
             $title =  "New Products";
             $type = 1;
             return view('admin/product.product_seq', compact('foreachData', 'title', 'type'));
