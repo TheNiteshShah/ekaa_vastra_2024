@@ -43,7 +43,7 @@
                             <!-- End show success and error messages -->
                             <div class="row">
                                 <div class="col-md-10">
-                                @if(!empty($parentData))
+                                    @if(!empty($parentData))
                                     <h4 class="mt-0 header-title">View <b>{{$parentData->name}}</b> > {{$title}} List</h4>
                                     @else
                                     <h4 class="mt-0 header-title">View {{$title}} List</h4>
@@ -71,7 +71,6 @@
                                                 <th data-priority="1">Featured</th>
                                                 <th data-priority="1">Image</th>
                                                 <th data-priority="1">Label</th>
-                                                <th data-priority="1">Sequence</th>
                                                 <th data-priority="6">Status</th>
                                                 <th data-priority="6">Action</th>
                                             </tr>
@@ -88,8 +87,22 @@
                                                 <th>{{$data->gst_percentage}}%</th>
                                                 <th>₹{{$data->gst}}</th>
                                                 <th>₹{{$data->selling_price}}</th>
-                                                <th>{{$data->is_trending==1?'Yes':'No'}}</th>
-                                                <th>{{$data->is_top==1?'Yes':'No'}}</th>
+                                                <th class="text-center">
+                                                    <span class="badge bg-{{ $data->is_top == 1 ? 'success' : 'secondary' }}">
+                                                        {{ $data->is_top == 1 ? 'New' : 'Not New' }}
+                                                    </span>
+                                                    <div class="mt-1 text-muted small">
+                                                        Seq: {{ $data->seq }}
+                                                    </div>
+                                                </th>
+                                                <th class="text-center">
+                                                    <span class="badge bg-{{ $data->is_trending == 1 ? 'primary' : 'secondary' }}">
+                                                        {{ $data->is_trending == 1 ? 'Featured' : 'Not Featured' }}
+                                                    </span>
+                                                    <div class="mt-1 text-muted small">
+                                                        Seq: {{ $data->trending_seq }}
+                                                    </div>
+                                                </th>
                                                 <th>
                                                     @if (!empty($data->image))
                                                     <img src="{{asset($data->image)}}" alt="image" height=50 width=80>
@@ -97,7 +110,6 @@
 
                                                 </th>
                                                 <th>{{$data->label}}</th>
-                                                <th>{{$data->seq}}</th>
                                                 @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>

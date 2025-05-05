@@ -45,7 +45,7 @@
     </div>
 </div> -->
 <!-- common banner  end -->
-@if(!empty($trendingData))
+@if(!empty($topData))
 <!-- New Arrivals Section Start -->
 <section class="theme1 bg-white pt-70 pb-70">
     <div class="container-custom">
@@ -60,7 +60,7 @@
 
             <div class="col-12">
                 <div class="product-slider-init slick-nav" aria-label="New Arrivals Slider">
-                    @foreach($trendingData as $trend)
+                    @foreach($topData as $trend)
                     <div class="slider-item" itemscope itemtype="https://schema.org/Product">
                         <div class="card product-card">
                             <div class="card-body p-0">
@@ -164,7 +164,7 @@
             <!-- Product Slider -->
             <div class="col-12">
                 <div class="product-slider-init slick-nav" aria-label="Featured Products Slider">
-                    @foreach($topData as $trend)
+                    @foreach($trendingData as $trend)
                     <div class="slider-item">
                         <article class="card product-card">
                             <div class="card-body p-0">

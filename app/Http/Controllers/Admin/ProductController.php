@@ -34,6 +34,28 @@ class ProductController extends Controller
             return view('admin/login/index');
         }
     }
+    public function new_products(Request $req)
+    {
+        if (!empty($req->session()->has('admin_data'))) {
+            $foreachData = ProductModal::where(['is_top' => 1])->orderBy('seq', 'asc')->get();
+            $title =  "New Products";
+            $type = 1;
+            return view('admin/product.product_seq', compact('foreachData', 'title', 'type'));
+        } else {
+            return view('admin/login/index');
+        }
+    }
+    public function trending_products(Request $req)
+    {
+        if (!empty($req->session()->has('admin_data'))) {
+            $foreachData = ProductModal::where(['is_trending' => 1])->orderBy('trending_seq', 'asc')->get();
+            $title =  "Trending Products";
+            $type = 2;
+            return view('admin/product.product_seq', compact('foreachData', 'title', 'type'));
+        } else {
+            return view('admin/login/index');
+        }
+    }
     public function index(Request $req, $type, $parent_id)
     {
         if (!empty($req->session()->has('admin_data'))) {
@@ -117,6 +139,7 @@ class ProductController extends Controller
             $uploadData->is_top = $req->is_top;
             $uploadData->is_trending = $req->is_trending;
             $uploadData->seq = $req->seq;
+            $uploadData->trending_seq = $req->trending_seq;
             $uploadData->mrp = $req->mrp;
             $uploadData->selling_price = $req->selling_price;
             $uploadData->gst_percentage = $req->gst_percentage;
@@ -144,6 +167,17 @@ class ProductController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Something Went Wrong');
             }
+        } else {
+            return view('admin/login/index');
+        }
+    }
+    public function updateProductSequence(Request $req)
+    {
+        if (!empty($req->session()->has('admin_data'))) {
+            foreach ($req->order as $index => $id) {
+                    ProductModal::where('id', $id)->update([$req->type == 1 ? 'seq' : 'trending_seq' => $index + 1]);
+            }
+            return response()->json(['status' => 'success']);
         } else {
             return view('admin/login/index');
         }
@@ -195,7 +229,7 @@ class ProductController extends Controller
     }
     function uploadImage($image, $folderName)
     {
-        $allowedFormats = ['jpeg', 'jpg', 'webp','avif'];
+        $allowedFormats = ['jpeg', 'jpg', 'webp', 'avif'];
         $extension = strtolower($image->getClientOriginalExtension());
         // Check if the file format is allowed
         if (in_array($extension, $allowedFormats)) {

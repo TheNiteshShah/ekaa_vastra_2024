@@ -324,6 +324,49 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-secondary  mini-stat position-relative">
+                        <a href="{{route('products.new')}}">
+                            <div class="card-body">
+                                <div class="mini-stat-desc">
+                                    <h6 class="text-uppercase verti-label text-white-50">New Products</h6>
+                                    <div class="text-white">
+                                        <h6 class="text-uppercase mt-0 text-white-50">New Products</h6>
+                                        <h3 class="mb-3 mt-0">{{$TotalNewProducts}}</h3>
+                                        <div class="">
+                                            <span class="ml-2">New Products</span>
+                                        </div>
+                                    </div>
+                                    <div class="mini-stat-icon">
+                                        <i class="mdi mdi-currency-inr display-2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-secondary  mini-stat position-relative">
+                        <a href="{{route('products.trending')}}">
+                            <div class="card-body">
+                                <div class="mini-stat-desc">
+                                    <h6 class="text-uppercase verti-label text-white-50">Featured Products</h6>
+                                    <div class="text-white">
+                                        <h6 class="text-uppercase mt-0 text-white-50">Featured Products</h6>
+                                        <h3 class="mb-3 mt-0">{{$TotalTrendingProducts}}</h3>
+                                        <div class="">
+                                            <span class="ml-2">Featured Products</span>
+                                        </div>
+                                    </div>
+                                    <div class="mini-stat-icon">
+                                        <i class="mdi mdi-currency-inr display-2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
             </div>
             <!-- end page content-->
         </div> <!-- container-fluid -->

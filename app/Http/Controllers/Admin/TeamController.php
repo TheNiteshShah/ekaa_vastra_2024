@@ -30,6 +30,8 @@ class TeamController extends Controller
 				$TotalDispatchedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 3])->count();
 				$TotalDeliveredOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 4])->count();
 				$TotalRejectedOrders = Order1Modal::where(['payment_status' => 1, 'order_status' => 5])->count();
+				$TotalTrendingProducts = ProductModal::where(['is_trending' => 1])->count();
+				$TotalNewProducts = ProductModal::where(['is_top' => 1])->count();
 				$TotalTodaysOrders = Order1Modal::whereDate('created_at', now()->toDateString())
 					->where('payment_status', 1)
 					->where('order_status', 1)
@@ -47,7 +49,7 @@ class TeamController extends Controller
 					->where('payment_status', 1)
 					->whereNotIn('order_status', [5])
 					->sum('final_amount');
-				return view('admin/index', compact(['totalOrders', 'totalUsers', 'totalCategory', 'totalProducts', 'TotalNewOrders', 'TotalAcceptedOrders', 'TotalDispatchedOrders', 'TotalDeliveredOrders', 'TotalRejectedOrders', 'TotalTodaysOrders', 'TotalTodaysUsers', 'sumFinalAmount', 'TodaysSumFinalAmount','qr_count']));
+				return view('admin/index', compact(['totalOrders', 'totalUsers', 'totalCategory', 'totalProducts', 'TotalNewOrders', 'TotalAcceptedOrders', 'TotalDispatchedOrders', 'TotalDeliveredOrders', 'TotalRejectedOrders', 'TotalTodaysOrders', 'TotalTodaysUsers', 'sumFinalAmount', 'TodaysSumFinalAmount', 'qr_count','TotalTrendingProducts','TotalNewProducts']));
 			} else {
 				$service = AdminSidebar::where('id', $services[0])->first();
 				if ($service->url == "#") {

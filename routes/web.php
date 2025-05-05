@@ -150,6 +150,10 @@ Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('pro
 Route::delete('/products-destroy/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/products-img_remove/{id}/{id2}', [ProductController::class, 'img_remove'])->name('products.img_remove');
 Route::get('/products-all', [ProductController::class, 'all_products'])->name('products.all');
+Route::get('/products-new', [ProductController::class, 'new_products'])->name('products.new');
+Route::get('/products-trending', [ProductController::class, 'trending_products'])->name('products.trending');
+Route::post('/products/update-product-sequence', [ProductController::class, 'updateProductSequence'])->name('products.updateProductSequence');
+
 //------ master_attributes ----------
 Route::get('/master_attributes/{id}', [MasterAttributeController::class, 'index'])->name('master_attributes.index');
 Route::get('/master_attributes-create/{id}', [MasterAttributeController::class, 'create'])->name('master_attributes.create');
