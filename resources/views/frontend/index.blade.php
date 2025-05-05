@@ -295,9 +295,10 @@
 
                             <!-- Review Text -->
                             <blockquote>
-                                <span class="ion-quote d-block float-left"></span>
+                                <i class="fas fa-quote-left float-left"></i>
                                 <p itemprop="reviewBody">{{ $test->review }}</p>
-                                <span class="ion-quote float-right"></span>
+                                <i class="fas fa-quote-right float-right"></i>
+
                             </blockquote>
 
                             <!-- Reviewer Name -->
