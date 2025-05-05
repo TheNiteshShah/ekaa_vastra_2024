@@ -28,7 +28,7 @@
 </section>
 
 
-<!-- main slider end -->
+<!-- main slider end --> 
 
 <!-- common banner  start -->
 <!-- <div class="common-banner pt-70 bg-white">
