@@ -175,7 +175,7 @@ class ProductController extends Controller
     {
         if (!empty($req->session()->has('admin_data'))) {
             foreach ($req->order as $index => $id) {
-                ProductModal::where('id', $id)->update([$req->type == 1 ? 'seq' : 'trending_seq' => $index + 1]);
+                ProductModal::where('id', $id)->update([$req->type == 1 ? 'new_seq' : 'trending_seq' => $index + 1]);
             }
             return response()->json(['status' => 'success']);
         } else {
