@@ -5,12 +5,19 @@
 <section class="bg-light position-relative">
     <div class="main-slider dots-style theme1">
         @foreach($sliderData as $index => $slider)
-        <picture>
-            <!-- Mobile optimized image with WebP support and explicit dimensions -->
-            <source srcset="{{ asset($slider->mob_image) }}" media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
-            <!-- Fallback image with proper alt text -->
-            <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }} style="object-fit: contain;width: 100%; height: auto;">
-        </picture>
+        @if(!empty($slider->link))
+        <a href="{{ $slider->link }}">
+            @endif
+            <picture>
+                <!-- Mobile optimized image with WebP support and explicit dimensions -->
+                <source srcset="{{ asset($slider->mob_image) }}" media="(max-width: 768px)" type="image/webp" {{ $index === 0 ? 'fetchpriority=high' : '' }}>
+                <!-- Fallback image with proper alt text -->
+                <img src="{{ asset($slider->web_image) }}" alt="{{ $slider->alt_text ?? 'Image showcasing our latest collection' }}" {{ $index === 0 ? 'fetchpriority=high' : '' }} style="object-fit: contain;width: 100%; height: auto;">
+            </picture>
+            @if(!empty($slider->link))
+        </a>
+        @endif
+
         @endforeach
     </div>
     <!-- slick-progress -->
@@ -93,7 +100,7 @@
                                         <div class="product-desc">
                                             <span class="logo-text" itemprop="brand">Ekaa Vastra</span>
                                             <h3 class="title mb-10">
-                                            <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}" class="truncate-text">
+                                                <a href="{{ route('product', $trend->slug) }}" aria-label="Explore {{ $trend->name }}" class="truncate-text">
                                                     {{ $trend->name }}
                                                 </a>
                                             </h3>
@@ -296,7 +303,8 @@
                     @if(!empty($bannerData[1]->link))
                     <a href="{{ $bannerData[1]->link }}">
                         @endif
-                        <picture>                            <!-- Source for mobile -->
+                        <picture>
+                            <!-- Source for mobile -->
                             <source srcset="{{ asset($bannerData[1]->mob_image) }}" loading="lazy" media="(max-width: 768px)" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}">
                             <!-- Source for desktop -->
                             <img src="{{ asset($bannerData[1]->web_image) }}" loading="lazy" alt="{{ $bannerData[1]->alt_text ?? 'Ekaa Vastra Banner' }}" style="object-fit: cover; width: 100%; height: auto; display: block;">
