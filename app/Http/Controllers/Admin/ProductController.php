@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function new_products(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $foreachData = ProductModal::where(['is_top' => 1])->orderBy('seq', 'asc')->get();
+            $foreachData = ProductModal::where(['is_top' => 1, 'is_active' => 1])->orderBy('seq', 'asc')->get();
             $title =  "New Products";
             $type = 1;
             return view('admin/product.product_seq', compact('foreachData', 'title', 'type'));
@@ -48,7 +48,7 @@ class ProductController extends Controller
     public function trending_products(Request $req)
     {
         if (!empty($req->session()->has('admin_data'))) {
-            $foreachData = ProductModal::where(['is_trending' => 1])->orderBy('trending_seq', 'asc')->get();
+            $foreachData = ProductModal::where(['is_trending' => 1, 'is_active' => 1])->orderBy('trending_seq', 'asc')->get();
             $title =  "Trending Products";
             $type = 2;
             return view('admin/product.product_seq', compact('foreachData', 'title', 'type'));
@@ -175,7 +175,7 @@ class ProductController extends Controller
     {
         if (!empty($req->session()->has('admin_data'))) {
             foreach ($req->order as $index => $id) {
-                    ProductModal::where('id', $id)->update([$req->type == 1 ? 'seq' : 'trending_seq' => $index + 1]);
+                ProductModal::where('id', $id)->update([$req->type == 1 ? 'seq' : 'trending_seq' => $index + 1]);
             }
             return response()->json(['status' => 'success']);
         } else {
