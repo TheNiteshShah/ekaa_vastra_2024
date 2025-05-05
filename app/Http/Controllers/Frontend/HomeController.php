@@ -34,7 +34,7 @@ class HomeController extends Controller
         $sliderData = SliderModal::where('is_active', 1)->orderBy('seq', 'asc')->get();
         $bannerData = BannerModal::where('is_active', 1)->get();
         $trendingData = ProductModal::where(['is_active' => 1, 'is_trending' => 1])->orderBy('trending_seq', 'asc')->get();
-        $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->orderBy('seq', 'asc')->get();
+        $topData = ProductModal::where(['is_active' => 1, 'is_top' => 1])->orderBy('new_seq', 'asc')->get();
         $testimonialsData = TestimonialModal::orderBy('seq', 'asc')->get();
         $title = "Ekaa Vastra | Shop stylish and affordable women's wear";
         $seo_description = "Explore Ekaa Vastra's collection of women's clothing, including kurta sets, kurtas, co-ord sets, tops, pants, shirts, and 3-piece suit sets. Discover stylish, comfortable, and high-quality ethnic wear for every occasion.";
