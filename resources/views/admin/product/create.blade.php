@@ -225,15 +225,6 @@
                                     </div>
                                     <div class="col-sm-6 my-3" style="margin-top: 23px!important">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control @error('trending_seq') is-invalid @enderror" value="{{old('trending_seq') ? old('trending_seq') : $data->trending_seq}}" id="trending_seq" name="trending_seq" placeholder="Enter Featured Sequence" onkeypress="return isNumberKey(event)">
-                                            <label for="trending_seq">Enter Featured Sequence &nbsp;<span style="color:red;"></span></label>
-                                        </div>
-                                        @error('trending_seq')
-                                        <div style="color:red">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-6 my-3" style="margin-top: 23px!important">
-                                        <div class="form-floating">
                                             <input type="text" class="form-control @error('label') is-invalid @enderror" value="{{old('label') ? old('label') : $data->label}}" id="label" name="label" placeholder="Enter Label">
                                             <label for="label">Enter Label &nbsp;<span style="color:red;"></span></label>
                                         </div>

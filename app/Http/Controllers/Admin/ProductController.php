@@ -139,7 +139,7 @@ class ProductController extends Controller
             $uploadData->is_top = $req->is_top;
             $uploadData->is_trending = $req->is_trending;
             $uploadData->seq = $req->seq;
-            $uploadData->trending_seq = $req->trending_seq;
+            // $uploadData->trending_seq = $req->trending_seq;
             $uploadData->mrp = $req->mrp;
             $uploadData->selling_price = $req->selling_price;
             $uploadData->gst_percentage = $req->gst_percentage;

@@ -133,7 +133,7 @@
                                                 <small>SKU: {{ $product->sku }}</small>
                                             </div>
                                         </div>
-                                        <span class="trending-seq">Seq: <span class="seq">{{ $product->seq }}</span></span>
+                                        <span class="trending-seq">Seq: <span class="seq">{{ $type==1?$product->seq: $product->trending_seq }}</span></span>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -141,7 +141,7 @@
 
                             <div class="form-group">
                                 <div class="w-100 text-center">
-                                    <button  style="margin-top: 10px;" id="saveSequence" class="btn btn-info"><i class="fa fa-save"></i> Submit</button>
+                                    <button style="margin-top: 10px;" id="saveSequence" class="btn btn-info"><i class="fa fa-save"></i> Submit</button>
                                 </div>
                             </div>
                         </div>

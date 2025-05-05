@@ -69,6 +69,7 @@
                                                 <th data-priority="1">Selling Price </th>
                                                 <th data-priority="1">New</th>
                                                 <th data-priority="1">Featured</th>
+                                                <th data-priority="1">Seq</th>
                                                 <th data-priority="1">Image</th>
                                                 <th data-priority="1">Label</th>
                                                 <th data-priority="6">Status</th>
@@ -103,6 +104,7 @@
                                                         Seq: {{ $data->trending_seq }}
                                                     </div>
                                                 </th>
+                                                <th>{{$data->seq}}</th>
                                                 <th>
                                                     @if (!empty($data->image))
                                                     <img src="{{asset($data->image)}}" alt="image" height=50 width=80>
