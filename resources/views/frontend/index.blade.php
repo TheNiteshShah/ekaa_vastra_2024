@@ -223,7 +223,69 @@
     </div>
 </section>
 <!-- Featured Products Section End -->
-
+<!-- Start promises -->
+<section class="static-media-section bg-white pt-70 pb-40" aria-label="Our Promises">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Free Shipping Promise -->
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/free-shipping.png')}}" alt="Free shipping on all orders" title="Free Shipping on All Orders">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">
+                            <a href="/shipping-policy" title="Learn more about our free shipping offer">Free Shipping*</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!-- Shipping pan-India -->
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/india.png')}}" alt="Shipping available across India" title="Shipping Available Across India">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">
+                            <a href="/shipping-info" title="Learn more about pan-India shipping">Shipping Pan-India</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!-- Secure Payment -->
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/card.png')}}" alt="Secure payment options" title="Safe and Secure Payment Options">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">
+                            <a href="/payment-methods" title="Explore our secure payment methods">Secure Payment</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!-- COD Available -->
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" alt="Cash on Delivery Available" title="Cash on Delivery Available for Your Convenience">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">
+                            <a href="/cod-availability" title="Learn more about Cash on Delivery availability">COD Available</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <!-- Active Support -->
+            <div class="col-md-2 col-sm-6 col-6 mb-30">
+                <div class="d-flex static-media2 flex-column">
+                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/customer-service.png')}}" alt="Active customer support" title="24/7 Active Customer Support">
+                    <div class="media-body text-center">
+                        <h4 class="title text-uppercase text-dark mb-25">
+                            <a href="/customer-support" title="Contact our customer support for assistance">Active Support</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End promises -->
 <!-- Common Banner Section Start -->
 @if(isset($bannerData[1]))
 <section class="common-banner pb-70 bg-white">
@@ -309,69 +371,7 @@
 @endif
 <!-- Testimonial Section End -->
 
-<!-- Start promises -->
-<section class="static-media-section bg-white pt-70 pb-40" aria-label="Our Promises">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <!-- Free Shipping Promise -->
-            <div class="col-md-2 col-sm-6 col-6 mb-30">
-                <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/free-shipping.png')}}" alt="Free shipping on all orders" title="Free Shipping on All Orders">
-                    <div class="media-body text-center">
-                        <h4 class="title text-uppercase text-dark mb-25">
-                            <a href="/shipping-policy" title="Learn more about our free shipping offer">Free Shipping*</a>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <!-- Shipping pan-India -->
-            <div class="col-md-2 col-sm-6 col-6 mb-30">
-                <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/india.png')}}" alt="Shipping available across India" title="Shipping Available Across India">
-                    <div class="media-body text-center">
-                        <h4 class="title text-uppercase text-dark mb-25">
-                            <a href="/shipping-info" title="Learn more about pan-India shipping">Shipping Pan-India</a>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <!-- Secure Payment -->
-            <div class="col-md-2 col-sm-6 col-6 mb-30">
-                <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/card.png')}}" alt="Secure payment options" title="Safe and Secure Payment Options">
-                    <div class="media-body text-center">
-                        <h4 class="title text-uppercase text-dark mb-25">
-                            <a href="/payment-methods" title="Explore our secure payment methods">Secure Payment</a>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <!-- COD Available -->
-            <div class="col-md-2 col-sm-6 col-6 mb-30">
-                <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/cash-on-delivery.png')}}" alt="Cash on Delivery Available" title="Cash on Delivery Available for Your Convenience">
-                    <div class="media-body text-center">
-                        <h4 class="title text-uppercase text-dark mb-25">
-                            <a href="/cod-availability" title="Learn more about Cash on Delivery availability">COD Available</a>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <!-- Active Support -->
-            <div class="col-md-2 col-sm-6 col-6 mb-30">
-                <div class="d-flex static-media2 flex-column">
-                    <img class="align-self-center mb-20" style="width: 30%;" src="{{asset('frontend/img/icon/customer-service.png')}}" alt="Active customer support" title="24/7 Active Customer Support">
-                    <div class="media-body text-center">
-                        <h4 class="title text-uppercase text-dark mb-25">
-                            <a href="/customer-support" title="Contact our customer support for assistance">Active Support</a>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End promises -->
+
 
 <!-- common-banner start -->
 <!-- <div class="common-banner pb-30 bg-white">
