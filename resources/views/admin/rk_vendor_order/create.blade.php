@@ -63,7 +63,8 @@
                                     <input type="hidden" name="vendor_id"
                                         value="{{ $data->id ? base64_encode($data->vendor_id) : $parent_id }}">
                                     <input type="hidden" name="id" value="{{ $data->id }}">
-                                    <input type="hidden" id="count" value="{{ !empty($data)? count($data->orderDetails):1 }}" name="count">
+                                    <input type="hidden" id="count"
+                                        value="{{ !empty($data) ? count($data->orderDetails) : 1 }}" name="count">
 
                                     <div class="form-group row">
                                         <div class="col-sm-3 my-3" style="margin-top: 23px!important">
@@ -81,7 +82,7 @@
                                         </div>
                                         <div class="col-sm-3 my-3" style="margin-top: 23px!important">
                                             <div class="form-floating">
-                                                <input type="text"
+                                                <input type="number"
                                                     class="form-control @error('invoice_no') is-invalid @enderror"
                                                     value="{{ old('invoice_no') ? old('invoice_no') : $data->invoice_no }}"
                                                     id="invoice_no" name="invoice_no" placeholder="Enter Invoice No."
@@ -92,6 +93,7 @@
                                             @error('invoice_no')
                                                 <div style="color:red">{{ $message }}</div>
                                             @enderror
+                                            <div id="validate_status"></div>
                                         </div>
                                         <div class="col-sm-3 my-3">
                                             <div class="form-floating">
@@ -297,6 +299,64 @@
     </div> <!-- content -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#invoice_date').on('change', function() {
+                const selectedDate = $(this).val();
+                if (selectedDate) {
+                    $.ajax({
+                        url: "{{ route('rk-get-next-invoice-no') }}", // Define this route
+                        type: "GET",
+                        data: {
+                            date: selectedDate
+                        },
+                        success: function(response) {
+                            $('#invoice_no').val(response.next_invoice_no);
+                        },
+                        error: function() {
+                            alert('Could not fetch next invoice number.');
+                        }
+                    });
+                }
+            });
+            $('#invoice_no').on('change', function () {
+            const invoiceNo = $(this).val();
+            const invoiceDate = $('#invoice_date').val();
+
+            if (invoiceNo && invoiceDate) {
+                $.ajax({
+                    url: "{{ route('rk-validate-invoice-no') }}",
+                    type: "GET",
+                    data: {
+                        invoice_no: invoiceNo,
+                        invoice_date: invoiceDate,
+                        id: "{{ $data->id ?? '' }}"
+                    },
+                    success: function (response) {
+                        const statusDiv = $('#validate_status');
+                        if (!response.valid) {
+                            $('#invoice_no').val('').focus();
+                            statusDiv
+                                .html('Invoice number already exists for the selected year.')
+                                .css({ color: 'red', marginTop: '5px' });
+                        } else {
+                            statusDiv
+                                .html('Invoice number is valid.')
+                                .css({ color: 'green', marginTop: '5px' });
+                        }
+                    },
+                    error: function () {
+                        $('#validate_status').html('Could not validate invoice number.')
+                            .css({ color: 'orange', marginTop: '5px' });
+                    }
+                });
+            } else {
+                $('#validate_status').html('');
+            }
+        });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             $('.select2').each(function() {

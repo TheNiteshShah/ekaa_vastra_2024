@@ -6,6 +6,7 @@ use App\Models\RkVendorModal;
 use App\Models\RkVendorOrderDetailsModal;
 use App\Models\RkVendorOrderModal;
 use App\Models\RkVendorProductModal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RkVendorOrderController extends Controller
@@ -48,6 +49,32 @@ class RkVendorOrderController extends Controller
                 'quantity'     => $req->id === null ? 'required' : 'required',
                 'total'        => $req->id === null ? 'required' : 'required',
             ]);
+
+            $invoiceDate = Carbon::parse($req->invoice_date);
+
+            // Determine Indian financial year range
+            if ($invoiceDate->month >= 4) {
+                $start = Carbon::createFromDate($invoiceDate->year, 4, 1)->startOfDay();
+                $end   = Carbon::createFromDate($invoiceDate->year + 1, 3, 31)->endOfDay();
+            } else {
+                $start = Carbon::createFromDate($invoiceDate->year - 1, 4, 1)->startOfDay();
+                $end   = Carbon::createFromDate($invoiceDate->year, 3, 31)->endOfDay();
+            }
+
+            // Check for existing invoice_no in the financial year range
+            $existingInvoice = RkVendorOrderModal::where('invoice_no', $req->invoice_no)
+                ->whereBetween('invoice_date', [$start, $end]);
+
+            if (! empty($req->id)) {
+                $existingInvoice->where('id', '!=', $req->id); // Exclude current record when updating
+            }
+
+            if ($existingInvoice->exists()) {
+                return back()
+                    ->withErrors(['invoice_no' => 'Invoice number already exists for the selected financial year.'])
+                    ->withInput();
+            }
+
             if ($req->id === null) {
                 $uploadData = new RkVendorOrderModal();
             } else {
@@ -159,10 +186,69 @@ class RkVendorOrderController extends Controller
         if (! empty($req->session()->has('admin_data'))) {
             $id        = base64_decode($idd);
             $bill_data = RkVendorOrderModal::where('id', $id)->first();
-            $title     = "RK Invoice " . $bill_data->invoice_no;
-            return view('admin/rk_vendor_order.print', compact('bill_data', 'title'));
+            $date      = Carbon::parse($bill_data->invoice_date);
+            $invoiceNo = $bill_data->invoice_no;
+
+            if ($date->month >= 4) {
+                $fyStart = $date->year;
+                $fyEnd   = $date->year + 1;
+            } else {
+                $fyStart = $date->year - 1;
+                $fyEnd   = $date->year;
+            }
+
+            $financialYear = $fyStart . '-' . substr($fyEnd, -2); // e.g. 2025-26
+            $title     = "RK INVOICE NO. : " . $financialYear.'/'.$bill_data->invoice_no.'/GST';
+
+            return view('admin/rk_vendor_order.print', compact('bill_data', 'title','financialYear','invoiceNo'));
         } else {
             return view('admin/login/index');
         }
+    }
+    public function getNextInvoiceNo(Request $request)
+    {
+        $date = Carbon::parse($request->date);
+
+        // Determine start and end of the financial year
+        if ($date->month >= 4) {
+            // April to December: financial year starts this year
+            $start = Carbon::createFromDate($date->year, 4, 1)->startOfDay();
+            $end   = Carbon::createFromDate($date->year + 1, 3, 31)->endOfDay();
+        } else {
+            // January to March: financial year started last year
+            $start = Carbon::createFromDate($date->year - 1, 4, 1)->startOfDay();
+            $end   = Carbon::createFromDate($date->year, 3, 31)->endOfDay();
+        }
+
+        // Get max invoice number in this financial year
+        $maxInvoiceNo  = RkVendorOrderModal::whereBetween('invoice_date', [$start, $end])->max('invoice_no');
+        $nextInvoiceNo = $maxInvoiceNo ? ($maxInvoiceNo + 1) : 1;
+
+        return response()->json(['next_invoice_no' => $nextInvoiceNo]);
+    }
+    public function validateInvoiceNo(Request $request)
+    {
+        $date = Carbon::parse($request->invoice_date);
+
+        // Calculate financial year range
+        if ($date->month >= 4) {
+            $start = Carbon::createFromDate($date->year, 4, 1)->startOfDay();
+            $end   = Carbon::createFromDate($date->year + 1, 3, 31)->endOfDay();
+        } else {
+            $start = Carbon::createFromDate($date->year - 1, 4, 1)->startOfDay();
+            $end   = Carbon::createFromDate($date->year, 3, 31)->endOfDay();
+        }
+
+        // Query for duplicate invoice_no within financial year
+        $query = RkVendorOrderModal::where('invoice_no', $request->invoice_no)
+            ->whereBetween('invoice_date', [$start, $end]);
+
+        if ($request->has('id') && ! empty($request->id)) {
+            $query->where('id', '!=', $request->id); // Exclude current record if updating
+        }
+
+        $exists = $query->exists();
+
+        return response()->json(['valid' => ! $exists]);
     }
 }

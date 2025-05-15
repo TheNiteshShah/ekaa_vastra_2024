@@ -67,6 +67,17 @@
                                         <tbody>
                                             @if(!empty($foreachData))
                                             @foreach($foreachData as $data)
+                                            @php
+                                            $date = \Carbon\Carbon::parse($data->invoice_date);
+                                            $no = $data->invoice_no;
+                                    
+                                            if ($date->month >= 4) {
+                                                $fy = $date->year . '-' . substr($date->year + 1, -2);
+                                            } else {
+                                                $fy = ($date->year - 1) . '-' . substr($date->year, -2);
+                                            }
+                                        @endphp
+                                    
                                             <tr>
                                                 <th>{{$loop->iteration}}</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
@@ -90,7 +101,7 @@
                                                     </div>
                                                 </td>
                                                 @endif
-                                                <th>{{$data->invoice_no}}</th>
+                                                <th>{{ $fy }}/{{ $no }}/GST</th>
                                                 <th>{{$data->invoice_date}}</th>
                                                 <th>₹{{$data->sub_total}}</th>
                                                 <th>₹{{$data->gst_amount}}</th>

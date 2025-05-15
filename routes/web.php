@@ -1,40 +1,40 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-//============== FRONTEND CONTROLLERS =================
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\AuthController;
-use App\Http\Controllers\Frontend\UserOrderController;
-use App\Http\Controllers\Frontend\AddressController;
-use App\Http\Controllers\Frontend\WishlistController;
-//============== BACKEND CONTROLLERS =================
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\TopBarController;
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BgImageController;
+//============== FRONTEND CONTROLLERS =================
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\SubCategoryController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\Admin\PopUpEnquiryController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\PopUpController;
-use App\Http\Controllers\Admin\TestimonialController;
-use App\Http\Controllers\Admin\PromoController;
-use App\Http\Controllers\Admin\MasterTypeController;
-use App\Http\Controllers\Admin\MasterAttributeController;
-use App\Http\Controllers\Admin\RkVendorController;
-use App\Http\Controllers\Admin\RkVendorProductController;
-use App\Http\Controllers\Admin\RkVendorOrderController;
 use App\Http\Controllers\Admin\EvVendorController;
 use App\Http\Controllers\Admin\FabricController;
-use App\Http\Controllers\Admin\BgImageController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MasterAttributeController;
+//============== BACKEND CONTROLLERS =================
+use App\Http\Controllers\Admin\MasterTypeController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PopUpController;
+use App\Http\Controllers\Admin\PopUpEnquiryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\RkVendorController;
+use App\Http\Controllers\Admin\RkVendorOrderController;
+use App\Http\Controllers\Admin\RkVendorProductController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\TopBarController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Frontend\AddressController;
+use App\Http\Controllers\Frontend\AuthController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserOrderController;
+use App\Http\Controllers\Frontend\WishlistController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +99,6 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/apply-wallet-discount', [UserOrderController::class, 'calculateWalletDiscount']);
     Route::post('/apply-promo-code', [UserOrderController::class, 'applyPromoCode']);
     Route::post('/calculate-payment-charges', [UserOrderController::class, 'calculatePaymentCharges']);
-
 
     //------------ ADDRESS ----------------
     Route::get('fetch-pin-data/{pincode}', [AddressController::class, 'fetchPincodeData']);
@@ -206,3 +205,5 @@ Route::post('/rk-vendor-order', [RkVendorOrderController::class, 'store'])->name
 Route::get('/rk-vendor-order-edit/{id}', [RkVendorOrderController::class, 'edit'])->name('rk-vendor-order.edit');
 Route::get('/rk-vendor-order-show/{id}', [RkVendorOrderController::class, 'show'])->name('rk-vendor-order.show');
 Route::get('/rk-vendor-order-print/{id}', [RkVendorOrderController::class, 'print'])->name('rk-vendor-order.print');
+Route::get('/rk-get-next-invoice-no', [RkVendorOrderController::class, 'getNextInvoiceNo'])->name('rk-get-next-invoice-no');
+Route::get('/rk-validate-invoice-no', [RkVendorOrderController::class, 'validateInvoiceNo'])->name('rk-validate-invoice-no');

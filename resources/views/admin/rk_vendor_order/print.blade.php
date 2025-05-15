@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Css file include -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    {{-- <link rel="stylesheet" type="text/css" href="css/style.css"> --}}
     <title>{{ $title }}</title>
     <style>
         .table thead th {
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="row" style="border-bottom:2px solid black">
-            <div class="col-sm-6">Invoice No.: &nbsp; {{ $bill_data->invoice_no }}<br>
+            <div class="col-sm-6">Invoice No.: &nbsp; {{ $financialYear }}/{{ $invoiceNo }}/GST<br>
                 <p> Date of Invoice &nbsp;
                     @php
                         $date = new DateTime($bill_data->invoice_date);

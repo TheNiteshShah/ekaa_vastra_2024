@@ -24,15 +24,15 @@
      <script src="{{asset('admin/assets/js/jquery.slimscroll.js')}}"></script>
      <script src="{{asset('admin/assets/js/waves.min.js')}}"></script>
 
-     <script src="../plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+     {{-- <script src="../plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
 
      <!-- Peity JS -->
      <script src="../plugins/peity/jquery.peity.min.js"></script>
 
      <script src="../plugins/morris/morris.min.js"></script>
-     <script src="../plugins/raphael/raphael-min.js"></script>
+     <script src="../plugins/raphael/raphael-min.js"></script> --}}
 
-     <script src="{{asset('admin/assets/pages/dashboard.js')}}"></script>
+     {{-- <script src="{{asset('admin/assets/pages/dashboard.js')}}"></script> --}}
 
      <!-- App js -->
      <script src="{{asset('admin/assets/js/app.js')}}"></script>

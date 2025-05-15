@@ -339,7 +339,7 @@
                         <img src="{{asset('frontend/img/logo.svg')}}" alt="" style="width: 100px;">
                     </span>
                     <i>
-                        <img src="{{asset('admin/assets/images/favicon-bae.png')}}" alt="">
+                        <img src="{{asset('frontend/img/loader.svg')}}" alt="" style="width: 70%;">
                     </i>
                 </a>
             </div>
