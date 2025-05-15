@@ -72,7 +72,7 @@
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <td>
                                                     <div class="btn-group" id="btns{{$loop->iteration}}">
-                                                        <!-- <a href="{{route('rk-vendor-order.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> -->
+                                                        <a href="{{route('rk-vendor-order.edit',base64_encode($data->id))}}"><i class="fas fa-pencil-alt info-icon" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
                                                         <a href="{{route('rk-vendor-order.print',base64_encode($data->id))}}"><i class="fas fa-print info-icon" data-toggle="tooltip" data-placement="top" title="Print"></i></a>
                                                         <!-- @if(session()->get('position') == "Super Admin")
                                                         <a href="javascript:();" class="dCnf" mydata="{{$loop->iteration}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash danger-icon"></i></a>

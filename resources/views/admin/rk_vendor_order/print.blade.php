@@ -5,14 +5,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/assets/images/favicon.png') }}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Css file include -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>{{$title}}</title>
+    <title>{{ $title }}</title>
     <style>
         .table thead th {
             border-bottom: none;
@@ -55,7 +55,7 @@
         </div>
         <div class="row" style="border-bottom:2px solid black">
             <div class="col-sm-4 col-md-4" style="padding-bottom:50px">
-                <img src="{{asset('admin/assets/images/rk_logo.png')}}" class="img-fluid" style="width:150px;">
+                <img src="{{ asset('admin/assets/images/rk_logo.png') }}" class="img-fluid" style="width:150px;">
             </div>
             <div class="col-sm-8 col-md-8 ">
                 <div style=" position: relative;">
@@ -73,39 +73,42 @@
             </div>
         </div>
         <div class="row" style="border-bottom:2px solid black">
-            <div class="col-sm-6">Invoice No.: &nbsp; {{$bill_data->invoice_no}}<br>
+            <div class="col-sm-6">Invoice No.: &nbsp; {{ $bill_data->invoice_no }}<br>
                 <p> Date of Invoice &nbsp;
                     @php
-                    $date = new DateTime($bill_data->invoice_date);
-                    echo $date->format('d-m-Y');
+                        $date = new DateTime($bill_data->invoice_date);
+                        echo $date->format('d-m-Y');
                     @endphp
                     <br>
-                    Place of Supply: {{$bill_data->vendor->city->name}}<br>
+                    Place of Supply: {{ $bill_data->vendor->city->name }}<br>
                     Reverse Charge : N
                 </p>
             </div>
             <div class="col-sm-6" style="border-left:2px solid black">
-                <p>GR/RR No. :
+                <p>Challan No. : {{ $bill_data->challan_no }}
                     <br>
-                    Transport : Self
+                    Transport : {{ $bill_data->transport }}
                     <br>
-                    Vehicle No. : <br>
-                    Station : <br>
+                    Vehicle No. : {{ $bill_data->vehicle_no }}<br>
+                    Station : {{ $bill_data->station }}<br>
                 </p>
             </div>
         </div>
         <div class="row" style="border-bottom:2px solid black">
             <div class="col-sm-6 billing_content"><span class="font-weight-bold ">Billed to :</span><br>
-                {{$bill_data->vendor->business_name}}
-                <br>{{$bill_data->vendor->address}}, {{$bill_data->vendor->city->name}}, {{$bill_data->vendor->city->state->name}} - {{$bill_data->vendor->pin_code}}
-                <br>Mobile: {{$bill_data->vendor->phone}}
-                <br>GSTIN/UIN: {{$bill_data->vendor->gst}}<br>
+                {{ $bill_data->vendor->business_name }}
+                <br>{{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
+                {{ $bill_data->vendor->city->state->name }} - {{ $bill_data->vendor->pin_code }}
+                <br>Mobile: {{ $bill_data->vendor->phone }}
+                <br>GSTIN/UIN: {{ $bill_data->vendor->gst }}<br>
             </div>
-            <div class="col-sm-6 shipping_content" style="border-left:2px solid black"><span class="font-weight-bold ">Shipped to:</span> <br>
-                {{$bill_data->vendor->business_name}}
-                <br>{{$bill_data->vendor->address}}, {{$bill_data->vendor->city->name}}, {{$bill_data->vendor->city->state->name}} - {{$bill_data->vendor->pin_code}}
-                <br>Mobile: {{$bill_data->vendor->phone}}
-                <br>GSTIN/UIN: {{$bill_data->vendor->gst}}<br>
+            <div class="col-sm-6 shipping_content" style="border-left:2px solid black"><span
+                    class="font-weight-bold ">Shipped to:</span> <br>
+                {{ $bill_data->vendor->business_name }}
+                <br>{{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
+                {{ $bill_data->vendor->city->state->name }} - {{ $bill_data->vendor->pin_code }}
+                <br>Mobile: {{ $bill_data->vendor->phone }}
+                <br>GSTIN/UIN: {{ $bill_data->vendor->gst }}<br>
             </div>
         </div>
         <table class="table table-black">
@@ -121,102 +124,114 @@
                 </tr>
             </thead>
             <tbody>
-                @if(!empty($bill_data->orderDetails))
-                @foreach($bill_data->orderDetails as $data)
-                <tr class="product_table2" @if($loop->last && (count($bill_data->orderDetails)<=6)) style="height:150px" @endif>
-                    <td style="border-right: 2px solid black;text-align:right">{{$loop->iteration}}</td>
-                    <td style="border-right: 2px solid black">{{$data->name}}</td>
-                    <td style="border-right: 2px solid black;text-align:right">{{ $data->quantity}}</td>
-                    <td style="border-right: 2px solid black">{{$data->unit}}</td>
-                    <td style="border-right: 2px solid black;text-align:right">{{number_format($data->price, 2, '.', ',')}}</td>
-                    <td style="border-right: 2px solid black;text-align:right">{{number_format($data->quantity * $data->price, 2, '.', ',')}}</td>
-                    <td style="text-align:right">{{number_format($data->quantity * $data->price, 2, '.', ',')}}</td>
-                </tr>
+                @if (!empty($bill_data->orderDetails))
+                    @foreach ($bill_data->orderDetails as $data)
+                        <tr class="product_table2" @if ($loop->last && count($bill_data->orderDetails) <= 6) style="height:150px" @endif>
+                            <td style="border-right: 2px solid black;text-align:right">{{ $loop->iteration }}</td>
+                            <td style="border-right: 2px solid black">{{ $data->name }}</td>
+                            <td style="border-right: 2px solid black;text-align:right">{{ $data->quantity }}</td>
+                            <td style="border-right: 2px solid black">{{ $data->unit }}</td>
+                            <td style="border-right: 2px solid black;text-align:right">
+                                {{ number_format($data->price, 2, '.', ',') }}</td>
+                            <td style="border-right: 2px solid black;text-align:right">
+                                {{ number_format($data->quantity * $data->price, 2, '.', ',') }}</td>
+                            <td style="text-align:right">
+                                {{ number_format($data->quantity * $data->price, 2, '.', ',') }}</td>
+                        </tr>
                     @endforeach
-                    @endif
+                @endif
 
-                    <tr style="border-top: 2px solid black">
-                        <th colspan="4"></th>
-                        <th class="product_table"></th>
-                        <th class="product_table"></th>
-                        <th class="product_table" style="border-left: 2px solid black;text-align:right">{{number_format($bill_data->sub_total, 2, '.', ',')}}</th>
-                    </tr>
-                    @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
+                <tr style="border-top: 2px solid black">
+                    <th colspan="4"></th>
+                    <th class="product_table"></th>
+                    <th class="product_table"></th>
+                    <th class="product_table" style="border-left: 2px solid black;text-align:right">
+                        {{ number_format($bill_data->sub_total, 2, '.', ',') }}</th>
+                </tr>
+                @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
                     <tr>
                         <th colspan="2"></th>
                         <td class="product_table"><i>Add : CGST</i></th>
                         <th class="product_table"><i>@</i></th>
-                        <th class="product_table"><i>{{number_format($bill_data->gst / 2, 2, '.', ',')}}%</i></th>
+                        <th class="product_table"><i>{{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></th>
                         <th class="product_table" colspan="1">
                         </th>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">{{number_format(($bill_data->gst_amount / 2), 2, '.', ',')}}</td>
+                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
                     </tr>
                     <tr>
                         <th colspan="2"></th>
                         <td class="product_table"><i>Add : SGST</i></td>
                         <th class="product_table"><i>@</i></th>
-                        <th class="product_table"><i>{{number_format($bill_data->gst/2, 2, '.', ',')}}%</i></th>
+                        <th class="product_table"><i>{{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></th>
                         <th class="product_table" colspan="1">
                         </th>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">{{number_format(($bill_data->gst_amount / 2), 2, '.', ',')}}</td>
+                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
 
                     </tr>
-                    @else
+                @else
                     <tr>
                         <th colspan="2"></th>
                         <td class="product_table"><i>Add : IGST</i></td>
                         <th class="product_table"><i>@</i></td>
-                        <th class="product_table"><i>{{number_format($bill_data->gst, 2, '.', ',')}}%</i></td>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">{{number_format(($bill_data->gst_amount), 2, '.', ',')}}</td>
+                        <th class="product_table"><i>{{ number_format($bill_data->gst, 2, '.', ',') }}%</i></td>
+                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                            {{ number_format($bill_data->gst_amount, 2, '.', ',') }}</td>
                     </tr>
-                    @endif
-                    <tr>
-                        <th colspan="2"></th>
-                        <td class="product_table"><i>Rounded Off(+/-)</i></td>
-                        <td class="product_table"></td>
-                        <td class="product_table"></td>
-                        <td class="product_table"></td>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">{{number_format((abs($bill_data->total_amount - round($bill_data->total_amount))), 2, '.', ',')}}</td>
-                    </tr>
-                    <tr style="border-top: 2px solid black">
-                        <th colspan="2"></th>
-                        <th class="product_table">Grand Total</th>
-                        <td class="product_table"></td>
-                        <td class="product_table">Pcs</td>
-                        <td class="product_table"></td>
-                        <th class="product_table" style="border-left: 2px solid black;border-bottom: 2px solid black;text-align:right">₹{{number_format($bill_data->total_amount, 2, '.', ',')}}</th>
-                    </tr>
-                    <br>
-                    <tr>
-                        <th colspan="1"></th>
-                        <td class="product_table" style="text-decoration: underline">Tax Rate(%)</td>
-                        <td class="product_table" style="text-decoration: underline">Taxable Amt.</td>
-                        @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
+                @endif
+                <tr>
+                    <th colspan="2"></th>
+                    <td class="product_table"><i>Rounded Off(+/-)</i></td>
+                    <td class="product_table"></td>
+                    <td class="product_table"></td>
+                    <td class="product_table"></td>
+                    <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                        {{ number_format(abs($bill_data->total_amount - round($bill_data->total_amount)), 2, '.', ',') }}
+                    </td>
+                </tr>
+                <tr style="border-top: 2px solid black">
+                    <th colspan="2"></th>
+                    <th class="product_table">Grand Total</th>
+                    <td class="product_table"></td>
+                    <td class="product_table">Pcs</td>
+                    <td class="product_table"></td>
+                    <th class="product_table"
+                        style="border-left: 2px solid black;border-bottom: 2px solid black;text-align:right">
+                        ₹{{ number_format($bill_data->total_amount, 2, '.', ',') }}</th>
+                </tr>
+                <br>
+                <tr>
+                    <th colspan="1"></th>
+                    <td class="product_table" style="text-decoration: underline">Tax Rate(%)</td>
+                    <td class="product_table" style="text-decoration: underline">Taxable Amt.</td>
+                    @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
                         <td class="product_table" style="text-decoration: underline">CGST Amt.</td>
                         <td class="product_table" style="text-decoration: underline">SGST Amt.</td>
-                        @else
+                    @else
                         <td class="product_table" style="text-decoration: underline">IGST Amt.</td>
-                        @endif
-                        <td class="product_table" style="text-decoration: underline">Total Tax</td>
-                    </tr>
-                    <tr>
-                        <th colspan="1"></th>
-                        <td class="product_table">{{number_format($bill_data->gst, 2, '.', ',')}}%</td>
-                        <td class="product_table">{{number_format($bill_data->sub_total, 2, '.', ',')}}</td>
-                        @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
-                        <td class="product_table">{{number_format(($bill_data->gst_amount / 2), 2, '.', ',')}}</td>
-                        <td class="product_table">{{number_format(($bill_data->gst_amount / 2), 2, '.', ',')}}</td>
-                        @else
-                        <td class="product_table">{{number_format(($bill_data->gst_amount), 2, '.', ',')}}</td>
-                        @endif
-                        <td class="product_table">{{number_format(($bill_data->gst_amount), 2, '.', ',')}}</td>
-                    </tr>
+                    @endif
+                    <td class="product_table" style="text-decoration: underline">Total Tax</td>
+                </tr>
+                <tr>
+                    <th colspan="1"></th>
+                    <td class="product_table">{{ number_format($bill_data->gst, 2, '.', ',') }}%</td>
+                    <td class="product_table">{{ number_format($bill_data->sub_total, 2, '.', ',') }}</td>
+                    @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
+                        <td class="product_table">{{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
+                        <td class="product_table">{{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
+                    @else
+                        <td class="product_table">{{ number_format($bill_data->gst_amount, 2, '.', ',') }}</td>
+                    @endif
+                    <td class="product_table">{{ number_format($bill_data->gst_amount, 2, '.', ',') }}</td>
+                </tr>
             </tbody>
         </table>
         <div class="row align-items-center">
             <div class="col-sm-6">
                 <h6 class="amount_content" style="padding: 0 0.75rem">Amount in Words:<br>
-                    <span id="checks123" style="text-transform: capitalize;font-style: revert;font-weight: 400;"></span>
+                    <span id="checks123"
+                        style="text-transform: capitalize;font-style: revert;font-weight: 400;"></span>
                 </h6>
             </div>
             <div class="col-sm-6 text-right">
@@ -239,7 +254,8 @@
                     Terms & Conditions:
                 </h5>
                 <p class="mb-0">E.& O.E.</p>
-                <span>1) Goods once sold will not be taken back. <br>2) Interest @18% p.a. will be charged if the paymemnt is
+                <span>1) Goods once sold will not be taken back. <br>2) Interest @18% p.a. will be charged if the
+                    paymemnt is
                     not made within the stipulated time.<br>3) Subject to 'Rajasthan' Jurisdiction only.</span>
             </div>
             <div class="col-sm-7 pt-2 pl-0 pr-0" style="border-left: 2px solid black">
@@ -254,7 +270,7 @@
             </div>
         </div>
     </div>
-    <input type="hidden" value="{{$bill_data->total_amount}}" id="tot_amnt">
+    <input type="hidden" value="{{ $bill_data->total_amount }}" id="tot_amnt">
 
 </body>
 
@@ -279,7 +295,9 @@
 
 
 
-    var a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+    var a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ',
+        'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '
+    ];
     var b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
     function inWords(num) {
@@ -291,10 +309,11 @@
         str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
         str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
         str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only. ' : '';
+        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) +
+            'only. ' : '';
         //return str;
         // alert(str);
-        $("#checks123").text('Rupees '+str);
+        $("#checks123").text('Rupees ' + str);
 
     }
 </script>
