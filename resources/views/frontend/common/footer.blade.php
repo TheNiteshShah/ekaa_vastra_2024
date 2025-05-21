@@ -1,5 +1,5 @@
 @php
-$categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active',1)->get();
+    $categoryData = App\Models\CategoryModal::orderBy('seq', 'asc')->where('is_active', 1)->get();
 @endphp
 <!-- Footer Start -->
 <footer class="bg-lighten2 theme1 position-relative footer_bg" aria-label="Footer">
@@ -12,16 +12,22 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     <div class="footer-widget">
                         <div class="footer-logo mb-10">
                             <a href="{{ route('/') }}" title="Ekaa Vastra Home">
-                                <img src="{{asset('frontend/img/logo.svg')}}" style="width:35%" alt="Ekaa Vastra - Empowering Women through Fashion">
+                                <img src="{{ asset('frontend/img/logo.svg') }}" style="width:35%"
+                                    alt="Ekaa Vastra - Empowering Women through Fashion">
                             </a>
                         </div>
                         <p class="text mb-35">
-                            Founded in 2024, our journey began with a passion to empower individuals through the clothes they wear.
+                            Founded in 2024, our journey began with a passion to empower individuals through the clothes
+                            they wear.
                         </p>
                         <div class="social-network">
                             <ul class="d-flex">
-                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/ekaavastra" title="Ekaa Vastra Facebook"><span class="ion-social-facebook"></span></a></li>
-                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ekaavastra" title="Ekaa Vastra Instagram"><span class="ion-social-instagram-outline"></span></a></li>
+                                <li><a target="_blank" rel="noopener noreferrer"
+                                        href="https://www.facebook.com/ekaavastra" title="Ekaa Vastra Facebook"><span
+                                            class="ion-social-facebook"></span></a></li>
+                                <li><a target="_blank" rel="noopener noreferrer"
+                                        href="https://www.instagram.com/ekaavastra" title="Ekaa Vastra Instagram"><span
+                                            class="ion-social-instagram-outline"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,8 +40,9 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             <h2 class="title text-dark text-capitalize">Categories</h2>
                         </div>
                         <ul class="footer-menu">
-                            @foreach($categoryData as $category)
-                            <li><a href="/category/{{$category->slug}}" title="Shop {{$category->name}}">{{$category->name}}</a></li>
+                            @foreach ($categoryData as $category)
+                                <li><a href="/category/{{ $category->slug }}"
+                                        title="Shop {{ $category->name }}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -49,10 +56,14 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         </div>
                         <ul class="footer-menu">
                             <li><a href="{{ route('about-us') }}" title="Learn about Ekaa Vastra">About Us</a></li>
-                            <li><a href="{{ route('privacy-policy') }}" title="Read our Privacy Policy">Privacy Policy</a></li>
-                            <li><a href="{{ route('terms-and-conditions') }}" title="Terms & Conditions">Terms & Conditions</a></li>
-                            <li><a href="{{ route('return-refund-policy') }}" title="Return & Refund Policy">Return & Refund Policy</a></li>
-                            <li><a href="{{ route('shipping-policy') }}" title="Shipping Policy">Shipping Policy</a></li>
+                            <li><a href="{{ route('privacy-policy') }}" title="Read our Privacy Policy">Privacy
+                                    Policy</a></li>
+                            <li><a href="{{ route('terms-and-conditions') }}" title="Terms & Conditions">Terms &
+                                    Conditions</a></li>
+                            <li><a href="{{ route('return-refund-policy') }}" title="Return & Refund Policy">Return &
+                                    Refund Policy</a></li>
+                            <li><a href="{{ route('shipping-policy') }}" title="Shipping Policy">Shipping Policy</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -65,9 +76,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         </div>
                         <ul class="footer-menu">
                             <li><i class="ion-ios-telephone mr-10"></i><span>Mon - Fri : 9AM - 6PM</span></li>
-                            <li><a href="tel:+919636373743" title="Call Ekaa Vastra"><i class="ion-ios-telephone mr-10"></i><span>+91 9636373743</span></a></li>
-                            <li><a href="mailto:ekaavastra@gmail.com" title="Email Us" style="text-transform: lowercase;"><i class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
-                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap Road, Sirsi, Jaipur, Rajasthan, 302012</span></li>
+                            <li><a href="tel:+919636373743" title="Call Ekaa Vastra"><i
+                                        class="ion-ios-telephone mr-10"></i><span>+91 9636373743</span></a></li>
+                            <li><a href="mailto:ekaavastra@gmail.com" title="Email Us"
+                                    style="text-transform: lowercase;"><i
+                                        class="ion-email mr-10"></i><span>ekaavastra@gmail.com</span></a></li>
+                            <li><span><i class="ion-ios-location mr-10"></i>Sunshine Aditya, Maharana Pratap Road,
+                                    Sirsi, Jaipur, Rajasthan, 302012</span></li>
                         </ul>
                     </div>
                 </div>
@@ -85,9 +100,12 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-last order-md-first text">
                                 <div class="text-center">
-                                    <p class="mb-3 mb-md-0">&copy; <script>
+                                    <p class="mb-3 mb-md-0">&copy;
+                                        <script>
                                             document.write(new Date().getFullYear())
-                                        </script> <a href="{{ route('/') }}" title="Ekaa Vastra Home">Ekaa Vastra</a>. All Rights Reserved</p>
+                                        </script> <a href="{{ route('/') }}"
+                                            title="Ekaa Vastra Home">Ekaa Vastra</a>. All Rights Reserved
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +117,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     <!-- Copyright End -->
 
     <!-- WhatsApp Button -->
-    <a class="btn btn-success white btn-lg mt-3 button-fixed-left green" href="https://wa.me/+919636373743/?text=Hi" role="button" title="Contact us on WhatsApp">
+    <a class="btn btn-success white btn-lg mt-3 button-fixed-left green" href="https://wa.me/+919636373743/?text=Hi"
+        role="button" title="Contact us on WhatsApp">
         <i class="ion-social-whatsapp-outline" style="font-size:25px"></i>
     </a>
 </footer>
@@ -109,12 +128,15 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 <!-- Search Box and Overlay Start -->
 <div class="overlay" aria-hidden="true" id="search-overlay">
     <div class="scale"></div>
-    <form class="search-box" action="{{ route('search.product') }}" method="GET" role="search" aria-labelledby="search-form">
+    <form class="search-box" action="{{ route('search.product') }}" method="GET" role="search"
+        aria-labelledby="search-form">
         <label for="search-input" class="sr-only" id="search-form">Search products</label>
-        <input type="text" id="search-input" name="search" placeholder="Search products..." aria-label="Search for products" required>
+        <input type="text" id="search-input" name="search" placeholder="Search products..."
+            aria-label="Search for products" required>
         <button id="close" type="submit" aria-label="Submit search"><i class="ion-ios-search-strong"></i></button>
     </form>
-    <button class="btn-close" aria-label="Close search overlay" onclick="closeSearchOverlay()"><i class="ion-android-close"></i></button>
+    <button class="btn-close" aria-label="Close search overlay" onclick="closeSearchOverlay()"><i
+            class="ion-android-close"></i></button>
 </div>
 <!-- Search Box and Overlay End -->
 
@@ -124,25 +146,30 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="wishSizeModalLabel">Select Size</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    title="Close modal"></button>
             </div>
             <div class="modal-body">
-                <p id="size-description" class="text-muted">Please select the size for your product from the available options.</p>
+                <p id="size-description" class="text-muted">Please select the size for your product from the available
+                    options.</p>
                 <nav class="shop-grid-nav mt-20" aria-labelledby="size-description">
-                    <ul class="product-tag d-flex flex-wrap sizeList" id="wishSizeList" aria-labelledby="size-description">
+                    <ul class="product-tag d-flex flex-wrap sizeList" id="wishSizeList"
+                        aria-labelledby="size-description">
                         <!-- Dynamically populated list of sizes will go here -->
                     </ul>
                 </nav>
                 <hr>
                 <div class="text-center">
-                    <button type="submit" onclick="event.preventDefault(); document.getElementById('move-product').submit();" class="btn theme-btn--dark1 btn--md" aria-label="Confirm size selection">Done</button>
+                    <button type="submit"
+                        onclick="event.preventDefault(); document.getElementById('move-product').submit();"
+                        class="btn theme-btn--dark1 btn--md" aria-label="Confirm size selection">Done</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<form method="post" id="move-product" action="{{ route('moveToCart')}}">
+<form method="post" id="move-product" action="{{ route('moveToCart') }}">
     @csrf
     <input type="hidden" name="ProductId" id="wishProductId" value="">
     <input type="hidden" name="TypeId" id="wishTypeId" value="">
@@ -150,35 +177,58 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
 
 
 
-<!--*********************** 
+<!--***********************
         all js files
      ***********************-->
 <script>
-    const baseUrl = "{{config('app.url')}}";
+    const baseUrl = "{{ config('app.url') }}";
 </script>
-<script src="{{asset('frontend/js/vendor/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js')}}"></script>
-<script src="{{asset('frontend/js/vendor/modernizr-3.7.1.min.js')}}"></script>
-<script src="{{asset('frontend/js/plugins/jquery-ui.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('frontend/js/plugins/plugins.js')}}"></script>
-<script src="{{asset('frontend/js/main.js')}}"></script>
-<script src="{{asset('frontend/custom/custom.js')}}"></script>
-<script src="{{asset('frontend/js/fancybox.umd.js')}}"></script>
-<script src="{{asset('frontend/js/toastify.js')}}"></script>
-<script src="{{asset('frontend/custom/cartOfflineOnline.js')}}"></script>
+<script src="{{ asset('frontend/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('frontend/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+<script src="{{ asset('frontend/js/vendor/modernizr-3.7.1.min.js') }}"></script>
+<script src="{{ asset('frontend/js/plugins/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('frontend/js/plugins/plugins.js') }}"></script>
+<script src="{{ asset('frontend/js/main.js') }}"></script>
+<script src="{{ asset('frontend/custom/custom.js') }}"></script>
+<script src="{{ asset('frontend/js/fancybox.umd.js') }}"></script>
+<script src="{{ asset('frontend/js/toastify.js') }}"></script>
+<script src="{{ asset('frontend/custom/cartOfflineOnline.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 @if (session('status-success'))
-<script>
-    successToast("{{ session('status-success') }}")
-</script>
+    <script>
+        successToast("{{ session('status-success') }}")
+    </script>
 @endif
 @if (session('status-error'))
-<script>
-    successToast("{{ session('status-error') }}")
-</script>
+    <script>
+        successToast("{{ session('status-error') }}")
+    </script>
 @endif
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const swiper = new Swiper(".product-swiper", {
+            slidesPerView: 2,
+            spaceBetween: 10,
+            loop: true,
+            speed: 600,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                992: { slidesPerView: 4 },
+                1200: { slidesPerView: 4 }
+            }
+        });
+    });
+</script>
 
 <script>
+    
     //------ TOP BAR ---------
     $(document).ready(function() {
         $('.offer-slider').slick({
@@ -223,6 +273,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 }
             ]
         });
+       
+
     });
     Fancybox.bind('[data-fancybox="gallery"]', {
         // Your custom options
@@ -332,17 +384,20 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     }, 1000);
                     otpModal.hide(); // Close OTP modal on successful login
                 } else {
-                    document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                    document.getElementById('verifyOtpButton').classList.remove(
+                        'd-none'); // Show button
                     document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
                     errorToast(data.message || 'OTP verification failed.');
                 }
             } catch (error) {
-                document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                document.getElementById('verifyOtpButton').classList.remove(
+                    'd-none'); // Show button
                 document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
                 errorToast('Error during OTP verification. Please try again.');
             } finally {
                 // Reset UI state
-                document.getElementById('verifyOtpButton').classList.remove('d-none'); // Show button
+                document.getElementById('verifyOtpButton').classList.remove(
+                    'd-none'); // Show button
                 document.getElementById('otp-loader').classList.add('d-none'); // Hide loader
                 otpForm.reset(); // Clear OTP form inputs
             }
@@ -520,8 +575,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         if (item.inventory == 0) {
                             out = "out";
                         }
-                        var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateTypeId(this,' + item.type_id + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        var activeClass = (item.type_id == activeTypeId) ?
+                            'active' : '';
+                        sizesList.append(
+                            '<li><a href="javascript:void(0)" onclick="updateTypeId(this,' +
+                            item.type_id + ')" class="' + activeClass + ' ' +
+                            out + '"  type_id = "' + item.type_id + '">' + item
+                            .size.name + '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;
@@ -551,8 +611,13 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                         if (item.inventory == 0) {
                             out = "out";
                         }
-                        var activeClass = (item.type_id == activeTypeId) ? 'active' : '';
-                        sizesList.append('<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' + item.type_id + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.size.name + '</a></li>');
+                        var activeClass = (item.type_id == activeTypeId) ?
+                            'active' : '';
+                        sizesList.append(
+                            '<li><a href="javascript:void(0)" onclick="updateWishTypeId(this,' +
+                            item.type_id + ')" class="' + activeClass + ' ' +
+                            out + '"  type_id = "' + item.type_id + '">' + item
+                            .size.name + '</a></li>');
                     });
                     document.getElementById('wishProductId').value = productId;
 
@@ -594,7 +659,11 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                             out = "out";
                         }
                         var activeClass = (item.qty == activeQty) ? 'active' : '';
-                        QtyList.append('<li><a href="javascript:void(0)" onclick="updateQty(this,' + item.qty + ')" class="' + activeClass + ' ' + out + '"  type_id = "' + item.type_id + '">' + item.qty + '</a></li>');
+                        QtyList.append(
+                            '<li><a href="javascript:void(0)" onclick="updateQty(this,' +
+                            item.qty + ')" class="' + activeClass + ' ' + out +
+                            '"  type_id = "' + item.type_id + '">' + item.qty +
+                            '</a></li>');
                     });
                     document.getElementById('activeTypeId').value = activeTypeId;
                     document.getElementById('CartTypeId').value = activeTypeId;
@@ -772,8 +841,10 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
             .then(data => {
                 if (data.status) {
                     // Show wallet discount in the UI
-                    updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), data.walletDiscount);
-                    document.getElementById('walletDiv').classList.remove('d-none'); // Show the wallet discount section
+                    updateSubTotal(parseFloat(document.getElementById('promo_code_discount').innerText), data
+                        .walletDiscount);
+                    document.getElementById('walletDiv').classList.remove(
+                        'd-none'); // Show the wallet discount section
                     successToast(data.message);
                 } else {
                     errorToast(data.message);
@@ -828,7 +899,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     document.getElementById('promo_code_discount').innerText = data.PromoDiscount;
 
                     // Update subtotal with promo discount, wallet, and shipping
-                    updateSubTotal(data.promoDiscount, parseFloat(document.getElementById('wallet_discount').innerText));
+                    updateSubTotal(data.promoDiscount, parseFloat(document.getElementById('wallet_discount')
+                        .innerText));
                     document.getElementById('clearPromoCode').classList.remove('d-none'); // Show the promo discount
                     document.getElementById('promoDive').classList.remove('d-none'); // Show the promo discount
                     successToast(data.message);
@@ -893,7 +965,8 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                     document.getElementById('prepaid_discount').innerText = data.prepaid_discount;
                     if (data.prepaid_discount != '0') {
                         document.getElementById('CodDiv').classList.add('d-none'); // hide the cod charge
-                        document.getElementById('prePaidDiv').classList.remove('d-none'); // Show the prepaid discount
+                        document.getElementById('prePaidDiv').classList.remove(
+                            'd-none'); // Show the prepaid discount
                     } else {
                         document.getElementById('CodDiv').classList.remove('d-none'); // show the cod charge
                         document.getElementById('prePaidDiv').classList.add('d-none'); // hide the prepaid discount
@@ -933,21 +1006,30 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
                 if (response.wishlistItems.length > 0) {
                     $.each(response.wishlistItems, function(index, wish) {
                         wishlistHtml += '<li>';
-                        wishlistHtml += '<a href="' + wish.product_url + '" class="image"><img src="' + wish.product_image + '" alt="Product Image"></a>';
+                        wishlistHtml += '<a href="' + wish.product_url +
+                            '" class="image"><img src="' + wish.product_image +
+                            '" alt="Product Image"></a>';
                         wishlistHtml += '<div class="content">';
-                        wishlistHtml += '<a href="' + wish.product_url + '" class="title">' + wish.product_name + '</a>';
+                        wishlistHtml += '<a href="' + wish.product_url + '" class="title">' + wish
+                            .product_name + '</a>';
                         wishlistHtml += '<h6 class="product-price">';
-                        wishlistHtml += '<del class="del" style="font-size: 13px;">₹' + wish.product_mrp + '</del>';
-                        wishlistHtml += '<span class="onsale" style="font-size: 13px;">₹' + wish.product_selling_price + '</span>';
+                        wishlistHtml += '<del class="del" style="font-size: 13px;">₹' + wish
+                            .product_mrp + '</del>';
+                        wishlistHtml += '<span class="onsale" style="font-size: 13px;">₹' + wish
+                            .product_selling_price + '</span>';
                         wishlistHtml += '</h6>';
-                        wishlistHtml += '<button class="btn theme-btn--dark3 btn--sm mt-10" data-bs-toggle="modal" data-bs-target="#wishSizeModal"';
-                        wishlistHtml += ' data-product-id="' + wish.product_id + '" data-type-id="' + wish.type_id + '" >';
-                        wishlistHtml += '<span class="me-2"><i class="ion-bag"></i></span> Move to bag</button>';
+                        wishlistHtml +=
+                            '<button class="btn theme-btn--dark3 btn--sm mt-10" data-bs-toggle="modal" data-bs-target="#wishSizeModal"';
+                        wishlistHtml += ' data-product-id="' + wish.product_id +
+                            '" data-type-id="' + wish.type_id + '" >';
+                        wishlistHtml +=
+                            '<span class="me-2"><i class="ion-bag"></i></span> Move to bag</button>';
                         wishlistHtml += '</div>';
                         wishlistHtml += '</li>';
                     });
                 } else {
-                    wishlistHtml = '<div class="text-center"><img src="' + response.emptyWishlistImage + '" alt="Empty-Wishlist" class="img-fluid" style="width:50%"></div>';
+                    wishlistHtml = '<div class="text-center"><img src="' + response.emptyWishlistImage +
+                        '" alt="Empty-Wishlist" class="img-fluid" style="width:50%"></div>';
                     wishlistHtml += '<h6 class="text-center mt-2">Your wishlist is empty!</h6>';
                 }
 
@@ -1018,21 +1100,21 @@ $categoryData = App\Models\CategoryModal::orderBy('seq','asc')->where('is_active
     });
     //---------------STOP TAB ATTRACT USER START ---------------
 </script>
-@if(auth()->check() && !auth()->user()->name)
-<script>
-    $(document).ready(function() {
-        $('#signup').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+@if (auth()->check() && !auth()->user()->name)
+    <script>
+        $(document).ready(function() {
+            $('#signup').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
 
-        $('#signup').on('hide.bs.modal', function(e) {
-            e.preventDefault(); // Prevents the modal from closing
+            $('#signup').on('hide.bs.modal', function(e) {
+                e.preventDefault(); // Prevents the modal from closing
+            });
         });
-    });
-    const signupModal = new bootstrap.Modal(document.getElementById('signup'));
-    signupModal.show();
-</script>
+        const signupModal = new bootstrap.Modal(document.getElementById('signup'));
+        signupModal.show();
+    </script>
 @endif
 </body>
 
