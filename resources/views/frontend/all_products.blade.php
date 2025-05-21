@@ -29,7 +29,7 @@
 </style>
 <!-- breadcrumb-section start -->
 <nav class="breadcrumb-section theme1 breadcrumb-bg1">
-    <div class="container">
+    <div class="container-custom">
         <div class="row">
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center">
@@ -43,7 +43,7 @@
 <!-- breadcrumb-section end -->
 <!-- product tab start -->
 <div class="product-tab pb-40">
-    <div class="container grid-wraper">
+    <div class="container-custom grid-wraper">
         <div class="row">
             <div class="col-lg-9 mb-30">
                 <div class="grid-nav-wraper mb-30">
@@ -196,6 +196,111 @@
     </div>
 </div>
 <!-- product tab end -->
+ @if (!$relatedData->isEmpty())
+        <!-- new arrival section start -->
+        <section class="theme1 bg-white pt-20 pb-70">
+            <div class="container-custom">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center mb-30">
+                            <h2 class="title text-dark text-capitalize mb-20">More For You</h2>
+                            <p class="text">Browse the collection of our products. </p>
+                        </div>
+                    </div>
+                    <!-- Swiper Container -->
+                    <div class="col-12">
+                        <div class="swiper product-swiper">
+                            <div class="swiper-wrapper">
+                                @foreach ($relatedData as $trend)
+                                    <div class="swiper-slide" itemscope itemtype="https://schema.org/Product">
+                                        <div class="card product-card">
+                                            <div class="card-body p-0">
+                                                <div class="media flex-column">
+                                                    <!-- Product Image Section -->
+                                                    <div class="product-thumbnail w-100 position-relative">
+                                                        @if ($trend->label)
+                                                            <span class="badge badge-danger top-left"
+                                                                itemprop="keywords">{{ $trend->label }}</span>
+                                                        @endif
+
+                                                        <a class="d-block" href="{{ route('product', $trend->slug) }}"
+                                                            itemprop="url">
+                                                            <img class="first-img" loading="lazy"
+                                                                src="{{ asset($trend->image) }}"
+                                                                alt="{{ $trend->name }}" itemprop="image">
+                                                            <img class="second-img" loading="lazy"
+                                                                src="{{ asset($trend->image2 ?: $trend->image1) }}"
+                                                                alt="{{ $trend->name }} - Alternative View">
+                                                        </a>
+
+                                                        @if (auth()->check())
+                                                            @php
+                                                                $isInWishlist = in_array(
+                                                                    $trend->id,
+                                                                    $wishlistProductIds,
+                                                                );
+                                                            @endphp
+                                                            <a href="javascript:void(0)"
+                                                                onclick="toggleWishlist({{ $trend->id }}, this)"
+                                                                aria-label="Toggle Wishlist for {{ $trend->name }}">
+                                                                <span
+                                                                    class="hear-icon top-right product{{ $trend->id }}">
+                                                                    <i
+                                                                        class="{{ $isInWishlist ? 'ion-ios-heart' : 'ion-ios-heart-outline' }}"></i>
+                                                                </span>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+
+                                                    <!-- Product Details Section -->
+                                                    <div class="media-body">
+                                                        <div class="product-desc">
+                                                            <span class="logo-text" itemprop="brand">Ekaa Vastra</span>
+                                                            <h3 class="title mb-10">
+                                                                <a href="{{ route('product', $trend->slug) }}"
+                                                                    aria-label="Explore {{ $trend->name }}"
+                                                                    class="truncate-text">
+                                                                    {{ $trend->name }}
+                                                                </a>
+                                                            </h3>
+                                                            <p class="product-price">
+                                                                <span
+                                                                    class="onsale">₹{{ number_format($trend->selling_price) }}</span>
+                                                                <del
+                                                                    class="del">₹{{ number_format($trend->mrp) }}</del>
+                                                                @php
+                                                                    $percentageSaved =
+                                                                        $trend->mrp > 0
+                                                                            ? (($trend->mrp - $trend->selling_price) /
+                                                                                    $trend->mrp) *
+                                                                                100
+                                                                            : 0;
+                                                                @endphp
+                                                                @if ($percentageSaved > 0)
+                                                                    <span
+                                                                        class="product-discountPercentage">({{ number_format($percentageSaved) }}%
+                                                                        Off)</span>
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Swiper Navigation -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- new arrival section end -->
+    @endif
 <!--  new model-->
 
 
