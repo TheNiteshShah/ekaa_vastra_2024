@@ -117,8 +117,8 @@ class HomeController extends Controller
                 // Fallback: exclude current category if no subcategory
                 return $query->where('category_id', '!=', $categoryData->id);
             })
+            ->inRandomOrder()
             ->limit(10)
-            ->orderBy('seq', 'asc')
             ->get();
 
         return view('frontend/all_products', compact('parentData', 'productData', 'title', 'seo_description', 'seo_keywords', 'relatedData'));
