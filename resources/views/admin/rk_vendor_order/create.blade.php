@@ -99,7 +99,7 @@
                                             <div class="form-floating">
                                                 <input type="text"
                                                     class="form-control @error('reverse_charge') is-invalid @enderror"
-                                                    value="{{ old('reverse_charge', $data->reverse_charge) }}"
+                                                    value="{{ old('reverse_charge', $data->reverse_charge ?? 'N') }}"
                                                     id="reverse_charge" name="reverse_charge"
                                                     placeholder="Enter Reverse Charge">
                                                 <label for="reverse_charge">Reverse Charge</label>
@@ -114,8 +114,9 @@
                                                 <input type="text"
                                                     class="form-control @error('challan_no') is-invalid @enderror"
                                                     value="{{ old('challan_no', $data->challan_no) }}" id="challan_no"
-                                                    name="challan_no" placeholder="Enter Challan No.">
-                                                <label for="challan_no">Challan No.</label>
+                                                    name="challan_no" placeholder="Enter Challan No." required>
+                                                <label for="challan_no">Challan No. &nbsp;<span
+                                                    style="color:red;">*</span></label>
                                             </div>
                                             @error('challan_no')
                                                 <div style="color:red">{{ $message }}</div>
@@ -126,7 +127,7 @@
                                             <div class="form-floating">
                                                 <input type="text"
                                                     class="form-control @error('transport') is-invalid @enderror"
-                                                    value="{{ old('transport', $data->transport) }}" id="transport"
+                                                    value="{{ old('transport', $data->transport ?? 'Self') }}" id="transport"
                                                     name="transport" placeholder="Enter Transport Name">
                                                 <label for="transport">Transport</label>
                                             </div>

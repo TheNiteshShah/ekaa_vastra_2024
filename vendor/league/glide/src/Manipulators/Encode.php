@@ -8,11 +8,13 @@ use Intervention\Image\Image;
  * @property string $fm
  * @property string $q
  */
-class Encode extends Manipulator
+class Encode extends BaseManipulator
 {
     /**
      * Perform output image manipulation.
-     * @param  Image $image The source image.
+     *
+     * @param Image $image The source image.
+     *
      * @return Image The manipulated image.
      */
     public function run(Image $image)
@@ -26,7 +28,7 @@ class Encode extends Manipulator
                            ->insert($image, 'top-left', 0, 0);
         }
 
-        if ($format === 'pjpg') {
+        if ('pjpg' === $format) {
             $image->interlace();
             $format = 'jpg';
         }
@@ -36,7 +38,9 @@ class Encode extends Manipulator
 
     /**
      * Resolve format.
-     * @param  Image  $image The source image.
+     *
+     * @param Image $image The source image.
+     *
      * @return string The resolved format.
      */
     public function getFormat(Image $image)
@@ -46,6 +50,7 @@ class Encode extends Manipulator
             'jpg' => 'image/jpeg',
             'pjpg' => 'image/jpeg',
             'png' => 'image/png',
+            'webp' => 'image/webp',
         ];
 
         if (array_key_exists($this->fm, $allowed)) {
@@ -61,6 +66,7 @@ class Encode extends Manipulator
 
     /**
      * Resolve quality.
+     *
      * @return string The resolved quality.
      */
     public function getQuality()

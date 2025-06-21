@@ -62,6 +62,12 @@ public function getCachePath($path, array $params)
 
 // Check if a cache file exists
 public function cacheFileExists($path, array $params)
+
+// Set the temporary directory that should be used to store EXIF data
+public function setTempDir($tempDir)
+
+// Get the current temporary directory
+public function getTempDir()
 ~~~
 
 ## Api
@@ -93,11 +99,11 @@ public function getResponseFactory()
 ~~~ php
 <?php
 
-// Set the default manipulations
-public function setDefaultManipulations(array $defaultManipulations)
+// Set the default manipulators
+public function setManipulators(array $manipulators)
 
-// Get the default manipulations
-public function getDefaultManipulations()
+// Get the default manipulators
+public function getManipulators()
 ~~~
 
 ## Base URL
