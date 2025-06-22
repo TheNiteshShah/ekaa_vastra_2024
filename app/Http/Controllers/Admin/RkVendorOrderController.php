@@ -6,9 +6,11 @@ use App\Models\RkVendorModal;
 use App\Models\RkVendorOrderDetailsModal;
 use App\Models\RkVendorOrderModal;
 use App\Models\RkVendorProductModal;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+// Add this at the top
 class RkVendorOrderController extends Controller
 {
     public function index(Request $req, $parent_id)
@@ -198,9 +200,18 @@ class RkVendorOrderController extends Controller
             }
 
             $financialYear = $fyStart . '-' . substr($fyEnd, -2); // e.g. 2025-26
-            $title     = "RK INVOICE NO. : " . $financialYear.'/'.$bill_data->invoice_no.'/GST';
+            $title         = "RK INVOICE NO. : " . $financialYear . '/' . $invoiceNo . '/GST';
 
-            return view('admin/rk_vendor_order.print', compact('bill_data', 'title','financialYear','invoiceNo'));
+            $number        = round($bill_data->total_amount);
+            $words         = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+            $amountInWords = ucfirst($words->format($number)) . ' only';
+            // Generate PDF from Blade view
+            $pdf = Pdf::loadView('admin.rk_vendor_order.print', compact('bill_data', 'title', 'financialYear', 'invoiceNo','amountInWords'));
+
+            // Preview in browser
+            return $pdf->stream("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
+            // Download as PDF
+            // return $pdf->download("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
         } else {
             return view('admin/login/index');
         }
