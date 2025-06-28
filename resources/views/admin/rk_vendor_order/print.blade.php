@@ -32,6 +32,10 @@
             text-align: right;
         }
 
+        .text-left {
+            text-align: left;
+        }
+
         .text-center {
             text-align: center;
         }
@@ -76,8 +80,25 @@
             margin: 0 !important;
         }
 
+        .border-0 {
+            border: 0 !important;
+            padding: 0px !important;
+
+        }
+
+        .m-1 {
+            margin: 5px !important;
+        }
+
         .no-border {
             border: none !important;
+        }
+
+        .no-vertical-border {
+            border-top: 0 !important;
+            border-bottom: 0 !important;
+            padding: 2px 4px !important;
+            /* reduced top/bottom and left/right padding */
         }
     </style>
 </head>
@@ -99,10 +120,10 @@
                 <!-- Company info centered -->
                 <td style="width: 100%; vertical-align: top; border: none; text-align: center;">
                     <h3 class="m-0"><strong><u>GST INVOICE</u></strong></h3>
-                    <h2 class="m-0">R K FASHIONS</h2>
+                    <h1 class="m-0">R K FASHIONS</h1>
                     <p class="m-0">C-275, VAISHALI NAGAR, BEHIND TPS SCHOOL, JAIPUR</p>
-                    <p class="m-0"><strong>GSTIN: 08AJGPK2857A1ZF</strong></p>
-                    <p class="m-0"><strong>Tel.: 9829579161 | Email: rkfashionsjaipur@gmail.com</strong></p>
+                    <h3 class="m-1"><strong>GSTIN: 08AJGPK2857A1ZF</strong></h3>
+                    <p class="m-0"><strong><i>Tel.: 9829579161 | Email: rkfashionsjaipur@gmail.com</i></strong></p>
                 </td>
             </tr>
 
@@ -111,18 +132,49 @@
 
         <table class="table">
             <tr>
-                <td style="width: 50%;">
-                    <strong>Invoice No.:</strong> {{ $financialYear }}/{{ $invoiceNo }}/GST<br>
-                    <strong>Date of Invoice:</strong>
-                    {{ \Carbon\Carbon::parse($bill_data->invoice_date)->format('d-m-Y') }}<br>
-                    <strong>Place of Supply:</strong> {{ $bill_data->vendor->city->name }}<br>
-                    <strong>Reverse Charge:</strong> {{ $bill_data->reverse_charge }}
+                <td style="width: 50%; vertical-align: top; padding: 5px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="border-0"><strong>Invoice No</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $financialYear }}/{{ $invoiceNo }}/GST</td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Date of Invoice</strong></td>
+                            <td class="border-0">
+                                :&nbsp;&nbsp;{{ \Carbon\Carbon::parse($bill_data->invoice_date)->format('d-m-Y') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Place of Supply</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $bill_data->vendor->city->name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Reverse Charge</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $bill_data->reverse_charge }}</td>
+                        </tr>
+                    </table>
                 </td>
-                <td>
-                    <strong>Challan No.:</strong> {{ $bill_data->challan_no }}<br>
-                    <strong>Transport:</strong> {{ $bill_data->transport }}<br>
-                    <strong>Vehicle No.:</strong> {{ $bill_data->vehicle_no }}<br>
-                    <strong>Station:</strong> {{ $bill_data->station }}
+                <td style="width: 50%; vertical-align: top; padding: 5px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="border-0"><strong>Challan No.</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $bill_data->challan_no }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Transport</strong></td>
+                            <td class="border-0">
+                                :&nbsp;&nbsp;{{ $bill_data->transport }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Vehicle No.</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $bill_data->vehicle_noe }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border-0"><strong>Station</strong></td>
+                            <td class="border-0">:&nbsp;&nbsp;{{ $bill_data->station }}</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
@@ -130,7 +182,7 @@
         <table class="table">
             <tr>
                 <td>
-                    <strong>Billed to:</strong><br>
+                    <strong><i>Billed to:</i></strong><br>
                     {{ $bill_data->vendor->business_name }}<br>
                     {{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
                     {{ $bill_data->vendor->city->state->name }} - {{ $bill_data->vendor->pin_code }}<br>
@@ -138,7 +190,7 @@
                     GSTIN/UIN: {{ $bill_data->vendor->gst }}<br>
                 </td>
                 <td>
-                    <strong>Shipped to:</strong><br>
+                    <strong><i>Shipped to</i></strong><br>
                     {{ $bill_data->vendor->business_name }}<br>
                     {{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
                     {{ $bill_data->vendor->city->state->name }} - {{ $bill_data->vendor->pin_code }}<br>
@@ -152,7 +204,7 @@
             <thead>
                 <tr>
                     <th style="width: 8%;" class="text-right">S. No.</th>
-                    <th style="width: 42%;">Description of Goods</th>
+                    <th style="width: 42%;" class="text-left">Description of Goods</th>
                     <th style="width: 5%;" class="text-right">Qty</th>
                     <th style="width: 5%;">Unit</th>
                     <th style="width: 10%;" class="text-right">Price</th>
@@ -169,24 +221,26 @@
                 @endphp
                 @foreach ($bill_data->orderDetails as $item)
                     <tr>
-                        <td class="text-right">{{ $loop->iteration }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td class="text-right">{{ $item->quantity }}</td>
-                        <td>{{ $item->unit }}</td>
-                        <td class="text-right">{{ number_format($item->price, 2) }}</td>
-                        <td class="text-right">{{ number_format($item->quantity * $item->price, 2) }}</td>
-                        <td class="text-right">{{ number_format($item->quantity * $item->price, 2) }}</td>
+                        <td class="text-right no-vertical-border">{{ $loop->iteration }}</td>
+                        <td class="no-vertical-border">{{ $item->name }}</td>
+                        <td class="no-vertical-border"class="text-right no-vertical-border">{{ $item->quantity }}</td>
+                        <td class="no-vertical-border">{{ $item->unit }}</td>
+                        <td class="text-right no-vertical-border">{{ number_format($item->price, 2) }}</td>
+                        <td class="text-right no-vertical-border">
+                            {{ number_format($item->quantity * $item->price, 2) }}</td>
+                        <td class="text-right no-vertical-border">
+                            {{ number_format($item->quantity * $item->price, 2) }}</td>
                     </tr>
                 @endforeach
                 @for ($i = $itemCount + 1; $i <= $totalRows; $i++)
                     <tr>
-                        <td class="text-right"></td>
-                        <td>&nbsp;</td>
-                        <td class="text-right">&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td class="text-right">&nbsp;</td>
-                        <td class="text-right">-</td>
-                        <td class="text-right">-</td>
+                        <td class="text-right no-vertical-border"></td>
+                        <td class="no-vertical-border">&nbsp;</td>
+                        <td class="text-right no-vertical-border">&nbsp;</td>
+                        <td class="no-vertical-border">&nbsp;</td>
+                        <td class="text-right no-vertical-border">&nbsp;</td>
+                        <td class="text-right no-vertical-border">-</td>
+                        <td class="text-right no-vertical-border">-</td>
                     </tr>
                 @endfor
                 <tr>
@@ -220,7 +274,7 @@
                 @endif
                 <tr>
                     <td colspan="2"></td>
-                    <td class="product_table" colspan="3"><i>Rounded Off(+/-)</i></td>
+                    <td class="product_table" colspan="3"><i>Rounded Off (+/-)</i></td>
                     <td class="product_table"></td>
                     <td class="product_table" style="border-left: 2px solid black;text-align:right">
                         {{ number_format(abs($bill_data->total_amount - round($bill_data->total_amount)), 2, '.', ',') }}
@@ -287,7 +341,7 @@
         </table>
 
         <div class="border-top-black border-bottom-black">
-            <h5 class="text-center">BANK DETAILS</h5>
+            <h4 class="text-center">BANK DETAILS</h4>
             <table class="table no-border">
                 <tr>
                     <td class="text-center">BANK: IDBI BANK LTD.</td>
@@ -309,7 +363,7 @@
                     </ul>
                 </td>
                 <td style="width: 50%; text-align: right;">
-                    <h5 style="text-align: left; vertical-align: top;"><strong>Receiver's Signature</strong></h5>
+                    <h5 style="text-align: left; vertical-align: top;"><strong>Receiver's Signature&nbsp;&nbsp;:</strong></h5>
                     <div class="signature-area"></div>
                     <h5>For R K FASHIONS</h5>
                     <strong>Authorised Signatory</strong>
