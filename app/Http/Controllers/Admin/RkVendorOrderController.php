@@ -209,9 +209,9 @@ class RkVendorOrderController extends Controller
             $pdf = Pdf::loadView('admin.rk_vendor_order.print', compact('bill_data', 'title', 'financialYear', 'invoiceNo','amountInWords'));
 
             // Preview in browser
-            return $pdf->stream("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
+            // return $pdf->stream("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
             // Download as PDF
-            // return $pdf->download("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
+            return $pdf->download("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
         } else {
             return view('admin/login/index');
         }
