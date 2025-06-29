@@ -100,6 +100,12 @@
             padding: 2px 4px !important;
             /* reduced top/bottom and left/right padding */
         }
+
+        .no-horizontal-border {
+            border-left: 0 !important;
+            border-right: 0 !important;
+            /* reduced top/bottom and left/right padding */
+        }
     </style>
 </head>
 
@@ -205,29 +211,35 @@
                 <tr>
                     <th style="width: 8%;" class="text-right">S. No.</th>
                     <th style="width: 42%;" class="text-left">Description of Goods</th>
-                    <th style="width: 5%;" class="text-right">Qty</th>
-                    <th style="width: 5%;">Unit</th>
-                    <th style="width: 10%;" class="text-right">Price</th>
-                    <th style="width: 15%;" class="text-right">Amount</th>
-                    <th style="width: 15%;" class="text-right">Total (<span
-                            style="font-family: DejaVu Sans; sans-serif;">&#8377;</span>)</th>
+                    <th style="width: 10%;" class="text-right">Qty</th>
+                    <th style="width: 10%;" class="text-left">Unit</th>
+                    <th style="width: 15%;" class="text-right">Price</th>
+                    <th style="width: 15%;" class="text-right">
+                        Amount (<span style="font-family: DejaVu Sans;">&#8377;</span>)
+                    </th>
                 </tr>
-
             </thead>
             <tbody>
                 @php
                     $totalRows = 8;
                     $itemCount = count($bill_data->orderDetails);
+                    $setTotal = 0;
+                    $pcTotal = 0;
                 @endphp
                 @foreach ($bill_data->orderDetails as $item)
+                    @php
+                        if ($item->unit == 'Set') {
+                            $setTotal += $item->quantity;
+                        } elseif ($item->unit == 'Pc') {
+                            $pcTotal += $item->quantity;
+                        }
+                    @endphp
                     <tr>
                         <td class="text-right no-vertical-border">{{ $loop->iteration }}</td>
                         <td class="no-vertical-border">{{ $item->name }}</td>
                         <td class="no-vertical-border"class="text-right no-vertical-border">{{ $item->quantity }}</td>
                         <td class="no-vertical-border">{{ $item->unit }}</td>
                         <td class="text-right no-vertical-border">{{ number_format($item->price, 2) }}</td>
-                        <td class="text-right no-vertical-border">
-                            {{ number_format($item->quantity * $item->price, 2) }}</td>
                         <td class="text-right no-vertical-border">
                             {{ number_format($item->quantity * $item->price, 2) }}</td>
                     </tr>
@@ -240,55 +252,65 @@
                         <td class="no-vertical-border">&nbsp;</td>
                         <td class="text-right no-vertical-border">&nbsp;</td>
                         <td class="text-right no-vertical-border">-</td>
-                        <td class="text-right no-vertical-border">-</td>
                     </tr>
                 @endfor
                 <tr>
-                    <td colspan="6" class="text-right"><strong>Sub Total</strong></td>
+                    <td colspan="5" class="text-right"><strong>Sub Total</strong></td>
                     <td class="text-right"><b>{{ number_format($bill_data->sub_total, 2) }}</b></td>
                 </tr>
                 @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
                     <tr>
-                        <td colspan="2"></td>
-                        <td class="product_table" colspan="3"><i>Add : CGST</i></td>
-                        <td class="product_table"><i>@ {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                        <td colspan="2" style="border-right:0"></td>
+                        <td class="product_table no-horizontal-border" colspan="2"><i>Add : CGST</i></td>
+                        <td class="product_table no-horizontal-border"><i>@
+                                {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
+                        <td class="product_table" style="border-left: 1px solid black;text-align:right">
                             {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
-                        <td class="product_table" colspan="3"><i>Add : SGST</i></td>
-                        <td class="product_table"><i>@ {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                        <td colspan="2" style="border-right:0"></td>
+                        <td class="product_table no-horizontal-border" colspan="2"><i>Add : SGST</i></td>
+                        <td class="product_table no-horizontal-border"><i>@
+                                {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
+                        <td class="product_table" style="border-left: 1px solid black;text-align:right">
                             {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
 
                     </tr>
                 @else
                     <tr>
-                        <td colspan="2"></td>
-                        <td class="product_table" colspan="3"><i>Add : IGST</i></td>
-                        <td class="product_table"><i>@ {{ number_format($bill_data->gst, 2, '.', ',') }}%</i></td>
-                        <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                        <td colspan="2" style="border-right:0"></td>
+                        <td class="product_table no-horizontal-border" colspan="2"><i>Add : IGST</i></td>
+                        <td class="product_table no-horizontal-border"><i>@
+                                {{ number_format($bill_data->gst, 2, '.', ',') }}%</i></td>
+                        <td class="product_table" style="border-left: 1px solid black;text-align:right">
                             {{ number_format($bill_data->gst_amount, 2, '.', ',') }}</td>
                     </tr>
                 @endif
                 <tr>
-                    <td colspan="2"></td>
-                    <td class="product_table" colspan="3"><i>Rounded Off (+/-)</i></td>
-                    <td class="product_table"></td>
-                    <td class="product_table" style="border-left: 2px solid black;text-align:right">
+                    <td colspan="2" style="border-right:0"></td>
+                    <td class="product_table no-horizontal-border" colspan="2"><i>Rounded Off (+/-)</i></td>
+                    <td class="product_table no-horizontal-border"></td>
+                    <td class="product_table" style="border-left: 1px solid black;text-align:right">
                         {{ number_format(abs($bill_data->total_amount - round($bill_data->total_amount)), 2, '.', ',') }}
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"></td>
-                    <td class="product_table" colspan="3"><b>Grand Total</b></td>
-                    <td class="product_table"><b>Pcs</b> </td>
+                    <td colspan="2" style="border-right:0"></td>
+                    <td class="product_table no-horizontal-border" colspan="1">
+                        <b>Sets:</b> {{ $setTotal }}
+                    </td>
+                    <td class="product_table no-horizontal-border" colspan="1">
+                        <b>Pcs:</b> {{ $pcTotal }}
+                    </td>
+                    <td class="product_table no-horizontal-border" colspan="1" style="text-align: right;">
+                        <b>Grand Total</b>
+                    </td>
                     <td class="product_table"
-                        style="border-left: 2px solid black;border-bottom: 2px solid black;text-align:right">
+                        style="border-left: 1px solid black; border-bottom: 1px solid black; text-align:right">
                         <b>{{ number_format($bill_data->total_amount, 2, '.', ',') }}</b>
                     </td>
                 </tr>
+
             </tbody>
         </table>
         <table class="table">
@@ -363,7 +385,8 @@
                     </ul>
                 </td>
                 <td style="width: 50%; text-align: right;">
-                    <h5 style="text-align: left; vertical-align: top;"><strong>Receiver's Signature&nbsp;&nbsp;:</strong></h5>
+                    <h5 style="text-align: left; vertical-align: top;"><strong>Receiver's
+                            Signature&nbsp;&nbsp;:</strong></h5>
                     <div class="signature-area"></div>
                     <h5>For R K FASHIONS</h5>
                     <strong>Authorised Signatory</strong>
