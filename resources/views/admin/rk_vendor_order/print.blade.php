@@ -17,7 +17,12 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 5px;
+            /* margin-bottom: 5px; */
+        }
+
+        .tbl {
+            border-left: none;
+            border-right: none !important;
         }
 
         .table th,
@@ -61,7 +66,11 @@
 
         .signature-area {
             border-top: 2px solid black;
-            margin-top: 60px;
+            margin-top: 50px;
+        }
+
+        .signature-area2 {
+            margin-top:50px;
         }
 
         .border-top-black {
@@ -110,35 +119,37 @@
 </head>
 
 <body>
-    <div style="border: 2px solid black; padding: 10px;">
-        <div class="text-right">
-            <p class="m-0">Original for Buyer</p>
+    <div>
+        <div style="border: 1px solid black;border-bottom:none !important">
+            <div class="text-right" style="padding: 5px;">
+                <p class="m-0">Original for Buyer</p>
+            </div>
+
+            <table class="table" style="table-layout: fixed; width: 100%;">
+                <tr>
+                    <!-- Logo aligned left -->
+                    <td style="width: 0%; vertical-align: top; border: none; text-align: left;">
+                        <img src="{{ public_path('admin/assets/images/rk_logo.png') }}"
+                            style="max-width: 120px; height: auto;">
+                    </td>
+
+                    <!-- Company info centered -->
+                    <td style="width: 100%; vertical-align: top; border: none; text-align: center;">
+                        <h3 class="m-0"><strong><u>GST INVOICE</u></strong></h3>
+                        <h1 class="m-0">R K FASHIONS</h1>
+                        <p class="m-0">C-275, VAISHALI NAGAR, BEHIND TPS SCHOOL, JAIPUR</p>
+                        <h3 class="m-1"><strong>GSTIN: 08AJGPK2857A1ZF</strong></h3>
+                        <p class="m-0"><strong><i>Tel.: 9829579161 | Email: rkfashionsjaipur@gmail.com</i></strong>
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
         </div>
-
-        <table class="table" style="table-layout: fixed; width: 100%;">
-            <tr>
-                <!-- Logo aligned left -->
-                <td style="width: 0%; vertical-align: top; border: none; text-align: left;">
-                    <img src="{{ public_path('admin/assets/images/rk_logo.png') }}"
-                        style="max-width: 120px; height: auto;">
-                </td>
-
-                <!-- Company info centered -->
-                <td style="width: 100%; vertical-align: top; border: none; text-align: center;">
-                    <h3 class="m-0"><strong><u>GST INVOICE</u></strong></h3>
-                    <h1 class="m-0">R K FASHIONS</h1>
-                    <p class="m-0">C-275, VAISHALI NAGAR, BEHIND TPS SCHOOL, JAIPUR</p>
-                    <h3 class="m-1"><strong>GSTIN: 08AJGPK2857A1ZF</strong></h3>
-                    <p class="m-0"><strong><i>Tel.: 9829579161 | Email: rkfashionsjaipur@gmail.com</i></strong></p>
-                </td>
-            </tr>
-
-
-        </table>
 
         <table class="table">
             <tr>
-                <td style="width: 50%; vertical-align: top; padding: 5px;">
+                <td style="width: 50%; vertical-align: top; padding: 5px;border-bottom:none;">
                     <table style="width: 100%;">
                         <tr>
                             <td class="border-0"><strong>Invoice No</strong></td>
@@ -160,7 +171,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="width: 50%; vertical-align: top; padding: 5px;">
+                <td style="width: 50%; vertical-align: top; padding: 5px;border-bottom:none;">
                     <table style="width: 100%;">
                         <tr>
                             <td class="border-0"><strong>Challan No.</strong></td>
@@ -187,7 +198,7 @@
 
         <table class="table">
             <tr>
-                <td>
+                <td style="border-bottom:none;padding-bottom:10px">
                     <strong><i>Billed to:</i></strong><br>
                     {{ $bill_data->vendor->business_name }}<br>
                     {{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
@@ -195,7 +206,7 @@
                     Mobile: {{ $bill_data->vendor->phone }}<br>
                     GSTIN/UIN: {{ $bill_data->vendor->gst }}<br>
                 </td>
-                <td>
+                <td style="border-bottom:none;padding-bottom:10px">
                     <strong><i>Shipped to</i></strong><br>
                     {{ $bill_data->vendor->business_name }}<br>
                     {{ $bill_data->vendor->address }}, {{ $bill_data->vendor->city->name }},
@@ -214,7 +225,7 @@
                     <th style="width: 10%;" class="text-right">Qty</th>
                     <th style="width: 10%;" class="text-left">Unit</th>
                     <th style="width: 15%;" class="text-right">Price</th>
-                    <th style="width: 15%;" class="text-right">
+                    <th style="width: 15%;" class="text-right" style="padding-top:none">
                         Amount (<span style="font-family: DejaVu Sans;">&#8377;</span>)
                     </th>
                 </tr>
@@ -295,54 +306,61 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-right:0"></td>
-                    <td class="product_table no-horizontal-border" colspan="1">
-                        <b>Sets:</b> {{ $setTotal }}
-                    </td>
-                    <td class="product_table no-horizontal-border" colspan="1">
-                        <b>Pcs:</b> {{ $pcTotal }}
-                    </td>
-                    <td class="product_table no-horizontal-border" colspan="1" style="text-align: right;">
+                    <td colspan="1" style="border-right:0;border-bottom:none;"></td>
+                    <td class="product_table no-horizontal-border" colspan="2"
+                        style="text-align: center;border-bottom:none;">
                         <b>Grand Total</b>
                     </td>
-                    <td class="product_table"
-                        style="border-left: 1px solid black; border-bottom: 1px solid black; text-align:right">
+                    <td class="product_table no-horizontal-border" colspan="1"
+                        style="text-align: left;border-bottom:none;">
+                        <b>Sets:</b> {{ $setTotal }}
+                    </td>
+                    <td class="product_table no-horizontal-border" colspan="1"
+                        style="text-align: center;border-bottom:none;">
+                        <b>Pcs:</b> {{ $pcTotal }}
+                    </td>
+                    <td class="product_table" style="text-align:right;border-bottom:none !important;">
                         <b>{{ number_format($bill_data->total_amount, 2, '.', ',') }}</b>
                     </td>
                 </tr>
-
             </tbody>
         </table>
         <table class="table">
             <tr>
-                <td class="product_table text-center" style="text-decoration: underline;">
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px; border-left: 1px solid black !important;">
                     <strong>Tax Rate(%)</strong><br>
                     {{ number_format($bill_data->gst, 2, '.', ',') }}%
                 </td>
 
-                <td class="product_table text-center" style="text-decoration: underline;">
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px">
                     <strong>Taxable Amt.</strong><br>
                     {{ number_format($bill_data->sub_total, 2, '.', ',') }}
                 </td>
 
                 @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
-                    <td class="product_table text-center" style="text-decoration: underline;">
+                    <td class="product_table text-center no-horizontal-border"
+                        style="text-decoration: underline;font-size:10px">
                         <strong>CGST Amt.</strong><br>
                         {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
                     </td>
 
-                    <td class="product_table text-center" style="text-decoration: underline;">
+                    <td class="product_table text-center no-horizontal-border"
+                        style="text-decoration: underline;font-size:10px">
                         <strong>SGST Amt.</strong><br>
                         {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
                     </td>
                 @else
-                    <td class="product_table text-center" style="text-decoration: underline;">
+                    <td class="product_table text-center no-horizontal-border"
+                        style="text-decoration: underline;font-size:10px">
                         <strong>IGST Amt.</strong><br>
                         {{ number_format($bill_data->gst_amount, 2, '.', ',') }}
                     </td>
                 @endif
 
-                <td class="product_table text-center" style="text-decoration: underline;">
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px;border-right: 1px solid black !important;">
                     <strong>Total Tax</strong><br>
                     {{ number_format($bill_data->gst_amount, 2, '.', ',') }}
                 </td>
@@ -352,23 +370,23 @@
 
         <table class="table">
             <tr>
-                <<td style="width: 50%; vertical-align: top;">
+                <<td style="width: 50%; vertical-align: top;border-top:none">
                     <strong>Amount in Words:</strong><br>
                     {{ $amountInWords }}
                     </td>
-                    <td style="width: 50%; text-align: right; vertical-align: bottom;">
+                    <td style="width: 50%; text-align: right; vertical-align: bottom;border-top:none">
                         <strong>JOBWORK ONLY</strong>
                     </td>
             </tr>
         </table>
 
-        <div class="border-top-black border-bottom-black">
-            <h4 class="text-center">BANK DETAILS</h4>
+        <div class="no-vertical-border" style="border:1px solid black;padding:10px">
+            <h4 class="text-center" style="text-decoration: underline;">BANK DETAILS</h4>
             <table class="table no-border">
                 <tr>
-                    <td class="text-center">BANK: IDBI BANK LTD.</td>
-                    <td class="text-center">A/C NO: 0273102000028945</td>
-                    <td class="text-center">IFSC: IBKL0000273</td>
+                    <td class="text-center no-border">BANK: IDBI BANK LTD.</td>
+                    <td class="text-center no-border">Current A/C NO: 0273102000028945</td>
+                    <td class="text-center no-border">IFSC: IBKL0000273</td>
                 </tr>
             </table>
         </div>
@@ -388,6 +406,7 @@
                     <h5 style="text-align: left; vertical-align: top;"><strong>Receiver's
                             Signature&nbsp;&nbsp;:</strong></h5>
                     <div class="signature-area"></div>
+                    <div class="signature-area2"></div>
                     <h5>For R K FASHIONS</h5>
                     <strong>Authorised Signatory</strong>
                 </td>
