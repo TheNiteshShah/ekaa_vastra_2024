@@ -207,3 +207,4 @@ Route::get('/rk-vendor-order-show/{id}', [RkVendorOrderController::class, 'show'
 Route::get('/rk-vendor-order-print/{id}', [RkVendorOrderController::class, 'print'])->name('rk-vendor-order.print');
 Route::get('/rk-get-next-invoice-no', [RkVendorOrderController::class, 'getNextInvoiceNo'])->name('rk-get-next-invoice-no');
 Route::get('/rk-validate-invoice-no', [RkVendorOrderController::class, 'validateInvoiceNo'])->name('rk-validate-invoice-no');
+Route::get('/rk-vendor-order-export', [RkVendorOrderController::class, 'exportExcel'])->name('rk-vendor-order.export');

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\RkSalesExport;
 use App\Http\Controllers\Controller;
 use App\Models\RkVendorModal;
 use App\Models\RkVendorOrderDetailsModal;
@@ -9,6 +10,7 @@ use App\Models\RkVendorProductModal;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 // Add this at the top
 class RkVendorOrderController extends Controller
@@ -202,16 +204,17 @@ class RkVendorOrderController extends Controller
             $financialYear = $fyStart . '-' . substr($fyEnd, -2); // e.g. 2025-26
             $title         = "RK INVOICE NO. : " . $financialYear . '/' . $invoiceNo . '/GST';
 
-            $number        = round($bill_data->total_amount);
-            $words         = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-            $amountInWords = ucfirst($words->format($number)) . ' only';
+            $number = round($bill_data->total_amount);
+            // $words         = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+            // $amountInWords = ucfirst($words->format($number)) . ' only';
+            $amountInWords = ' only';
             // Generate PDF from Blade view
-            $pdf = Pdf::loadView('admin.rk_vendor_order.print', compact('bill_data', 'title', 'financialYear', 'invoiceNo','amountInWords'));
+            $pdf = Pdf::loadView('admin.rk_vendor_order.print', compact('bill_data', 'title', 'financialYear', 'invoiceNo', 'amountInWords'));
 
             // Preview in browser
-            // return $pdf->stream("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
+            return $pdf->stream("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
             // Download as PDF
-            return $pdf->download("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
+            // return $pdf->download("RK-Invoice-{$financialYear}-{$invoiceNo}.pdf");
         } else {
             return view('admin/login/index');
         }
@@ -261,5 +264,22 @@ class RkVendorOrderController extends Controller
         $exists = $query->exists();
 
         return response()->json(['valid' => ! $exists]);
+    }
+    public function exportExcel(Request $request)
+    {
+        $request->validate([
+            'parent_id'  => 'required|exists:rk_vendor,id',
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $start    = Carbon::parse($request->start_date)->format('d-m-Y');
+        $end      = Carbon::parse($request->end_date)->format('d-m-Y');
+        $fileName = 'RK-Fashion-Sales-Register-' . $start . '_To_' . $end . '.xlsx';
+        
+        return Excel::download(
+            new RkSalesExport($request->parent_id, $request->start_date, $request->end_date),
+            $fileName
+        );
     }
 }
