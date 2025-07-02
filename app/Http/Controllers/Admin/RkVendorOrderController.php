@@ -205,9 +205,9 @@ class RkVendorOrderController extends Controller
             $title         = "RK INVOICE NO. : " . $financialYear . '/' . $invoiceNo . '/GST';
 
             $number = round($bill_data->total_amount);
-            // $words         = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-            // $amountInWords = ucfirst($words->format($number)) . ' only';
-            $amountInWords = ' only';
+            $words         = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
+            $amountInWords = ucfirst($words->format($number)) . ' only';
+            // $amountInWords = ' only';
             // Generate PDF from Blade view
             $pdf = Pdf::loadView('admin.rk_vendor_order.print', compact('bill_data', 'title', 'financialYear', 'invoiceNo', 'amountInWords'));
 
