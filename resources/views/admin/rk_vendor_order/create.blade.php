@@ -64,7 +64,7 @@
                                         value="{{ $data->id ? base64_encode($data->vendor_id) : $parent_id }}">
                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                     <input type="hidden" id="count"
-                                        value="{{ !empty($data) ? count($data->orderDetails) : 1 }}" name="count">
+                                        value="{{ !empty($data->orderDetails) && count($data->orderDetails)!=0 ? count($data->orderDetails) : 1 }}" name="count">
 
                                     <div class="form-group row">
                                         <div class="col-sm-3 my-3" style="margin-top: 23px!important">
