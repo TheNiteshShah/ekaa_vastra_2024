@@ -278,7 +278,7 @@ class RkVendorOrderController extends Controller
         $fileName = 'RK-Fashion-Sales-Register-' . $start . '_To_' . $end . '.xlsx';
         
         return Excel::download(
-            new RkSalesExport($request->parent_id, $request->start_date, $request->end_date),
+            new RkSalesExport($request->start_date, $request->end_date),
             $fileName
         );
     }

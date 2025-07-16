@@ -302,7 +302,7 @@
                     <td class="product_table no-horizontal-border" colspan="2"><i>Rounded Off (+/-)</i></td>
                     <td class="product_table no-horizontal-border"></td>
                     <td class="product_table" style="border-left: 1px solid black;text-align:right">
-                        {{ number_format(abs($bill_data->total_amount - round($bill_data->total_amount)), 2, '.', ',') }}
+                        {{ number_format(abs($bill_data->sub_total + $bill_data->gst_amount - round($bill_data->total_amount)), 2, '.', ',') }}
                     </td>
                 </tr>
                 <tr>

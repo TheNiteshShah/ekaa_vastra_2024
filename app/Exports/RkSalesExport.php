@@ -15,12 +15,11 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
 {
     use Exportable;
 
-    protected $parentId, $startDate, $endDate;
+    protected $startDate, $endDate;
     protected $rowNumber = 1;
 
-    public function __construct($parentId, $startDate, $endDate)
+    public function __construct( $startDate, $endDate)
     {
-        $this->parentId  = $parentId;
         $this->startDate = $startDate;
         $this->endDate   = $endDate;
     }
@@ -28,7 +27,6 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
     public function query()
     {
         return RkVendorOrderModal::with(['vendor.city.state'])
-            ->where('vendor_id', $this->parentId)
             ->whereBetween('invoice_date', [$this->startDate, $this->endDate])
             ->orderBy('invoice_date', 'asc');
     }
