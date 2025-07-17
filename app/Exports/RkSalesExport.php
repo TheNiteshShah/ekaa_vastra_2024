@@ -72,6 +72,7 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
         }
 
         $formattedInvoice = "{$fy}/{$invoiceNo}/GST";
+        $otherAmount = number_format(abs($order->sub_total + $order->gst_amount - round($order->total_amount)), 2, '.', ',') ;
 
         return [
             $this->rowNumber++,
@@ -87,7 +88,7 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
             number_format($cgst, 2, '.', ''),
             number_format($sgstTxbl, 2, '.', ''),
             number_format($sgst, 2, '.', ''),
-            number_format($order->other_amount ?? 0.50, 2, '.', ''),
+            number_format($otherAmount ?? 0.50, 2, '.', ''),
         ];
     }
 
