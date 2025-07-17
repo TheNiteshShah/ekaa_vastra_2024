@@ -36,7 +36,7 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
         return [
             ['R K FASHIONS'],
             ['C-275, VAISHALI NAGAR, BEHIND TPS SCHOOL, JAIPUR'],
-            ['Sales Register (Bill-wise)'],
+            ['Sales Register (Bill-Wise)'],
             ['(From: ' . \Carbon\Carbon::parse($this->startDate)->format('d-m-Y') . ' To ' . \Carbon\Carbon::parse($this->endDate)->format('d-m-Y') . ')'],
             [], // Empty row before table headings
             [
