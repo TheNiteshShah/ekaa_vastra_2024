@@ -54,6 +54,7 @@ class RkVendorProductController extends Controller
             $uploadData->vendor_id = base64_decode($req->vendor_id);
             $uploadData->unit = $req->unit;
             $uploadData->price = $req->price;
+            $uploadData->hsn_code = $req->hsn_code;
             $uploadData->ip = $req->ip();
             $uploadData->added_by = $userId;
             $uploadData->save();

@@ -16,6 +16,10 @@ class RkVendorOrderDetailsModal extends Model
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];
+    public function product()
+    {
+        return $this->belongsTo(RkVendorProductModal::class, 'product_id');
+    }
     public function order()
     {
         return $this->belongsTo(RkVendorOrderModal::class, 'order_id');

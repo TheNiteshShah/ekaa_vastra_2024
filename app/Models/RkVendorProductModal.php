@@ -11,7 +11,7 @@ class RkVendorProductModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'vendor_id','name','unit','price','ip', 'added_by', 'is_active',
+        'vendor_id','name','unit','price','ip', 'added_by', 'is_active','hsn_code'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

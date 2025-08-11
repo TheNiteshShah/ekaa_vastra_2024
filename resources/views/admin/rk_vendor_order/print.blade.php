@@ -224,105 +224,133 @@
                     <th style="width: 42%;" class="text-left">Description of Goods</th>
                     <th style="width: 10%;" class="text-right">Qty</th>
                     <th style="width: 10%;" class="text-left">Unit</th>
+                    @if(!empty($bill_data->hsn_code) && $bill_data->hsn_code == 1)
+                    <th style="width: 5%;" class="text-right">HSN Code</th>
+                    <th style="width: 10%;" class="text-right">Price</th>
+                    <th style="width: 15%;" class="text-right" style="padding-top:none">
+                        Amount (<span style="font-family: DejaVu Sans;">&#8377;</span>)
+                    </th>
+                    @else
                     <th style="width: 15%;" class="text-right">Price</th>
                     <th style="width: 15%;" class="text-right" style="padding-top:none">
                         Amount (<span style="font-family: DejaVu Sans;">&#8377;</span>)
                     </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $totalRows = 8;
-                    $itemCount = count($bill_data->orderDetails);
-                    $setTotal = 0;
-                    $pcTotal = 0;
+                $totalRows = 8;
+                $itemCount = count($bill_data->orderDetails);
+                $setTotal = 0;
+                $pcTotal = 0;
                 @endphp
                 @foreach ($bill_data->orderDetails as $item)
-                    @php
-                        if ($item->unit == 'Set') {
-                            $setTotal += $item->quantity;
-                        } elseif ($item->unit == 'Pc') {
-                            $pcTotal += $item->quantity;
-                        }
-                    @endphp
-                    <tr>
-                        <td class="text-right no-vertical-border">{{ $loop->iteration }}</td>
-                        <td class="no-vertical-border">{{ $item->name }}</td>
-                        <td class="no-vertical-border"class="text-right no-vertical-border">{{ $item->quantity }}</td>
-                        <td class="no-vertical-border">{{ $item->unit }}</td>
-                        <td class="text-right no-vertical-border">{{ number_format($item->price, 2) }}</td>
-                        <td class="text-right no-vertical-border">
-                            {{ number_format($item->quantity * $item->price, 2) }}</td>
-                    </tr>
+                @php
+                if ($item->unit == 'Set') {
+                $setTotal += $item->quantity;
+                } elseif ($item->unit == 'Pc') {
+                $pcTotal += $item->quantity;
+                }
+                @endphp
+                <tr>
+                    <td class="text-right no-vertical-border">{{ $loop->iteration }}</td>
+                    <td class="no-vertical-border">{{ $item->name }}</td>
+                    <td class="no-vertical-border" class="text-right no-vertical-border">{{ $item->quantity }}</td>
+                    <td class="no-vertical-border">{{ $item->unit }}</td>
+                    @if(!empty($bill_data->hsn_code) && $bill_data->hsn_code == 1)
+                    <td class="text-right no-vertical-border">{{ $item->product->hsn_code }}</td>
+                    <td class="text-right no-vertical-border">{{ number_format($item->price, 2) }}</td>
+                    <td class="text-right no-vertical-border">
+                        {{ number_format($item->quantity * $item->price, 2) }}
+                    </td>
+                    @else
+                    <td class="text-right no-vertical-border">{{ number_format($item->price, 2) }}</td>
+                    <td class="text-right no-vertical-border">
+                        {{ number_format($item->quantity * $item->price, 2) }}
+                    </td>
+                    @endif
+
+
+                </tr>
                 @endforeach
                 @for ($i = $itemCount + 1; $i <= $totalRows; $i++)
                     <tr>
-                        <td class="text-right no-vertical-border"></td>
-                        <td class="no-vertical-border">&nbsp;</td>
-                        <td class="text-right no-vertical-border">&nbsp;</td>
-                        <td class="no-vertical-border">&nbsp;</td>
-                        <td class="text-right no-vertical-border">&nbsp;</td>
-                        <td class="text-right no-vertical-border">-</td>
+                    <td class="text-right no-vertical-border"></td>
+                    <td class="no-vertical-border">&nbsp;</td>
+                    <td class="text-right no-vertical-border">&nbsp;</td>
+                    <td class="no-vertical-border">&nbsp;</td>
+                    @if(!empty($bill_data->hsn_code) && $bill_data->hsn_code == 1)
+                    <td class="text-right no-vertical-border">&nbsp;</td>
+                    <td class="text-right no-vertical-border">&nbsp;</td>
+                    <td class="text-right no-vertical-border">-</td>
+                    @else
+                    <td class="text-right no-vertical-border">&nbsp;</td>
+                    <td class="text-right no-vertical-border">-</td>
+                    @endif
                     </tr>
-                @endfor
-                <tr>
-                    <td colspan="5" class="text-right"><strong>Sub Total</strong></td>
-                    <td class="text-right"><b>{{ number_format($bill_data->sub_total, 2) }}</b></td>
-                </tr>
-                @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
+                    @endfor
                     <tr>
-                        <td colspan="2" style="border-right:0"></td>
+                        <td colspan="{{$bill_data->hsn_code == 1?6:5}}" class="text-right"><strong>Sub Total</strong></td>
+                        <td class="text-right"><b>{{ number_format($bill_data->sub_total, 2) }}</b></td>
+                    </tr>
+                    @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
+                    <tr>
+                        <td colspan="{{$bill_data->hsn_code == 1?3:2}}" style="border-right:0"></td>
                         <td class="product_table no-horizontal-border" colspan="2"><i>Add : CGST</i></td>
                         <td class="product_table no-horizontal-border"><i>@
                                 {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
                         <td class="product_table" style="border-left: 1px solid black;text-align:right">
-                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
+                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="border-right:0"></td>
+                        <td colspan="{{$bill_data->hsn_code == 1?3:2}}" style="border-right:0"></td>
                         <td class="product_table no-horizontal-border" colspan="2"><i>Add : SGST</i></td>
                         <td class="product_table no-horizontal-border"><i>@
                                 {{ number_format($bill_data->gst / 2, 2, '.', ',') }}%</i></td>
                         <td class="product_table" style="border-left: 1px solid black;text-align:right">
-                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}</td>
+                            {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
+                        </td>
 
                     </tr>
-                @else
+                    @else
                     <tr>
-                        <td colspan="2" style="border-right:0"></td>
+                        <td colspan="{{$bill_data->hsn_code == 1?3:2}}" style="border-right:0"></td>
                         <td class="product_table no-horizontal-border" colspan="2"><i>Add : IGST</i></td>
                         <td class="product_table no-horizontal-border"><i>@
                                 {{ number_format($bill_data->gst, 2, '.', ',') }}%</i></td>
                         <td class="product_table" style="border-left: 1px solid black;text-align:right">
-                            {{ number_format($bill_data->gst_amount, 2, '.', ',') }}</td>
+                            {{ number_format($bill_data->gst_amount, 2, '.', ',') }}
+                        </td>
                     </tr>
-                @endif
-                <tr>
-                    <td colspan="2" style="border-right:0"></td>
-                    <td class="product_table no-horizontal-border" colspan="2"><i>Rounded Off (+/-)</i></td>
-                    <td class="product_table no-horizontal-border"></td>
-                    <td class="product_table" style="border-left: 1px solid black;text-align:right">
-                        {{ number_format(abs($bill_data->sub_total + $bill_data->gst_amount - round($bill_data->total_amount)), 2, '.', ',') }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="1" style="border-right:0;border-bottom:none;"></td>
-                    <td class="product_table no-horizontal-border" colspan="2"
-                        style="text-align: center;border-bottom:none;">
-                        <b>Grand Total</b>
-                    </td>
-                    <td class="product_table no-horizontal-border" colspan="1"
-                        style="text-align: left;border-bottom:none;">
-                        <b>Sets:</b> {{ $setTotal }}
-                    </td>
-                    <td class="product_table no-horizontal-border" colspan="1"
-                        style="text-align: center;border-bottom:none;">
-                        <b>Pcs:</b> {{ $pcTotal }}
-                    </td>
-                    <td class="product_table" style="text-align:right;border-bottom:none !important;">
-                        <b>{{ number_format($bill_data->total_amount, 2, '.', ',') }}</b>
-                    </td>
-                </tr>
+                    @endif
+                    <tr>
+                        <td colspan="{{$bill_data->hsn_code == 1?3:2}}" style="border-right:0"></td>
+                        <td class="product_table no-horizontal-border" colspan="2"><i>Rounded Off (+/-)</i></td>
+                        <td class="product_table no-horizontal-border"></td>
+                        <td class="product_table" style="border-left: 1px solid black;text-align:right">
+                            {{ number_format(abs($bill_data->sub_total + $bill_data->gst_amount - round($bill_data->total_amount)), 2, '.', ',') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="{{$bill_data->hsn_code == 1?2:1}}" style="border-right:0;border-bottom:none;"></td>
+                        <td class="product_table no-horizontal-border" colspan="2"
+                            style="text-align: center;border-bottom:none;">
+                            <b>Grand Total</b>
+                        </td>
+                        <td class="product_table no-horizontal-border" colspan="1"
+                            style="text-align: left;border-bottom:none;">
+                            <b>Sets:</b> {{ $setTotal }}
+                        </td>
+                        <td class="product_table no-horizontal-border" colspan="1"
+                            style="text-align: center;border-bottom:none;">
+                            <b>Pcs:</b> {{ $pcTotal }}
+                        </td>
+                        <td class="product_table" style="text-align:right;border-bottom:none !important;">
+                            <b>{{ number_format($bill_data->total_amount, 2, '.', ',') }}</b>
+                        </td>
+                    </tr>
             </tbody>
         </table>
         <table class="table">
@@ -340,23 +368,23 @@
                 </td>
 
                 @if ($bill_data->vendor->city->state->name == 'Rajasthan [RJ]')
-                    <td class="product_table text-center no-horizontal-border"
-                        style="text-decoration: underline;font-size:10px">
-                        <strong>CGST Amt.</strong><br>
-                        {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
-                    </td>
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px">
+                    <strong>CGST Amt.</strong><br>
+                    {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
+                </td>
 
-                    <td class="product_table text-center no-horizontal-border"
-                        style="text-decoration: underline;font-size:10px">
-                        <strong>SGST Amt.</strong><br>
-                        {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
-                    </td>
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px">
+                    <strong>SGST Amt.</strong><br>
+                    {{ number_format($bill_data->gst_amount / 2, 2, '.', ',') }}
+                </td>
                 @else
-                    <td class="product_table text-center no-horizontal-border"
-                        style="text-decoration: underline;font-size:10px">
-                        <strong>IGST Amt.</strong><br>
-                        {{ number_format($bill_data->gst_amount, 2, '.', ',') }}
-                    </td>
+                <td class="product_table text-center no-horizontal-border"
+                    style="text-decoration: underline;font-size:10px">
+                    <strong>IGST Amt.</strong><br>
+                    {{ number_format($bill_data->gst_amount, 2, '.', ',') }}
+                </td>
                 @endif
 
                 <td class="product_table text-center no-horizontal-border"

@@ -12,7 +12,7 @@ class RkVendorOrderModal extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'vendor_id', 'invoice_no', 'invoice_date', 'sub_total', 'gst', 'gst_amount', 'total_amount', 'ip', 'added_by',
+        'vendor_id', 'invoice_no', 'invoice_date', 'sub_total', 'gst', 'gst_amount', 'total_amount', 'ip', 'added_by','hsn_code'
     ];
     use SoftDeletes;
     protected $del = ['deleted_at'];

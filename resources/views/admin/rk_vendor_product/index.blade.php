@@ -57,6 +57,7 @@
                                                 <th data-priority="1">Name</th>
                                                 <th data-priority="1">Unit</th>
                                                 <th data-priority="1">Price</th>
+                                                <th data-priority="1">HSN Code</th>
                                                 <th data-priority="6">Status</th>
                                                 @if(session()->get('position') == "Super Admin" || session()->get('position') == "Admin")
                                                 <th data-priority="6">Action</th>
@@ -71,6 +72,7 @@
                                                 <th>{{$data->name}}</th>
                                                 <th>{{$data->unit}}</th>
                                                 <th>₹{{$data->price}}</th>
+                                                <th>{{$data->hsn_code}}</th>
                                                 @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>

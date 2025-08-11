@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\RkSalesExport;
@@ -94,6 +95,7 @@ class RkVendorOrderController extends Controller
             $uploadData->transport      = $req->transport;
             $uploadData->vehicle_no     = $req->vehicle_no;
             $uploadData->station        = $req->station;
+            $uploadData->hsn_code        = $req->hsn_code;
             $uploadData->ip             = $req->ip();
             $uploadData->added_by       = $userId;
             $uploadData->save();
@@ -268,7 +270,7 @@ class RkVendorOrderController extends Controller
     public function exportExcel(Request $request)
     {
         $request->validate([
-            'parent_id'  => 'required|exists:rk_vendor,id',
+            // 'parent_id'  => 'required|exists:rk_vendor,id',
             'start_date' => 'required|date',
             'end_date'   => 'required|date|after_or_equal:start_date',
         ]);
@@ -276,9 +278,9 @@ class RkVendorOrderController extends Controller
         $start    = Carbon::parse($request->start_date)->format('d-m-Y');
         $end      = Carbon::parse($request->end_date)->format('d-m-Y');
         $fileName = 'RK-Fashion-Sales-Register-' . $start . '_To_' . $end . '.xlsx';
-        
+        $parent_id = $request->parent_id ? $request->parent_id : null;
         return Excel::download(
-            new RkSalesExport($request->start_date, $request->end_date),
+            new RkSalesExport($request->start_date, $request->end_date,$parent_id),
             $fileName
         );
     }

@@ -47,6 +47,49 @@
                                 <div class="col-md-2"> <a class="btn btn-info cticket" href="{{route('rk_vendor.create')}}" role="button" style="margin-left: 20px;"> Add New Vendor</a></div>
                                 @endif
                             </div>
+                            <div class="accordion mb-4 mt-3" id="exportAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="exportHeading">
+                                        <button class="accordion-button collapsed fw-bold py-2 px-3" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#exportCollapse"
+                                            aria-expanded="false" aria-controls="exportCollapse"
+                                            style="font-size: 0.95rem;">
+                                            📁 Export Sales Register to Excel
+                                        </button>
+                                    </h2>
+
+                                    <div id="exportCollapse" class="accordion-collapse collapse"
+                                        aria-labelledby="exportHeading" data-bs-parent="#exportAccordion">
+                                        <div class="accordion-body bg-light border rounded">
+                                            <form action="{{ route('rk-vendor-order.export') }}" method="GET">
+                                                @csrf
+
+                                                <div class="row g-3 align-items-end">
+                                                    <div class="col-md-4">
+                                                        <label for="start_date" class="form-label fw-semibold">Start
+                                                            Date:</label>
+                                                        <input type="date" id="start_date" name="start_date"
+                                                            class="form-control" required>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <label for="end_date" class="form-label fw-semibold">End
+                                                            Date:</label>
+                                                        <input type="date" id="end_date" name="end_date"
+                                                            class="form-control" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 d-grid">
+                                                        <button type="submit" class="btn btn-info">
+                                                            <i class="fas fa-file-excel me-2"></i> Export to Excel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <hr style="margin-bottom: 50px;background-color: darkgrey;">
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
@@ -108,7 +151,7 @@
                                                 <th>{{$data->city->name}}</th>
                                                 <th>{{$data->city->state->name}}</th>
                                                 <th>{{$data->pin_code}}</th>
-                                               
+
                                                 <!-- @if($data->is_active == "1")
                                                 <td>
                                                     <p class="label  status-active">Active</p>
@@ -118,7 +161,7 @@
                                                     <p class="label  status-inactive">Inactive</p>
                                                 </td>
                                                 @endif -->
-                                                
+
                                             </tr>
                                             @endforeach
                                             @endif

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Exports;
 
 use App\Models\RkVendorOrderModal;
@@ -15,22 +16,27 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
 {
     use Exportable;
 
-    protected $startDate, $endDate;
+    protected $startDate, $endDate, $parent_id;
     protected $rowNumber = 1;
 
-    public function __construct( $startDate, $endDate)
+    public function __construct($startDate, $endDate, $parent_id = null)
     {
         $this->startDate = $startDate;
         $this->endDate   = $endDate;
+        $this->parent_id   = $parent_id;
     }
 
     public function query()
     {
+        $parentId = $this->parent_id;
+
         return RkVendorOrderModal::with(['vendor.city.state'])
             ->whereBetween('invoice_date', [$this->startDate, $this->endDate])
+            ->when(!empty($parentId), function ($query) use ($parentId) {
+                $query->where('vendor_id', $parentId);
+            })
             ->orderBy('invoice_date', 'asc');
     }
-
     public function headings(): array
     {
         return [
@@ -40,10 +46,19 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
             ['(From: ' . \Carbon\Carbon::parse($this->startDate)->format('d-m-Y') . ' To ' . \Carbon\Carbon::parse($this->endDate)->format('d-m-Y') . ')'],
             [], // Empty row before table headings
             [
-                'S.No.', 'Bill No', 'Date', 'Name & Address of Dealer', 'GSTIN', 'Sale Type',
-                'Bill Amount', 'IGST Txbl. Amt @ 5%', 'IGST Tax Amt @ 5%',
-                'CGST Txbl. Amt @ 2.5%', 'CGST Tax Amt @ 2.5%',
-                'SGST Txbl. Amt @ 2.5%', 'SGST Tax Amt @ 2.5%',
+                'S.No.',
+                'Bill No',
+                'Date',
+                'Name & Address of Dealer',
+                'GSTIN',
+                'Sale Type',
+                'Bill Amount',
+                'IGST Txbl. Amt @ 5%',
+                'IGST Tax Amt @ 5%',
+                'CGST Txbl. Amt @ 2.5%',
+                'CGST Tax Amt @ 2.5%',
+                'SGST Txbl. Amt @ 2.5%',
+                'SGST Tax Amt @ 2.5%',
                 'Other Amt.',
             ],
         ];
@@ -72,7 +87,7 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
         }
 
         $formattedInvoice = "{$fy}/{$invoiceNo}/GST";
-        $otherAmount = number_format(abs($order->sub_total + $order->gst_amount - round($order->total_amount)), 2, '.', ',') ;
+        $otherAmount = number_format(abs($order->sub_total + $order->gst_amount - round($order->total_amount)), 2, '.', ',');
 
         return [
             $this->rowNumber++,
@@ -159,5 +174,4 @@ class RkSalesExport implements FromQuery, WithMapping, WithHeadings, WithEvents,
             },
         ];
     }
-
 }
